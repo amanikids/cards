@@ -1,3 +1,0 @@
-[submodule "vendor/plugins/joyent_deployment"]
-	path = vendor/plugins/joyent_deployment
-	url = git://github.com/matthewtodd/joyent_deployment.git

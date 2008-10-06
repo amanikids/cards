@@ -1,5 +1,6 @@
 namespace :db do
   namespace :data do
+    desc "Load real data into the current environment's database."
     task :load => :environment do
       require 'active_record/fixtures'
       ActiveRecord::Base.establish_connection(RAILS_ENV.to_sym)

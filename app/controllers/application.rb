@@ -13,17 +13,17 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password").
   # filter_parameter_logging :password
 
-  # TODO: I *really* ought to cache the current_cart.
   def current_cart
-    if session[:cart_id]
-      Order.find(session[:cart_id]) rescue Order.new
-    else
-      Order.new
-    end
+    @current_cart ||= if session[:cart_id]
+                        Order.find(session[:cart_id]) rescue Order.new
+                      else
+                        Order.new
+                      end
   end
   helper_method :current_cart
 
   def current_cart=(order)
+    @current_cart     = order
     session[:cart_id] = order.id
   end
 end

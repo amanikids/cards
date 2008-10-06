@@ -11,7 +11,7 @@ Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   config.frameworks -= [:active_resource]
 
-  # Specify gems that this application depends on. 
+  # Specify gems that this application depends on.
   # They can then be installed with "rake gems:install" on new installations.
   config.gem 'haml'
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
@@ -27,7 +27,7 @@ Rails::Initializer.run do |config|
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
-  # Make sure the secret is at least 30 characters and all random, 
+  # Make sure the secret is at least 30 characters and all random,
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :session_key => '_cards_amanikids_org_session',

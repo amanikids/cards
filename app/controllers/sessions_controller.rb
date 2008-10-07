@@ -1,6 +1,16 @@
 class SessionsController < ApplicationController
   def create
-    user = User.authenticate(params[:email], params[:password])
+    if params[:existing].to_i.nonzero?
+      login params[:email], params[:password]
+    else
+      redirect_to hash_for_new_user_path(:user => { :email => params[:email]})
+    end
+  end
+
+  private
+
+  def login(email, password)
+    user = User.authenticate(email, password)
     if user
       session[:user_id] = user.id
       redirect_to root_path

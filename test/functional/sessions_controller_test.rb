@@ -31,5 +31,13 @@ class SessionsControllerTest < ActionController::TestCase
         should_render_template :new
       end
     end
+
+    context 'new user' do
+      setup do
+        post :create, :email => 'email', :existing => '0', :password => 'password'
+      end
+
+      should_redirect_to 'hash_for_new_user_path(:user => { :email => "email" })'
+    end
   end
 end

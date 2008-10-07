@@ -1,6 +1,3 @@
 .card
   %h2= card.name
   = textilize(card.description)
-  - form_for Item.new do |form|
-    = form.hidden_field :card_id, :value => card.id
-    = form.submit 'Add to Cart'

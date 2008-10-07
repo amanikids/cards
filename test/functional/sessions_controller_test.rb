@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
-  should_route :get,  '/login', :action => :new
-  should_route :post, '/login', :action => :create
+  should_route :get,    '/login',  :action => :new
+  should_route :post,   '/login',  :action => :create
+  should_route :delete, '/logout', :action => :destroy
 
   context 'login' do
     context 'existing user' do
@@ -39,5 +40,15 @@ class SessionsControllerTest < ActionController::TestCase
 
       should_redirect_to 'hash_for_new_user_path(:user => { :email => "email" })'
     end
+  end
+
+  context 'logout' do
+    setup do
+      @request.session[:user_id] = Factory.create(:user).id
+      delete :destroy
+    end
+
+    should_return_from_session :user_id, 'nil'
+    should_redirect_to 'login_path'
   end
 end

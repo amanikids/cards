@@ -6,12 +6,12 @@ class UserTest < ActiveSupport::TestCase
   should_require_confirmation_of :email, :password
 
   context :validations do
-    setup { Factory(:user) }
+    setup { Factory.create(:user) }
     should_require_unique_attributes :email
   end
 
   context :before_create do
-    setup { @user = Factory(:user) }
+    setup { @user = Factory.create(:user) }
 
     should 'write the encrypted_password' do
       assert_not_nil @user.encrypted_password
@@ -27,7 +27,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   context :authentication do
-    setup { @user = Factory(:user) }
+    setup { @user = Factory.create(:user) }
 
     should 'authenticate a user with the proper credentials' do
       assert_equal @user, User.authenticate(@user.email, @user.password)

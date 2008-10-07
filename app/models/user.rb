@@ -8,11 +8,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate(email, password)
     user = User.find_by_email(email)
-    user.authenticate(password) if user
-  end
-
-  def authenticate(password)
-    self if encrypted_password == encrypt(password)
+    user if user && user.send(:encrypt, password) == user.encrypted_password
   end
 
   private

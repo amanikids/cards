@@ -10,7 +10,7 @@ class Test::Unit::TestCase
   self.backtrace_silencers << :rails_vendor
   self.backtrace_filters   << :rails_root
 
-  def stub_login
+  def stub_current_user
     @request.session[:user] = 42
     User.stubs(:find).with(42).returns(stub(:id => 42, :email => 'email'))
   end

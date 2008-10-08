@@ -40,7 +40,7 @@ class SessionsControllerTest < ActionController::TestCase
 
   context 'destroy' do
     setup do
-      stub_login
+      stub_current_user
       delete :destroy
     end
 

@@ -45,6 +45,6 @@ class SessionsControllerTest < ActionController::TestCase
     end
 
     should_return_from_session :user_id, 'nil'
-    should_redirect_to 'login_path'
+    should_redirect_to 'root_path'
   end
 end

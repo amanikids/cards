@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  should_require_attributes :name, :email, :password
+  should_require_attributes :email, :password
   should_protect_attributes :encrypted_password, :remember_me_token, :salt
-  should_require_confirmation_of :email, :password
+  should_require_confirmation_of :password
 
   context :validations do
     setup { Factory.create(:user) }

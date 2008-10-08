@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(:version => 20081007095012) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name"
     t.string   "email"
     t.string   "encrypted_password", :limit => 40
     t.string   "remember_me_token",  :limit => 40

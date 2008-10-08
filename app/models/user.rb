@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  validates_presence_of :name, :email, :password
-  validates_confirmation_of :email, :password
+  validates_presence_of :email, :password
   validates_uniqueness_of :email
+  validates_confirmation_of :password
   attr_protected :encrypted_password, :remember_me_token, :salt
   attr_accessor :password
   before_create :write_generated_login_tokens

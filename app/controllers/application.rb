@@ -13,28 +13,26 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password").
   # filter_parameter_logging :password
 
-  attr_reader   :current_cart
-  helper_method :current_cart
-  before_filter :load_current_cart
-
-  attr_reader   :current_user
-  helper_method :current_user
-  before_filter :load_current_user
-
-  private
+  attr_reader   :current_cart, :current_user
+  helper_method :current_cart, :current_user
+  before_filter :load_current_cart, :load_current_user
 
   def current_cart=(cart)
-    @current_cart  = cart
-    session[:cart] = cart ? cart.id : nil
-  end
-
-  def load_current_cart
-    self.current_cart = Order.find(session[:cart]) if session[:cart]
+    @current_cart = cart
+    current_session = session || request.session
+    current_session[:cart] = (cart.id if cart)
   end
 
   def current_user=(user)
-    @current_user  = user
-    session[:user] = user ? user.id : nil
+    @current_user = user
+    current_session = session || request.session
+    current_session[:user] = (user.id if user)
+  end
+
+  private
+
+  def load_current_cart
+    self.current_cart = Order.find(session[:cart]) if session[:cart]
   end
 
   def load_current_user

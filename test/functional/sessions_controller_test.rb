@@ -5,27 +5,26 @@ class SessionsControllerTest < ActionController::TestCase
   should_route :post,   '/login',  :action => :create
   should_route :delete, '/logout', :action => :destroy
 
-  context 'login' do
+  context 'create' do
+    setup { @login_parameters = { :email => 'email', :password => 'password' } }
+
     context 'existing user' do
-      setup do
-        @parameters = { :email => 'email', :existing => '1', :password => 'password' }
-      end
+      setup { @login_parameters.merge!(:existing => '1') }
 
       context 'SUCCESS' do
         setup do
-          @user = Factory.create(:user)
-          User.stubs(:authenticate).with('email', 'password').returns(@user)
-          post :create, @parameters
+          User.stubs(:authenticate).with('email', 'password').returns(stub(:id => 42))
+          post :create, @login_parameters
         end
 
-        should_return_from_session :user_id, '@user.id'
+        should_return_from_session :user_id, '42'
         should_redirect_to 'root_path'
       end
 
       context 'FAILURE' do
         setup do
           User.stubs(:authenticate).returns(nil)
-          post :create, @parameters
+          post :create, @login_parameters
         end
 
         should_return_from_session :user_id, 'nil'
@@ -34,17 +33,14 @@ class SessionsControllerTest < ActionController::TestCase
     end
 
     context 'new user' do
-      setup do
-        post :create, :email => 'email', :existing => '0', :password => 'password'
-      end
-
+      setup { post :create, @login_parameters.merge(:existing => '0') }
       should_redirect_to 'hash_for_new_user_path(:user => { :email => "email" })'
     end
   end
 
-  context 'logout' do
+  context 'destroy' do
     setup do
-      @request.session[:user_id] = Factory.create(:user).id
+      @request.session[:user_id] = 42
       delete :destroy
     end
 

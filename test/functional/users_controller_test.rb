@@ -7,6 +7,7 @@ class UsersControllerTest < ActionController::TestCase
   context 'new' do
     setup { get :new }
     should_assign_to :user
+    should_not_assign_to :current_user
     should_render_template :new
     should_render_with_layout 'sessions'
   end
@@ -18,7 +19,7 @@ class UsersControllerTest < ActionController::TestCase
         post :create, :user => :attributes
       end
 
-      should_return_from_session :user_id, '42'
+      should_assign_to :current_user
       should_redirect_to 'root_path'
     end
 
@@ -29,8 +30,8 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should_assign_to :user
+      should_not_assign_to :current_user
       should_render_template :new
-      should_return_from_session :user_id, 'nil'
     end
   end
 end

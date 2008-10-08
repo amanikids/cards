@@ -17,7 +17,7 @@ class SessionsControllerTest < ActionController::TestCase
           post :create, @login_parameters
         end
 
-        should_return_from_session :user_id, '42'
+        should_assign_to :current_user
         should_redirect_to 'root_path'
       end
 
@@ -27,7 +27,7 @@ class SessionsControllerTest < ActionController::TestCase
           post :create, @login_parameters
         end
 
-        should_return_from_session :user_id, 'nil'
+        should_not_assign_to :current_user
         should_render_template :new
       end
     end
@@ -40,11 +40,11 @@ class SessionsControllerTest < ActionController::TestCase
 
   context 'destroy' do
     setup do
-      @request.session[:user_id] = 42
+      stub_login
       delete :destroy
     end
 
-    should_return_from_session :user_id, 'nil'
+    should_not_assign_to :current_user
     should_redirect_to 'root_path'
   end
 end

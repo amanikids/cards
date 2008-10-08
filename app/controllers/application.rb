@@ -13,11 +13,18 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password").
   # filter_parameter_logging :password
 
-  def current_user
-    @current_user ||= if session[:user_id]
-                        User.find(session[:user_id])
-                      end
+  attr_reader   :current_user
+  helper_method :current_user
+  before_filter :load_current_user
+
+  private
+
+  def current_user=(user)
+    @current_user  = user
+    session[:user] = user ? user.id : nil
   end
 
-  helper_method :current_user
+  def load_current_user
+    self.current_user = User.find(session[:user]) if session[:user]
+  end
 end

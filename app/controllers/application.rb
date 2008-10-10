@@ -32,10 +32,14 @@ class ApplicationController < ActionController::Base
   private
 
   def load_current_cart
-    self.current_cart = Order.find(session[:cart]) if session[:cart]
+    if session[:cart]
+      self.current_cart = Order.find(session[:cart]) rescue nil
+    end
   end
 
   def load_current_user
-    self.current_user = User.find(session[:user]) if session[:user]
+    if session[:user]
+      self.current_user = User.find(session[:user]) rescue nil
+    end
   end
 end

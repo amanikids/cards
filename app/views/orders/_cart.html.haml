@@ -1,6 +1,6 @@
 %p
   You have
-  = pluralize current_cart.items.count, 'item'
+  = pluralize current_cart.quantity, 'item'
   in your cart.
 %ul
   = render :partial => current_cart.items

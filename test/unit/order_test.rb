@@ -26,4 +26,10 @@ class OrderTest < ActiveSupport::TestCase
       assert_equal Money.new(7), order.total
     end
   end
+
+  context 'update quantities' do
+    should 'return true' do
+      assert Order.new.update_quantities({})
+    end
+  end
 end

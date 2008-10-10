@@ -12,4 +12,8 @@ class Order < ActiveRecord::Base
     items.each { |item| total += item.total }
     total
   end
+
+  def update_quantities(attributes)
+    true
+  end
 end

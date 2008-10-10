@@ -14,9 +14,9 @@ Rails::Initializer.run do |config|
   # Specify gems that this application depends on.
   # They can then be installed with "rake gems:install" on new installations.
   config.gem 'haml'
-  config.gem 'thoughtbot-factory_girl',   :lib => 'factory_girl',   :source => 'http://gems.github.com'
-  config.gem 'thoughtbot-quietbacktrace', :lib => 'quietbacktrace', :source => 'http://gems.github.com'
-  config.gem 'thoughtbot-shoulda',        :lib => 'shoulda/rails',  :source => "http://gems.github.com"
+  config.gem 'thoughtbot-factory_girl',   :lib => false, :source => 'http://gems.github.com'
+  config.gem 'thoughtbot-quietbacktrace', :lib => false, :source => 'http://gems.github.com'
+  config.gem 'thoughtbot-shoulda',        :lib => false, :source => "http://gems.github.com"
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )

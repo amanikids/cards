@@ -1,6 +1,6 @@
-class CreateCards < ActiveRecord::Migration
+class CreateProducts < ActiveRecord::Migration
   def self.up
-    create_table :cards do |t|
+    create_table :products do |t|
       t.string :name
       t.text :description
       t.timestamps
@@ -8,6 +8,6 @@ class CreateCards < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :cards
+    drop_table :products
   end
 end

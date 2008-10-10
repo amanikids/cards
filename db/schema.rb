@@ -11,21 +11,21 @@
 
 ActiveRecord::Schema.define(:version => 20081007095012) do
 
-  create_table "cards", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "items", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "card_id"
+    t.integer  "product_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "orders", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

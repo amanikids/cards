@@ -1,7 +1,7 @@
 class CreateItems < ActiveRecord::Migration
   def self.up
     create_table :items do |t|
-      t.references :order, :card
+      t.references :order, :product
       t.timestamps
     end
   end

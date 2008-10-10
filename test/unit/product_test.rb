@@ -1,5 +1,5 @@
 require 'test_helper'
 
-class CardTest < ActiveSupport::TestCase
+class ProductTest < ActiveSupport::TestCase
   should_require_attributes :name
 end

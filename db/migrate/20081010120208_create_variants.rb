@@ -4,7 +4,7 @@ class CreateVariants < ActiveRecord::Migration
       t.references :product
       t.string :name
       t.integer :price_amount
-      t.string :price_currency
+      t.string :price_currency, :default => 'USD'
       t.timestamps
     end
   end

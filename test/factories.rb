@@ -19,6 +19,7 @@ end
 
 Factory.define(:variant) do |variant|
   variant.association :product
+  variant.name '10-pack'
   variant.price_amount 10
   variant.price_currency 'USD'
 end

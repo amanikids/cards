@@ -1,15 +1,23 @@
 this_10:
   product: this
   name: 10-pack
+  price_amount: 10
+  price_currency: USD
 
 this_25:
   product: this
   name: 25-pack
+  price_amount: 25
+  price_currency: USD
 
 last_10:
   product: last
   name: 10-pack
+  price_amount: 10
+  price_currency: USD
 
 last_25:
   product: last
   name: 25-pack
+  price_amount: 25
+  price_currency: USD

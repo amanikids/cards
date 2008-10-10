@@ -6,4 +6,8 @@ class Item < ActiveRecord::Base
   def product_name
     variant.product_name
   end
+
+  def total
+    variant.price
+  end
 end

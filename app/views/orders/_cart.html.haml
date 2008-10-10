@@ -1,4 +1,9 @@
-You have
-= pluralize current_cart.items.count, 'item'
-in your cart.
-%ul= render :partial => current_cart.items
+%p
+  You have
+  = pluralize current_cart.items.count, 'item'
+  in your cart.
+%ul
+  = render :partial => current_cart.items
+%p
+  Cart total:
+  = current_cart.total.converted_to(current_currency)

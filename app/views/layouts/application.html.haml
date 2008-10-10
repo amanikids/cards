@@ -5,5 +5,4 @@
     = stylesheet_link_tag('application')
   %body
     .identity= render_user_partial
-    = render :partial => 'orders/cart' if current_cart
     = yield

@@ -6,5 +6,5 @@
       - product.variants.each do |variant|
         .field
           = f.radio_button :variant_id, variant.id
-          = f.label :variant_id, variant.name, :for => [:item, :variant_id, variant.id].join('_')
+          = f.label :variant_id, "#{variant.name} #{variant.price.converted_to(current_currency)}", :for => [:item, :variant_id, variant.id].join('_')
     = f.submit 'Add to Cart'

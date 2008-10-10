@@ -13,14 +13,20 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password").
   # filter_parameter_logging :password
 
-  attr_reader   :current_cart, :current_user
-  helper_method :current_cart, :current_user
-  before_filter :load_current_cart, :load_current_user
+  attr_reader   :current_cart, :current_currency, :current_user
+  helper_method :current_cart, :current_currency, :current_user
+  before_filter :load_current_cart, :load_current_currency, :load_current_user
 
   def current_cart=(cart)
     @current_cart = cart
     current_session = session || request.session
     current_session[:cart] = (cart.id if cart)
+  end
+
+  def current_currency=(currency)
+    @current_currency = currency
+    current_session = session || request.session
+    current_session[:currency] = currency
   end
 
   def current_user=(user)
@@ -35,6 +41,10 @@ class ApplicationController < ActionController::Base
     if session[:cart]
       self.current_cart = Order.find(session[:cart]) rescue nil
     end
+  end
+
+  def load_current_currency
+    self.current_currency = session[:currency] || 'USD'
   end
 
   def load_current_user

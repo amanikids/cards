@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  belongs_to :product
   belongs_to :order
-  validates_presence_of :order_id, :product_id
+  belongs_to :variant
+  validates_presence_of :order_id, :variant_id
 end

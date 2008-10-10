@@ -9,11 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081007095012) do
+ActiveRecord::Schema.define(:version => 20081010120208) do
 
   create_table "items", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "product_id"
+    t.integer  "variant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(:version => 20081007095012) do
     t.string   "encrypted_password", :limit => 40
     t.string   "remember_me_token",  :limit => 40
     t.string   "salt",               :limit => 40
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "variants", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

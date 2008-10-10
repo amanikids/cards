@@ -1,18 +1,22 @@
 Factory.sequence(:email) { |n| "user#{n}@example.com" }
 
-Factory.define(:product) do |product|
-  product.name "This Year's Card"
-end
-
 Factory.define(:item) do |item|
   item.association :order
-  item.association :product
+  item.association :variant
 end
 
 Factory.define(:order) do |order|
 end
 
+Factory.define(:product) do |product|
+  product.name "This Year's Card"
+end
+
 Factory.define(:user) do |user|
   user.email Factory.next(:email)
   user.password 'foo'
+end
+
+Factory.define(:variant) do |variant|
+  variant.association :product
 end

@@ -1,0 +1,15 @@
+this_10:
+  product: this
+  name: 10-pack
+
+this_25:
+  product: this
+  name: 25-pack
+
+last_10:
+  product: last
+  name: 10-pack
+
+last_25:
+  product: last
+  name: 25-pack

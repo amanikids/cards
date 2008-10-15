@@ -31,8 +31,8 @@ class CartsControllerTest < ActionController::TestCase
       context 'SUCCESS' do
         setup do
           @controller.current_cart = Order.new
-          @controller.current_cart.stubs(:update_quantities).with(:item_attributes).returns(true)
-          put :update, :item => :item_attributes
+          @controller.current_cart.stubs(:update_items).with(:item_attributes).returns(true)
+          put :update, :items => :item_attributes
         end
 
         should_assign_to :cart
@@ -42,7 +42,7 @@ class CartsControllerTest < ActionController::TestCase
       context 'FAILURE' do
         setup do
           @controller.current_cart = Order.new
-          @controller.current_cart.stubs(:update_quantities).returns(false)
+          @controller.current_cart.stubs(:update_items).returns(false)
           put :update
         end
 

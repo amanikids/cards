@@ -1,7 +1,8 @@
 %p
   You have
   = pluralize current_cart.quantity, 'item'
-  in your cart.
+  in your
+  = link_to 'cart.', edit_cart_path
 %ul
   = render :partial => current_cart.items
 %p

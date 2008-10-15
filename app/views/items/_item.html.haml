@@ -1,4 +1,5 @@
 %li
+  = item.quantity
   = item.product_name
   = item.variant.name
-  = item.variant.price.converted_to(current_currency)
+  = item.total.converted_to(current_currency)

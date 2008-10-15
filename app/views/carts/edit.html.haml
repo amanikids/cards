@@ -10,13 +10,11 @@
     %tbody
       - current_cart.items.each do |item|
         %tr
-          - fields_for item do |fields|
+          - fields_for 'items[]', item do |fields|
             %td= item.product_name
             %td= item.variant.name
             %td= item.variant.price.converted_to(current_currency)
-            %td
-              = fields.text_field :quantity
-              = fields.hidden_field :id
+            %td= fields.text_field :quantity
             %td= item.total.converted_to(current_currency)
     %tfoot
       %tr

@@ -3,7 +3,7 @@ class CartsController < ApplicationController
   before_filter :load_cart
 
   def update
-    if @cart.update_quantities(params[:item])
+    if @cart.update_items(params[:items])
       redirect_to edit_cart_path
     else
       render :action => 'edit'

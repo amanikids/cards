@@ -27,9 +27,22 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
-  context 'update quantities' do
-    should 'return true' do
-      assert Order.new.update_quantities({})
+  context 'update items' do
+    setup do
+      @item = Factory.create(:item)
+      @cart = @item.order
+    end
+
+    context 'with valid attributes' do
+      setup { @result = @cart.update_items(@item.id => {:quantity => 2}) }
+      should('return true') { assert @result }
+      should_change '@item.reload.quantity', :to => 2
+    end
+
+    context 'with invalid attributes' do
+      setup { @result = @cart.update_items(@item.id => {:quantity => 'a'}) }
+      should('return false') { assert !@result }
+      should_not_change '@item.reload.quantity'
     end
   end
 end

@@ -4,5 +4,5 @@
   %head
     = stylesheet_link_tag('application')
   %body
-    .identity= render_user_partial
+    .identity= render :partial => (current_user ? 'layouts/user' : 'layouts/guest')
     = yield

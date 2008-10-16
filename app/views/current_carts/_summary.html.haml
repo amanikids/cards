@@ -4,7 +4,7 @@
   in your
   = link_to 'cart.', edit_current_cart_path
 %ul
-  - current.cart.items.each do |item|
+  - current_cart.items.each do |item|
     %li
       = item.quantity
       = item.product_name

@@ -13,3 +13,5 @@
 %p
   Cart total:
   = current_cart.total.converted_to(current_currency)
+%p
+  = link_to 'Checkout', checkout_path

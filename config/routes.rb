@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'products'
 
   map.with_options(:controller => 'current_carts') do |map|
+    map.checkout          '/checkout', :action => 'show',   :conditions => { :method => :get }
     map.edit_current_cart '/cart',    :action => 'edit',    :conditions => { :method => :get }
     map.current_cart      '/cart',    :action => 'update',  :conditions => { :method => :put }
   end

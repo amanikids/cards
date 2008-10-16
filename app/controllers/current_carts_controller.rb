@@ -1,5 +1,6 @@
 class CurrentCartsController < ApplicationController
   before_filter :ensure_current_cart
+  before_filter :ensure_current_user, :only => :show
   before_filter :load_cart
 
   def update
@@ -16,6 +17,13 @@ class CurrentCartsController < ApplicationController
     unless current_cart
       flash[:notice] = 'Your cart is empty.'
       redirect_to root_path
+    end
+  end
+
+  def ensure_current_user
+    unless current_user
+      session[:return_to] = checkout_path
+      redirect_to login_path
     end
   end
 

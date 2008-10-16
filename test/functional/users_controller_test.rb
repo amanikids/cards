@@ -14,13 +14,22 @@ class UsersControllerTest < ActionController::TestCase
 
   context 'create' do
     context 'SUCCESS' do
-      setup do
-        User.stubs(:new).with(:attributes).returns(stub(:id => 42, :save => true))
-        post :create, :user => :attributes
+      setup { User.stubs(:new).with(:attributes).returns(stub(:id => 42, :save => true)) }
+
+      context 'without return_to in the session' do
+        setup { post :create, :user => :attributes }
+        should_assign_to :current_user
+        should_redirect_to 'root_path'
       end
 
-      should_assign_to :current_user
-      should_redirect_to 'root_path'
+      context 'with return_to in the session' do
+        setup do
+          @request.session[:return_to] = checkout_path
+          post :create, :user => :attributes
+        end
+        should_assign_to :current_user
+        should_redirect_to 'checkout_path'
+      end
     end
 
     context 'FAILURE' do

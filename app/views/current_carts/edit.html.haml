@@ -1,11 +1,11 @@
-- form_for current_cart, :url => cart_path do |f|
+- form_for current_cart, :url => current_cart_path do |f|
   %table
     %thead
       %tr
         %th
         %th
-        %th
-        %th Quantity
+        %th Unit
+        %th Qty
         %th Total
     %tbody
       - current_cart.items.each do |item|

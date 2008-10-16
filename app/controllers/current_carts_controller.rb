@@ -1,10 +1,10 @@
-class CartsController < ApplicationController
+class CurrentCartsController < ApplicationController
   before_filter :ensure_current_cart
   before_filter :load_cart
 
   def update
     if @cart.update_items(params[:items])
-      redirect_to edit_cart_path
+      redirect_to edit_current_cart_path
     else
       render :action => 'edit'
     end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CartsControllerTest < ActionController::TestCase
+class CurrentCartsControllerTest < ActionController::TestCase
   should_route :get, '/cart', :action => 'edit'
   should_route :put, '/cart', :action => 'update'
 
@@ -36,7 +36,7 @@ class CartsControllerTest < ActionController::TestCase
         end
 
         should_assign_to :cart
-        should_redirect_to 'edit_cart_path'
+        should_redirect_to 'edit_current_cart_path'
       end
 
       context 'FAILURE' do

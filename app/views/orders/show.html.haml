@@ -1,5 +1,3 @@
-%h1 Checking out!
-
-- payment_service_for @cart.id, 'donation.notify@peacehousefoundation.org', :amount => @cart.total, :currency => @cart.total.currency, :service => :paypal do |service|
+- payment_service_for @order.token, 'donation.notify@peacehousefoundation.org', :amount => @order.total, :currency => @order.total.currency, :service => :paypal do |service|
   - service.item_name = 'Contribution for Amani Christmas Cards'
-  = submit_tag
+  = submit_tag 'Donate Online via Peace House Africa'

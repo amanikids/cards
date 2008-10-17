@@ -12,7 +12,7 @@
 ActiveRecord::Schema.define(:version => 20081017114336) do
 
   create_table "addresses", :force => true do |t|
-    t.integer  "order_id"
+    t.integer  "list_id"
     t.string   "name"
     t.string   "email"
     t.string   "line_one"
@@ -25,15 +25,16 @@ ActiveRecord::Schema.define(:version => 20081017114336) do
   end
 
   create_table "items", :force => true do |t|
-    t.integer  "order_id"
+    t.integer  "list_id"
     t.integer  "variant_id"
     t.integer  "quantity",   :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "orders", :force => true do |t|
+  create_table "lists", :force => true do |t|
     t.string   "type"
+    t.string   "token",      :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
   end

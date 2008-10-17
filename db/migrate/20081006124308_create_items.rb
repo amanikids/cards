@@ -1,7 +1,7 @@
 class CreateItems < ActiveRecord::Migration
   def self.up
     create_table :items do |t|
-      t.references :order, :variant
+      t.references :list, :variant
       t.integer :quantity, :default => 1
       t.timestamps
     end

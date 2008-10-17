@@ -1,16 +1,7 @@
-class Order < ActiveRecord::Base
-  has_one :address
-  has_many :items
+class Order < List
+  validates_uniqueness_of :token
 
-  def quantity
-    quantity = 0
-    items.each { |item| quantity += item.quantity }
-    quantity
-  end
-
-  def total
-    total = Money.new(0)
-    items.each { |item| total += item.total }
-    total
+  def to_param
+    token
   end
 end

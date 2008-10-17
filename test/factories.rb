@@ -22,6 +22,10 @@ Factory.define(:item) do |item|
   item.association :variant
 end
 
+Factory.define(:order) do |order|
+  order.token '6bcc3f7303a4675e3c33f84bbd33e245cc770921'
+end
+
 Factory.define(:product) do |product|
   product.name "This Year's Card"
 end

@@ -1,1 +1,5 @@
 %h1 Checking out!
+
+- payment_service_for @cart.id, 'donation.notify@peacehousefoundation.org', :amount => @cart.total.amount, :currency => @cart.total.currency, :service => :paypal do |service|
+  - service.item_name = 'Contribution for Amani Christmas Cards'
+  = submit_tag

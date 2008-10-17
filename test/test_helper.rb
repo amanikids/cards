@@ -1,11 +1,7 @@
 ENV['RAILS_ENV'] = 'test'
 require File.expand_path(File.dirname(__FILE__) + '/../config/environment')
 require 'test_help'
-
-require 'factory_girl'
 require File.expand_path(File.dirname(__FILE__) + '/factories')
-require 'quietbacktrace'
-require 'shoulda/rails'
 
 class Test::Unit::TestCase
   self.use_transactional_fixtures = true

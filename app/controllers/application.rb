@@ -33,11 +33,11 @@ class ApplicationController < ActionController::Base
 
   def load_current_cart
     if session[:cart]
-      self.current_cart = Cart.find(session[:cart]) rescue nil
+      self.current_cart ||= Cart.find(session[:cart]) rescue nil
     end
   end
 
   def load_current_currency
-    self.current_currency = session[:currency] || 'USD'
+    self.current_currency ||= session[:currency] || 'USD'
   end
 end

@@ -1,4 +1,4 @@
-- form_for current_cart, :url => current_cart_path do |f|
+- form_for @cart, :url => cart_path do |f|
   %table
     %thead
       %tr
@@ -8,7 +8,7 @@
         %th Qty
         %th Total
     %tbody
-      - current_cart.items.each do |item|
+      - @cart.items.each do |item|
         %tr
           - fields_for 'items[]', item do |fields|
             %td= item.product_name
@@ -22,6 +22,6 @@
         %td
         %td
         %td
-        %td= current_cart.total.exchange_to(current_currency)
+        %td= @cart.total.exchange_to(current_currency)
 
   = f.submit 'Update Quantities'

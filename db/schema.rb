@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20081010120208) do
   create_table "variants", :force => true do |t|
     t.integer  "product_id"
     t.string   "name"
-    t.integer  "price_amount"
-    t.string   "price_currency", :default => "USD"
+    t.integer  "cents"
+    t.string   "currency",   :default => "USD"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

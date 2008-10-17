@@ -9,9 +9,9 @@
       = item.quantity
       = item.product_name
       = item.variant.name
-      = item.total.converted_to(current_currency)
+      = item.total.exchange_to(current_currency)
 %p
   Cart total:
-  = current_cart.total.converted_to(current_currency)
+  = current_cart.total.exchange_to(current_currency)
 %p
   = link_to 'Checkout', checkout_path

@@ -13,16 +13,16 @@
           - fields_for 'items[]', item do |fields|
             %td= item.product_name
             %td= item.variant.name
-            %td= item.variant.price.converted_to(current_currency)
+            %td= item.variant.price.exchange_to(current_currency)
             %td= fields.text_field :quantity
-            %td= item.total.converted_to(current_currency)
+            %td= item.total.exchange_to(current_currency)
     %tfoot
       %tr
         %td
         %td
         %td
         %td
-        %td= current_cart.total.converted_to(current_currency)
+        %td= current_cart.total.exchange_to(current_currency)
 
   = f.submit 'Update Quantities'
   = link_to 'Checkout', checkout_path

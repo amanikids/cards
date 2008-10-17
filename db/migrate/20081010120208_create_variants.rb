@@ -3,8 +3,8 @@ class CreateVariants < ActiveRecord::Migration
     create_table :variants do |t|
       t.references :product
       t.string :name
-      t.integer :price_amount
-      t.string :price_currency, :default => 'USD'
+      t.integer :cents
+      t.string :currency, :default => 'USD'
       t.timestamps
     end
   end

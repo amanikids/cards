@@ -12,22 +12,12 @@ class CurrentCartsControllerTest < ActionController::TestCase
     end
 
     context 'with a current cart' do
-      setup { @controller.current_cart = Order.new }
-
-      context 'not logged in' do
-        setup { get :show }
-        should_return_from_session :return_to, 'checkout_path'
-        should_redirect_to 'login_path'
+      setup do
+        @controller.current_cart = Order.new
+        get :show
       end
 
-      context 'logged in' do
-        setup do
-          @controller.current_user = User.new
-          get :show
-        end
-
-        should_return_from_session :return_to, 'nil'
-      end
+      should_eventually 'do something'
     end
   end
 

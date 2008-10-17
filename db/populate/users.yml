@@ -1,5 +1,0 @@
-bob:
-  email: bob@example.com
-  salt: 2d1dbb3cfe9ee18b84e08a3a9e7cc5158cba7234
-  encrypted_password: 6eefe0be4bdcd1e24329fc8caa5f7265c53091a6
-  remember_me_token: 2a219a4a7970cce81fcca8c60d9c13f3294e9beb

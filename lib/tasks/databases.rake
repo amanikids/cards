@@ -1,4 +1,7 @@
 namespace :db do
+  desc "Reset migrations, populate, and clone to test."
+  task :clean => ['db:migrate:reset', 'db:populate', 'db:test:clone']
+
   desc "Load real data into the current environment's database."
   task :populate => :environment do
     require 'active_record/fixtures'

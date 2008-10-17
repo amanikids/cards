@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_current_cart
-    unless current_cart
+    if current_cart.blank?
       flash[:notice] = 'Your cart is empty.'
       redirect_to root_path
     end

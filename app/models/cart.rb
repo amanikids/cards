@@ -1,4 +1,8 @@
 class Cart < Order
+  def blank?
+    items.empty?
+  end
+
   def update_items(attributes)
     attributes = attributes.stringify_keys
     items.inject(true) do |result, item|

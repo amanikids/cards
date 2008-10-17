@@ -16,8 +16,11 @@ class CartsControllerTest < ActionController::TestCase
     end
   end
 
-  context 'with a current cart' do
-    setup { @controller.current_cart = Factory.create(:cart) }
+  context 'with a non-empty current cart' do
+    setup do
+      @controller.current_cart = Factory.create(:cart)
+      @controller.current_cart.items << Factory.create(:item)
+    end
 
     context 'edit' do
       setup { get :edit }

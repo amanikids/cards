@@ -1,2 +1,2 @@
-= render :partial => 'carts/summary' if current_cart
+= render :partial => 'carts/summary' unless current_cart.blank?
 = render :partial => @products

@@ -7,7 +7,8 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.with_options(:controller => 'items') do |map|
-    map.items '/items', :action => 'create', :conditions => { :method => :post }
+    map.items '/items',     :action => 'create',  :conditions => { :method => :post }
+    map.item  '/items/:id', :action => 'destroy', :conditions => { :method => :delete }
   end
 
   map.with_options(:controller => 'orders') do |map|

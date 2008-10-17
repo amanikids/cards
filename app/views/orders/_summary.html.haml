@@ -22,6 +22,10 @@
       %td
       %td= @order.total.exchange_to(current_currency)
 
+- if @order.donor_editable?
+  %ul
+    %li= link_to 'Update Quantities', edit_cart_path
+
 %p
   %div= @order.address.name
   %div= @order.address.line_one

@@ -9,6 +9,10 @@ class Cart < List
     self.save
   end
 
+  def donor_editable?
+    true
+  end
+
   def update_items(attributes)
     attributes = attributes.stringify_keys
     items.inject(true) do |result, item|

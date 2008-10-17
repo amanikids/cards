@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20081010120208) do
   end
 
   create_table "orders", :force => true do |t|
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

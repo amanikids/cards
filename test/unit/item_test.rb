@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
-  should_belong_to :order, :variant
-  should_require_attributes :order_id, :variant_id
+  should_belong_to :variant
+  should_require_attributes :variant_id
 
   should_only_allow_numeric_values_for :quantity
   should_not_allow_values_for :quantity, -1, 0, :message => /greater than/

@@ -1,4 +1,4 @@
-class CurrentCartsController < ApplicationController
+class CartsController < ApplicationController
   before_filter :ensure_current_cart
   before_filter :load_cart
 

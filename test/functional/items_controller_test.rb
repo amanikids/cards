@@ -5,23 +5,23 @@ class ItemsControllerTest < ActionController::TestCase
 
   context 'create' do
     context 'with a brand-new cart' do
-      setup do
-        post :create, :item => Factory.attributes_for(:item, :variant_id => Factory(:variant).id)
-      end
+      setup { post :create, :item => Factory.attributes_for(:item, :variant_id => Factory(:variant).id) }
 
       should_assign_to :current_cart
-      should_change 'Order.count', :by => 1
+      should_change 'Cart.count', :by => 1
       should_change 'Item.count', :by => 1
       should_redirect_to 'root_path'
     end
 
     context 'with an existing cart' do
-      setup do
-        @controller.current_cart = Order.create
-        post :create, :item => Factory.attributes_for(:item, :variant_id => Factory(:variant).id)
-      end
+      setup { @controller.current_cart = Cart.create }
 
-      should_change 'Order.count', :by => 1
+      context 'posting valid attributes' do
+        setup { post :create, :item => Factory.attributes_for(:item, :variant_id => Factory(:variant).id) }
+        should_not_change 'Cart.count'
+        should_change 'Item.count', :by => 1
+        should_redirect_to 'root_path'
+      end
     end
   end
 end

@@ -6,13 +6,12 @@ Factory.sequence(:email) { |n| "user#{n}@example.com" }
 # =============================================================================
 # = Definitions                                                               =
 # =============================================================================
-Factory.define(:item) do |item|
-  item.quantity 1
-  item.association :order
-  item.association :variant
+Factory.define(:cart) do |cart|
 end
 
-Factory.define(:order) do |order|
+Factory.define(:item) do |item|
+  item.quantity 1
+  item.association :variant
 end
 
 Factory.define(:product) do |product|

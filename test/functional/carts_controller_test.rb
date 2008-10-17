@@ -1,25 +1,8 @@
 require 'test_helper'
 
-class CurrentCartsControllerTest < ActionController::TestCase
-  should_route :get, '/checkout', :action => 'show'
+class CartsControllerTest < ActionController::TestCase
   should_route :get, '/cart',     :action => 'edit'
   should_route :put, '/cart',     :action => 'update'
-
-  context 'show' do
-    context 'without a current cart' do
-      setup { get :show }
-      should_redirect_to 'root_path'
-    end
-
-    context 'with a current cart' do
-      setup do
-        @controller.current_cart = Order.new
-        get :show
-      end
-
-      should_eventually 'do something'
-    end
-  end
 
   context 'edit' do
     context 'without a current cart' do

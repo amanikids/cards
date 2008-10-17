@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
 
   def load_current_cart
     if session[:cart]
-      self.current_cart = Order.find(session[:cart]) rescue nil
+      self.current_cart = Cart.find(session[:cart]) rescue nil
     end
   end
 

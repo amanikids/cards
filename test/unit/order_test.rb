@@ -26,23 +26,4 @@ class OrderTest < ActiveSupport::TestCase
       assert_equal Money.new(7), order.total
     end
   end
-
-  context 'update items' do
-    setup do
-      @item = Factory.create(:item)
-      @cart = @item.order
-    end
-
-    context 'with valid attributes' do
-      setup { @result = @cart.update_items(@item.id => {:quantity => 2}) }
-      should('return true') { assert @result }
-      should_change '@item.reload.quantity', :to => 2
-    end
-
-    context 'with invalid attributes' do
-      setup { @result = @cart.update_items(@item.id => {:quantity => 'a'}) }
-      should('return false') { assert !@result }
-      should_not_change '@item.reload.quantity'
-    end
-  end
 end

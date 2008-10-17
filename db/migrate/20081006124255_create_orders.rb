@@ -1,6 +1,7 @@
 class CreateOrders < ActiveRecord::Migration
   def self.up
     create_table :orders do |t|
+      t.string :type
       t.timestamps
     end
   end

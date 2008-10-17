@@ -15,6 +15,8 @@ Rails::Initializer.run do |config|
   # They can then be installed with "rake gems:install" on new installations.
   config.gem 'activemerchant', :lib => 'active_merchant'
   config.gem 'haml'
+  # TODO install money gem, remove my money class, tweak migrations
+  # config.gem 'money', :source => 'http://dist.leetsoft.com'
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )

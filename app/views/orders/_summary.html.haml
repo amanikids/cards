@@ -1,0 +1,32 @@
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th Unit
+      %th Qty
+      %th Total
+  %tbody
+    - @order.items.each do |item|
+      %tr
+        %td= item.product_name
+        %td= item.variant.name
+        %td= item.variant.price.exchange_to(current_currency)
+        %td= item.quantity
+        %td= item.total.exchange_to(current_currency)
+  %tfoot
+    %tr
+      %td
+      %td
+      %td
+      %td
+      %td= @order.total.exchange_to(current_currency)
+
+%p
+  %div= @order.address.name
+  %div= @order.address.line_one
+  %div= @order.address.line_two
+  %div= @order.address.line_three
+  %div= @order.address.line_four
+  %div= @order.address.country
+  %div= @order.address.email

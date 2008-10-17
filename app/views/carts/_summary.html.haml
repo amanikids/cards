@@ -1,8 +1,7 @@
 %p
   You have
   = pluralize current_cart.quantity, 'item'
-  in your
-  = link_to 'cart.', edit_cart_path
+  in your cart:
 %ul
   - current_cart.items.each do |item|
     %li
@@ -13,3 +12,7 @@
 %p
   Cart total:
   = current_cart.total.exchange_to(current_currency)
+
+%ul
+  %li= link_to 'Update Quantities', edit_cart_path
+  %li= link_to 'Proceed to Checkout', checkout_path

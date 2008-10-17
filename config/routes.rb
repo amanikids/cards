@@ -9,4 +9,8 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options(:controller => 'items') do |map|
     map.items '/items', :action => 'create', :conditions => { :method => :post }
   end
+
+  map.with_options(:controller => 'orders') do |map|
+    map.checkout '/checkout', :action => 'new', :conditions => { :method => :get }
+  end
 end

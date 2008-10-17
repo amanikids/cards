@@ -4,20 +4,13 @@ class CartsController < ApplicationController
 
   def update
     if @cart.update_items(params[:items])
-      redirect_to edit_cart_path
+      redirect_to root_path
     else
       render :action => 'edit'
     end
   end
 
   private
-
-  def ensure_current_cart
-    unless current_cart
-      flash[:notice] = 'Your cart is empty.'
-      redirect_to root_path
-    end
-  end
 
   def load_cart
     @cart = current_cart

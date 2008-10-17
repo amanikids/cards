@@ -40,4 +40,11 @@ class ApplicationController < ActionController::Base
   def load_current_currency
     self.current_currency ||= session[:currency] || 'USD'
   end
+
+  def ensure_current_cart
+    unless current_cart
+      flash[:notice] = 'Your cart is empty.'
+      redirect_to root_path
+    end
+  end
 end

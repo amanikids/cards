@@ -29,7 +29,7 @@ class CartsControllerTest < ActionController::TestCase
       setup { @controller.current_cart.stubs(:update_items).with(:item_attributes).returns(true) }
       context 'update' do
         setup { put :update, :items => :item_attributes }
-        should_redirect_to 'edit_cart_path'
+        should_redirect_to 'root_path'
       end
     end
 

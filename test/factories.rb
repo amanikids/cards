@@ -6,6 +6,14 @@ Factory.sequence(:email) { |n| "user#{n}@example.com" }
 # =============================================================================
 # = Definitions                                                               =
 # =============================================================================
+Factory.define(:address, :class => Address) do |address|
+  address.name 'Bob Loblaw'
+  address.line_one '123 Main St.'
+  address.line_two 'Anytown, GA'
+  address.country 'United States'
+  address.email 'bob@example.com'
+end
+
 Factory.define(:cart) do |cart|
 end
 

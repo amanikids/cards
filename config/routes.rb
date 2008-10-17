@@ -1,6 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'products'
 
+  map.with_options(:controller => 'addresses') do |map|
+    map.new_address '/shipping', :action => 'new',    :conditions => { :method => :get }
+    map.addresses   '/shipping', :action => 'create', :conditions => { :method => :post }
+  end
+
   map.with_options(:controller => 'carts') do |map|
     map.edit_cart '/cart', :action => 'edit',   :conditions => { :method => :get }
     map.cart      '/cart', :action => 'update', :conditions => { :method => :put }

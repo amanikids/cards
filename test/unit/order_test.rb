@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
+  should_have_one :address
   should_have_many :items
 
   context 'quantity' do

@@ -4,4 +4,10 @@
   %head
     = stylesheet_link_tag('application')
   %body
+    - unless flash.empty?
+      #flash
+        - flash.each do |key, message|
+          %div{:class => key}
+            = message
+
     = yield

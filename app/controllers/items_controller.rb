@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
   def destroy
     @item = current_cart.items.find(params[:id])
     @item.destroy
+    flash[:notice] = 'Item removed.'
     redirect_to edit_cart_path
   end
 end

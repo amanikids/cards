@@ -1,0 +1,3 @@
+confirmed_order:
+  type: Order
+  token: confirmed

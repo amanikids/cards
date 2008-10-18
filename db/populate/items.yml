@@ -1,0 +1,4 @@
+confirmed_order_item:
+  list: confirmed_order
+  variant: this_10
+  quantity: 3

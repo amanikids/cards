@@ -1,5 +1,5 @@
 = render :partial => 'orders/summary', :locals => { :order => @order }
 
-- payment_service_for @order.token, 'donation.notify@peacehousefoundation.org', :amount => @order.total, :currency => @order.total.currency, :service => :paypal do |service|
+- paypal_payment_service_for @order.token, :amount => @order.total, :currency => @order.total.currency do |service|
   - service.item_name = 'Contribution for Amani Christmas Cards'
   = submit_tag "Make My #{@order.total} Donation Online"

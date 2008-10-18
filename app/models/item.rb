@@ -1,4 +1,5 @@
 class Item < ActiveRecord::Base
+  belongs_to :list
   belongs_to :variant
   validates_presence_of :variant_id
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0

@@ -5,7 +5,7 @@ class ListTest < ActiveSupport::TestCase
   should_have_many :items
 
   context 'with an unsaved list' do
-    setup { @list = Factory.build(:cart) }
+    setup { @list = Factory.build(:list) }
     context 'saving' do
       setup { @list.save }
       should_change '@list.token', :from => nil
@@ -21,6 +21,13 @@ class ListTest < ActiveSupport::TestCase
       list = List.new
       list.stubs(:items).returns [stub(:quantity => 3), stub(:quantity => 4)]
       assert_equal 7, list.quantity
+    end
+  end
+
+  context 'to_param' do
+    should 'answer token' do
+      order = Factory.build(:list, :token => :token)
+      assert_equal :token, order.to_param
     end
   end
 

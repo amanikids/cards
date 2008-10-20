@@ -19,17 +19,19 @@ class ApplicationController < ActionController::Base
 
   def current_cart=(cart)
     @current_cart = cart
-    current_session = session || request.session
-    current_session[:cart] = (cart.id if cart)
+    current_session[:cart] = cart ? cart.id : nil
   end
 
   def current_currency=(currency)
     @current_currency = currency
-    current_session = session || request.session
     current_session[:currency] = currency
   end
 
   private
+
+  def current_session
+    session || request.session
+  end
 
   def load_current_cart
     if session[:cart]

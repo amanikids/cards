@@ -9,6 +9,10 @@ class List < ActiveRecord::Base
     quantity
   end
 
+  def to_param
+    token
+  end
+
   def total
     total = Money.new(0)
     items.each { |item| total += item.total }

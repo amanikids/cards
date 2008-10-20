@@ -17,7 +17,8 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.with_options(:controller => 'orders') do |map|
-    map.checkout '/checkout', :action => 'new', :conditions => { :method => :get }
+    map.checkout '/checkout',   :action => 'new',  :conditions => { :method => :get }
+    map.order    '/orders/:id', :action => 'show', :conditions => { :method => :get }
   end
 
   map.with_options(:controller => 'payments') do |map|

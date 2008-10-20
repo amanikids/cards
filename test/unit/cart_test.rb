@@ -12,7 +12,6 @@ class CartTest < ActiveSupport::TestCase
       setup { @cart.confirm! }
       should_change 'Cart.count', :by => -1
       should_change 'Order.count', :by => 1
-      should_change '@cart.token', :from => nil
     end
 
     context 'update items' do

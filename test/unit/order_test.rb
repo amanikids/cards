@@ -7,11 +7,6 @@ class OrderTest < ActiveSupport::TestCase
     assert !Order.new.donor_editable?
   end
 
-  context 'with an existing order' do
-    setup { Factory.create(:order) }
-    should_require_unique_attributes :token
-  end
-
   context 'to_param' do
     should 'answer token' do
       order = Factory.build(:order, :token => :token)

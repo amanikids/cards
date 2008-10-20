@@ -1,6 +1,4 @@
 class Order < List
-  validates_uniqueness_of :token
-
   def donor_editable?
     false
   end

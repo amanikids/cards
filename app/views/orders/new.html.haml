@@ -1,2 +1,6 @@
-= render :partial => 'orders/summary', :locals => { :order => @order }
-= button_to 'Confirm my Order', checkout_path
+= render :partial => 'orders/summary', :locals => { :order => @cart }
+
+- paypal_donation_service_for @cart.token, :amount => @cart.total, :currency => @cart.total.currency do |service|
+  - service.item_name = 'Contribution for Amani Christmas Cards'
+  - service.notify_url = payments_url
+  = submit_tag "Make My #{@cart.total} Donation Online"

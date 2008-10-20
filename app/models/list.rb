@@ -1,6 +1,7 @@
 class List < ActiveRecord::Base
   has_one :address
   has_many :items
+  before_create :write_token
 
   def quantity
     quantity = 0
@@ -12,5 +13,15 @@ class List < ActiveRecord::Base
     total = Money.new(0)
     items.each { |item| total += item.total }
     total
+  end
+
+  private
+
+  def write_token
+    self.token = Digest::SHA1.hexdigest(random_string)
+  end
+
+  def random_string
+    Time.now.to_s.split(//).sort_by { rand }.join
   end
 end

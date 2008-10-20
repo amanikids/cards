@@ -4,6 +4,14 @@ class ListTest < ActiveSupport::TestCase
   should_have_one :address
   should_have_many :items
 
+  context 'with an unsaved list' do
+    setup { @list = Factory.build(:cart) }
+    context 'saving' do
+      setup { @list.save }
+      should_change '@list.token', :from => nil
+    end
+  end
+
   context 'quantity' do
     should 'be zero if there are no items' do
       assert_equal 0, List.new.quantity

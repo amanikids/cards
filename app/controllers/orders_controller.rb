@@ -1,8 +1,14 @@
 class OrdersController < ApplicationController
-  before_filter :ensure_current_cart, :only => :new
-  before_filter :ensure_address,      :only => :new
-  before_filter :load_cart,           :only => :new
+  before_filter :ensure_current_cart, :only => %w[new create]
+  before_filter :ensure_address,      :only => %w[new create]
+  before_filter :load_cart,           :only => %w[new create]
   before_filter :load_order,          :only => :show
+
+  def create
+    @cart.confirm!
+    self.current_cart = nil
+    redirect_to order_path(@cart)
+  end
 
   private
 

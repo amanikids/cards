@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
-  should_route :get, '/checkout',     :action => 'new'
-  should_route :get, '/orders/token', :action => 'show', :id => 'token'
+  should_route :get,  '/checkout',     :action => 'new'
+  should_route :post, '/checkout',     :action => 'create'
+  should_route :get,  '/orders/token', :action => 'show', :id => 'token'
 
   context 'with a current cart' do
     setup do
@@ -28,6 +29,14 @@ class OrdersControllerTest < ActionController::TestCase
           setup { get :new }
           should_assign_to :cart
           should_render_template 'new'
+        end
+
+        context 'create' do
+          setup { post :create }
+          should_change 'Cart.count', :by => -1
+          should_change 'Order.count', :by => 1
+          should_redirect_to 'order_path(@cart)'
+          should_change '@controller.current_cart', :to => nil
         end
       end
     end

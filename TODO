@@ -1,7 +1,1 @@
-TODO consider modeling Cart -> Order -> ... ? as STI with state transitions
-  what would the states be? (think further here)
-    . cart
-    . checking out
-    . paid
-    . fulfilled
-  what would each state's validations / responsibilities be?
+TODO Collapse line items pointing to the same variant.

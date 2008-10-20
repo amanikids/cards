@@ -1,7 +1,9 @@
 kili:
   name: Kilimanjaro Holiday Card
   position: 1
+  image: kili
 
 peace:
   name: Peace Holiday Card
   position: 2
+  image: peace

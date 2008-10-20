@@ -1,5 +1,6 @@
 .card
   %h2= product.name
+  = image_tag(product.image.path)
   = textilize(product.description)
   - form_for Item.new(:variant => product.variants.first) do |f|
     %ul

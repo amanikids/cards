@@ -1,23 +1,14 @@
-this_10:
-  product: this
-  name: 10-pack
-  cents: 1000
-  currency: USD
+<% position = 0 %>
 
-this_25:
-  product: this
-  name: 25-pack
-  cents: 2500
-  currency: USD
+<% %w[kili peace].each do |front| %>
+<% [[10, 1200], [25, 2500]].each do |size, cents| %>
+<% %w[merry_christmas happy_holidays].each do |inside| %>
 
-last_10:
-  product: last
-  name: 10-pack
-  cents: 1000
+<%= front %>_<%= size %>_<%= inside %>:
+  product: <%= front %>
+  name: <%= size %>-pack <%= inside.titleize %>
+  cents: <%= cents %>
   currency: USD
+  position: <%= position += 1 %>
 
-last_25:
-  product: last
-  name: 25-pack
-  cents: 2500
-  currency: USD
+<% end; end; end %>

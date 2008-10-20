@@ -1,5 +1,7 @@
-this:
-  name: This Year's Card
+kili:
+  name: Kilimanjaro Holiday Card
+  position: 1
 
-last:
-  name: Last Year's Card
+peace:
+  name: Peace Holiday Card
+  position: 2

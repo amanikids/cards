@@ -10,4 +10,9 @@
           %div{:class => key}
             = message
 
+    - if current_user
+      %ul.header_navigation
+        %li= link_to_unless_current 'Orders', orders_path
+        %li= link_to 'Log out', sessions_path, :method => :delete
+
     = yield

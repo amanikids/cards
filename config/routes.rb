@@ -17,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.with_options(:controller => 'orders') do |map|
+    map.orders   '/orders',     :action => 'index',  :conditions => { :method => :get }
     map.checkout '/checkout',   :action => 'new',    :conditions => { :method => :get }
     map.connect  '/checkout',   :action => 'create', :conditions => { :method => :post }
     map.order    '/orders/:id', :action => 'show',   :conditions => { :method => :get }
@@ -28,5 +29,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.with_options(:controller => 'paypal_payments') do |map|
     map.paypal_payments '/orders/:id/paypal_payment', :action => 'create', :conditions => { :method => :post }
+  end
+
+  map.with_options(:controller => 'sessions') do |map|
+    map.new_session '/sessions/new', :action => 'new',     :conditions => { :method => :get }
+    map.sessions    '/sessions',     :action => 'create',  :conditions => { :method => :post }
+    map.connect     '/sessions',     :action => 'destroy', :conditions => { :method => :delete }
   end
 end

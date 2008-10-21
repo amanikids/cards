@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
+  should_have_named_scope :with_payment, :include => :payment, :conditions => 'payments.id IS NOT NULL'
   should_have_one :payment
 
   should 'not be donor_editable' do

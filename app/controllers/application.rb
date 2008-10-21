@@ -13,9 +13,9 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password").
   # filter_parameter_logging :password
 
-  attr_reader   :current_cart, :current_currency
-  helper_method :current_cart, :current_currency
-  before_filter :load_current_cart, :load_current_currency
+  attr_reader   :current_cart, :current_currency, :current_user
+  helper_method :current_cart, :current_currency, :current_user
+  before_filter :load_current_cart, :load_current_currency, :load_current_user
 
   def current_cart=(cart)
     @current_cart = cart
@@ -25,6 +25,11 @@ class ApplicationController < ActionController::Base
   def current_currency=(currency)
     @current_currency = currency
     current_session[:currency] = currency
+  end
+
+  def current_user=(user)
+    @current_user = user
+    current_session[:user] = user ? user.id : nil
   end
 
   private
@@ -43,10 +48,23 @@ class ApplicationController < ActionController::Base
     self.current_currency ||= session[:currency] || 'USD'
   end
 
+  def load_current_user
+    if session[:user]
+      self.current_user ||= User.find(session[:user]) rescue nil
+    end
+  end
+
   def ensure_current_cart
     if current_cart.blank?
       flash[:notice] = 'Your cart is empty.'
       redirect_to root_path
+    end
+  end
+
+  def ensure_current_user
+    if current_user.blank?
+      flash[:notice] = 'Please log in.'
+      redirect_to new_session_path
     end
   end
 end

@@ -1,0 +1,18 @@
+%table
+  %thead
+    %tr
+      %th Order Placed
+      %th Donor
+      %th Donation
+      %th Payment Method
+      %th Payment Sent
+      %th Payment Received
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= time_ago_in_words(order.created_at) + ' ago'
+        %td= mail_to order.address.email, order.address.name
+        %td= order.total.to_s + ' ' + order.total.currency
+        %td= order.payment.method
+        %td= order.payment.created_at
+        %td= order.payment.received_at

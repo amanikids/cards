@@ -42,9 +42,7 @@ ActiveRecord::Schema.define(:version => 20081021093035) do
 
   create_table "lists", :force => true do |t|
     t.string   "type"
-    t.string   "token",          :limit => 40
-    t.string   "payment_method"
-    t.datetime "paid_at"
+    t.string   "token",      :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,7 +77,6 @@ ActiveRecord::Schema.define(:version => 20081021093035) do
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "encrypted_password", :limit => 40
-    t.string   "remember_me_token",  :limit => 40
     t.string   "salt",               :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"

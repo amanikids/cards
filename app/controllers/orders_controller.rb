@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_filter :ensure_current_user, :only => :index
+  before_filter :load_orders,         :only => :index
   before_filter :ensure_current_cart, :only => %w[new create]
   before_filter :ensure_address,      :only => %w[new create]
   before_filter :load_cart,           :only => %w[new create]
@@ -11,6 +13,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def load_orders
+    @orders = Order.with_payment
+  end
 
   def ensure_address
     redirect_to new_address_path unless current_cart.address

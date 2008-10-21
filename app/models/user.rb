@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   attr_protected :encrypted_password, :remember_me_token, :salt
   attr_accessor :password
-  before_create :write_generated_login_tokens
+  before_create :write_salt
+  before_create :write_encrypted_password
 
   def self.authenticate(email, password)
     user = User.find_by_email(email)
@@ -25,9 +26,11 @@ class User < ActiveRecord::Base
     Time.now.to_s.split(//).sort_by { rand }.join
   end
 
-  def write_generated_login_tokens
-    self.salt               = digest(random_string)
+  def write_salt
+    self.salt = digest(random_string)
+  end
+
+  def write_encrypted_password
     self.encrypted_password = encrypt(password)
-    self.remember_me_token  = encrypt(email)
   end
 end

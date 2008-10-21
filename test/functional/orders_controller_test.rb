@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
+  should_route :get,  '/orders',       :action => 'index'
   should_route :get,  '/checkout',     :action => 'new'
   should_route :post, '/checkout',     :action => 'create'
   should_route :get,  '/orders/token', :action => 'show', :id => 'token'
@@ -47,6 +48,25 @@ class OrdersControllerTest < ActionController::TestCase
     context 'show' do
       setup { get :show, :id => @order.token }
       should_assign_to :order, :equals => '@order'
+    end
+  end
+
+  context 'logged in' do
+    setup { @controller.current_user = Factory.create(:user) }
+
+    context 'index' do
+      setup { get :index }
+      should_assign_to :orders
+      should_render_template :index
+    end
+  end
+
+  context 'not logged in' do
+    setup { @controller.current_user = nil }
+
+    context 'index' do
+      setup { get :index }
+      should_redirect_to 'new_session_path'
     end
   end
 end

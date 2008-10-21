@@ -2,7 +2,7 @@ class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
       t.string :email
-      t.string :encrypted_password, :remember_me_token, :salt, :limit => 40
+      t.string :encrypted_password, :salt, :limit => 40
       t.timestamps
     end
   end

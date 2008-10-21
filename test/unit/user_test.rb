@@ -17,10 +17,6 @@ class UserTest < ActiveSupport::TestCase
       assert_not_nil @user.encrypted_password
     end
 
-    should 'write the remember_me_token' do
-      assert_not_nil @user.remember_me_token
-    end
-
     should 'write the salt' do
       assert_not_nil @user.salt
     end

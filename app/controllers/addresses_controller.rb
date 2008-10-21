@@ -13,6 +13,7 @@ class AddressesController < ApplicationController
   private
 
   def load_new_address
-    @address = current_cart.build_address(params[:address])
+    @address = Address.new(params[:address])
+    @address.list = current_cart
   end
 end

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ListTest < ActiveSupport::TestCase
-  should_have_one :address
+  should_belong_to :address
   should_have_many :items
 
   context 'with an unsaved list' do

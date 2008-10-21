@@ -12,7 +12,6 @@
 ActiveRecord::Schema.define(:version => 20081021093035) do
 
   create_table "addresses", :force => true do |t|
-    t.integer  "list_id"
     t.string   "name"
     t.string   "email"
     t.string   "line_one"
@@ -41,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20081021093035) do
   end
 
   create_table "lists", :force => true do |t|
+    t.integer  "address_id"
     t.string   "type"
     t.string   "token",      :limit => 40
     t.datetime "created_at"

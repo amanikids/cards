@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  has_one :address
+  belongs_to :address
   has_many :items
   before_create :write_token
 

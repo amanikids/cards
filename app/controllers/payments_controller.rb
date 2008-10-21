@@ -1,4 +1,7 @@
 class PaymentsController < ApplicationController
+  # POSTs come from PayPal, not our own application.
+  skip_before_filter :verify_authenticity_token
+
   before_filter :load_notification
   before_filter :load_order
 

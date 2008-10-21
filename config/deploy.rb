@@ -1,7 +1,14 @@
 set :application, 'cards_amanikids_org'
 set :user,        'matthew'
-set :database,    "#{user}_#{application}_production"
-set :domain_path, "/users/home/#{user}/domains/cards.amanikids.org"
+
+if ENV['TARGET'] == 'production'
+  set :database,    "#{user}_#{application}_production"
+  set :domain_path, "/users/home/#{user}/domains/cards.amanikids.org"
+else
+  set :database,    "#{user}_#{application}_preview"
+  set :domain_path, "/users/home/#{user}/domains/cards-preview.amanikids.org"
+end
+
 set :deploy_to,   "#{domain_path}/var/www"
 
 set :scm, :git

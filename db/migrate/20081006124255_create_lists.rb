@@ -3,6 +3,8 @@ class CreateLists < ActiveRecord::Migration
     create_table :lists do |t|
       t.string :type
       t.string :token, :limit => 40
+      t.string :payment_method
+      t.timestamp :paid_at
       t.timestamps
     end
   end

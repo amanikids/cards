@@ -42,7 +42,9 @@ ActiveRecord::Schema.define(:version => 20081020100722) do
 
   create_table "lists", :force => true do |t|
     t.string   "type"
-    t.string   "token",      :limit => 40
+    t.string   "token",          :limit => 40
+    t.string   "payment_method"
+    t.datetime "paid_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

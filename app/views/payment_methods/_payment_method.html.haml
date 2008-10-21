@@ -1,0 +1,4 @@
+- div_for(payment_method, :class => payment_method.name) do
+  %h2= payment_method.title
+  = textilize payment_method.description
+  = render :partial => "payment_methods/#{payment_method.name}", :locals => { :order => order, :payment_method => payment_method }

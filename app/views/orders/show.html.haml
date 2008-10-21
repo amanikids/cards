@@ -1,6 +1,6 @@
 = render :partial => 'orders/summary', :locals => { :order => @order }
 
-- paypal_donation_service_for @order.token, :amount => @order.total, :currency => @order.total.currency do |service|
-  - service.item_name = 'Contribution for Amani Christmas Cards'
-  - service.notify_url = payments_url
-  = submit_tag "Make My #{@order.total} Donation Online"
+- if @order.payment
+  = render :partial => @order.payment
+- else
+  = render :partial => @order.payment_methods, :locals => { :order => @order }

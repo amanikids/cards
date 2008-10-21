@@ -23,6 +23,10 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.with_options(:controller => 'payments') do |map|
-    map.payments '/payments', :action => 'create', :conditions => { :method => :post }
+    map.payments '/orders/:id/payment', :action => 'create', :conditions => { :method => :post }
+  end
+
+  map.with_options(:controller => 'paypal_payments') do |map|
+    map.paypal_payments '/orders/:id/paypal_payment', :action => 'create', :conditions => { :method => :post }
   end
 end

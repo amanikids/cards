@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081020100722) do
+ActiveRecord::Schema.define(:version => 20081021093035) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "list_id"
@@ -45,6 +45,24 @@ ActiveRecord::Schema.define(:version => 20081020100722) do
     t.string   "token",          :limit => 40
     t.string   "payment_method"
     t.datetime "paid_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payment_methods", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "country"
+    t.text     "description"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "payment_method_id"
+    t.datetime "received_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

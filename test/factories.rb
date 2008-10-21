@@ -30,6 +30,14 @@ Factory.define(:order) do |order|
   order.association :address
 end
 
+Factory.define(:payment_method) do |method|
+  method.name 'check'
+end
+
+Factory.define(:paypal_payment_method, :class => PaymentMethod) do |method|
+  method.name 'paypal'
+end
+
 Factory.define(:product) do |product|
   product.name "This Year's Card"
 end

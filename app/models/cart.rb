@@ -3,7 +3,6 @@ class Cart < List
     items.empty?
   end
 
-  # TODO rename confirm! to be something like create_order!
   def confirm!
     self.type = 'Order'
     self.save

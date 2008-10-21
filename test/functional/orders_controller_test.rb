@@ -56,7 +56,6 @@ class OrdersControllerTest < ActionController::TestCase
 
     context 'index' do
       setup { get :index }
-      should_assign_to :orders
       should_render_template :index
     end
   end

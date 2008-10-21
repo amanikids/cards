@@ -1,4 +1,19 @@
-confirmed_order_item:
-  list: confirmed_order
+unpaid:
+  list: unpaid
   variant: kili_10_merry_christmas
+  quantity: 1
+
+paypal_paid:
+  list: paypal_paid
+  variant: peace_10_merry_christmas
   quantity: 3
+
+check_pending:
+  list: check_pending
+  variant: kili_25_merry_christmas
+  quantity: 2
+
+check_paid:
+  list: check_paid
+  variant: peace_25_merry_christmas
+  quantity: 4

@@ -1,18 +1,28 @@
-%table
-  %thead
-    %tr
-      %th Order Placed
-      %th Donor
-      %th Donation
-      %th Payment Method
-      %th Payment Sent
-      %th Payment Received
-  %tbody
-    - @orders.each do |order|
+- [['Shippable Orders', Order.with_payment.received], ['Pending Orders', Order.with_payment.pending]].each do |heading, orders|
+  %h2= heading
+  %table
+    %thead
       %tr
-        %td= time_ago_in_words(order.created_at) + ' ago'
-        %td= mail_to order.address.email, order.address.name
-        %td= order.total.to_s + ' ' + order.total.currency
-        %td= order.payment.method
-        %td= order.payment.created_at
-        %td= order.payment.received_at
+        %th
+        %th
+        %th
+        %th
+        %th{:colspan => 3} Payment
+      %tr
+        %th Country
+        %th Order Number
+        %th Donor
+        %th Donation
+        %th Method
+        %th Sent
+        %th Received
+    %tbody
+      - orders.each do |order|
+        %tr
+          %td= order.address.country
+          %td= link_to truncate(order.token, 5, ''), order
+          %td= order.address.name
+          %td= order.total.to_s + ' ' + order.total.currency
+          %td= order.payment.payment_method.name.titleize
+          %td= order.payment.created_at.to_s(:readable)
+          %td= order.payment.received_at.to_s(:readable) if order.payment.received_at

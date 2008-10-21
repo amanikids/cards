@@ -25,6 +25,6 @@ class PaymentsController < ApplicationController
   end
 
   def load_order
-    @order = Order.find_by_token(@notification.item_id)
+    @order = Order.find_by_token(@notification.item_id) || raise(ActiveRecord::RecordNotFound)
   end
 end

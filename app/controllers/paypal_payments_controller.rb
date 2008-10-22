@@ -19,7 +19,7 @@ class PaypalPaymentsController < ApplicationController
   end
 
   def load_order
-    @order = Order.find_by_token(params[:id]) || raise(ActiveRecord::RecordNotFound)
+    @order = Order.find_by_token(params[:order_id]) || raise(ActiveRecord::RecordNotFound)
   end
 
   # TODO make a named scope for PaymentMethod.paypal?

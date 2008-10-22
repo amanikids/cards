@@ -24,11 +24,12 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.with_options(:controller => 'payments') do |map|
-    map.payments '/orders/:id/payment', :action => 'create', :conditions => { :method => :post }
+    map.order_payments '/orders/:order_id/payment', :action => 'create', :conditions => { :method => :post }
+    map.order_payment  '/orders/:order_id/payment', :action => 'update', :conditions => { :method => :put }
   end
 
   map.with_options(:controller => 'paypal_payments') do |map|
-    map.paypal_payments '/orders/:id/paypal_payment', :action => 'create', :conditions => { :method => :post }
+    map.order_paypal_payments '/orders/:order_id/paypal_payment', :action => 'create', :conditions => { :method => :post }
   end
 
   map.with_options(:controller => 'sessions') do |map|

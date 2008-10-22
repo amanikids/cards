@@ -1,6 +1,6 @@
 = render :partial => 'orders/summary', :locals => { :order => @order }
 
 - if @order.payment
-  = render :partial => @order.payment
+  = render :partial => @order.payment, :locals => { :order => @order }
 - else
   = render :partial => @order.payment_methods, :locals => { :order => @order }

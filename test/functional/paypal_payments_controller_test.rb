@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PaypalPaymentsControllerTest < ActionController::TestCase
-  should_route :post, '/orders/12345/paypal_payment', :action => 'create', :id => '12345'
+  should_route :post, '/orders/12345/paypal_payment', :action => 'create', :order_id => '12345'
 
   context 'with an existing Order and PayPal PaymentMethod' do
     setup do
@@ -19,7 +19,7 @@ class PaypalPaymentsControllerTest < ActionController::TestCase
           setup { ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:item_id).returns(@order.token) }
 
           context 'create' do
-            setup { post :create, :id => @order.token }
+            setup { post :create, :order_id => @order.token }
             should_change '@order.reload.payment', :from => nil
             should_change 'Payment.count', :by => 1
 
@@ -37,7 +37,7 @@ class PaypalPaymentsControllerTest < ActionController::TestCase
           setup { ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:item_id).returns('not the right order token') }
 
           context 'create' do
-            setup { post :create, :id => @order.token }
+            setup { post :create, :order_id => @order.token }
             should_not_change '@order.reload.payment'
             should_not_change 'Payment.count'
           end

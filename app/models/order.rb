@@ -26,7 +26,6 @@ class Order < List
     shipment ? shipment.shipper : nil
   end
 
-
   def shipped_at
     shipment ? shipment.created_at : nil
   end

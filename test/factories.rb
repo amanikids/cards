@@ -17,6 +17,9 @@ end
 Factory.define(:cart) do |cart|
 end
 
+Factory.define(:download) do |cart|
+end
+
 Factory.define(:item) do |item|
   item.quantity 1
   item.association :variant
@@ -57,14 +60,27 @@ Factory.define(:shipment) do |shipment|
   shipment.association :shipper, :factory => :user
 end
 
+Factory.define(:system_user) do |system_user|
+  system_user.email Factory.next(:email)
+  system_user.password 'foo'
+end
+
 Factory.define(:user) do |user|
   user.email Factory.next(:email)
   user.password 'foo'
 end
 
 Factory.define(:variant) do |variant|
-  variant.association :product
   variant.name '10-pack'
   variant.cents 1000
   variant.currency 'USD'
+  variant.association :product
+end
+
+Factory.define(:variant_with_download, :class => Variant) do |variant|
+  variant.name '10-pack'
+  variant.cents 1000
+  variant.currency 'USD'
+  variant.association :product
+  variant.association :download
 end

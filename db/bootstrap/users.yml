@@ -1,3 +1,10 @@
+system:
+  type: SystemUser
+  name: The Website
+  email: orders@cards.amanikids.org
+  encrypted_password: 841aa628a495410deff700a233eb587d1de67df1
+  salt: 334b7ac207f8b1c24fd3eb895b50c6bd4bf31e94
+
 matthew:
   name: Matthew Todd
   email: matthew.todd@gmail.com

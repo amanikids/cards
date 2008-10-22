@@ -6,12 +6,12 @@ class List < ActiveRecord::Base
 
   before_create :write_token
 
-  def all_downloads?
-    items.all?(&:download) unless items.blank?
-  end
-
   def downloads
     items.collect(&:download).compact
+  end
+
+  def immediately_shippable?
+    items.all?(&:download) unless items.blank?
   end
 
   def quantity

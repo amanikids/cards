@@ -14,18 +14,18 @@ class ListTest < ActiveSupport::TestCase
 
   context 'a List' do
     setup { @list = List.new }
-    should('not be all downloads')   { assert !@list.all_downloads? }
+    should('not be immediately shippable') { assert !@list.immediately_shippable? }
     should('not have any downloads') { assert_equal [], @list.downloads }
 
     context 'with some items downloadable, some not' do
       setup { @list.stubs(:items).returns [stub(:download => nil), stub(:download => 'DOWNLOAD_TWO')] }
-      should('not be all downloads')          { assert !@list.all_downloads? }
+      should('not be immediately shippable') { assert !@list.immediately_shippable? }
       should('collect downloadable variants') { assert_equal ['DOWNLOAD_TWO'], @list.downloads }
     end
 
     context 'with all items downloadable' do
       setup { @list.stubs(:items).returns [stub(:download => 'DOWNLOAD_ONE'), stub(:download => 'DOWNLOAD_TWO')] }
-      should('return true for all downloads') { assert @list.all_downloads? }
+      should('be immediately shippable') { assert @list.immediately_shippable? }
       should('collect downloadable variants') { assert_equal ['DOWNLOAD_ONE', 'DOWNLOAD_TWO'], @list.downloads }
     end
   end

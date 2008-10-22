@@ -1,0 +1,2 @@
+class SystemUser < User
+end

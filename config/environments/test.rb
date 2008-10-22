@@ -20,6 +20,8 @@ config.action_controller.allow_forgery_protection    = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
+config.action_mailer.default_url_options = { :host => 'shoes.local:3000' }
+
 
 # Specify gems that this application depends on for testing.
 # They can then be installed with "RAILS_ENV=test rake gems:install" on new installations.

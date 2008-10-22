@@ -1,15 +1,13 @@
 # Let me hang some parameters here:
-ActiveMerchant::Configuration = Struct.new(:paypal_account, :paypal_order).new
+ActiveMerchant::Configuration = Struct.new(:paypal_account).new
 
 # Configure ActiveMerchant in test mode, unless we're running in production.
 if Rails.env.production?
   ActiveMerchant::Billing::Base.mode = :production
   ActiveMerchant::Configuration.paypal_account = 'donation.notify@peacehousefoundation.org'
-  ActiveMerchant::Configuration.paypal_order   = '123'
 else
   ActiveMerchant::Billing::Base.mode = :test
   ActiveMerchant::Configuration.paypal_account = 'develo_1224327392_biz@matthewtodd.org'
-  ActiveMerchant::Configuration.paypal_order   = '123'
 end
 
 # Include the ActiveMerchant view helper.

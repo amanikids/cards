@@ -4,9 +4,11 @@ set :user,        'matthew'
 if ENV['TARGET'] == 'production'
   set :database,    "#{user}_#{application}_production"
   set :domain_path, "/users/home/#{user}/domains/cards.amanikids.org"
+  set :rails_env,   'production'
 else
   set :database,    "#{user}_#{application}_preview"
   set :domain_path, "/users/home/#{user}/domains/cards-preview.amanikids.org"
+  set :rails_env,   'staging'
 end
 
 set :deploy_to,   "#{domain_path}/var/www"

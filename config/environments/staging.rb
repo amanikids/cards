@@ -19,6 +19,6 @@ config.action_view.cache_template_loading            = true
 # config.action_controller.asset_host                  = "http://assets.example.com"
 
 # ActionMailer settings
-config.action_mailer.default_url_options = { :host => 'cards.amanikids.org' }
+config.action_mailer.default_url_options = { :host => 'cards-preview.amanikids.org' }
 config.action_mailer.delivery_method     = :sendmail
 config.action_mailer.sendmail_settings   = { :location => '/usr/local/bin/sendmail', :arguments => '-i -t' }

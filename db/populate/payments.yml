@@ -2,6 +2,7 @@ paypal_paid:
   order: paypal_paid
   payment_method: paypal
   received_at: <%= Time.now.to_s(:db) %>
+  recipient: system
 
 check_pending:
   order: check_pending

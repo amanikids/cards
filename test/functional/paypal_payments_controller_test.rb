@@ -5,6 +5,7 @@ class PaypalPaymentsControllerTest < ActionController::TestCase
 
   context 'with an existing Order and PayPal PaymentMethod' do
     setup do
+      Factory.create(:system_user)
       @order = Factory.create(:order)
       @method = Factory.create(:paypal_payment_method)
     end
@@ -23,12 +24,16 @@ class PaypalPaymentsControllerTest < ActionController::TestCase
             should_change '@order.reload.payment', :from => nil
             should_change 'Payment.count', :by => 1
 
-            should "set the payment's payment_method field to PayPal" do
-              assert_equal @method, @order.payment.payment_method
+            should "set the payment_method field to PayPal" do
+              assert_equal @method, @order.payment_method
             end
 
-            should "set the payment's received_at field" do
-              assert_not_nil @order.payment.received_at
+            should "set the payment_received_at field" do
+              assert_not_nil @order.payment_received_at
+            end
+
+            should "set the payment's recipient field" do
+              assert_equal SystemUser.first, @order.payment_recipient
             end
           end
         end

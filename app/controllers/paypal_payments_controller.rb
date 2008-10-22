@@ -8,7 +8,7 @@ class PaypalPaymentsController < ApplicationController
 
   # TODO use a received_at timestamp from PayPal?
   def create
-    @order.create_payment(:payment_method => @payment_method, :received_at => Time.now) if payment_received?
+    @order.create_payment(:payment_method => @payment_method, :recipient => SystemUser.first, :received_at => Time.now) if payment_received?
     render :text => ''
   end
 

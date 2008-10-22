@@ -11,6 +11,11 @@ ActionController::Routing::Routes.draw do |map|
     map.cart      '/cart', :action => 'update', :conditions => { :method => :put }
   end
 
+  map.with_options(:controller => 'currencies') do |map|
+    map.currency_gbp '/currencies/GBP', :action => 'create', :currency => 'GBP', :conditions => { :method => :post }
+    map.currency_usd '/currencies/USD', :action => 'create', :currency => 'USD', :conditions => { :method => :post }
+  end
+
   map.download '/downloads/:id'
 
   map.with_options(:controller => 'items') do |map|

@@ -54,6 +54,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def load_parent_order
+    @order = Order.find_by_token(params[:order_id]) || raise(ActiveRecord::RecordNotFound)
+  end
+
   def ensure_current_cart
     if current_cart.blank?
       flash[:notice] = 'Your cart is empty.'

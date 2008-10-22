@@ -1,7 +1,5 @@
 %table
   %tr
-    %th Unshipped
-  %tr
     %th Country
     %th Order
     %th Donor
@@ -24,8 +22,6 @@
       %td= n order.payment_received_at
       %td= n order.shipper
       %td= n order.shipped_at
-  %tr
-    %th Shipped
   - Order.shipped.each do |order|
     %tr
       %td= order.country

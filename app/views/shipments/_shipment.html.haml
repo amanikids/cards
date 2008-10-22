@@ -1,0 +1,3 @@
+.shipment
+  %h2 Your order has shipped!
+  %p= "#{order.shipper || 'We'} sent it your way #{order.shipped_at.to_date.to_s(:long)}."

@@ -1,7 +1,7 @@
 / TODO show payment and shipping information to the donor
 / TODO show Payment Received and Order Shipped buttons to the Distributor
 .payment
-  %h2= "Thank you, #{order.name}."
+  %h2= "Thank you!"
 
   - if payment.received_at
     %p= "We received your donation on #{payment.received_at.to_date.to_s(:long)}."

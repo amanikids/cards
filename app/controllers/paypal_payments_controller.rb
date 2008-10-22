@@ -3,7 +3,7 @@ class PaypalPaymentsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   before_filter :load_notification
-  before_filter :load_order
+  before_filter :load_parent_order
   before_filter :load_payment_method
 
   # TODO use a received_at timestamp from PayPal?
@@ -16,10 +16,6 @@ class PaypalPaymentsController < ApplicationController
 
   def load_notification
     @notification = ActiveMerchant::Billing::Integrations::Paypal::Notification.new(request.raw_post)
-  end
-
-  def load_order
-    @order = Order.find_by_token(params[:order_id]) || raise(ActiveRecord::RecordNotFound)
   end
 
   # TODO make a named scope for PaymentMethod.paypal?

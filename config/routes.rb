@@ -37,4 +37,8 @@ ActionController::Routing::Routes.draw do |map|
     map.sessions    '/sessions',     :action => 'create',  :conditions => { :method => :post }
     map.connect     '/sessions',     :action => 'destroy', :conditions => { :method => :delete }
   end
+
+  map.with_options(:controller => 'shipments') do |map|
+    map.order_shipments '/orders/:order_id/shipment', :action => 'create', :conditions => { :method => :post }
+  end
 end

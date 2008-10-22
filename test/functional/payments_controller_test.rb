@@ -28,7 +28,7 @@ class PaymentsControllerTest < ActionController::TestCase
   end
 
   context 'with an existing Order and unreceived Payment' do
-    setup { @payment = Factory.create(:payment, :received_at => nil) }
+    setup { @payment = Factory.create(:payment, :received_at => nil, :recipient => nil) }
 
     context 'not logged in' do
       setup { @controller.current_user = nil }
@@ -46,6 +46,8 @@ class PaymentsControllerTest < ActionController::TestCase
       context 'update' do
         setup { put :update, :order_id => @payment.order.token, :payment => { :received_at => Time.now } }
         should_change '@payment.reload.received_at'
+        should_change '@payment.reload.recipient', :from => nil
+        should('set recipient to current_user') { assert_equal @controller.current_user, @payment.reload.recipient }
         should_set_the_flash_to 'Payment updated.'
         should_redirect_to 'order_path(@order)'
       end

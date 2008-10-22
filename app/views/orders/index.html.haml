@@ -8,7 +8,8 @@
     %th Amount
     %th Paid By
     %th On
-    %th Received On
+    %th Received By
+    %th On
     %th Shipped By
     %th On
   - Order.unshipped.each do |order|
@@ -17,9 +18,12 @@
       %td= link_to truncate(order.token, 5, ''), order
       %td= order.name
       %td= order.total.format(:with_currency)
-      %td= order.payment_method
-      %td= order.payment_created_at
-      %td= order.payment_received_at
+      %td= n order.payment_method
+      %td= n order.payment_created_at
+      %td= n order.payment_recipient
+      %td= n order.payment_received_at
+      %td= n order.shipper
+      %td= n order.shipped_at
   %tr
     %th Shipped
   - Order.shipped.each do |order|
@@ -28,8 +32,9 @@
       %td= link_to truncate(order.token, 5, ''), order
       %td= order.name
       %td= order.total.format(:with_currency)
-      %td= order.payment_method
-      %td= order.payment_created_at
-      %td= order.payment_received_at
-      %td= order.shipper
-      %td= order.shipped_at
+      %td= n order.payment_method
+      %td= n order.payment_created_at
+      %td= n order.payment_recipient
+      %td= n order.payment_received_at
+      %td= n order.shipper
+      %td= n order.shipped_at

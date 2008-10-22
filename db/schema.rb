@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20081022061743) do
   create_table "payments", :force => true do |t|
     t.integer  "order_id"
     t.integer  "payment_method_id"
+    t.integer  "recipient_id"
     t.datetime "received_at"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,4 +1,4 @@
-TODO User marks Payment as received (Payment belongs to User as :recipient)
 TODO User creates Shipment for Order (Order has_one :shipment, Shipment(:sender))
 
+TODO Rename Payment -> Donation
 TODO Collapse line items pointing to the same variant.

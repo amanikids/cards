@@ -28,6 +28,7 @@ class OrderTest < ActiveSupport::TestCase
     should('return nil for payment_method') { assert_nil @order.payment_method }
     should('return nil for payment_created_at') { assert_nil @order.payment_created_at }
     should('return nil for payment_received_at') { assert_nil @order.payment_received_at }
+    should('return nil for payment_recipient') { assert_nil @order.payment_recipient }
   end
 
   context 'an order with a payment' do
@@ -35,6 +36,7 @@ class OrderTest < ActiveSupport::TestCase
     should('delegate payment_method to payment') { assert_equal @order.payment.payment_method, @order.payment_method }
     should('delegate payment_created_at to payment') { assert_equal @order.payment.created_at, @order.payment_created_at }
     should('delegate payment_received_at to payment') { assert_equal @order.payment.received_at, @order.payment_received_at }
+    should('delegate payment_recipient to payment') { assert_equal @order.payment.recipient, @order.payment_recipient }
   end
 
   context 'an order with no shipment' do

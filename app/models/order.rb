@@ -14,12 +14,16 @@ class Order < List
     payment ? payment.created_at : nil
   end
 
+  def payment_methods
+    PaymentMethod.for(address.country)
+  end
+
   def payment_received_at
     payment ? payment.received_at : nil
   end
 
-  def payment_methods
-    PaymentMethod.for(address.country)
+  def payment_recipient
+    payment ? payment.recipient : nil
   end
 
   def shipper

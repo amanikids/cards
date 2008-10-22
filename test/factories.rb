@@ -36,6 +36,7 @@ Factory.define(:payment) do |payment|
   payment.received_at 47.hours.ago
   payment.association :order
   payment.association :payment_method
+  payment.association :recipient, :factory => :user
 end
 
 Factory.define(:payment_method) do |method|

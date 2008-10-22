@@ -8,7 +8,7 @@ class PaymentsController < ApplicationController
   end
 
   def update
-    @order.payment.update_attributes(params[:payment])
+    @order.payment.update_attributes(params[:payment].merge(:recipient => current_user))
     flash[:notice] = 'Payment updated.'
     redirect_to order_path(@order)
   end

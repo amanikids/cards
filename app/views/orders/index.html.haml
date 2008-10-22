@@ -1,28 +1,35 @@
-- [['Shippable Orders', Order.with_payment.received], ['Pending Orders', Order.with_payment.pending]].each do |heading, orders|
-  %h2= heading
-  %table
-    %thead
-      %tr
-        %th
-        %th
-        %th
-        %th
-        %th{:colspan => 3} Payment
-      %tr
-        %th Country
-        %th Order Number
-        %th Donor
-        %th Donation
-        %th Method
-        %th Sent
-        %th Received
-    %tbody
-      - orders.each do |order|
-        %tr
-          %td= order.address.country
-          %td= link_to truncate(order.token, 5, ''), order
-          %td= order.address.name
-          %td= order.total.to_s + ' ' + order.total.currency
-          %td= order.payment.payment_method.name.titleize
-          %td= order.payment.created_at.to_s(:readable)
-          %td= order.payment.received_at.to_s(:readable) if order.payment.received_at
+%table
+  %tr
+    %th Unshipped
+  %tr
+    %th Country
+    %th Order
+    %th Donor
+    %th Amount
+    %th Paid By
+    %th On
+    %th Received On
+    %th Shipped By
+    %th On
+  - Order.unshipped.each do |order|
+    %tr
+      %td= order.country
+      %td= link_to truncate(order.token, 5, ''), order
+      %td= order.name
+      %td= order.total.format(:with_currency)
+      %td= order.payment_method
+      %td= order.payment_created_at
+      %td= order.payment_received_at
+  %tr
+    %th Shipped
+  - Order.shipped.each do |order|
+    %tr
+      %td= order.country
+      %td= link_to truncate(order.token, 5, ''), order
+      %td= order.name
+      %td= order.total.format(:with_currency)
+      %td= order.payment_method
+      %td= order.payment_created_at
+      %td= order.payment_received_at
+      %td= order.shipper
+      %td= order.shipped_at

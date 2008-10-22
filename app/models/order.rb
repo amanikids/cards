@@ -1,15 +1,33 @@
 class Order < List
-  has_one :payment
+  named_scope :shipped,   :include => :shipment, :conditions => 'shipments.id IS NOT NULL', :order => 'lists.created_at'
+  named_scope :unshipped, :include => :shipment, :conditions => 'shipments.id IS NULL',     :order => 'lists.created_at'
 
-  named_scope :with_payment, :include => :payment, :conditions => 'payments.id IS NOT NULL', :order => 'lists.created_at'
-  named_scope :pending,  :conditions => 'payments.received_at IS NULL'
-  named_scope :received, :conditions => 'payments.received_at IS NOT NULL'
+  has_one :payment
+  has_one :payment_method, :through => :payment
+  has_one :shipment
 
   def donor_editable?
     false
   end
 
+  def payment_created_at
+    payment ? payment.created_at : nil
+  end
+
+  def payment_received_at
+    payment ? payment.received_at : nil
+  end
+
   def payment_methods
     PaymentMethod.for(address.country)
+  end
+
+  def shipper
+    shipment ? shipment.shipper : nil
+  end
+
+
+  def shipped_at
+    shipment ? shipment.created_at : nil
   end
 end

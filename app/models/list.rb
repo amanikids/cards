@@ -1,6 +1,9 @@
 class List < ActiveRecord::Base
   belongs_to :address
   has_many :items
+
+  delegate :country, :name, :to => :address
+
   before_create :write_token
 
   def quantity

@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
     user if user && user.send(:encrypt, password) == user.encrypted_password
   end
 
+  def to_s
+    name
+  end
+
   private
 
   def digest(string)

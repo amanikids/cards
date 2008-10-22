@@ -26,8 +26,27 @@ Factory.define(:list) do |list|
 end
 
 Factory.define(:order) do |order|
+  order.created_at 3.days.ago
   order.token '6bcc3f7303a4675e3c33f84bbd33e245cc770921'
   order.association :address
+end
+
+Factory.define(:order_with_payment, :class => Order) do |order|
+  order.token '6bcc3f7303a4675e3c33f84bbd33e245cc770921'
+  order.association :address
+  order.association :payment
+end
+
+Factory.define(:order_with_shipment, :class => Order) do |order|
+  order.token '6bcc3f7303a4675e3c33f84bbd33e245cc770921'
+  order.association :address
+  order.association :shipment
+end
+
+Factory.define(:payment) do |payment|
+  payment.created_at 2.days.ago
+  payment.received_at 47.hours.ago
+  payment.association :payment_method
 end
 
 Factory.define(:payment_method) do |method|
@@ -40,6 +59,12 @@ end
 
 Factory.define(:product) do |product|
   product.name "This Year's Card"
+end
+
+Factory.define(:shipment) do |shipment|
+  shipment.created_at 1.day.ago
+  shipment.association :order
+  shipment.association :shipper, :factory => :user
 end
 
 Factory.define(:user) do |user|

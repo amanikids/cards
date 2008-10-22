@@ -1,13 +1,13 @@
 paypal:
   name: paypal
-  title: Donate online via PayPal.
+  title: Donating via PayPal.
   description: Description coming soon.
   position: 1
   country:
 
 check_us:
   name: check
-  title: Mail a Check in the United States.
+  title: Mailing a Check.
   description: Description coming soon.
   position: 2
   country: United States

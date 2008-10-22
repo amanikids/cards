@@ -3,13 +3,13 @@ class Cart < List
     items.empty?
   end
 
+  def confirmed?
+    false
+  end
+
   def confirm!
     self.type = 'Order'
     self.save
-  end
-
-  def donor_editable?
-    true
   end
 
   def update_items(attributes)

@@ -12,6 +12,24 @@ class ListTest < ActiveSupport::TestCase
     end
   end
 
+  context 'a List' do
+    setup { @list = List.new }
+    should('not be all downloads')   { assert !@list.all_downloads? }
+    should('not have any downloads') { assert_equal [], @list.downloads }
+
+    context 'with some items downloadable, some not' do
+      setup { @list.stubs(:items).returns [stub(:download => nil), stub(:download => 'DOWNLOAD_TWO')] }
+      should('not be all downloads')          { assert !@list.all_downloads? }
+      should('collect downloadable variants') { assert_equal ['DOWNLOAD_TWO'], @list.downloads }
+    end
+
+    context 'with all items downloadable' do
+      setup { @list.stubs(:items).returns [stub(:download => 'DOWNLOAD_ONE'), stub(:download => 'DOWNLOAD_TWO')] }
+      should('return true for all downloads') { assert @list.all_downloads? }
+      should('collect downloadable variants') { assert_equal ['DOWNLOAD_ONE', 'DOWNLOAD_TWO'], @list.downloads }
+    end
+  end
+
   context 'quantity' do
     should 'be zero if there are no items' do
       assert_equal 0, List.new.quantity

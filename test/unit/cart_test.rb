@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class CartTest < ActiveSupport::TestCase
-  should 'be donor_editable' do
-    assert Cart.new.donor_editable?
+  should 'not be confirmed' do
+    assert !Cart.new.confirmed?
   end
 
   context 'with an existing cart' do

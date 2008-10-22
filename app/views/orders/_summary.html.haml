@@ -22,7 +22,7 @@
       %td
       %td= order.total.exchange_to(current_currency)
 
-- if order.donor_editable?
+- unless order.confirmed?
   %ul
     %li= link_to 'Update Quantities', edit_cart_path
 

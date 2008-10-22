@@ -4,7 +4,7 @@
 <% [[10, 1200], [25, 2500]].each do |size, cents| %>
 <% %w[merry_christmas happy_holidays].each do |inside| %>
 
-<%= front %>_<%= size %>_<%= inside %>:
+<%= "#{front}_#{size}_#{inside}" %>:
   product: <%= front %>
   name: <%= size %>-pack <%= inside.titleize %>
   cents: <%= cents %>
@@ -12,3 +12,11 @@
   position: <%= position += 1 %>
 
 <% end; end; end %>
+
+gift_20:
+  product: gift
+  name: 20
+  cents: 2000
+  currency: USD
+  position: <%= position += 1 %>
+  download: gift_20

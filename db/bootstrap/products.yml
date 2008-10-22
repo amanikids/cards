@@ -7,3 +7,8 @@ peace:
   name: Peace Holiday Card
   position: 2
   image: peace
+
+gift:
+  name: Gift Card
+  position: 3
+  image: peace

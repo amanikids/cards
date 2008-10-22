@@ -6,8 +6,8 @@ class Order < List
   has_one :payment_method, :through => :payment
   has_one :shipment
 
-  def donor_editable?
-    false
+  def confirmed?
+    true
   end
 
   def payment_created_at

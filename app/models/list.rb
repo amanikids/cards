@@ -6,6 +6,14 @@ class List < ActiveRecord::Base
 
   before_create :write_token
 
+  def all_downloads?
+    items.all?(&:download) unless items.blank?
+  end
+
+  def downloads
+    items.collect(&:download).compact
+  end
+
   def quantity
     quantity = 0
     items.each { |item| quantity += item.quantity }

@@ -1,5 +1,8 @@
 = render :partial => 'orders/summary', :locals => { :order => @order }
 
+- if @order.downloads.any?
+  = render :partial => 'downloads/list', :locals => { :order => @order }
+
 - if @order.payment
   = render :partial => @order.payment, :locals => { :order => @order }
 - else

@@ -11,6 +11,8 @@ ActionController::Routing::Routes.draw do |map|
     map.cart      '/cart', :action => 'update', :conditions => { :method => :put }
   end
 
+  map.download '/downloads/:id'
+
   map.with_options(:controller => 'items') do |map|
     map.items '/items',     :action => 'create',  :conditions => { :method => :post }
     map.item  '/items/:id', :action => 'destroy', :conditions => { :method => :delete }

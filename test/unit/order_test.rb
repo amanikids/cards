@@ -7,8 +7,8 @@ class OrderTest < ActiveSupport::TestCase
   should_have_one :payment
   should_have_one :shipment
 
-  should 'not be donor_editable' do
-    assert !Order.new.donor_editable?
+  should 'be confirmed' do
+    assert Order.new.confirmed?
   end
 
   context 'an order with an address in SOME COUNTRY' do

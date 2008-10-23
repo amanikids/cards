@@ -1,0 +1,68 @@
+!unit= 12px
+!product_image_width= 10 * !unit
+!welcome_width= 25 * !unit
+
+!logo_height= 154px
+!logo_inner_padding= 18px
+
+!base= #fc9
+
+body
+  :font-family Verdana, Arial, sans-serif
+  :font-size= !unit
+  :margin 0
+  :padding 0
+
+h1, h2
+  :font-size= !unit * 1.5
+  :margin-top 0
+
+#flash
+  .notice
+    :background-color= !base
+    :padding= (!unit / 2.0) !unit
+    :text-align center
+    
+.header
+  .currency
+    :text-align right
+    / :position absolute
+    / :right= !unit
+    / :top= !logo_height - !logo_inner_padding - !unit
+  .cart
+    :background-color #006
+    :color #fff
+    :padding= (!unit / 2.0) !unit
+    :text-align center
+    a
+      :color #fff
+    
+.main
+  :margin= !unit
+
+  .welcome
+    :background-color= !base
+    :float left
+    :padding= !unit
+    :width= !welcome_width
+
+  .products
+    :margin-left= !welcome_width + (3 * !unit)
+    
+    .product
+      :background-color #fed
+      :margin-bottom= !unit
+      :padding= !unit
+      .image
+        :float left
+      .content
+        :margin-left= !product_image_width + !unit
+
+.footer
+  :background-color= !base / 1.5
+  :border-top-width= !unit
+  :border-top-style solid
+  :border-top-color= !base / 2.0
+  :padding= !unit
+  .thanks
+    :width 50%

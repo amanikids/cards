@@ -4,7 +4,8 @@
 
 .main
   = render :partial => 'layouts/welcome'
-  = render :partial => @products
+  .products
+    = render :partial => @products
 
 .footer
   = render :partial => 'layouts/thanks'

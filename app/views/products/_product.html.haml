@@ -1,11 +1,12 @@
-.card
+.product
   %h2= product.name
-  = image_tag product.image.path
-  = markdown product.description
-  - form_for Item.new(:variant => product.variants.first) do |f|
-    %ul
-      - product.variants.each do |variant|
-        .field
-          = f.radio_button :variant_id, variant.id
-          = f.label :variant_id, "#{variant.name} #{variant.price.exchange_to(current_currency)}", :for => [:item, :variant_id, variant.id].join('_')
-    = f.submit 'Add to Cart'
+  .image= image_tag product.image.path
+  .content
+    = markdown product.description
+    - form_for Item.new(:variant => product.variants.first) do |f|
+      %ul
+        - product.variants.each do |variant|
+          .field
+            = f.radio_button :variant_id, variant.id
+            = f.label :variant_id, "#{variant.name} #{variant.price.exchange_to(current_currency)}", :for => [:item, :variant_id, variant.id].join('_')
+      = f.submit 'Add to Cart'

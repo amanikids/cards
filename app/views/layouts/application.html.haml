@@ -4,10 +4,11 @@
   %head
     = stylesheet_link_tag('application')
   %body
+    = render :partial => 'layouts/flash', :locals => { :flash => flash } unless flash.empty?
+
     .header
       = image_tag 'logo.jpg'
       = yield :header
 
-    = render :partial => 'layouts/flash' unless flash.empty?
     = render :partial => 'layouts/navigation' if current_user
     = yield

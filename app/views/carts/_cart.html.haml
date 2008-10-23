@@ -1,9 +1,9 @@
 %p
   You have
-  = pluralize current_cart.quantity, 'item'
+  = pluralize cart.quantity, 'item'
   in your cart:
 %ul
-  - current_cart.items.each do |item|
+  - cart.items.each do |item|
     %li
       = item.quantity
       = item.product_name
@@ -11,7 +11,7 @@
       = item.total.exchange_to(current_currency)
 %p
   Cart total:
-  = current_cart.total.exchange_to(current_currency)
+  = cart.total.exchange_to(current_currency)
 
 %ul
   %li= link_to 'Update Quantities', edit_cart_path

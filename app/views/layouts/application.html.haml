@@ -15,9 +15,4 @@
         %li= link_to_unless_current 'Orders', orders_path
         %li= link_to 'Log out', sessions_path, :method => :delete
 
-    .currency
-      %ul
-        %li= (current_currency == 'USD') ? 'USD' : button_to('USD', currency_usd_path)
-        %li= (current_currency == 'GBP') ? 'GBP' : button_to('GBP', currency_gbp_path)
-
     = yield

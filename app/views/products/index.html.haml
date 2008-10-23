@@ -1,2 +1,7 @@
-= render :partial => 'carts/summary' unless current_cart.blank?
+.currency
+  %ul
+    %li= (current_currency == 'USD') ? 'USD' : button_to('USD', currency_usd_path)
+    %li= (current_currency == 'GBP') ? 'GBP' : button_to('GBP', currency_gbp_path)
+
+= render :partial => current_cart unless current_cart.blank?
 = render :partial => @products

@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20081022132811) do
 
   create_table "lists", :force => true do |t|
     t.integer  "address_id"
+    t.string   "currency",                 :default => "USD"
     t.string   "type"
     t.string   "token",      :limit => 40
     t.datetime "created_at"

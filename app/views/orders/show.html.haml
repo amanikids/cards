@@ -1,6 +1,6 @@
 / TODO don't pass :locals => { :order => @order } so much
 
-= render :partial => 'orders/items', :locals => { :order => @order }
+= render :partial => @order
 = render :partial => @order.address
 
 - if @order.downloads.any?

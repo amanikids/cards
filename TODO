@@ -1,5 +1,3 @@
-FIXME Order needs a currency attribute
-
 TODO Test making a PayPal checkout with GBP
 TODO Layout
 TODO Prevent double-clicking buttons
@@ -15,3 +13,8 @@ MAYBE Edit Address until shipped.
 MAYBE Rename Payment -> Donation
 MAYBE Use map.resources after all
 MAYBE Collapse line items pointing to the same variant.
+MAYBE Make Currency (has_many :currencies, :through => :exchange_rate) an Entity
+MAYBE Make Country an Entity
+
+MAYBE Can I clean up the Factories?
+MAYBE Can I clean up the OrderTest?

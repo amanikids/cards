@@ -1,4 +1,4 @@
-= render :partial => 'orders/items', :locals => { :order => @order }
+= render :partial => @order
 
 - form_for @order do |f|
   - fields_for 'order[address]', @order.address do |a|

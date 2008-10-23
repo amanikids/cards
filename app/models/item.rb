@@ -11,6 +11,7 @@ class Item < ActiveRecord::Base
     variant.product_name
   end
 
+  # MAYBE Item should know its currency and return total appropriately
   def total
     if errors.on(:quantity)
       variant.price

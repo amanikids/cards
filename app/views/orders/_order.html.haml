@@ -11,16 +11,16 @@
       %tr
         %td= item.product_name
         %td= item.variant.name
-        %td= item.variant.price.exchange_to(current_currency)
+        %td= item.variant.price.exchange_to(order.currency)
         %td= item.quantity
-        %td= item.total.exchange_to(current_currency)
+        %td= item.total.exchange_to(order.currency)
   %tfoot
     %tr
       %td
       %td
       %td
       %td
-      %td= order.total.exchange_to(current_currency)
+      %td= order.total.exchange_to(order.currency)
 
 - if order.new_record?
   %ul

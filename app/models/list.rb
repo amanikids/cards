@@ -7,6 +7,7 @@ class List < ActiveRecord::Base
     quantity
   end
 
+  # MAYBE List should know its currency and return total appropriately
   def total
     total = Money.new(0)
     items.each { |item| total += item.total }

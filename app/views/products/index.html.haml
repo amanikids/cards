@@ -1,7 +1,10 @@
-.currency
-  %ul
-    %li= (current_currency == 'USD') ? 'USD' : button_to('USD', currency_usd_path)
-    %li= (current_currency == 'GBP') ? 'GBP' : button_to('GBP', currency_gbp_path)
+.header
+  = render :partial => 'currencies/selector'
+  = render :partial => current_cart unless current_cart.blank?
 
-= render :partial => current_cart unless current_cart.blank?
-= render :partial => @products
+.main
+  = render :partial => 'layouts/welcome'
+  = render :partial => @products
+
+.footer
+  = render :partial => 'layouts/thanks'

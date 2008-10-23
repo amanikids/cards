@@ -1,7 +1,7 @@
 .card
   %h2= product.name
-  = image_tag(product.image.path)
-  = simple_format(product.description)
+  = image_tag product.image.path
+  = markdown product.description
   - form_for Item.new(:variant => product.variants.first) do |f|
     %ul
       - product.variants.each do |variant|

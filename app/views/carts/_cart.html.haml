@@ -1,18 +1,5 @@
-%p
-  You have
-  = pluralize cart.quantity, 'item'
-  in your cart:
-%ul
-  - cart.items.each do |item|
-    %li
-      = item.quantity
-      = item.product_name
-      = item.variant_name
-      = item.total
-%p
-  Cart total:
+.cart
+  = link_to('Your Cart', edit_cart_path) + ':'
+  = pluralize(cart.quantity, 'item') + ','
   = cart.total
-
-%ul
-  %li= link_to 'Update Quantities', edit_cart_path
-  %li= link_to 'Proceed to Checkout', checkout_path
+  = link_to 'Checkout', checkout_path

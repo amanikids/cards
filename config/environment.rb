@@ -13,6 +13,7 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on.
   # They can then be installed with "rake gems:install" on new installations.
+  config.gem 'BlueCloth', :lib => 'bluecloth'
   config.gem 'activemerchant', :lib => 'active_merchant'
   config.gem 'haml'
   config.gem 'money', :source => 'http://dist.leetsoft.com'

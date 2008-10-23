@@ -1,4 +1,4 @@
 .currency
-  %ul
-    %li= (current_currency == 'USD') ? 'USD' : button_to('USD', currency_usd_path)
-    %li= (current_currency == 'GBP') ? 'GBP' : button_to('GBP', currency_gbp_path)
+  Change Currency:
+  = link_to_unless current_currency == 'USD', 'USD', currency_usd_path, :method => :post
+  = link_to_unless current_currency == 'GBP', 'GBP', currency_gbp_path, :method => :post

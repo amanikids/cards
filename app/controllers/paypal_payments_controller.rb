@@ -6,7 +6,7 @@ class PaypalPaymentsController < ApplicationController
   before_filter :load_parent_order
   before_filter :load_payment_method
 
-  # TODO use a received_at timestamp from PayPal?
+  # MAYBE use a received_at timestamp from PayPal?
   def create
     @order.create_payment(:payment_method => @payment_method, :recipient => SystemUser.first, :received_at => Time.now) if payment_received?
     render :text => ''
@@ -18,7 +18,7 @@ class PaypalPaymentsController < ApplicationController
     @notification = ActiveMerchant::Billing::Integrations::Paypal::Notification.new(request.raw_post)
   end
 
-  # TODO make a named scope for PaymentMethod.paypal?
+  # MAYBE make a named scope for PaymentMethod.paypal?
   def load_payment_method
     @payment_method = PaymentMethod.find_by_name('paypal') || raise(ActiveRecord::RecordNotFound)
   end

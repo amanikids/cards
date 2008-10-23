@@ -20,6 +20,11 @@ end
 Factory.define(:download) do |cart|
 end
 
+Factory.define(:downloadable_item, :class => Item) do |item|
+  item.quantity 1
+  item.association :variant, :factory => :variant_with_download
+end
+
 Factory.define(:item) do |item|
   item.quantity 1
   item.association :variant

@@ -1,4 +1,7 @@
-= render :partial => 'orders/summary', :locals => { :order => @order }
+/ TODO don't pass :locals => { :order => @order } so much
+
+= render :partial => 'orders/items', :locals => { :order => @order }
+= render :partial => @order.address
 
 - if @order.downloads.any?
   = render :partial => 'downloads/list', :locals => { :order => @order }

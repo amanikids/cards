@@ -1,11 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'products'
 
-  map.with_options(:controller => 'addresses') do |map|
-    map.new_address '/shipping', :action => 'new',    :conditions => { :method => :get }
-    map.addresses   '/shipping', :action => 'create', :conditions => { :method => :post }
-  end
-
   map.with_options(:controller => 'carts') do |map|
     map.edit_cart '/cart', :action => 'edit',   :conditions => { :method => :get }
     map.cart      '/cart', :action => 'update', :conditions => { :method => :put }
@@ -25,8 +20,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.with_options(:controller => 'orders') do |map|
     map.orders   '/orders',     :action => 'index',  :conditions => { :method => :get }
-    map.checkout '/checkout',   :action => 'new',    :conditions => { :method => :get }
-    map.connect  '/checkout',   :action => 'create', :conditions => { :method => :post }
+    map.checkout '/orders/new', :action => 'new',    :conditions => { :method => :get }
+    map.connect  '/orders',     :action => 'create', :conditions => { :method => :post }
     map.order    '/orders/:id', :action => 'show',   :conditions => { :method => :get }
   end
 

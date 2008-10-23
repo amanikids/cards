@@ -22,15 +22,6 @@
       %td
       %td= order.total.exchange_to(current_currency)
 
-- unless order.confirmed?
+- if order.new_record?
   %ul
     %li= link_to 'Update Quantities', edit_cart_path
-
-%p
-  %div= order.address.name
-  %div= order.address.line_one
-  %div= order.address.line_two
-  %div= order.address.line_three
-  %div= order.address.line_four
-  %div= order.address.country
-  %div= order.address.email

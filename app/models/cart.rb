@@ -1,17 +1,13 @@
 class Cart < List
-  after_update :create_shipment, :if => :order_is_immediately_shippable?
-
+  # MAYBE pull blank? up from Cart to List, and validate that an Order can't be blank
   def blank?
     items.empty?
   end
 
-  def confirmed?
-    false
-  end
-
-  def confirm!
-    self.type = 'Order'
-    self.save
+  def build_order(attributes={})
+    returning(Order.new(attributes)) do |order|
+      order.item_ids = item_ids
+    end
   end
 
   def update_items(attributes)
@@ -19,16 +15,5 @@ class Cart < List
     items.inject(true) do |result, item|
       result &&= item.update_attributes(attributes[item.id.to_s])
     end
-  end
-
-  private
-
-  def create_shipment
-    order = Order.find(id)
-    order.create_shipment(:shipper => SystemUser.first)
-  end
-
-  def order_is_immediately_shippable?
-    type == 'Order' && immediately_shippable?
   end
 end

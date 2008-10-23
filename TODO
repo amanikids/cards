@@ -1,8 +1,17 @@
+FIXME Order needs a currency attribute
+
+TODO Test making a PayPal checkout with GBP
 TODO Layout
-TODO Prevent double-clipping buttons
-TODO Work through back-button concerns in the checkout process
-
+TODO Prevent double-clicking buttons
+TODO Show currency sign with money amounts (&pound;)
 TODO Additional Donation
+TODO Adjust exchange rates
+TODO Hide currency buttons if current_user
 
-TODO Rename Payment -> Donation
-TODO Collapse line items pointing to the same variant.
+MAYBE Send PayPal a cancel url (order_path(@order))
+MAYBE Change text of PayPal return button
+MAYBE Rename :address to :mailing_address
+MAYBE Edit Address until shipped.
+MAYBE Rename Payment -> Donation
+MAYBE Use map.resources after all
+MAYBE Collapse line items pointing to the same variant.

@@ -2,15 +2,12 @@ require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
   should_route :get,  '/orders',       :action => 'index'
-  should_route :get,  '/checkout',     :action => 'new'
-  should_route :post, '/checkout',     :action => 'create'
+  should_route :get,  '/orders/new',   :action => 'new'
+  should_route :post, '/orders',       :action => 'create'
   should_route :get,  '/orders/token', :action => 'show', :id => 'token'
 
   context 'with a current cart' do
-    setup do
-      @cart = Factory.create(:cart)
-      @controller.current_cart = @cart
-    end
+    setup { @controller.current_cart = Factory.create(:cart) }
 
     context 'new' do
       setup { get :new }
@@ -18,26 +15,29 @@ class OrdersControllerTest < ActionController::TestCase
     end
 
     context 'with one item' do
-      setup { @cart.items << Factory.create(:item) }
+      setup { @controller.current_cart.items << Factory.create(:item) }
+
       context 'new' do
         setup { get :new }
-        should_redirect_to 'new_address_path'
+        should_assign_to :order
+        should_render_template 'new'
       end
 
-      context 'with a shipping address' do
-        setup { @cart.address = Factory.create(:address) }
-        context 'new' do
-          setup { get :new }
-          should_assign_to :cart
-          should_render_template 'new'
-        end
+      context 'when save succeeds' do
+        setup { Order.any_instance.stubs(:save).returns(true) }
 
         context 'create' do
           setup { post :create }
-          should_change 'Cart.count', :by => -1
-          should_change 'Order.count', :by => 1
           should_redirect_to 'order_path(@cart)'
-          should_change '@controller.current_cart', :to => nil
+        end
+      end
+
+      context 'when save fails' do
+        setup { Order.any_instance.stubs(:save).returns(false) }
+
+        context 'create' do
+          setup { post :create }
+          should_render_template :new
         end
       end
     end
@@ -51,21 +51,17 @@ class OrdersControllerTest < ActionController::TestCase
     end
   end
 
+  context 'index' do
+    setup { get :index }
+    should_redirect_to 'new_session_path'
+  end
+
   context 'logged in' do
     setup { @controller.current_user = Factory.create(:user) }
 
     context 'index' do
       setup { get :index }
       should_render_template :index
-    end
-  end
-
-  context 'not logged in' do
-    setup { @controller.current_user = nil }
-
-    context 'index' do
-      setup { get :index }
-      should_redirect_to 'new_session_path'
     end
   end
 end

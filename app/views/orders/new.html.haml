@@ -1,4 +1,24 @@
-= render :partial => 'orders/summary', :locals => { :order => @cart }
+= render :partial => 'orders/items', :locals => { :order => @order }
 
-- form_tag checkout_path do
-  = submit_tag 'Confirm'
+- form_for @order do |f|
+  - fields_for 'order[address]', @order.address do |a|
+    .field
+      = a.label :name
+      = a.text_field :name
+    .field
+      = a.label :address
+      = a.text_field :line_one
+    .field
+      = a.text_field :line_two
+    .field
+      = a.text_field :line_three
+    .field
+      = a.text_field :line_four
+    .field
+      = a.label :country
+      = a.country_select :country, ['United States', 'Canada', 'United Kingdom']
+    .field
+      = a.label :email
+      = a.text_field :email
+  .field
+    = f.submit 'Place my Order'

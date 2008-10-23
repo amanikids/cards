@@ -1,24 +1,17 @@
 class NotificationObserver < ActiveRecord::Observer
-  observe :list, :shipment
+  observe :order, :shipment
 
-  def after_create(model)
-    method = "after_create_#{model.class.name.underscore}"
-    send(method, model) if respond_to?(method)
+  def after_create(record)
+    send "after_create_#{record.class.name.underscore}", record
   end
 
-  def after_update(model)
-    method = "after_update_#{model.class.name.underscore}"
-    send(method, model) if respond_to?(method)
-  end
+  private
 
-  protected
+  def after_create_order(order)
+    Mailer.deliver_order_thank_you(order)
+  end
 
   def after_create_shipment(shipment)
     Mailer.deliver_order_shipped(shipment.order)
-  end
-
-  def after_update_cart(cart)
-    return unless cart.type == 'Order'
-    Mailer.deliver_order_thank_you(Order.find(cart.id))
   end
 end

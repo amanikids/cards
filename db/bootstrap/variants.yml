@@ -13,10 +13,23 @@
 
 <% end; end; end %>
 
-gift_20:
+<% [
+  ['Textbook', 400],
+  ['School Uniform', 1000],
+  ['Bedding (sheet and blanket)', 1600],
+  ['Sports equipment (Cleats, balls, jerseys)', 2500],
+  ['Art supplies', 3000],
+  ['2 Drums', 4000],
+  ['Medical Supplies', 5000],
+  ['Desk and chair', 6000],
+  ['Part-time Carpentry Teacher\'s salary (per month)', 7500],
+  ['2 Enormous Cooking Pots', 10000],
+  ['First semester of secondary school', 20000]
+  ].each do |name, cents| %>
+gift_<%= cents %>:
   product: gift
-  name: 20
-  cents: 2000
+  name: <%= name %>
+  cents: <%= cents %>
   currency: USD
   position: <%= position += 1 %>
-  download: gift_20
+<% end %>

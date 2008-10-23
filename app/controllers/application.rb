@@ -15,7 +15,10 @@ class ApplicationController < ActionController::Base
 
   attr_reader   :current_cart, :current_currency, :current_user
   helper_method :current_cart, :current_currency, :current_user
-  before_filter :load_current_cart, :load_current_currency, :load_current_user
+
+  before_filter :load_current_cart
+  before_filter :load_current_currency
+  before_filter :load_current_user
 
   def current_cart=(cart)
     @current_cart = cart
@@ -25,6 +28,10 @@ class ApplicationController < ActionController::Base
   def current_currency=(currency)
     @current_currency = currency
     current_session[:currency] = currency
+
+    if self.current_cart
+      self.current_cart.currency = currency
+    end
   end
 
   def current_user=(user)

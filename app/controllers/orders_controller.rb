@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
   private
 
   def load_new_order
-    @order = current_cart.build_order((params[:order] || {}).merge(:currency => current_currency))
+    @order = current_cart.build_order(params[:order])
   end
 
   def load_order

@@ -13,10 +13,10 @@
         %tr
           - fields_for 'items[]', item do |fields|
             %td= item.product_name
-            %td= item.variant.name
-            %td= item.variant.price.exchange_to(current_currency)
+            %td= item.variant_name
+            %td= item.variant_price
             %td= fields.text_field :quantity
-            %td= item.total.exchange_to(current_currency)
+            %td= item.total
             %td= link_to 'Remove', item, :method => :delete
     %tfoot
       %tr
@@ -24,6 +24,6 @@
         %td
         %td
         %td
-        %td= @cart.total.exchange_to(current_currency)
+        %td= @cart.total
 
   = f.submit 'Update Quantities'

@@ -1,10 +1,9 @@
-TODO Test making a PayPal checkout with GBP
 TODO Layout
 TODO Prevent double-clicking buttons
 TODO Show currency sign with money amounts (&pound;)
 TODO Additional Donation
 TODO Adjust exchange rates
-TODO Hide currency buttons if current_user
+TODO Auto-select currency based on REQUEST_IP
 
 MAYBE Send PayPal a cancel url (order_path(@order))
 MAYBE Change text of PayPal return button
@@ -13,7 +12,6 @@ MAYBE Edit Address until shipped.
 MAYBE Rename Payment -> Donation
 MAYBE Use map.resources after all
 MAYBE Collapse line items pointing to the same variant.
-MAYBE Make Currency (has_many :currencies, :through => :exchange_rate) an Entity
 MAYBE Make Country an Entity
 
 MAYBE Can I clean up the Factories?

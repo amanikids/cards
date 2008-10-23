@@ -11,12 +11,23 @@ class Item < ActiveRecord::Base
     variant.product_name
   end
 
-  # MAYBE Item should know its currency and return total appropriately
+  def variant_name
+    variant.name
+  end
+
+  def variant_price
+    list.exchanged(variant.price)
+  end
+
   def total
-    if errors.on(:quantity)
-      variant.price
-    else
-      variant.price * quantity
-    end
+    # Though it would be nice to say "variant_price * safe_quantity," we're
+    # subject to rounding error if we don't multiply first.
+    list.exchanged(variant.price * safe_quantity)
+  end
+
+  private
+
+  def safe_quantity
+    errors.on(:quantity) ? 1 : quantity
   end
 end

@@ -21,9 +21,10 @@ class ListTest < ActiveSupport::TestCase
     end
 
     should 'be delegated to items' do
-      list = List.new
+      list = List.new(:currency => 'GBP')
       list.stubs(:items).returns [stub(:total => Money.new(3)), stub(:total => Money.new(4))]
-      assert_equal Money.new(7), list.total
+      assert_equal Money.new(7).exchange_to('GBP'), list.total
+      assert_equal 'GBP', list.total.currency
     end
   end
 end

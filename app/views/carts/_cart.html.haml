@@ -7,11 +7,11 @@
     %li
       = item.quantity
       = item.product_name
-      = item.variant.name
-      = item.total.exchange_to(current_currency)
+      = item.variant_name
+      = item.total
 %p
   Cart total:
-  = cart.total.exchange_to(current_currency)
+  = cart.total
 
 %ul
   %li= link_to 'Update Quantities', edit_cart_path

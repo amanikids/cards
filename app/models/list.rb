@@ -1,16 +1,16 @@
 class List < ActiveRecord::Base
   has_many :items
 
-  def quantity
-    quantity = 0
-    items.each { |item| quantity += item.quantity }
-    quantity
+  def exchanged(money)
+    money.currency == currency ? money : money.exchange_to(currency)
   end
 
-  # MAYBE List should know its currency and return total appropriately
+  def quantity
+    items.inject(0) { |total, item| total + item.quantity }
+  end
+
   def total
-    total = Money.new(0)
-    items.each { |item| total += item.total }
-    total
+    total = items.inject(Money.new(0)) { |total, item| total + item.total }
+    exchanged(total)
   end
 end

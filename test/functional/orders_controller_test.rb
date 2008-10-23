@@ -17,10 +17,9 @@ class OrdersControllerTest < ActionController::TestCase
     context 'with one item' do
       setup { @controller.current_cart.items << Factory.create(:item) }
 
-      context 'new (with current currency set)' do
-        setup { @controller.current_currency = 'GBP'; get :new }
+      context 'new' do
+        setup { get :new }
         should_assign_to :order
-        should('set Order currency to current_currency') { assert_equal 'GBP', assigns(:order).currency }
         should_render_template 'new'
       end
 

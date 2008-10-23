@@ -10,17 +10,17 @@
     - order.items.each do |item|
       %tr
         %td= item.product_name
-        %td= item.variant.name
-        %td= item.variant.price.exchange_to(order.currency)
+        %td= item.variant_name
+        %td= item.variant_price
         %td= item.quantity
-        %td= item.total.exchange_to(order.currency)
+        %td= item.total
   %tfoot
     %tr
       %td
       %td
       %td
       %td
-      %td= order.total.exchange_to(order.currency)
+      %td= order.total
 
 - if order.new_record?
   %ul

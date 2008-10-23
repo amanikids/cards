@@ -1,5 +1,8 @@
-kili:
-  path: 'cards/kili_front_small.jpg'
+joy:
+  path: 'cards/joy_front_small.jpg'
 
 peace:
   path: 'cards/peace_front_small.jpg'
+
+gift:
+  path: 'cards/gift_front_small.jpg'

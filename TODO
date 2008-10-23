@@ -4,6 +4,7 @@ TODO Show currency sign with money amounts (&pound;)
 TODO Additional Donation
 TODO Adjust exchange rates
 TODO Auto-select currency based on REQUEST_IP
+TODO Inventory tracking
 
 MAYBE Send PayPal a cancel url (order_path(@order))
 MAYBE Change text of PayPal return button

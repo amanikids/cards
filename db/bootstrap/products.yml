@@ -1,7 +1,7 @@
 kili:
   name: Joy to the World Holiday Card Design
   position: 1
-  image: kili
+  image: joy
   description: "This playful holiday card captures the fun and imagination of the Amani children and is sure to warm the hearts of your family and friends. The design features some of Tanzania's most famous wild animals beneath a festive Mt. Kilimanjaro.\n\nTwo options are available for the inside of the cards:\n\nMerry Christmas!\n\nOr\n\nHappy Holidays!"
 
 peace:
@@ -13,5 +13,5 @@ peace:
 gift:
   name: Amani Alternative Gift Card
   position: 3
-  image: peace
+  image: gift
   description: "Instead of a traditional gift, you can honor your loved one by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.\n\nThis holiday season, give the gift of hope. Order you Alternative Gift Cards today!\n\nHere are some of the alternative gift options:\n\n"

@@ -1,7 +1,7 @@
 set :application, 'cards_amanikids_org'
 set :user,        'matthew'
 
-if ENV['TARGET'] == 'production'
+if ENV['RAILS_ENV'] == 'production'
   set :database,    "#{user}_#{application}_production"
   set :domain_path, "/users/home/#{user}/domains/cards.amanikids.org"
   set :rails_env,   'production'

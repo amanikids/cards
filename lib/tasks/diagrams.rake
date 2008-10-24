@@ -40,7 +40,7 @@ class Diagram
   end
 end
 
-
+desc 'Generate and open a GraphViz document representing model associations.'
 task :diagrams => :environment do
   Dir.glob(Rails.root + '/app/models/**/*.rb') { |file| require file }
 
@@ -49,10 +49,10 @@ task :diagrams => :environment do
   model_classes = ActiveRecord::Base.send(:subclasses).reject { |klass| klass.name =~ /:/ }
   model_classes.each do |klass|
     diagram.model(klass)
-    klass.ancestors.select { |ancestor| model_classes.include?(ancestor) && ancestor != klass }.each { |ancestor| diagram.parent(klass, ancestor) }
-    klass.reflect_on_all_associations(:belongs_to).each { |association| diagram.belongs_to(klass, association.klass)}
-    klass.reflect_on_all_associations(:has_many).each { |association| diagram.has_many(klass, association.klass) unless association.options[:through] }
-    klass.reflect_on_all_associations(:has_one).each { |association| diagram.has_one(klass, association.klass) unless association.options[:through] }
+    diagram.parent(klass, klass.superclass) unless klass.superclass == ActiveRecord::Base
+    klass.reflect_on_all_associations.reject { |a| klass.superclass.reflect_on_all_associations.include?(a) }.each do |association|
+      diagram.send(association.macro, klass, association.klass) unless association.options[:through]
+    end
   end
 
   File.open(Rails.root + '/doc/models.dot', 'w') do |file|

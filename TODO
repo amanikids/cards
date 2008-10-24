@@ -1,3 +1,5 @@
+FIXME Update Quantities should stay on cart edit page
+
 TODO Layout
 TODO Prevent double-clicking buttons
 TODO Show currency sign with money amounts (&pound;)
@@ -5,6 +7,11 @@ TODO Additional Donation
 TODO Adjust exchange rates
 TODO Auto-select currency based on REQUEST_IP
 TODO Inventory tracking
+TODO attach gift cards to emails
+TODO Checkout directly from Edit cart page (Enable/disable buttons if form changes?)
+
+TODO Cycle through summary of PaymentMethods for current_distributor somewhere on the homepage as a heads-up.
+TODO Re-word "paypal online" to emphasize that you can just use a credit card there.
 
 MAYBE Send PayPal a cancel url (order_path(@order))
 MAYBE Change text of PayPal return button

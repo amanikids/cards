@@ -2,7 +2,7 @@ load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
 load 'config/deploy'
 
-def run_rake(target)
+def run_rake(rake_target)
   rake = fetch(:rake, "rake")
   rails_env = fetch(:rails_env, "production")
   migrate_env = fetch(:migrate_env, "")
@@ -14,7 +14,7 @@ def run_rake(target)
     else raise ArgumentError, "unknown migration target #{migrate_target.inspect}"
   end
 
-  run "cd #{directory}; #{rake} RAILS_ENV=#{rails_env} #{migrate_env} db:migrate:reset"
+  run "cd #{directory}; #{rake} RAILS_ENV=#{rails_env} #{migrate_env} #{rake_target}"
 end
 
 unless ENV['RAILS_ENV'] == 'production'
@@ -25,6 +25,6 @@ unless ENV['RAILS_ENV'] == 'production'
     end
   end
 
-  after 'deploy', 'deploy:db:reset'
-  after 'deploy', 'deploy:db:populate'
+  after 'deploy:finalize_update', 'deploy:db:reset'
+  after 'deploy:finalize_update', 'deploy:db:populate'
 end

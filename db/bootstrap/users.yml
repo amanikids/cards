@@ -10,3 +10,9 @@ matthew:
   email: matthew.todd@gmail.com
   encrypted_password: 10e4cfa3b66223e6d578be2667e34d555e7171df
   salt: e4d1deb15f41e074b8019f3e5fe3955799ce52ff
+
+joe:
+  name: Joe Ventura
+  email: joe@amanikids.org
+  encrypted_password: ec8d9d7c8b64c7dc5cc9511205a48cfb5a565ad0
+  salt: 7ee404f70ff74f8cf87ae92176f88ec009a348db

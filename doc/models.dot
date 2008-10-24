@@ -1,0 +1,33 @@
+digraph models {
+graph[overlap=false, splines=true]
+List
+Shipment
+Address
+Download
+Image
+Item
+Payment
+PaymentMethod
+Product
+User
+Variant
+Order
+Cart
+SystemUser
+User -> Payment [arrowtail=none, arrowhead=dot]
+Variant -> Item [arrowtail=none, arrowhead=dot]
+PaymentMethod -> Payment [arrowtail=none, arrowhead=dot]
+List -> Order [arrowtail=onormal, arrowhead=none]
+Order -> Payment [arrowtail=odot, arrowhead=dot]
+List -> Item [arrowtail=crow, arrowhead=dot]
+Address -> Order [arrowtail=odot, arrowhead=dot]
+Order -> Shipment [arrowtail=odot, arrowhead=dot]
+Cart -> Item [arrowtail=crow, arrowhead=none]
+Download -> Variant [arrowtail=none, arrowhead=dot]
+Product -> Variant [arrowtail=crow, arrowhead=dot]
+List -> Cart [arrowtail=onormal, arrowhead=none]
+User -> SystemUser [arrowtail=onormal, arrowhead=none]
+User -> Shipment [arrowtail=none, arrowhead=dot]
+Order -> Item [arrowtail=crow, arrowhead=none]
+Image -> Product [arrowtail=none, arrowhead=dot]
+}

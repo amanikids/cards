@@ -1,12 +1,16 @@
 .product
-  %h2= product.name
   .image= image_tag product.image.path
   .content
+    %h2= product.name
     = markdown product.description
     - form_for Item.new(:variant => product.variants.first) do |f|
-      %ul
+      %table
         - product.variants.each do |variant|
-          .field
-            = f.radio_button :variant_id, variant.id
-            = f.label :variant_id, "#{variant.name} #{variant.price.exchange_to(current_currency)}", :for => [:item, :variant_id, variant.id].join('_')
-      = f.submit 'Add to Cart'
+          %tr
+            %td.name
+              = f.radio_button :variant_id, variant.id
+              = f.label :variant_id, variant.name, :for => [:item, :variant_id, variant.id].join('_')
+            %td.price
+              = variant.price.exchange_to(current_currency)
+      .button
+        = f.submit 'Add to Cart'

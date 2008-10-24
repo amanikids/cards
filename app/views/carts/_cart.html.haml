@@ -1,6 +1,2 @@
 .cart
-  = link_to('Your Cart', edit_cart_path) + ':'
-  = pluralize(cart.quantity, 'item') + ','
-  = cart.total
-  suggested donation
-  = link_to 'Checkout', checkout_path
+  = link_to(content_tag(:div, 'View Your') + content_tag(:div, 'Shopping Cart'), edit_cart_path)

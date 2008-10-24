@@ -1,4 +1,10 @@
 module ApplicationHelper
+  def cycle_letter_classes(string, *classes)
+    string.split(//).map do |c|
+      c.blank? ? c : content_tag(:span, c, :class => cycle(*classes))
+    end.join
+  end
+
   def n(value)
     value ? value : '&mdash;'
   end

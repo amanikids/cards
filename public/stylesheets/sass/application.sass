@@ -1,68 +1,91 @@
-!unit= 12px
-!product_image_width= 10 * !unit
-!welcome_width= 25 * !unit
+/ colors
+!yellow_40 = rgb(252, 230, 152)
 
-!logo_height= 154px
-!logo_inner_padding= 18px
+/ dimensions
+!card_width = 360px
+!font_size = 14px
+!logo_height = 123px
+!logo_width = 240px
+!logo_baseline_offset = 28px
 
-!base= #fc9
 
 body
-  :font-family Verdana, Arial, sans-serif
-  :font-size= !unit
-  :margin 0
-  :padding 0
+  :font-family "Century Gothic", Verdana, Arial, sans-serif
+  :font-size = !font_size
 
-h1, h2
-  :font-size= !unit * 1.5
-  :margin-top 0
-
-#flash
-  .notice
-    :background-color= !base
-    :padding= (!unit / 2.0) !unit
-    :text-align center
-    
 .header
-  .currency
-    :text-align right
-    / :position absolute
-    / :right= !unit
-    / :top= !logo_height - !logo_inner_padding - !unit
-  .cart
-    :background-color #006
-    :color #fff
-    :padding= (!unit / 2.0) !unit
-    :text-align center
-    a
-      :color #fff
-    
-.main
-  :margin= !unit
-
-  .welcome
-    :background-color= !base
+  :border-bottom 1px solid black
+  :height = !logo_height
+  
+  .logo
     :float left
-    :padding= !unit
-    :width= !welcome_width
+    :width = !logo_width
 
-  .products
-    :margin-left= !welcome_width + (3 * !unit)
+  h1
+    :font-size = 3 * !font_size
+    :font-weight normal
+    :line-height 1em
+    :margin 0
+    :margin-left = !logo_width
+    :padding 0
+    :padding-top = !logo_height - (3 * !font_size) - !logo_baseline_offset
+    :padding-left = 2 * !font_size
+    .red
+      :color rgb(169, 0, 26)
+    .green
+      :color rgb(0, 88, 0)
+      
+  .cart
+    :position absolute
+    :top 0
+    :right 0
+    a
+      :background-color = !yellow_40
+      :color black
+      :display block
+      / :line-height = !font_size
+      :padding = !font_size
+      :text-align center
+      :text-decoration none
+  
+.sidebar
+  :background-color = !yellow_40
+  :clear both
+  :float left
+  :width = !logo_width
+
+  .content
+    :padding = !font_size
     
-    .product
-      :background-color #fed
-      :margin-bottom= !unit
-      :padding= !unit
-      .image
-        :float left
-      .content
-        :margin-left= !product_image_width + !unit
+    p
+      :margin-top 0
+    
+    .welcome
 
-.footer
-  :background-color= !base / 1.5
-  :border-top-width= !unit
-  :border-top-style solid
-  :border-top-color= !base / 2.0
-  :padding= !unit
-  .thanks
-    :width 50%
+    .thanks
+      :border-top 1px solid black
+      :font-size 90%
+
+.main
+  :margin 0
+  :margin-left = !logo_width
+  
+  .product
+    :border-bottom 1px solid black
+    :padding = 2 * !font_size
+    .image
+      :float left
+      :width = !card_width
+    .content
+      :margin-left = !card_width
+      :padding-left = 2 * !font_size
+      h2
+        :margin 0
+        :padding 0
+      table
+        :margin-bottom = !font_size
+        .name
+          :padding-right = 5 * !font_size
+        .price
+          :font-weight bold
+          :text-align right

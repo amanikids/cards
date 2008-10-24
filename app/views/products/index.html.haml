@@ -1,11 +1,6 @@
 - content_for(:header) do
-  = render :partial => 'currencies/selector'
   = render :partial => current_cart unless current_cart.blank?
 
 .main
-  = render :partial => 'layouts/welcome'
   .products
     = render :partial => @products
-
-.footer
-  = render :partial => 'layouts/thanks'

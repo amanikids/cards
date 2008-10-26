@@ -1,4 +1,6 @@
 / colors
+!orange = rgb(242, 101, 34)
+
 !yellow_40 = rgb(252, 230, 152)
 
 / dimensions
@@ -8,10 +10,16 @@
 !logo_width = 240px
 !logo_baseline_offset = 28px
 
+/ fonts
+!heading_font = "Century Gothic", Verdana, Arial, "sans-serif"
+!body_font = Constantia, Georgia, "Times New Roman", serif
 
 body
-  :font-family "Century Gothic", Verdana, Arial, sans-serif
+  :font-family = !body_font
   :font-size = !font_size
+
+h1, h2, h3, h4, h5
+  :font-family = !heading_font
 
 .header
   :border-bottom 1px solid black

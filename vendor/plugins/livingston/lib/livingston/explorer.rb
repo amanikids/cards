@@ -6,6 +6,8 @@ module Livingston
       @diagram = diagram
     end
     
+    # TODO don't take a list of files, just take a directory (defaulting to app/models)
+    # TODO rather than requiring each file, just classify and constantize the basename, then use the resulting class.
     def explore(files)
       files.each { |file| require file }
       

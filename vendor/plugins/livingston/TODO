@@ -1,0 +1,2 @@
+TODO hook into an after callback for `rake doc:app`
+TODO insert models.png into rdoc generate by `rake doc:app`

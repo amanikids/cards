@@ -1,3 +1,4 @@
+# TODO would it help to make Node and Edge classes?
 module Livingston
   class Diagram
     def initialize

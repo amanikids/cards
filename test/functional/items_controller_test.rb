@@ -36,7 +36,7 @@ class ItemsControllerTest < ActionController::TestCase
         setup { delete :destroy, :id => @item.id }
         should_change 'Item.count', :by => -1
         should_set_the_flash_to 'Item removed.'
-        should_redirect_to 'edit_cart_path'
+        should_redirect_to 'cart_path'
       end
     end
   end

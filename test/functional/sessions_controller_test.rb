@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
-  should_route :get,    '/sessions/new', :action => 'new'
-  should_route :post,   '/sessions',     :action => 'create'
-  should_route :delete, '/sessions',     :action => 'destroy'
+  should_route :get,    '/session/new', :action => 'new'
+  should_route :post,   '/session',     :action => 'create'
+  should_route :delete, '/session',     :action => 'destroy'
 
   context 'with an existing User' do
     setup { @user = Factory.create(:user) }

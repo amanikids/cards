@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class CartsControllerTest < ActionController::TestCase
-  should_route :get, '/cart', :action => 'edit'
+  should_route :get, '/cart', :action => 'show'
   should_route :put, '/cart', :action => 'update'
 
   context 'without a current cart' do
-    context 'edit' do
-      setup { get :edit }
+    context 'show' do
+      setup { get :show }
       should_redirect_to 'root_path'
     end
 
@@ -22,10 +22,10 @@ class CartsControllerTest < ActionController::TestCase
       @controller.current_cart.items << Factory.create(:item)
     end
 
-    context 'edit' do
-      setup { get :edit }
+    context 'show' do
+      setup { get :show }
       should_assign_to :cart
-      should_render_template 'edit'
+      should_render_template 'show'
     end
 
     context 'when update_items succeeds' do
@@ -41,7 +41,7 @@ class CartsControllerTest < ActionController::TestCase
       setup { @controller.current_cart.stubs(:update_items).returns(false) }
       context 'update' do
         setup { put :update, :items => {} }
-        should_render_template 'edit'
+        should_render_template 'show'
       end
     end
   end

@@ -7,7 +7,7 @@ class CartsController < ApplicationController
       flash[:notice] = 'Cart updated.'
       redirect_to root_path
     else
-      render :action => 'edit'
+      render :action => 'show'
     end
   end
 

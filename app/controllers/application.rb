@@ -13,25 +13,16 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password").
   # filter_parameter_logging :password
 
-  attr_reader   :current_cart, :current_currency, :current_user
-  helper_method :current_cart, :current_currency, :current_user
+  attr_accessor :current_cart, :current_distributor, :current_user
+  helper_method :current_cart, :current_distributor, :current_user
 
+  before_filter :load_current_distributor
   before_filter :load_current_cart
-  before_filter :load_current_currency
   before_filter :load_current_user
 
   def current_cart=(cart)
     @current_cart = cart
     current_session[:cart] = cart ? cart.id : nil
-  end
-
-  def current_currency=(currency)
-    @current_currency = currency
-    current_session[:currency] = currency
-
-    if self.current_cart
-      self.current_cart.currency = currency
-    end
   end
 
   def current_user=(user)
@@ -47,12 +38,12 @@ class ApplicationController < ActionController::Base
 
   def load_current_cart
     if session[:cart]
-      self.current_cart ||= Cart.find(session[:cart]) rescue nil
+      self.current_cart ||= current_distributor.carts.find(session[:cart]) rescue nil
     end
   end
 
-  def load_current_currency
-    self.current_currency ||= session[:currency] || 'USD'
+  def load_current_distributor
+    self.current_distributor ||= Distributor.find(params[:distributor_id]) if params[:distributor_id]
   end
 
   def load_current_user
@@ -68,7 +59,7 @@ class ApplicationController < ActionController::Base
   def ensure_current_cart
     if current_cart.blank?
       flash[:notice] = 'Your cart is empty.'
-      redirect_to root_path
+      redirect_to distributor_root_path(current_distributor)
     end
   end
 

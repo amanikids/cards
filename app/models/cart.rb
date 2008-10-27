@@ -6,8 +6,8 @@ class Cart < List
 
   def build_order(attributes={})
     returning(Order.new(attributes)) do |order|
-      order.currency = currency
-      order.item_ids = item_ids
+      order.distributor = distributor
+      order.item_ids    = item_ids
     end
   end
 

@@ -27,7 +27,7 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   should 'delegate variant_price to variant, converting currency' do
-    item = Factory.build(:item, :list => Factory.build(:list, :currency => 'GBP'))
+    item = Factory.build(:item, :list => Factory.build(:list, :distributor => Factory.build(:distributor, :currency => 'GBP')))
     assert_equal item.variant.price.exchange_to('GBP'), item.variant_price
     assert_equal 'GBP', item.variant_price.currency, 'this is here because exchanged currencies compare as =='
   end
@@ -44,7 +44,7 @@ class ItemTest < ActiveSupport::TestCase
     end
 
     should 'exchange the total to the given currency' do
-      @item.list.currency = 'GBP'
+      @item.list.distributor.currency = 'GBP'
       @item.quantity = 2
       assert_equal Money.new(10).exchange_to('GBP'), @item.total
     end

@@ -4,12 +4,12 @@ class DonationsController < ApplicationController
 
   def create
     @order.create_donation(params[:donation])
-    redirect_to order_path(@order)
+    redirect_to order_path(current_distributor, @order)
   end
 
   def update
     @order.donation.update_attributes(params[:donation].merge(:recipient => current_user))
     flash[:notice] = 'Donation updated.'
-    redirect_to order_path(@order)
+    redirect_to order_path(current_distributor, @order)
   end
 end

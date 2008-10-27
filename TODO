@@ -1,7 +1,15 @@
 FIXME Update Quantities should stay on cart edit page
 
-TODO Rename Payment -> Donation
 TODO Inventory tracking
+  . Distributor.to_param => :country_code
+  . Distributor has_many :donation_methods (Remove Order.donation_methods and DonationMethod.for)
+  . Set up redirect from / to distributor_root_path(Distributor.first(:order => :position))
+  . Some way to change to a different Distributor
+  . Distributor has_many :inventories
+  . Inventory(+distributor, +quantity, +sku)
+  . Load Products for Homepage from Distributor
+  . /distributors/us shows just the Orders for the us distributor
+  . Cycle through summary of PaymentMethods for current_distributor somewhere on the homepage as a heads-up.
 TODO Additional Donation
 
 TODO Layout
@@ -11,7 +19,6 @@ TODO Adjust exchange rates
 TODO Auto-select currency based on REQUEST_IP
 TODO Attach gift cards to emails
 TODO Checkout directly from Edit cart page (Enable/disable buttons if form changes?)
-TODO Cycle through summary of PaymentMethods for current_distributor somewhere on the homepage as a heads-up.
 TODO Re-word "paypal online" to emphasize that you can just use a credit card there.
 
 MAYBE Send PayPal a cancel url (order_path(@order))
@@ -20,7 +27,6 @@ MAYBE Rename :address to :mailing_address
 MAYBE Edit Address until shipped.
 MAYBE Use map.resources after all
 MAYBE Collapse line items pointing to the same variant.
-MAYBE Make Country an Entity
 
 MAYBE Can I clean up the Factories?
 MAYBE Can I clean up the OrderTest?

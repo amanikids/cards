@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     @user = User.authenticate(params[:email], params[:password])
     if @user
       self.current_user = @user
-      redirect_to orders_path
+      redirect_to distributors_path
     else
       render :action => 'new'
     end

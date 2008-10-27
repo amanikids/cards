@@ -36,13 +36,17 @@ class OrderTest < ActiveSupport::TestCase
   end
 
   context 'an existing Cart with 2 Items' do
-    setup { @cart = Factory.create(:cart, :currency => 'GBP'); 2.times { @cart.items << Factory.create(:item) } }
+    setup do
+      @distributor = Factory.create(:distributor, :currency => 'GBP')
+      @cart = Factory.create(:cart, :distributor => @distributor)
+      2.times { @cart.items << Factory.create(:item) }
+    end
 
     context 'build_order with valid attributes' do
       setup { @order = @cart.build_order(:address => Factory.attributes_for(:address)) }
       should('make an Order') { assert_equal Order, @order.class }
       should('make a new record') { assert @order.new_record? }
-      should('initialize currency') { assert_equal @cart.currency, @order.currency }
+      should('initialize distributor') { assert_equal @cart.distributor, @order.distributor }
       should('associate items') { assert_same_elements @cart.items, @order.items }
       should_not_change '@cart.reload.items.count'
 
@@ -50,6 +54,7 @@ class OrderTest < ActiveSupport::TestCase
         setup { @order.save! }
         should_change '@cart.items.count',  :from => 2, :to => 0
         should_change '@order.items.count', :from => 0, :to => 2
+        should_change '@distributor.orders.count', :by => 1
         should_not_change '@order.shipment'
       end
     end

@@ -14,7 +14,7 @@ class SessionsControllerTest < ActionController::TestCase
       context 'create' do
         setup { post :create, :email => 'EMAIL', :password => 'PASSWORD' }
         should_change '@controller.current_user', :from => nil, :to => @user
-        should_redirect_to 'orders_path'
+        should_redirect_to 'distributors_path'
       end
     end
 

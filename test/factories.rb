@@ -15,6 +15,14 @@ Factory.define(:address, :class => Address) do |address|
 end
 
 Factory.define(:cart) do |cart|
+  cart.association :distributor
+end
+
+Factory.define(:distributor) do |distributor|
+  distributor.country_code 'us'
+  distributor.currency 'USD'
+  distributor.email { Factory.next(:email) }
+  distributor.password 'foo'
 end
 
 Factory.define(:donation) do |donation|
@@ -43,12 +51,14 @@ Factory.define(:item) do |item|
 end
 
 Factory.define(:list) do |list|
+  list.association :distributor
 end
 
 Factory.define(:order) do |order|
   order.created_at 3.days.ago
   order.token '6bcc3f7303a4675e3c33f84bbd33e245cc770921'
   order.association :address
+  order.association :distributor
 end
 
 Factory.define(:paypal_donation_method, :class => DonationMethod) do |method|
@@ -71,12 +81,12 @@ Factory.define(:sku) do |sku|
 end
 
 Factory.define(:system_user) do |system_user|
-  system_user.email Factory.next(:email)
+  system_user.email { Factory.next(:email) }
   system_user.password 'foo'
 end
 
 Factory.define(:user) do |user|
-  user.email Factory.next(:email)
+  user.email { Factory.next(:email) }
   user.password 'foo'
 end
 

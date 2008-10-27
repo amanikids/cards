@@ -1,67 +1,56 @@
 require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
-  should_route :get,  '/orders',       :action => 'index'
-  should_route :get,  '/orders/new',   :action => 'new'
-  should_route :post, '/orders',       :action => 'create'
-  should_route :get,  '/orders/token', :action => 'show', :id => 'token'
+  should_route :get,  '/us/orders/new',   :action => 'new',    :distributor_id => 'us'
+  should_route :post, '/us/orders',       :action => 'create', :distributor_id => 'us'
+  should_route :get,  '/us/orders/token', :action => 'show',   :distributor_id => 'us', :id => 'token'
 
-  context 'with a current cart' do
-    setup { @controller.current_cart = Factory.create(:cart) }
+  context 'with a saved Distributor' do
+    setup { @distributor = Factory.create(:distributor) }
 
-    context 'new' do
-      setup { get :new }
-      should_redirect_to 'root_path'
-    end
-
-    context 'with one item' do
-      setup { @controller.current_cart.items << Factory.create(:item) }
+    context 'with a current cart' do
+      setup { @controller.current_cart = Factory.create(:cart) }
 
       context 'new' do
-        setup { get :new }
-        should_assign_to :order
-        should_render_template 'new'
+        setup { get :new, :distributor_id => @distributor }
+        should_redirect_to 'distributor_root_path(@distributor)'
       end
 
-      context 'when save succeeds' do
-        setup { Order.any_instance.stubs(:save).returns(true) }
+      context 'with one item' do
+        setup { @controller.current_cart.items << Factory.create(:item) }
 
-        context 'create' do
-          setup { post :create }
-          should_redirect_to 'order_path(@cart)'
+        context 'new' do
+          setup { get :new, :distributor_id => @distributor }
+          should_assign_to :order
+          should_render_template 'new'
         end
-      end
 
-      context 'when save fails' do
-        setup { Order.any_instance.stubs(:save).returns(false) }
+        context 'when save succeeds' do
+          setup { Order.any_instance.stubs(:save).returns(true) }
 
-        context 'create' do
-          setup { post :create }
-          should_render_template :new
+          context 'create' do
+            setup { post :create, :distributor_id => @distributor }
+            should_redirect_to 'order_path(@distributor, @cart)'
+          end
+        end
+
+        context 'when save fails' do
+          setup { Order.any_instance.stubs(:save).returns(false) }
+
+          context 'create' do
+            setup { post :create, :distributor_id => @distributor }
+            should_render_template :new
+          end
         end
       end
     end
-  end
 
-  context 'with a saved Order' do
-    setup { @order = Factory.create(:order) }
-    context 'show' do
-      setup { get :show, :id => @order.token }
-      should_assign_to :order, :equals => '@order'
-    end
-  end
-
-  context 'index' do
-    setup { get :index }
-    should_redirect_to 'new_session_path'
-  end
-
-  context 'logged in' do
-    setup { @controller.current_user = Factory.create(:user) }
-
-    context 'index' do
-      setup { get :index }
-      should_render_template :index
+    context 'with a saved Order' do
+      setup { @order = Factory.create(:order) }
+      context 'show' do
+        setup { get :show, :distributor_id => @distributor, :id => @order.token }
+        should_assign_to :order, :equals => '@order'
+      end
     end
   end
 end

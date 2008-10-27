@@ -1,8 +1,7 @@
 class CreateLists < ActiveRecord::Migration
   def self.up
     create_table :lists do |t|
-      t.references :address
-      t.string :currency, :default => 'USD'
+      t.references :address, :distributor
       t.string :type
       t.string :token, :limit => 40
       t.timestamps

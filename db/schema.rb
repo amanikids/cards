@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20081022132811) do
     t.string   "currency",    :default => "USD"
     t.integer  "cents",       :default => 0
     t.integer  "position",    :default => 0
+    t.integer  "size",        :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

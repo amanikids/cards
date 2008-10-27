@@ -5,6 +5,7 @@ class CreateVariants < ActiveRecord::Migration
       t.string :name
       t.string :currency, :default => 'USD'
       t.integer :cents, :position, :default => 0
+      t.integer :size, :default => 1
       t.timestamps
     end
   end

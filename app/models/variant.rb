@@ -4,6 +4,10 @@ class Variant < ActiveRecord::Base
   composed_of :price, :class_name => 'Money', :mapping => [%w(cents cents), %w(currency currency)]
   validates_presence_of :name, :cents, :currency, :product_id
 
+  def description
+    size == 1 ? name : "#{size}-pack #{name}"
+  end
+
   def product_name
     product.name
   end

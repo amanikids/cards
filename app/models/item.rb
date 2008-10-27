@@ -11,8 +11,8 @@ class Item < ActiveRecord::Base
     variant.product_name
   end
 
-  def variant_name
-    variant.name
+  def variant_description
+    variant.description
   end
 
   def variant_price

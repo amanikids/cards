@@ -20,6 +20,12 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal 'PRODUCT_NAME', item.product_name
   end
 
+  should 'delegate variant_description to variant' do
+    item = Item.new
+    item.stubs(:variant).returns(stub(:description => 'DESCRIPTION'))
+    assert_equal 'DESCRIPTION', item.variant_description
+  end
+
   should 'delegate variant_price to variant, converting currency' do
     item = Factory.build(:item, :list => Factory.build(:list, :currency => 'GBP'))
     assert_equal item.variant.price.exchange_to('GBP'), item.variant_price

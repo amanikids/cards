@@ -6,10 +6,11 @@
 
 <%= "#{front}_#{size}_#{inside}" %>:
   product: <%= front %>
-  name: <%= size %>-pack <%= inside.titleize %>
+  name: <%= inside.titleize %>
   cents: <%= cents %>
   currency: USD
   position: <%= position += 1 %>
+  size: <%= size %>
 
 <% end; end; end %>
 

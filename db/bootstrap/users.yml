@@ -22,21 +22,30 @@ joe:
 # FIXME get real email addresses for Distributors
 dina:
   type: Distributor
+  country_code: us
+  currency: USD
   name: Dina Sciarra
   email: us@cards.amanikids.org
   encrypted_password: 16e5cb615ae506300e15f8b0fa07aaf5db43bc69
   salt: 2dbce0169629ef8bb6072f86bae57f43ad56b460
+  position: 1
 
 danielle:
   type: Distributor
+  country_code: ca
+  currency: CAD
   name: Danielle Kozak
   email: ca@cards.amanikids.org
   encrypted_password: 6625d62421788d9e88e76b2a65ed3d716ec8c25a
   salt: 0297dd4916a85b8f1dab56545c0712a212e4316e
+  position: 2
 
 shelly:
   type: Distributor
+  country_code: uk
+  currency: GBP
   name: Shelly Malekia
   email: uk@cards.amanikids.org
   encrypted_password: ee2f091d8759c34646592e248df48a309c1c53a6
   salt: 343b5fc739cc0772c230f6caae27f684e3f31f53
+  position: 3

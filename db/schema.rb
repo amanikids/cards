@@ -103,6 +103,9 @@ ActiveRecord::Schema.define(:version => 20081027095514) do
     t.string   "type"
     t.string   "encrypted_password", :limit => 40
     t.string   "salt",               :limit => 40
+    t.string   "country_code",       :limit => 2
+    t.string   "currency",           :limit => 3
+    t.integer  "position",                         :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

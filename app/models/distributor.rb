@@ -1,0 +1,2 @@
+class Distributor < User
+end

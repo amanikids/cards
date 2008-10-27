@@ -65,6 +65,11 @@ Factory.define(:shipment) do |shipment|
   shipment.association :shipper, :factory => :user
 end
 
+Factory.define(:sku) do |sku|
+  sku.name 'the blue one'
+  sku.association :product
+end
+
 Factory.define(:system_user) do |system_user|
   system_user.email Factory.next(:email)
   system_user.password 'foo'
@@ -76,16 +81,15 @@ Factory.define(:user) do |user|
 end
 
 Factory.define(:variant) do |variant|
-  variant.name '10-pack'
   variant.cents 1000
   variant.currency 'USD'
-  variant.association :product
+  variant.size 5
+  variant.association :sku
 end
 
 Factory.define(:variant_with_download, :class => Variant) do |variant|
-  variant.name '10-pack'
   variant.cents 1000
   variant.currency 'USD'
-  variant.association :product
+  variant.association :sku
   variant.association :download
 end

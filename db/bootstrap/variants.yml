@@ -4,9 +4,8 @@
 <% [[10, 1200], [25, 2500]].each do |size, cents| %>
 <% %w[merry_christmas happy_holidays].each do |inside| %>
 
-<%= "#{front}_#{size}_#{inside}" %>:
-  product: <%= front %>
-  name: <%= inside.titleize %>
+<%= "#{front}_#{inside}_#{size}" %>:
+  sku: <%= "#{front}_#{inside}" %>
   cents: <%= cents %>
   currency: USD
   position: <%= position += 1 %>
@@ -15,21 +14,20 @@
 <% end; end; end %>
 
 <% [
-  ['Textbook', 400],
-  ['School Uniform', 1000],
-  ['Bedding (sheet and blanket)', 1600],
-  ['Sports equipment (Cleats, balls, jerseys)', 2500],
-  ['Art supplies', 3000],
-  ['2 Drums', 4000],
-  ['Medical Supplies', 5000],
-  ['Desk and chair', 6000],
-  ['Part-time Carpentry Teacher\'s salary (per month)', 7500],
-  ['2 Enormous Cooking Pots', 10000],
-  ['First semester of secondary school', 20000]
-  ].each do |name, cents| %>
-gift_<%= cents %>:
-  product: gift
-  name: <%= name %>
+  ['gift_textbook', 400],
+  ['gift_school_uniform', 1000],
+  ['gift_bedding', 1600],
+  ['gift_sports_equipment', 2500],
+  ['gift_art_supplies', 3000],
+  ['gift_two_drums', 4000],
+  ['gift_medical_supplies', 5000],
+  ['gift_desk_and_chair', 6000],
+  ['gift_carpentry_teacher_salary', 7500],
+  ['gift_two_cooking_pots', 10000],
+  ['gift_secondary_school_semester', 20000]
+  ].each do |sku, cents| %>
+<%= sku %>:
+  sku: <%= sku %>
   cents: <%= cents %>
   currency: USD
   position: <%= position += 1 %>

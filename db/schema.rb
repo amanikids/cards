@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081022132811) do
+ActiveRecord::Schema.define(:version => 20081027095514) do
 
   create_table "addresses", :force => true do |t|
     t.string   "name"
@@ -90,6 +90,13 @@ ActiveRecord::Schema.define(:version => 20081022132811) do
     t.datetime "updated_at"
   end
 
+  create_table "skus", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -101,9 +108,8 @@ ActiveRecord::Schema.define(:version => 20081022132811) do
   end
 
   create_table "variants", :force => true do |t|
-    t.integer  "product_id"
+    t.integer  "sku_id"
     t.integer  "download_id"
-    t.string   "name"
     t.string   "currency",    :default => "USD"
     t.integer  "cents",       :default => 0
     t.integer  "position",    :default => 0

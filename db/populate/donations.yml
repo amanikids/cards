@@ -1,15 +1,15 @@
 paypal_paid:
   order: paypal_paid
-  payment_method: paypal
+  donation_method: paypal
   received_at: <%= Time.now.to_s(:db) %>
   recipient: system
 
 check_pending:
   order: check_pending
-  payment_method: check_us
+  donation_method: check_us
 
 check_paid:
   order: check_paid
-  payment_method: check_us
+  donation_method: check_us
   received_at: <%= Time.now.to_s(:db) %>
   recipient: matthew

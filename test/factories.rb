@@ -17,6 +17,18 @@ end
 Factory.define(:cart) do |cart|
 end
 
+Factory.define(:donation) do |donation|
+  donation.created_at 2.days.ago
+  donation.received_at 47.hours.ago
+  donation.association :order
+  donation.association :donation_method
+  donation.association :recipient, :factory => :user
+end
+
+Factory.define(:donation_method) do |method|
+  method.name 'check'
+end
+
 Factory.define(:download) do |cart|
 end
 
@@ -39,19 +51,7 @@ Factory.define(:order) do |order|
   order.association :address
 end
 
-Factory.define(:payment) do |payment|
-  payment.created_at 2.days.ago
-  payment.received_at 47.hours.ago
-  payment.association :order
-  payment.association :payment_method
-  payment.association :recipient, :factory => :user
-end
-
-Factory.define(:payment_method) do |method|
-  method.name 'check'
-end
-
-Factory.define(:paypal_payment_method, :class => PaymentMethod) do |method|
+Factory.define(:paypal_donation_method, :class => DonationMethod) do |method|
   method.name 'paypal'
 end
 

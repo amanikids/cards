@@ -4,7 +4,7 @@
     %th Order
     %th Donor
     %th Amount
-    %th Paid By
+    %th Made By
     %th On
     %th Received By
     %th On
@@ -16,10 +16,10 @@
       %td= link_to truncate(order.token, 5, ''), order
       %td= order.name
       %td= order.total.format(:with_currency)
-      %td= n order.payment_method
-      %td= n order.payment_created_at
-      %td= n order.payment_recipient
-      %td= n order.payment_received_at
+      %td= n order.donation_method
+      %td= n order.donation_created_at
+      %td= n order.donation_recipient
+      %td= n order.donation_received_at
       %td= n order.shipper
       %td= n order.shipped_at
   - Order.shipped.each do |order|
@@ -28,9 +28,9 @@
       %td= link_to truncate(order.token, 5, ''), order
       %td= order.name
       %td= order.total.format(:with_currency)
-      %td= n order.payment_method
-      %td= n order.payment_created_at
-      %td= n order.payment_recipient
-      %td= n order.payment_received_at
+      %td= n order.donation_method
+      %td= n order.donation_created_at
+      %td= n order.donation_recipient
+      %td= n order.donation_received_at
       %td= n order.shipper
       %td= n order.shipped_at

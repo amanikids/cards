@@ -3,8 +3,8 @@ class Order < List
   named_scope :unshipped, :include => :shipment, :conditions => 'shipments.id IS NULL',     :order => 'lists.created_at'
 
   belongs_to :address
-  has_one :payment
-  has_one :payment_method, :through => :payment
+  has_one :donation
+  has_one :donation_method, :through => :donation
   has_one :shipment
 
   validates_presence_of :address
@@ -27,28 +27,28 @@ class Order < List
 
   alias_method_chain :address=, :nested_attributes
 
+  def donation_created_at
+    donation ? donation.created_at : nil
+  end
+
+  def donation_methods
+    DonationMethod.for(country)
+  end
+
+  def donation_received_at
+    donation ? donation.received_at : nil
+  end
+
+  def donation_recipient
+    donation ? donation.recipient : nil
+  end
+
   def downloads
     items.collect(&:download).compact
   end
 
   def immediately_shippable?
     items.all?(&:download) unless items.blank?
-  end
-
-  def payment_created_at
-    payment ? payment.created_at : nil
-  end
-
-  def payment_methods
-    PaymentMethod.for(country)
-  end
-
-  def payment_received_at
-    payment ? payment.received_at : nil
-  end
-
-  def payment_recipient
-    payment ? payment.recipient : nil
   end
 
   def shipper

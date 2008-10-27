@@ -5,7 +5,7 @@ class OrderTest < ActiveSupport::TestCase
   should_have_named_scope :unshipped, :include => :shipment, :conditions => 'shipments.id IS NULL',     :order => 'lists.created_at'
 
   should_belong_to :address
-  should_have_one :payment
+  should_have_one :donation
   should_have_one :shipment
 
   should_require_attributes :address
@@ -77,11 +77,11 @@ class OrderTest < ActiveSupport::TestCase
   context 'an order with an address in SOME COUNTRY' do
     setup { @order = Factory.build(:order, :address => Factory.build(:address, :country => 'SOME COUNTRY')) }
 
-    context 'asking for payment methods' do
-      setup { @order.payment_methods }
+    context 'asking for donation methods' do
+      setup { @order.donation_methods }
 
-      before_should 'delegate to PaymentMethod' do
-        PaymentMethod.expects(:for).with('SOME COUNTRY')
+      before_should 'delegate to DonationMethod' do
+        DonationMethod.expects(:for).with('SOME COUNTRY')
       end
     end
   end
@@ -104,20 +104,20 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
-  context 'an order with no payment' do
+  context 'an order with no donation' do
     setup { @order = Factory.build(:order) }
-    should('return nil for payment_method') { assert_nil @order.payment_method }
-    should('return nil for payment_created_at') { assert_nil @order.payment_created_at }
-    should('return nil for payment_received_at') { assert_nil @order.payment_received_at }
-    should('return nil for payment_recipient') { assert_nil @order.payment_recipient }
+    should('return nil for donation_method') { assert_nil @order.donation_method }
+    should('return nil for donation_created_at') { assert_nil @order.donation_created_at }
+    should('return nil for donation_received_at') { assert_nil @order.donation_received_at }
+    should('return nil for donation_recipient') { assert_nil @order.donation_recipient }
   end
 
-  context 'an order with a payment' do
-    setup { @order = Factory.create(:payment).order }
-    should('delegate payment_method to payment') { assert_equal @order.payment.payment_method, @order.payment_method }
-    should('delegate payment_created_at to payment') { assert_equal @order.payment.created_at, @order.payment_created_at }
-    should('delegate payment_received_at to payment') { assert_equal @order.payment.received_at, @order.payment_received_at }
-    should('delegate payment_recipient to payment') { assert_equal @order.payment.recipient, @order.payment_recipient }
+  context 'an order with a donation' do
+    setup { @order = Factory.create(:donation).order }
+    should('delegate donation_method to donation') { assert_equal @order.donation.donation_method, @order.donation_method }
+    should('delegate donation_created_at to donation') { assert_equal @order.donation.created_at, @order.donation_created_at }
+    should('delegate donation_received_at to donation') { assert_equal @order.donation.received_at, @order.donation_received_at }
+    should('delegate donation_recipient to donation') { assert_equal @order.donation.recipient, @order.donation_recipient }
   end
 
   context 'an order with no shipment' do

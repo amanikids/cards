@@ -11,6 +11,11 @@ ActionController::Routing::Routes.draw do |map|
     map.currency_usd '/currencies/USD', :action => 'create', :currency => 'USD', :conditions => { :method => :post }
   end
 
+  map.with_options(:controller => 'donations') do |map|
+    map.order_donations '/orders/:order_id/donation', :action => 'create', :conditions => { :method => :post }
+    map.order_donation  '/orders/:order_id/donation', :action => 'update', :conditions => { :method => :put }
+  end
+
   map.download '/downloads/:id'
 
   map.with_options(:controller => 'items') do |map|
@@ -25,13 +30,8 @@ ActionController::Routing::Routes.draw do |map|
     map.order    '/orders/:id', :action => 'show',   :conditions => { :method => :get }
   end
 
-  map.with_options(:controller => 'payments') do |map|
-    map.order_payments '/orders/:order_id/payment', :action => 'create', :conditions => { :method => :post }
-    map.order_payment  '/orders/:order_id/payment', :action => 'update', :conditions => { :method => :put }
-  end
-
-  map.with_options(:controller => 'paypal_payments') do |map|
-    map.order_paypal_payments '/orders/:order_id/paypal_payment', :action => 'create', :conditions => { :method => :post }
+  map.with_options(:controller => 'paypal_donations') do |map|
+    map.order_paypal_donations '/orders/:order_id/paypal_donation', :action => 'create', :conditions => { :method => :post }
   end
 
   map.with_options(:controller => 'sessions') do |map|

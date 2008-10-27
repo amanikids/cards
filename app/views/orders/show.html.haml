@@ -6,10 +6,10 @@
 - if @order.downloads.any?
   = render :partial => 'downloads/list', :locals => { :order => @order }
 
-- if @order.payment
-  = render :partial => @order.payment, :locals => { :order => @order }
+- if @order.donation
+  = render :partial => @order.donation, :locals => { :order => @order }
 - else
-  = render :partial => @order.payment_methods, :locals => { :order => @order }
+  = render :partial => @order.donation_methods, :locals => { :order => @order }
 
 - if @order.shipment
   = render :partial => @order.shipment, :locals => { :order => @order }

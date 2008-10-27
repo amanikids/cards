@@ -23,6 +23,25 @@ ActiveRecord::Schema.define(:version => 20081022132811) do
     t.datetime "updated_at"
   end
 
+  create_table "donation_methods", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "country"
+    t.text     "description"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "donations", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "donation_method_id"
+    t.integer  "recipient_id"
+    t.datetime "received_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "downloads", :force => true do |t|
     t.string   "name"
     t.string   "content_type"
@@ -51,25 +70,6 @@ ActiveRecord::Schema.define(:version => 20081022132811) do
     t.string   "currency",                 :default => "USD"
     t.string   "type"
     t.string   "token",      :limit => 40
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "payment_methods", :force => true do |t|
-    t.string   "name"
-    t.string   "title"
-    t.string   "country"
-    t.text     "description"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "payments", :force => true do |t|
-    t.integer  "order_id"
-    t.integer  "payment_method_id"
-    t.integer  "recipient_id"
-    t.datetime "received_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

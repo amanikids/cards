@@ -1,10 +1,3 @@
-system:
-  type: SystemUser
-  name: The Website
-  email: orders@cards.amanikids.org
-  encrypted_password: 841aa628a495410deff700a233eb587d1de67df1
-  salt: 334b7ac207f8b1c24fd3eb895b50c6bd4bf31e94
-
 matthew:
   type:
   name: Matthew Todd
@@ -19,7 +12,6 @@ joe:
   encrypted_password: ec8d9d7c8b64c7dc5cc9511205a48cfb5a565ad0
   salt: 7ee404f70ff74f8cf87ae92176f88ec009a348db
 
-# FIXME get real email addresses for Distributors
 dina:
   type: Distributor
   country_code: us

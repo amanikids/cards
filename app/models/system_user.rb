@@ -1,2 +1,0 @@
-class SystemUser < User
-end

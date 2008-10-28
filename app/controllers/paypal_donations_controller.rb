@@ -8,7 +8,7 @@ class PaypalDonationsController < ApplicationController
 
   # MAYBE use a received_at timestamp from PayPal?
   def create
-    @order.create_donation(:donation_method => @donation_method, :recipient => SystemUser.first, :received_at => Time.now) if donation_received?
+    @order.create_donation(:donation_method => @donation_method, :received_at => Time.now) if donation_received?
     render :text => ''
   end
 

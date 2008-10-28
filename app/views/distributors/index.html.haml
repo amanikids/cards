@@ -6,10 +6,8 @@
     %th Amount
     %th Made By
     %th On
-    %th Received By
-    %th On
-    %th Shipped By
-    %th On
+    %th Received
+    %th Shipped
   - Order.unshipped.each do |order|
     %tr
       %td= order.country
@@ -18,9 +16,7 @@
       %td= order.total.format(:with_currency)
       %td= n order.donation_method
       %td= n order.donation_created_at
-      %td= n order.donation_recipient
       %td= n order.donation_received_at
-      %td= n order.shipper
       %td= n order.shipped_at
   - Order.shipped.each do |order|
     %tr
@@ -30,7 +26,5 @@
       %td= order.total.format(:with_currency)
       %td= n order.donation_method
       %td= n order.donation_created_at
-      %td= n order.donation_recipient
       %td= n order.donation_received_at
-      %td= n order.shipper
       %td= n order.shipped_at

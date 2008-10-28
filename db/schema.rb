@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(:version => 20081028063016) do
   create_table "donations", :force => true do |t|
     t.integer  "order_id"
     t.integer  "donation_method_id"
-    t.integer  "recipient_id"
     t.datetime "received_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -91,7 +90,6 @@ ActiveRecord::Schema.define(:version => 20081028063016) do
 
   create_table "shipments", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "shipper_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -3,7 +3,7 @@ class ShipmentsController < ApplicationController
   before_filter :load_parent_order
 
   def create
-    @order.create_shipment(:shipper => current_user)
+    @order.create_shipment
     flash[:notice] = 'Shipment created.'
     redirect_to order_path(current_distributor, @order)
   end

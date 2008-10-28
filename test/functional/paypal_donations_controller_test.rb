@@ -8,7 +8,6 @@ class PaypalDonationsControllerTest < ActionController::TestCase
 
     context 'with an existing Order and PayPal DonationMethod' do
       setup do
-        Factory.create(:system_user)
         @order = Factory.create(:order)
         @method = Factory.create(:paypal_donation_method)
       end
@@ -33,10 +32,6 @@ class PaypalDonationsControllerTest < ActionController::TestCase
 
               should "set the donation_received_at field" do
                 assert_not_nil @order.donation_received_at
-              end
-
-              should "set the donation's recipient field" do
-                assert_equal SystemUser.first, @order.donation_recipient
               end
             end
           end

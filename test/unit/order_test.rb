@@ -62,7 +62,6 @@ class OrderTest < ActiveSupport::TestCase
 
   context 'an existing Cart entirely downloadable' do
     setup do
-      Factory.create(:system_user)
       @cart = Factory.create(:cart)
       2.times { @cart.items << Factory.create(:downloadable_item) }
     end
@@ -74,7 +73,6 @@ class OrderTest < ActiveSupport::TestCase
         setup { @order.save! }
         should_change 'Shipment.count', :by => 1
         should('be shipped') { assert_not_nil @order.shipped_at }
-        should('be shipped by the system') { assert_equal SystemUser.first, @order.shipper }
       end
     end
   end
@@ -108,7 +106,6 @@ class OrderTest < ActiveSupport::TestCase
     should('return nil for donation_method') { assert_nil @order.donation_method }
     should('return nil for donation_created_at') { assert_nil @order.donation_created_at }
     should('return nil for donation_received_at') { assert_nil @order.donation_received_at }
-    should('return nil for donation_recipient') { assert_nil @order.donation_recipient }
   end
 
   context 'an order with a donation' do
@@ -116,18 +113,15 @@ class OrderTest < ActiveSupport::TestCase
     should('delegate donation_method to donation') { assert_equal @order.donation.donation_method, @order.donation_method }
     should('delegate donation_created_at to donation') { assert_equal @order.donation.created_at, @order.donation_created_at }
     should('delegate donation_received_at to donation') { assert_equal @order.donation.received_at, @order.donation_received_at }
-    should('delegate donation_recipient to donation') { assert_equal @order.donation.recipient, @order.donation_recipient }
   end
 
   context 'an order with no shipment' do
     setup { @order = Factory.build(:order) }
-    should('return nil for shipper') { assert_nil @order.shipper }
     should('return nil for shipped_at') { assert_nil @order.shipped_at }
   end
 
   context 'an order with a shipment' do
     setup { @order = Factory.create(:shipment).order }
-    should('delegate shipper to shipment') { assert_equal @order.shipment.shipper, @order.shipper }
     should('delegate shipped_at to shipment') { assert_equal @order.shipment.created_at, @order.shipped_at }
   end
 

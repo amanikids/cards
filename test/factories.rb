@@ -30,7 +30,6 @@ Factory.define(:donation) do |donation|
   donation.received_at 47.hours.ago
   donation.association :order
   donation.association :donation_method
-  donation.association :recipient, :factory => :user
 end
 
 Factory.define(:donation_method) do |method|
@@ -72,7 +71,6 @@ end
 Factory.define(:shipment) do |shipment|
   shipment.created_at 1.day.ago
   shipment.association :order
-  shipment.association :shipper, :factory => :user
 end
 
 Factory.define(:sku) do |sku|

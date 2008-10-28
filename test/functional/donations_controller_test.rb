@@ -31,7 +31,7 @@ class DonationsControllerTest < ActionController::TestCase
     end
 
     context 'with an existing Order and unreceived Donation' do
-      setup { @donation = Factory.create(:donation, :received_at => nil, :recipient => nil) }
+      setup { @donation = Factory.create(:donation, :received_at => nil) }
 
       context 'not logged in' do
         setup { @controller.current_user = nil }
@@ -49,8 +49,6 @@ class DonationsControllerTest < ActionController::TestCase
         context 'update' do
           setup { put :update, :distributor_id => @distributor, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
           should_change '@donation.reload.received_at'
-          should_change '@donation.reload.recipient', :from => nil
-          should('set recipient to current_user') { assert_equal @controller.current_user, @donation.reload.recipient }
           should_set_the_flash_to 'Donation updated.'
           should_redirect_to 'order_path(@distributor, @order)'
         end

@@ -25,7 +25,6 @@ class ShipmentsControllerTest < ActionController::TestCase
           setup { post :create, :distributor_id => @distributor, :order_id => @order.token }
           should_change '@order.reload.shipment', :from => nil
           should_change 'Shipment.count', :by => 1
-          should('set shipper to current_user') { assert_equal @controller.current_user, @order.reload.shipper }
           should_set_the_flash_to 'Shipment created.'
           should_redirect_to 'order_path(@distributor, @order)'
         end

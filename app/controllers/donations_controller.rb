@@ -8,7 +8,7 @@ class DonationsController < ApplicationController
   end
 
   def update
-    @order.donation.update_attributes(params[:donation].merge(:recipient => current_user))
+    @order.donation.update_attributes(params[:donation])
     flash[:notice] = 'Donation updated.'
     redirect_to order_path(current_distributor, @order)
   end

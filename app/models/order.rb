@@ -14,7 +14,7 @@ class Order < List
   delegate :donation_methods, :to => :distributor
 
   before_create :write_token
-  after_create  :ship, :if => :immediately_shippable?
+  after_create  :create_shipment, :if => :immediately_shippable?
 
   def address_with_nested_attributes=(record_or_attributes)
     record = case record_or_attributes
@@ -36,20 +36,12 @@ class Order < List
     donation ? donation.received_at : nil
   end
 
-  def donation_recipient
-    donation ? donation.recipient : nil
-  end
-
   def downloads
     items.collect(&:download).compact
   end
 
   def immediately_shippable?
     items.all?(&:download) unless items.blank?
-  end
-
-  def shipper
-    shipment ? shipment.shipper : nil
   end
 
   def shipped_at
@@ -61,10 +53,6 @@ class Order < List
   end
 
   private
-
-  def ship
-    create_shipment(:shipper => SystemUser.first)
-  end
 
   def write_token
     self.token = Digest::SHA1.hexdigest(random_string)

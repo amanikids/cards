@@ -13,7 +13,7 @@ class ShipmentsControllerTest < ActionController::TestCase
         setup { @controller.current_user = nil }
 
         context 'create' do
-          setup { post :create, :distributor_id => @distributor, :order_id => @order.token }
+          setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token }
           should_redirect_to 'new_session_path'
         end
       end
@@ -22,7 +22,7 @@ class ShipmentsControllerTest < ActionController::TestCase
         setup { @controller.current_user = Factory.create(:user) }
 
         context 'create' do
-          setup { post :create, :distributor_id => @distributor, :order_id => @order.token }
+          setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token }
           should_change '@order.reload.shipment', :from => nil
           should_change 'Shipment.count', :by => 1
           should_set_the_flash_to 'Shipment created.'

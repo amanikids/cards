@@ -22,7 +22,7 @@ class PaypalDonationsControllerTest < ActionController::TestCase
             setup { ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:item_id).returns(@order.token) }
 
             context 'create' do
-              setup { post :create, :distributor_id => @distributor, :order_id => @order.token }
+              setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token }
               should_change '@order.reload.donation', :from => nil
               should_change 'Donation.count', :by => 1
 
@@ -40,7 +40,7 @@ class PaypalDonationsControllerTest < ActionController::TestCase
             setup { ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:item_id).returns('not the right order token') }
 
             context 'create' do
-              setup { post :create, :distributor_id => @distributor, :order_id => @order.token }
+              setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token }
               should_not_change '@order.reload.donation'
               should_not_change 'Donation.count'
             end

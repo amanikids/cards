@@ -3,7 +3,7 @@
   .content
     %h2= product.name
     = markdown product.description
-    - form_for Item.new(:variant => product.variants.first) do |f|
+    - form_for Item.new(:variant => product.variants.first), :url => cart_items_path(current_distributor) do |f|
       %table
         - product.variants.each do |variant|
           %tr
@@ -11,6 +11,6 @@
               = f.radio_button :variant_id, variant.id
               = f.label :variant_id, variant.description, :for => [:item, :variant_id, variant.id].join('_')
             %td.price
-              = variant.price.exchange_to(current_currency)
+              = variant.price.exchange_to(current_distributor.currency)
       .button
         = f.submit 'Add to Cart'

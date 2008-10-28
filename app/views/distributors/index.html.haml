@@ -1,17 +1,17 @@
 %table
   %tr
-    %th Country
+    %th Distributor
     %th Order
     %th Donor
-    %th Amount
+    %th Donation
     %th Made By
     %th On
     %th Received
     %th Shipped
   - Order.unshipped.each do |order|
     %tr
-      %td= order.country
-      %td= link_to truncate(order.token, 5, ''), order
+      %td= order.distributor
+      %td= link_to truncate(order.token, 5, ''), order_path(order.distributor, order)
       %td= order.name
       %td= order.total.format(:with_currency)
       %td= n order.donation_method
@@ -20,8 +20,8 @@
       %td= n order.shipped_at
   - Order.shipped.each do |order|
     %tr
-      %td= order.country
-      %td= link_to truncate(order.token, 5, ''), order
+      %td= order.distributor
+      %td= link_to truncate(order.token, 5, ''), order_path(order.distributor, order)
       %td= order.name
       %td= order.total.format(:with_currency)
       %td= n order.donation_method

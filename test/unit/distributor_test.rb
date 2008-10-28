@@ -12,4 +12,18 @@ class DistributorTest < ActiveSupport::TestCase
     distributor = Factory.build(:distributor, :country_code => 'COUNTRY_CODE')
     assert_equal 'COUNTRY_CODE', distributor.to_param
   end
+
+  context 'with an existing Distributor' do
+    setup { @distributor = Factory.create(:distributor) }
+
+    should 'return distributor when find_by_param with to_param' do
+      assert_equal @distributor, Distributor.find_by_param(@distributor.to_param)
+    end
+
+    should 'raise NotFound with find_by_param with something else' do
+      assert_raise(ActiveRecord::RecordNotFound) do
+        Distributor.find_by_param('NO DISTRIBUTOR SHOULD HAVE THIS TO_PARAM')
+      end
+    end
+  end
 end

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.root :controller => 'roots'
+
   map.resource :session
   map.resources :distributors, :downloads
 

@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_current_distributor
-    self.current_distributor ||= Distributor.find(params[:distributor_id]) if params[:distributor_id]
+    self.current_distributor ||= Distributor.find_by_param(params[:distributor_id]) if params[:distributor_id]
   end
 
   def load_current_user

@@ -1,7 +1,7 @@
 FIXME Update Quantities should stay on cart edit page
 
 TODO Inventory tracking
-  . Set up redirect from / to distributor_root_path(Distributor.first(:order => :position))
+  . User toolbar
   . Some way to change to a different Distributor
   . Distributor has_many :inventories
   . Inventory(+distributor, +quantity, +sku)
@@ -28,3 +28,7 @@ MAYBE Collapse line items pointing to the same variant.
 
 MAYBE Can I clean up the Factories?
 MAYBE Can I clean up the OrderTest?
+
+MAYBE Write a patch for Rails to automatically call .to_param instead of .id in controller tests
+  That is, we'd like to avoid the to_param call in
+  get 'show', :distributor_id => @distributor.to_param

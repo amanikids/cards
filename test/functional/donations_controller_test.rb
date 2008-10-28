@@ -14,7 +14,7 @@ class DonationsControllerTest < ActionController::TestCase
       end
 
       context 'create' do
-        setup { post :create, :distributor_id => @distributor, :order_id => @order.token, :donation => { :donation_method_id => @donation_method.id }}
+        setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token, :donation => { :donation_method_id => @donation_method.id }}
         should_change '@order.reload.donation', :from => nil
         should_change 'Donation.count', :by => 1
 
@@ -37,7 +37,7 @@ class DonationsControllerTest < ActionController::TestCase
         setup { @controller.current_user = nil }
 
         context 'update' do
-          setup { put :update, :distributor_id => @distributor, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
+          setup { put :update, :distributor_id => @distributor.to_param, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
           should_not_change '@donation.received_at'
           should_redirect_to 'new_session_path'
         end
@@ -47,7 +47,7 @@ class DonationsControllerTest < ActionController::TestCase
         setup { @controller.current_user = Factory.create(:user) }
 
         context 'update' do
-          setup { put :update, :distributor_id => @distributor, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
+          setup { put :update, :distributor_id => @distributor.to_param, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
           should_change '@donation.reload.received_at'
           should_set_the_flash_to 'Donation updated.'
           should_redirect_to 'order_path(@distributor, @order)'

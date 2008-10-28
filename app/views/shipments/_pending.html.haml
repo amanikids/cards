@@ -1,5 +1,5 @@
 .shipment
   %h2 Your order has not yet shipped.
   - if current_user
-    - form_for [order, order.build_shipment] do |f|
-      = f.submit 'I just shipped this order.'
+    - form_tag order_shipment_path(current_distributor, order) do
+      = submit_tag 'I just shipped this order.'

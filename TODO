@@ -1,3 +1,5 @@
+FIXME Links to other distributors shouldn't linkify current distributor away from home page.
+
 TODO Inventory tracking
   . Variant.running_low?(distributor)
   . Distributor updates actual inventory counts

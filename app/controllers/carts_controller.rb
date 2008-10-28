@@ -5,7 +5,7 @@ class CartsController < ApplicationController
   def update
     if @cart.update_items(params[:items])
       flash[:notice] = 'Cart updated.'
-      redirect_to distributor_root_path(current_distributor)
+      redirect_to cart_path(current_distributor)
     else
       render :action => 'show'
     end

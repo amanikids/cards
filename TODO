@@ -1,5 +1,3 @@
-FIXME Update Quantities should stay on cart edit page
-
 TODO Inventory tracking
   . Distributor has_many :inventories
   . Inventory(+distributor, +quantity, +sku)
@@ -16,6 +14,7 @@ TODO Auto-select currency based on REQUEST_IP
 TODO Attach gift cards to emails
 TODO Checkout directly from Edit cart page (Enable/disable buttons if form changes?)
 TODO Re-word "paypal online" to emphasize that you can just use a credit card there.
+TODO Default New Order's Address's Country to the Distributor's Country
 
 MAYBE Send PayPal a cancel url (order_path(@order))
 MAYBE Change text of PayPal return button

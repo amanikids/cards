@@ -36,7 +36,7 @@ class CartsControllerTest < ActionController::TestCase
         context 'update' do
           setup { put :update, :items => :item_attributes, :distributor_id => @distributor.to_param }
           should_set_the_flash_to 'Cart updated.'
-          should_redirect_to 'distributor_root_path(@distributor)'
+          should_redirect_to 'cart_path(@distributor)'
         end
       end
 

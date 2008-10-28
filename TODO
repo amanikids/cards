@@ -1,8 +1,5 @@
 TODO Inventory tracking
-  . Decrement inventory
   . Variant.running_low?(distributor)
-  . /distributors/us shows just the Orders for the us distributor
-  . Cycle through summary of DonationMethods for current_distributor somewhere on the homepage as a heads-up.
   . Distributor updates actual inventory counts
 TODO Additional Donation
 
@@ -10,19 +7,18 @@ TODO Layout
 TODO Prevent double-clicking buttons
 TODO Show currency sign with money amounts (&pound;)
 TODO Adjust exchange rates
-TODO Auto-select currency based on REQUEST_IP
 TODO Attach gift cards to emails
-TODO Checkout directly from Edit cart page (Enable/disable buttons if form changes?)
 TODO Re-word "paypal online" to emphasize that you can just use a credit card there.
 TODO Default New Order's Address's Country to the Distributor's Country
 
+MAYBE Cycle through summary of DonationMethods for current_distributor somewhere on the homepage as a heads-up.
+MAYBE /distributors/us shows just the Orders for the us distributor
+MAYBE Auto-select distributor based on REQUEST_IP
 MAYBE Send PayPal a cancel url (order_path(@order))
 MAYBE Change text of PayPal return button
 MAYBE Rename :address to :mailing_address
 MAYBE Edit Address until shipped.
-MAYBE Use map.resources after all
 MAYBE Collapse line items pointing to the same variant.
-
 MAYBE Can I clean up the Factories?
 MAYBE Can I clean up the OrderTest?
 

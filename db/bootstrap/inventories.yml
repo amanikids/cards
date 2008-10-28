@@ -6,54 +6,58 @@ dina_kili_merry_christmas:
 dina_kili_happy_holidays:
   distributor: dina
   sku: kili_happy_holidays
-  initial: 2000
+  initial: 1500
 
 dina_peace_merry_christmas:
   distributor: dina
   sku: peace_merry_christmas
-  initial: 2000
+  initial: 1000
 
 dina_peace_happy_holidays:
   distributor: dina
   sku: peace_happy_holidays
-  initial: 2000
+  initial: 500
+
+
 
 danielle_kili_merry_christmas:
   distributor: danielle
   sku: kili_merry_christmas
-  initial: 2000
+  initial: 1000
 
 danielle_kili_happy_holidays:
   distributor: danielle
   sku: kili_happy_holidays
-  initial: 2000
+  initial: 750
 
 danielle_peace_merry_christmas:
   distributor: danielle
   sku: peace_merry_christmas
-  initial: 2000
+  initial: 0
 
 danielle_peace_happy_holidays:
   distributor: danielle
   sku: peace_happy_holidays
-  initial: 2000
+  initial: 0
+
+
 
 shelley_kili_merry_christmas:
   distributor: shelley
   sku: kili_merry_christmas
-  initial: 2000
+  initial: 1000
 
 shelley_kili_happy_holidays:
   distributor: shelley
   sku: kili_happy_holidays
-  initial: 2000
+  initial: 750
 
 shelley_peace_merry_christmas:
   distributor: shelley
   sku: peace_merry_christmas
-  initial: 2000
+  initial: 500
 
 shelley_peace_happy_holidays:
   distributor: shelley
   sku: peace_happy_holidays
-  initial: 2000
+  initial: 500

@@ -5,6 +5,8 @@ class OrdersController < ApplicationController
 
   def create
     if @order.save
+      self.current_cart.destroy
+      self.current_cart = nil
       redirect_to order_path(current_distributor, @order)
     else
       render :action => 'new'

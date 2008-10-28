@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ListTest < ActiveSupport::TestCase
   should_belong_to :distributor
-  should_have_many :items
+  should_have_many :items, :dependent => :destroy
 
   should 'delegate currency to distributor' do
     list = List.new

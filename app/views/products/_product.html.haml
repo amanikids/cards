@@ -4,7 +4,7 @@
     .content
       %h2= product.name
       = markdown product.description
-      - form_for Item.new, :url => cart_items_path(current_distributor) do |f|
+      - form_for Item.new(:variant => product.available_variants(current_distributor).first), :url => cart_items_path(current_distributor) do |f|
         %table
           - product.available_variants(current_distributor).each do |variant|
             %tr

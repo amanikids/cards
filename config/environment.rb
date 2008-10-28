@@ -36,5 +36,5 @@ Rails::Initializer.run do |config|
   }
 
   # Activate observers that should always be running
-  config.active_record.observers = :notification_observer
+  config.active_record.observers = :inventory_cache_observer, :notification_observer
 end

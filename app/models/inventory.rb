@@ -2,8 +2,6 @@ class Inventory < ActiveRecord::Base
   belongs_to :distributor
   belongs_to :sku
 
-  attr_protected :initial, :promised, :shipped
-
   def actual
     initial - shipped
   end
@@ -12,16 +10,11 @@ class Inventory < ActiveRecord::Base
     actual - promised
   end
 
-  def clear_cache
-    self.promised = 0
-    self.shipped  = 0
+  def item_unshipped(item)
+    update_attributes :promised => (self.promised + item.sku_count)
   end
 
-  def promised_item(item)
-    self.promised += item.sku_count
-  end
-
-  def shipped_item(item)
-    self.shipped += item.sku_count
+  def item_shipped(item)
+    update_attributes :shipped => (self.shipped + item.sku_count), :promised => (self.promised - item.sku_count)
   end
 end

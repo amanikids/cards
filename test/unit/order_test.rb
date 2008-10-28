@@ -47,12 +47,16 @@ class OrderTest < ActiveSupport::TestCase
       should('make an Order') { assert_equal Order, @order.class }
       should('make a new record') { assert @order.new_record? }
       should('initialize distributor') { assert_equal @cart.distributor, @order.distributor }
-      should('associate items') { assert_same_elements @cart.items, @order.items }
-      should_not_change '@cart.reload.items.count'
+      should('associate items') do
+        @cart.items.zip(@order.items).each do |old_item, new_item|
+          assert_equal old_item.quantity, new_item.quantity
+          assert_equal old_item.total,    new_item.total
+          assert_equal old_item.variant,  new_item.variant
+        end
+      end
 
       context 'and then save the order' do
         setup { @order.save! }
-        should_change '@cart.items.count',  :from => 2, :to => 0
         should_change '@order.items.count', :from => 0, :to => 2
         should_change '@distributor.orders.count', :by => 1
         should_not_change '@order.shipment'

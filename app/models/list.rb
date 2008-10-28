@@ -1,6 +1,6 @@
 class List < ActiveRecord::Base
   belongs_to :distributor
-  has_many :items
+  has_many :items, :dependent => :destroy
 
   delegate :currency, :to => :distributor
 

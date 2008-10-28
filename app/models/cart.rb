@@ -7,7 +7,7 @@ class Cart < List
   def build_order(attributes={})
     returning(Order.new(attributes)) do |order|
       order.distributor = distributor
-      order.item_ids    = item_ids
+      items.each { |item| order.items.build(:list => order, :quantity => item.quantity, :variant => item.variant) }
     end
   end
 

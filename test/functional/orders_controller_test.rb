@@ -31,6 +31,8 @@ class OrdersControllerTest < ActionController::TestCase
           context 'create' do
             setup { post :create, :distributor_id => @distributor.to_param }
             should_redirect_to 'order_path(@distributor, @cart)'
+            should_change 'Cart.count', :by => -1
+            should_change '@controller.current_cart', :to => nil
           end
         end
 

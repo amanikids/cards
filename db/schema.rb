@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081028063016) do
+ActiveRecord::Schema.define(:version => 20081028084513) do
 
   create_table "addresses", :force => true do |t|
     t.string   "name"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(:version => 20081028063016) do
     t.string   "path"
     t.integer  "width"
     t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "inventories", :force => true do |t|
+    t.integer  "distributor_id"
+    t.integer  "sku_id"
+    t.integer  "quantity",       :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

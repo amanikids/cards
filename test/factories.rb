@@ -44,6 +44,12 @@ Factory.define(:downloadable_item, :class => Item) do |item|
   item.association :variant, :factory => :variant_with_download
 end
 
+Factory.define(:inventory) do |inventory|
+  inventory.quantity 300
+  inventory.association :distributor
+  inventory.association :sku
+end
+
 Factory.define(:item) do |item|
   item.quantity 1
   item.association :variant

@@ -1,7 +1,6 @@
 FIXME Update Quantities should stay on cart edit page
 
 TODO Inventory tracking
-  . User toolbar
   . Some way to change to a different Distributor
   . Distributor has_many :inventories
   . Inventory(+distributor, +quantity, +sku)

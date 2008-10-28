@@ -1,0 +1,4 @@
+%ul.distributor
+  %li= current_user.name
+  %li= link_to_unless_current 'View Orders', distributors_path
+  %li= link_to 'Log out', session_path, :method => :delete

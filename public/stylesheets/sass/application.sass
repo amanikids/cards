@@ -21,6 +21,19 @@ body
 h1, h2, h3, h4, h5
   :font-family = !heading_font
 
+.distributor
+  :background-color = !orange
+  :list-style none
+  :margin 0
+  :padding = 0.5 * !font_size
+  li
+    :display inline
+    :padding = 0.5 * !font_size
+    a
+      :color white
+      :font-weight bold
+
+
 .header
   :border-bottom 1px solid black
   :height = !logo_height

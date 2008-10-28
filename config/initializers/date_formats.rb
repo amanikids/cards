@@ -1,1 +1,1 @@
-Time::DATE_FORMATS[:default] = lambda { |time| time.strftime("%d %B")}
+Time::DATE_FORMATS[:default] = lambda { |time| time.strftime("%d %b")}

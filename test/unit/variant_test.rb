@@ -5,6 +5,21 @@ class VariantTest < ActiveSupport::TestCase
   should_belong_to :download
   should_require_attributes :cents, :currency, :sku_id
 
+  # TODO consult Joe for these thresholds
+  context 'with a variant of size 10' do
+    setup { @variant = Factory.build(:variant, :size => 10) }
+
+    should 'be available if sku quantity is greater than or equal to 1 of me' do
+      @variant.sku.stubs(:quantity).with(:distributor).returns(10)
+      assert @variant.available?(:distributor)
+    end
+
+    should 'not be available if sku quantity is less than 1 of me' do
+      @variant.sku.stubs(:quantity).with(:distributor).returns(9)
+      assert !@variant.available?(:distributor)
+    end
+  end
+
   should 'delegate description to sku_name when size is 1' do
     variant = Variant.new(:size => 1)
     variant.stubs(:sku_name).returns('SKU_NAME')

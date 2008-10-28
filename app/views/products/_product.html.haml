@@ -1,16 +1,17 @@
-.product
-  .image= image_tag product.image.path
-  .content
-    %h2= product.name
-    = markdown product.description
-    - form_for Item.new(:variant => product.variants.first), :url => cart_items_path(current_distributor) do |f|
-      %table
-        - product.variants.each do |variant|
-          %tr
-            %td.name
-              = f.radio_button :variant_id, variant.id
-              = f.label :variant_id, variant.description, :for => [:item, :variant_id, variant.id].join('_')
-            %td.price
-              = variant.price.exchange_to(current_distributor.currency)
-      .button
-        = f.submit 'Add to Cart'
+- if product.available?(current_distributor)
+  .product
+    .image= image_tag product.image.path
+    .content
+      %h2= product.name
+      = markdown product.description
+      - form_for Item.new, :url => cart_items_path(current_distributor) do |f|
+        %table
+          - product.available_variants(current_distributor).each do |variant|
+            %tr
+              %td.name
+                = f.radio_button :variant_id, variant.id
+                = f.label :variant_id, variant.description, :for => [:item, :variant_id, variant.id].join('_')
+              %td.price
+                = variant.price.exchange_to(current_distributor.currency)
+        .button
+          = f.submit 'Add to Cart'

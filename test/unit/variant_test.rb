@@ -5,6 +5,14 @@ class VariantTest < ActiveSupport::TestCase
   should_belong_to :download
   should_require_attributes :cents, :currency, :sku_id
 
+  context 'with a downloadable variant' do
+    setup { @variant = Factory.build(:variant_with_download) }
+
+    should 'always be available' do
+      assert @variant.available?(:distributor)
+    end
+  end
+
   # TODO consult Joe for these thresholds
   context 'with a variant of size 10' do
     setup { @variant = Factory.build(:variant, :size => 10) }

@@ -31,4 +31,5 @@
   cents: <%= cents %>
   currency: USD
   position: <%= position += 1 %>
+  download: generic_gift_card
 <% end %>

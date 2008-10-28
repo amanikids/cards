@@ -1,0 +1,20 @@
+dina_paypal:
+  distributor: dina
+  donation_method: paypal
+  position: 1
+
+dina_check_us:
+  distributor: dina
+  donation_method: check_us
+  position: 2
+
+danielle_paypal:
+  distributor: danielle
+  donation_method: paypal
+  position: 1
+
+shelley_paypal:
+  distributor: shelley
+  donation_method: paypal
+  position: 1
+

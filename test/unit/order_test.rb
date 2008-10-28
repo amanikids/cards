@@ -79,16 +79,10 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
-  context 'an order with an address in SOME COUNTRY' do
-    setup { @order = Factory.build(:order, :address => Factory.build(:address, :country => 'SOME COUNTRY')) }
-
-    context 'asking for donation methods' do
-      setup { @order.donation_methods }
-
-      before_should 'delegate to DonationMethod' do
-        DonationMethod.expects(:for).with('SOME COUNTRY')
-      end
-    end
+  should 'delegate donation_methods to distributor' do
+    @order = Factory.build(:order)
+    @order.distributor.stubs(:donation_methods).returns('DONATION_METHODS')
+    assert_equal 'DONATION_METHODS', @order.donation_methods
   end
 
   context 'a new Order' do

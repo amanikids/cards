@@ -40,7 +40,7 @@ danielle:
   salt: 0297dd4916a85b8f1dab56545c0712a212e4316e
   position: 2
 
-shelly:
+shelley:
   type: Distributor
   country_code: uk
   currency: GBP

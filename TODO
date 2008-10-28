@@ -1,7 +1,7 @@
 FIXME Update Quantities should stay on cart edit page
 
 TODO Inventory tracking
-  . Distributor has_many :donation_methods (Remove Order.donation_methods and DonationMethod.for)
+  . Remove User associations with Payment and Shipment
   . Set up redirect from / to distributor_root_path(Distributor.first(:order => :position))
   . Some way to change to a different Distributor
   . Distributor has_many :inventories

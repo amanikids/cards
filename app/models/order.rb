@@ -11,6 +11,7 @@ class Order < List
   validates_associated :address
 
   delegate :name, :email, :country, :to => :address
+  delegate :donation_methods, :to => :distributor
 
   before_create :write_token
   after_create  :ship, :if => :immediately_shippable?
@@ -29,10 +30,6 @@ class Order < List
 
   def donation_created_at
     donation ? donation.created_at : nil
-  end
-
-  def donation_methods
-    DonationMethod.for(country)
   end
 
   def donation_received_at

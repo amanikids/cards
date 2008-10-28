@@ -65,7 +65,9 @@ ActiveRecord::Schema.define(:version => 20081028084513) do
   create_table "inventories", :force => true do |t|
     t.integer  "distributor_id"
     t.integer  "sku_id"
-    t.integer  "quantity",       :default => 0
+    t.integer  "initial",        :default => 0
+    t.integer  "promised",       :default => 0
+    t.integer  "shipped",        :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

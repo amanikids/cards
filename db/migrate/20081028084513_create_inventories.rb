@@ -2,7 +2,7 @@ class CreateInventories < ActiveRecord::Migration
   def self.up
     create_table :inventories do |t|
       t.references :distributor, :sku
-      t.integer :quantity, :default => 0
+      t.integer :initial, :promised, :shipped, :default => 0
       t.timestamps
     end
   end

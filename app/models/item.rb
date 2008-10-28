@@ -2,13 +2,13 @@ class Item < ActiveRecord::Base
   belongs_to :list
   belongs_to :variant
 
-  delegate :download, :to => :variant
+  delegate :download, :product_name, :sku, :to => :variant
 
   validates_presence_of :variant_id
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0
 
-  def product_name
-    variant.product_name
+  def sku_count
+    quantity * variant_size
   end
 
   def variant_description
@@ -17,6 +17,10 @@ class Item < ActiveRecord::Base
 
   def variant_price
     list.exchanged(variant.price)
+  end
+
+  def variant_size
+    variant.size
   end
 
   def total

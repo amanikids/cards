@@ -1,9 +1,9 @@
 TODO Inventory tracking
-  . Distributor has_many :inventories
-  . Inventory(+distributor, +quantity, +sku)
-  . Load Products for Homepage from Distributor
+  . Decrement inventory
+  . Variant.running_low?(distributor)
   . /distributors/us shows just the Orders for the us distributor
-  . Cycle through summary of PaymentMethods for current_distributor somewhere on the homepage as a heads-up.
+  . Cycle through summary of DonationMethods for current_distributor somewhere on the homepage as a heads-up.
+  . Distributor updates actual inventory counts
 TODO Additional Donation
 
 TODO Layout

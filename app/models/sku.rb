@@ -7,13 +7,11 @@ class Sku < ActiveRecord::Base
     product.name
   end
 
-  def quantity(distributor)
-    inventory(distributor).quantity
+  def inventory(distributor)
+    inventories.detect { |inventory| inventory.distributor == distributor }
   end
 
-  private
-
-  def inventory(distributor)
-    inventories.first :conditions => { :distributor_id => distributor.id }
+  def quantity(distributor)
+    inventory(distributor).available
   end
 end

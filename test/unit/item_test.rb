@@ -20,6 +20,12 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal 'PRODUCT_NAME', item.product_name
   end
 
+  should 'delegate sku to variant' do
+    item = Item.new
+    item.stubs(:variant).returns(stub(:sku => 'SKU'))
+    assert_equal 'SKU', item.sku
+  end
+
   should 'delegate variant_description to variant' do
     item = Item.new
     item.stubs(:variant).returns(stub(:description => 'DESCRIPTION'))
@@ -30,6 +36,19 @@ class ItemTest < ActiveSupport::TestCase
     item = Factory.build(:item, :list => Factory.build(:list, :distributor => Factory.build(:distributor, :currency => 'GBP')))
     assert_equal item.variant.price.exchange_to('GBP'), item.variant_price
     assert_equal 'GBP', item.variant_price.currency, 'this is here because exchanged currencies compare as =='
+  end
+
+  should 'delegate variant_size to variant' do
+    item = Item.new
+    item.stubs(:variant).returns(stub(:size => 'SIZE'))
+    assert_equal 'SIZE', item.variant_size
+  end
+
+  should 'multiply quantity and variant_size to get sku_count' do
+    item = Item.new
+    item.stubs(:quantity).returns(3)
+    item.stubs(:variant_size).returns(7)
+    assert_equal 21, item.sku_count
   end
 
   context 'total' do

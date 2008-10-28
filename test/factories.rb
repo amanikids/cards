@@ -45,7 +45,7 @@ Factory.define(:downloadable_item, :class => Item) do |item|
 end
 
 Factory.define(:inventory) do |inventory|
-  inventory.quantity 300
+  inventory.initial 300
   inventory.association :distributor
   inventory.association :sku
 end

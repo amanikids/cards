@@ -44,6 +44,10 @@ class Order < List
     items.all?(&:download) unless items.blank?
   end
 
+  def items_for(sku)
+    items.select { |item| item.sku == sku }
+  end
+
   def shipped_at
     shipment ? shipment.created_at : nil
   end

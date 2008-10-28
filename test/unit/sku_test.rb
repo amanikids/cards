@@ -11,14 +11,16 @@ class SkuTest < ActiveSupport::TestCase
     assert_equal 'PRODUCT_NAME', sku.product_name
   end
 
-  context 'with an existing inventory item' do
-    setup do
-      @inventory = Factory.create(:inventory)
-      @distributor, @sku = @inventory.distributor, @inventory.sku
-    end
+  should 'look up inventory from distributor' do
+    inventory   = Factory.create(:inventory)
+    distributor = inventory.distributor
+    sku         = inventory.sku
+    assert_equal inventory, sku.inventory(distributor)
+  end
 
-    should 'look up quantity from inventory' do
-      assert_equal @inventory.quantity, @sku.quantity(@distributor)
-    end
+  should 'delgate quantity to inventory(distributor).available' do
+    sku = Factory.build(:sku)
+    sku.stubs(:inventory).with(:distributor).returns(stub(:available => 300))
+    assert_equal 300, sku.quantity(:distributor)
   end
 end

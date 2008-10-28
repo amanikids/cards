@@ -129,4 +129,12 @@ class OrderTest < ActiveSupport::TestCase
     order = Factory.build(:order, :token => :token)
     assert_equal :token, order.to_param
   end
+
+  should 'return items_for a sku' do
+    order = Order.new
+    match = stub(:sku => 'SKU')
+    other = stub(:sku => 'SOME OTHER SKU')
+    order.stubs(:items).returns [match, other]
+    assert_equal [match], order.items_for('SKU')
+  end
 end

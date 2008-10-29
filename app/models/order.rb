@@ -36,6 +36,7 @@ class Order < List
     donation ? donation.received_at : nil
   end
 
+  # TODO uniq Order#downloads?
   def downloads
     items.collect(&:download).compact
   end

@@ -36,7 +36,9 @@ Factory.define(:donation_method) do |method|
   method.name 'check'
 end
 
-Factory.define(:download) do |cart|
+Factory.define(:download) do |download|
+  download.name 'gift_front.jpg'
+  download.content_type 'image/jpg'
 end
 
 Factory.define(:downloadable_item, :class => Item) do |item|

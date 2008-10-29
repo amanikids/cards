@@ -1,3 +1,4 @@
+# TODO get real gift card PDFs
 generic_gift_card:
-  name: gift_card.pdf
-  content_type: application/pdf
+  name: gift_front.jpg
+  content_type: image/jpg

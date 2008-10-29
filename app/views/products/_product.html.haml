@@ -11,6 +11,8 @@
               %td.name
                 = f.radio_button :variant_id, variant.id
                 = f.label :variant_id, variant.description, :for => [:item, :variant_id, variant.id].join('_')
+                - if variant.running_low?(current_distributor)
+                  %span.running_low Running low!
               %td.price
                 = variant.price.exchange_to(current_distributor.currency)
         .button

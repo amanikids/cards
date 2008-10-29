@@ -11,9 +11,13 @@ class VariantTest < ActiveSupport::TestCase
     should 'always be available' do
       assert @variant.available?(:distributor)
     end
+
+    should 'never be running_low' do
+      assert !@variant.running_low?(:distributor)
+    end
   end
 
-  # TODO consult Joe for these thresholds
+  # TODO consult Joe for the available? and running_low? thresholds
   context 'with a variant of size 10' do
     setup { @variant = Factory.build(:variant, :size => 10) }
 
@@ -25,6 +29,16 @@ class VariantTest < ActiveSupport::TestCase
     should 'not be available if sku quantity is less than 1 of me' do
       @variant.sku.stubs(:quantity).with(:distributor).returns(9)
       assert !@variant.available?(:distributor)
+    end
+
+    should 'be running_low if sku quantity is less than 6 of me' do
+      @variant.sku.stubs(:quantity).with(:distributor).returns(59)
+      assert @variant.running_low?(:distributor)
+    end
+
+    should 'not be running_low if sku quantity is greater than or equal to 6 of me' do
+      @variant.sku.stubs(:quantity).with(:distributor).returns(60)
+      assert !@variant.running_low?(:distributor)
     end
   end
 

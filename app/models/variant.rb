@@ -5,7 +5,7 @@ class Variant < ActiveRecord::Base
   validates_presence_of :cents, :currency, :sku_id
 
   def available?(distributor)
-    download || sku.quantity(distributor) >= size
+    quantity_available?(distributor, 1)
   end
 
   def description
@@ -16,11 +16,21 @@ class Variant < ActiveRecord::Base
     sku.product_name
   end
 
+  def running_low?(distributor)
+    !quantity_available?(distributor, 6)
+  end
+
   def sku_name
     sku.name
   end
 
   def to_param
     unix_name
+  end
+
+  private
+
+  def quantity_available?(distributor, number_of_packs)
+    download || sku.quantity(distributor) >= (number_of_packs * size)
   end
 end

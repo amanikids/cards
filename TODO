@@ -1,9 +1,7 @@
-TODO Inventory tracking
-  . Variant.running_low?(distributor)
-  . Distributor updates actual inventory counts
+TODO Distributor updates actual inventory counts
 TODO Additional Donation
 
-TODO Layout
+TODO Layout (re-space Running low!)
 TODO Prevent double-clicking buttons
 TODO Show currency sign with money amounts (&pound;)
 TODO Adjust exchange rates

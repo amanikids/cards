@@ -13,7 +13,7 @@
       %td= order.distributor
       %td= link_to truncate(order.token, 5, ''), order_path(order.distributor, order)
       %td= order.name
-      %td= order.total.format(:with_currency)
+      %td= m order.total
       %td= n order.donation_method
       %td= n order.donation_created_at
       %td= n order.donation_received_at
@@ -23,7 +23,7 @@
       %td= order.distributor
       %td= link_to truncate(order.token, 5, ''), order_path(order.distributor, order)
       %td= order.name
-      %td= order.total.format(:with_currency)
+      %td= m order.total
       %td= n order.donation_method
       %td= n order.donation_created_at
       %td= n order.donation_received_at

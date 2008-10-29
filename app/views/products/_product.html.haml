@@ -14,6 +14,6 @@
                 - if variant.running_low?(current_distributor)
                   %span.running_low Running low!
               %td.price
-                = variant.price.exchange_to(current_distributor.currency)
+                = m variant.price.exchange_to(current_distributor.currency)
         .button
           = f.submit 'Add to Cart'

@@ -11,16 +11,16 @@
       %tr
         %td= item.product_name
         %td= item.variant_description
-        %td= item.variant_price
+        %td= m item.variant_price
         %td= item.quantity
-        %td= item.total
+        %td= m item.total
   %tfoot
     %tr
       %td
       %td
       %td
       %td
-      %td= order.total
+      %td= m order.total
 
 - if order.new_record?
   %ul

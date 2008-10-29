@@ -10,6 +10,11 @@ module ApplicationHelper
     link_to_unless(current_country_code == country_code, text, "/#{country_code}")
   end
 
+  def m(money)
+    symbol = money.currency == 'GBP' ? '&pound;' : '$'
+    "#{symbol}#{money}"
+  end
+
   def n(value)
     value ? value : '&mdash;'
   end

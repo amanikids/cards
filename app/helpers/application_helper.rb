@@ -5,6 +5,11 @@ module ApplicationHelper
     end.join
   end
 
+  def link_to_country_code(text, country_code)
+    current_country_code = current_distributor ? current_distributor.country_code : nil
+    link_to_unless(current_country_code == country_code, text, "/#{country_code}")
+  end
+
   def n(value)
     value ? value : '&mdash;'
   end

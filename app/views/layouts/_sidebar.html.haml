@@ -1,9 +1,9 @@
 .sidebar
   .content
     %ul.distributors
-      %li= link_to_unless_current('United States', '/us')
-      %li= link_to_unless_current('Canada', '/ca')
-      %li= link_to_unless_current('United Kingdom', '/uk')
+      %li= link_to_country_code('United States', 'us')
+      %li= link_to_country_code('Canada', 'ca')
+      %li= link_to_country_code('United Kingdom', 'uk')
 
     .welcome
       %p The money raised through sales of Amani's Holiday Cards directly funds our education program. Amani paid for tuition, uniforms, textbooks, and school lunches for nearly 300 Tanzanian children in 2008.
@@ -11,10 +11,10 @@
       %p
         %strong
           Amani's Holiday Cards are ready to be shipped from the
-          = link_to_unless_current('United States', '/us') + ','
-          = link_to_unless_current('Canada', '/ca')
+          = link_to_country_code('United States', 'us') + ','
+          = link_to_country_code('Canada', 'ca')
           and the
-          = link_to_unless_current('United Kingdom', '/uk') + ','
+          = link_to_country_code('United Kingdom', 'uk') + ','
         so you're sure to receive your cards in plenty of time to send to your friends and family before the holiday season.
 
     .thanks

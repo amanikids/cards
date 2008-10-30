@@ -1,3 +1,10 @@
 .shipment
   %h2 Your order has shipped!
   %p= "We sent it your way #{shipment.created_at.to_date.to_s(:long)}."
+
+  - if @order.downloads.any?
+    .downloads
+      %h3 Gift cards aren't shipped; instead, you print them out yourself:
+      %ul
+      - shipment.order.downloads.each do |download|
+        %li= link_to download.name, download

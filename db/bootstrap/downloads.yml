@@ -1,4 +1,4 @@
-# TODO Joe -- get real gift card PDFs
+# TODO Joe -- get specific gift card pdfs (textbook, desk, etc.)
 generic_gift_card:
-  name: gift_front.jpg
-  content_type: image/jpg
+  name: gift_cards.pdf
+  content_type: application/pdf

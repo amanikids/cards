@@ -4,6 +4,10 @@ class InventoryTest < ActiveSupport::TestCase
   should_belong_to :distributor
   should_belong_to :sku
 
+  should_only_allow_numeric_values_for :actual
+  should_not_allow_values_for :actual, -1, :message => /greater than/
+  should_not_allow_values_for :actual, 3.14, :message =>  /not a number/
+
   context 'an inventory' do
     setup { @inventory = Factory.build(:inventory, :initial => 400, :promised => 200, :shipped => 100) }
 
@@ -16,8 +20,8 @@ class InventoryTest < ActiveSupport::TestCase
     end
 
     should 'adjust inital when setting actual' do
-      @inventory.actual = 250
-      assert_equal 350, @inventory.initial
+      @inventory.update_attributes('actual' => '250')
+      assert_equal 350, @inventory.reload.initial
     end
   end
 end

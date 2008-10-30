@@ -15,7 +15,7 @@ class DistributorTest < ActiveSupport::TestCase
   end
 
   context 'with an existing Distributor' do
-    setup { @distributor = Factory.create(:distributor) }
+    setup { @distributor = Factory(:distributor) }
 
     context 'find_by_param' do
       should 'return distributor when find_by_param with to_param' do
@@ -26,6 +26,26 @@ class DistributorTest < ActiveSupport::TestCase
         assert_raise(ActiveRecord::RecordNotFound) do
           Distributor.find_by_param('NO DISTRIBUTOR SHOULD HAVE THIS TO_PARAM')
         end
+      end
+    end
+
+    context 'update inventories' do
+      setup { @inventory = Factory(:inventory, :distributor => @distributor) }
+
+      should 'have the inventory' do
+        assert_equal [@inventory], @distributor.inventories
+      end
+
+      context 'with valid attributes' do
+        setup { @result = @distributor.update_inventories(@inventory.id => {'actual' => '200'}) }
+        should('return true') { assert @result }
+        should_change '@inventory.reload.actual', :to => 200
+      end
+
+      context 'with invalid attributes' do
+        setup { @result = @distributor.update_inventories(@inventory.id => {'actual' => 'a'}) }
+        should('return false') { assert !@result }
+        should_not_change '@inventory.reload.actual'
       end
     end
   end

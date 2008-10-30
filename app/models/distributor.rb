@@ -36,4 +36,9 @@ class Distributor < User
   def to_param
     country_code
   end
+
+  def update_inventories(attributes)
+    attributes = attributes.stringify_keys
+    inventories.map { |inventory| inventory.update_attributes attributes[inventory.id.to_s] }.all?
+  end
 end

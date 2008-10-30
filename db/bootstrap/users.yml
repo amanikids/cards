@@ -12,6 +12,13 @@ joe:
   encrypted_password: ec8d9d7c8b64c7dc5cc9511205a48cfb5a565ad0
   salt: 7ee404f70ff74f8cf87ae92176f88ec009a348db
 
+valerie:
+  type:
+  name: Valerie Todd
+  email: valerie@amanikids.org
+  encrypted_password: 4e7782a4971dc33f08b8625fdf015871de64152d
+  salt: e867d61499a0f91c13f244f220bc4d85572508c9
+
 dina:
   type: Distributor
   country_code: us

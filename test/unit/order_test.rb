@@ -104,6 +104,11 @@ class OrderTest < ActiveSupport::TestCase
       should('be immediately shippable') { assert @order.immediately_shippable? }
       should('collect downloadable variants') { assert_equal ['DOWNLOAD_ONE', 'DOWNLOAD_TWO'], @order.downloads }
     end
+
+    context 'with duplicate downloads' do
+      setup { @order.stubs(:items).returns [stub(:download => 'DOWNLOAD_ONE'), stub(:download => 'DOWNLOAD_TWO'), stub(:download => 'DOWNLOAD_ONE')] }
+      should('uniq downloadable variants') { assert_equal ['DOWNLOAD_ONE', 'DOWNLOAD_TWO'], @order.downloads }
+    end
   end
 
   context 'an order with no donation' do

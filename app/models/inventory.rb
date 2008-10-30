@@ -7,14 +7,14 @@ class Inventory < ActiveRecord::Base
   end
 
   def available
-    actual - promised
+    initial - promised
   end
 
   def item_unshipped(item)
-    update_attributes :promised => (self.promised + item.sku_count)
+    increment! :promised, item.sku_count
   end
 
   def item_shipped(item)
-    update_attributes :shipped => (self.shipped + item.sku_count), :promised => (self.promised - item.sku_count)
+    increment! :shipped, item.sku_count
   end
 end

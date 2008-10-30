@@ -17,7 +17,7 @@ class VariantTest < ActiveSupport::TestCase
     end
   end
 
-  # TODO consult Joe for the available? and running_low? thresholds
+  # TODO Joe -- what thresholds shall we use for available? and running_low?
   context 'with a variant of size 10' do
     setup { @variant = Factory.build(:variant, :size => 10) }
 

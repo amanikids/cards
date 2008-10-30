@@ -18,7 +18,6 @@ class PaypalDonationsController < ApplicationController
     @notification = ActiveMerchant::Billing::Integrations::Paypal::Notification.new(request.raw_post)
   end
 
-  # MAYBE make a named scope -- or a subclass? -- for DonationMethod.paypal?
   def load_donation_method
     @donation_method = DonationMethod.find_by_name('paypal') || raise(ActiveRecord::RecordNotFound)
   end

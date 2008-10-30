@@ -1,6 +1,7 @@
 # =============================================================================
 # = Sequences                                                                 =
 # =============================================================================
+Factory.sequence(:country_code) { |n| Digest::SHA1.hexdigest(n.to_s)[0..1] }
 Factory.sequence(:email) { |n| "user#{n}@example.com" }
 
 # =============================================================================
@@ -19,7 +20,7 @@ Factory.define(:cart) do |cart|
 end
 
 Factory.define(:distributor) do |distributor|
-  distributor.country_code 'us'
+  distributor.country_code { Factory.next(:country_code) }
   distributor.currency 'USD'
   distributor.email { Factory.next(:email) }
   distributor.password 'foo'

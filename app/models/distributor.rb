@@ -8,9 +8,10 @@ class Distributor < User
   has_many :orders
 
   validates_presence_of :country_code, :currency
+  validates_uniqueness_of :country_code
 
   def self.default
-    ordered.first
+    find_by_country_code('uk')
   end
 
   def self.find_by_param(param)

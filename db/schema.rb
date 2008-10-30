@@ -113,9 +113,10 @@ ActiveRecord::Schema.define(:version => 20081028084513) do
   end
 
   create_table "users", :force => true do |t|
+    t.string   "type"
     t.string   "name"
     t.string   "email"
-    t.string   "type"
+    t.string   "country"
     t.string   "encrypted_password", :limit => 40
     t.string   "salt",               :limit => 40
     t.string   "country_code",       :limit => 2

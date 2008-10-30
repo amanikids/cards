@@ -22,6 +22,7 @@ valerie:
 dina:
   type: Distributor
   country_code: us
+  country: United States
   currency: USD
   name: Dina Sciarra
   email: amanikids@comcast.net
@@ -32,6 +33,7 @@ dina:
 danielle:
   type: Distributor
   country_code: ca
+  country: Canada
   currency: CAD
   name: Danielle Kozak
   email: daniellekozak@gmail.com
@@ -42,6 +44,7 @@ danielle:
 shelley:
   type: Distributor
   country_code: uk
+  country: United Kingdom
   currency: GBP
   name: Shelley Malekia
   email: shelley_malekia@yahoo.co.uk

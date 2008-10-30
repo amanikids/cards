@@ -1,7 +1,7 @@
 = render :partial => @order
 
 - form_for @order do |f|
-  - fields_for 'order[address]', @order.address do |a|
+  - fields_for 'order[address]', @order.build_address(:country => @order.distributor.country) do |a|
     .field
       = a.label :name
       = a.text_field :name
@@ -16,7 +16,7 @@
       = a.text_field :line_four
     .field
       = a.label :country
-      = a.country_select :country, ['United States', 'Canada', 'United Kingdom']
+      = a.text_field :country
     .field
       = a.label :email
       = a.text_field :email

@@ -3,6 +3,9 @@ require 'test_helper'
 class ListTest < ActiveSupport::TestCase
   should_belong_to :distributor
   should_have_many :items, :dependent => :destroy
+  should_only_allow_numeric_values_for :additional_donation_amount
+  should_not_allow_values_for :additional_donation_amount, -1, :message => /greater than/
+  should_not_allow_values_for :additional_donation_amount, 3.14, :message =>  /not a number/
 
   should 'delegate currency to distributor' do
     list = List.new
@@ -29,11 +32,26 @@ class ListTest < ActiveSupport::TestCase
       assert_equal Money.new(0), @list.total
     end
 
-    should 'be delegated to items' do
-      @list.distributor.currency = 'GBP'
-      @list.stubs(:items).returns [stub(:total => Money.new(3)), stub(:total => Money.new(4))]
-      assert_equal Money.new(7).exchange_to('GBP'), @list.total
-      assert_equal 'GBP', @list.total.currency
+    context 'when there are items' do
+      setup do
+        @list.distributor.currency = 'GBP'
+        @list.stubs(:items).returns [stub(:total => Money.new(3)), stub(:total => Money.new(4))]
+      end
+
+      should 'be delegated to items' do
+        assert_equal Money.new(7).exchange_to('GBP'), @list.total
+      end
+
+      should 'be expressed in the proper currency' do
+        assert_equal 'GBP', @list.total.currency
+      end
+    end
+
+    context 'when there is an additional donation' do
+      setup { @list.additional_donation_amount = 3 }
+      should 'include additional donation' do
+        assert_equal Money.new(300), @list.total
+      end
     end
   end
 end

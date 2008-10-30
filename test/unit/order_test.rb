@@ -38,7 +38,7 @@ class OrderTest < ActiveSupport::TestCase
   context 'an existing Cart with 2 Items' do
     setup do
       @distributor = Factory.create(:distributor, :currency => 'GBP')
-      @cart = Factory.create(:cart, :distributor => @distributor)
+      @cart = Factory.create(:cart, :distributor => @distributor, :additional_donation_amount => 1)
       2.times { @cart.items << Factory.create(:item) }
     end
 
@@ -46,6 +46,7 @@ class OrderTest < ActiveSupport::TestCase
       setup { @order = @cart.build_order(:address => Factory.attributes_for(:address)) }
       should('make an Order') { assert_equal Order, @order.class }
       should('make a new record') { assert @order.new_record? }
+      should('initialize additional_donation_amount') { assert_equal @cart.additional_donation_amount, @order.additional_donation_amount }
       should('initialize distributor') { assert_equal @cart.distributor, @order.distributor }
       should('associate items') do
         @cart.items.zip(@order.items).each do |old_item, new_item|

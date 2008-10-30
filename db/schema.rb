@@ -84,7 +84,8 @@ ActiveRecord::Schema.define(:version => 20081028084513) do
     t.integer  "address_id"
     t.integer  "distributor_id"
     t.string   "type"
-    t.string   "token",          :limit => 40
+    t.string   "token",                      :limit => 40
+    t.integer  "additional_donation_amount",               :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

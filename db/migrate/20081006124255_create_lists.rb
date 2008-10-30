@@ -4,6 +4,7 @@ class CreateLists < ActiveRecord::Migration
       t.references :address, :distributor
       t.string :type
       t.string :token, :limit => 40
+      t.integer :additional_donation_amount, :default => 0
       t.timestamps
     end
   end

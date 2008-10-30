@@ -31,19 +31,19 @@ class CartsControllerTest < ActionController::TestCase
         should_render_template 'show'
       end
 
-      context 'when update_items succeeds' do
-        setup { @controller.current_cart.stubs(:update_items).with(:item_attributes).returns(true) }
+      context 'when update_attributes succeeds' do
+        setup { @controller.current_cart.stubs(:update_attributes).with(:attributes).returns(true) }
         context 'update' do
-          setup { put :update, :items => :item_attributes, :distributor_id => @distributor.to_param }
+          setup { put :update, :cart => :attributes, :distributor_id => @distributor.to_param }
           should_set_the_flash_to 'Cart updated.'
           should_redirect_to 'cart_path(@distributor)'
         end
       end
 
-      context 'when update_items fails' do
-        setup { @controller.current_cart.stubs(:update_items).returns(false) }
+      context 'when update_attributes fails' do
+        setup { @controller.current_cart.stubs(:update_attributes).returns(false) }
         context 'update' do
-          setup { put :update, :items => {}, :distributor_id => @distributor.to_param }
+          setup { put :update, :cart =>:attributes, :distributor_id => @distributor.to_param }
           should_render_template 'show'
         end
       end

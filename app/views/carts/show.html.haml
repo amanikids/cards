@@ -11,20 +11,22 @@
     %tbody
       - @cart.items.each do |item|
         %tr
-          - fields_for 'items[]', item do |fields|
+          - fields_for 'cart[items_hash][]', item do |fields|
             %td= item.product_name
             %td= item.variant_description
-            %td= m item.variant_price
-            %td= fields.text_field :quantity
-            %td= m item.total
+            %td.number= m item.variant_price
+            %td.number= fields.text_field :quantity, :size => 5
+            %td.number= m item.total
             %td= link_to 'Remove', cart_item_path(current_distributor, item), :method => :delete
     %tfoot
-      %tr
-        %td
-        %td
-        %td
-        %td
-        %td= m @cart.total
+      %tr.additional_donation
+        %td.label{:colspan => 4} Additional Donation
+        %td.number
+          = f.text_field(:additional_donation_amount, :size => 5) + '.00'
+
+      %tr.total
+        %td.label{:colspan => 4} Total
+        %td.number= m @cart.total
 
   %div
     = link_to 'Return to Shopping', distributor_root_path(current_distributor)

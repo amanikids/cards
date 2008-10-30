@@ -1,8 +1,7 @@
-TODO Additional Donation
 TODO Layout (re-space Running low!)
 
-TODO Re-word "paypal online" to emphasize that you can just use a credit card there.
 TODO Default New Order's Address's Country to the Distributor's Country
+TODO Re-word "paypal online" to emphasize that you can just use a credit card there.
 
 MAYBE Cycle through summary of DonationMethods for current_distributor somewhere on the homepage as a heads-up.
 MAYBE Auto-select distributor based on REQUEST_IP

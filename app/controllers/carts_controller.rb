@@ -3,7 +3,7 @@ class CartsController < ApplicationController
   before_filter :load_cart
 
   def update
-    if @cart.update_items(params[:items])
+    if @cart.update_attributes(params[:cart])
       flash[:notice] = 'Cart updated.'
       redirect_to cart_path(current_distributor)
     else

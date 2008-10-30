@@ -14,5 +14,10 @@ class InventoryTest < ActiveSupport::TestCase
     should 'subtract shipped from initial to get actual' do
       assert_equal 300, @inventory.actual
     end
+    
+    should 'adjust inital when setting actual' do
+      @inventory.actual = 250
+      assert_equal 350, @inventory.initial
+    end
   end
 end

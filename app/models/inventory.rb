@@ -6,6 +6,10 @@ class Inventory < ActiveRecord::Base
     initial - shipped
   end
 
+  def actual=(actual)
+    self.initial = actual + shipped
+  end
+  
   def available
     initial - promised
   end

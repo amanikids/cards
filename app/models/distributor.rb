@@ -1,4 +1,6 @@
 class Distributor < User
+  named_scope :ordered, :order => :position
+
   has_many :carts
   has_many :distributor_donation_methods
   has_many :donation_methods, :through => :distributor_donation_methods, :order => :position
@@ -8,7 +10,7 @@ class Distributor < User
   validates_presence_of :country_code, :currency
 
   def self.default
-    first :order => :position
+    ordered.first
   end
 
   def self.find_by_param(param)

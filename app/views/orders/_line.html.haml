@@ -1,0 +1,8 @@
+%tr
+  %td= link_to truncate(line.token, 5, ''), order_path(line.distributor, line)
+  %td= line.name
+  %td= m line.total
+  %td= n line.donation_method
+  %td= n line.donation_created_at
+  %td= n line.donation_received_at
+  %td= n line.shipped_at

@@ -1,30 +1,11 @@
-%table
-  %tr
-    %th Distributor
-    %th Order
-    %th Donor
-    %th Donation
-    %th Made By
-    %th On
-    %th Received
-    %th Shipped
-  - Order.unshipped.each do |order|
-    %tr
-      %td= order.distributor
-      %td= link_to truncate(order.token, 5, ''), order_path(order.distributor, order)
-      %td= order.name
-      %td= m order.total
-      %td= n order.donation_method
-      %td= n order.donation_created_at
-      %td= n order.donation_received_at
-      %td= n order.shipped_at
-  - Order.shipped.each do |order|
-    %tr
-      %td= order.distributor
-      %td= link_to truncate(order.token, 5, ''), order_path(order.distributor, order)
-      %td= order.name
-      %td= m order.total
-      %td= n order.donation_method
-      %td= n order.donation_created_at
-      %td= n order.donation_received_at
-      %td= n order.shipped_at
+%h2 Summary
+%ul
+  %li
+    = pluralize(Order.shipped.count, 'order')
+    shipped so far.
+
+  - Distributor.ordered.each do |distributor|
+    %li
+      = m distributor.orders.map(&:total).sum.to_money.exchange_to(distributor.currency)
+      raised in
+      = distributor.country_code.upcase

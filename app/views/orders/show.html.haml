@@ -1,17 +1,19 @@
-/ TODO don't pass :locals => { :order => @order } so much
-
 = render :partial => @order
 = render :partial => @order.address
 
 - if @order.downloads.any?
-  = render :partial => 'downloads/list', :locals => { :order => @order }
+  .downloads
+    %h2 These items may be downloaded immediately for printing:
+    %ul
+    - @order.downloads.each do |download|
+      %li= link_to download.name, download
 
 - if @order.donation
-  = render :partial => @order.donation, :locals => { :order => @order }
+  = render :partial => @order.donation
 - else
   = render :partial => @order.donation_methods, :locals => { :order => @order }
 
 - if @order.shipment
-  = render :partial => @order.shipment, :locals => { :order => @order }
+  = render :partial => @order.shipment
 - else
   = render :partial => 'shipments/pending', :locals => { :order => @order }

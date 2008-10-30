@@ -1,11 +1,13 @@
-.payment
+.donation
   %h2= "Thank you!"
 
   - if donation.received_at
     %p= "We received your donation on #{donation.received_at.to_date.to_s(:long)}."
   - else
     %p We'll let you know here when we've received your donation.
+    %h3 As a Reminder
+    = textilize donation.donation_method.description
     - if current_user
-      - form_for donation, :url => order_donation_path(current_distributor, order) do |f|
+      - form_for donation, :url => order_donation_path(current_distributor, donation.order) do |f|
         = f.hidden_field :received_at, :value => Time.now.to_s(:number)
         = f.submit 'I just received this donation.'

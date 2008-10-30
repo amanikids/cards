@@ -1,5 +1,6 @@
 = render :partial => @order
 
+%h2 Shipping Address
 - form_for @order do |f|
   - fields_for 'order[address]', @order.build_address(:country => @order.distributor.country) do |a|
     .field

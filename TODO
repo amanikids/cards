@@ -1,18 +1,9 @@
-FIXME Still show the mailing address for a check after the Donor clicks the button!
-
+TODO Joe -- PayPal text
 TODO Layout (re-space Running low!)
-TODO Re-word "paypal online" to emphasize that you can just use a credit card there.
+
+TODO Auto-select distributor based on REQUEST_IP
 
 MAYBE Cycle through summary of DonationMethods for current_distributor somewhere on the homepage as a heads-up.
-MAYBE Auto-select distributor based on REQUEST_IP
-MAYBE Send PayPal a cancel url (order_path(@order))
 MAYBE Change text of PayPal return button
-MAYBE Rename :address to :mailing_address
 MAYBE Edit Address until shipped.
 MAYBE Collapse line items pointing to the same variant.
-MAYBE Can I clean up the Factories?
-MAYBE Can I clean up the OrderTest?
-
-MAYBE Write a patch for Rails to automatically call .to_param instead of .id in controller tests
-  That is, we'd like to avoid the to_param call in
-  get 'show', :distributor_id => @distributor.to_param

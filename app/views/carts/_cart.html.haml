@@ -1,2 +1,2 @@
 .cart
-  = link_to(content_tag(:div, 'View Your') + content_tag(:div, 'Shopping Cart'), cart_path)
+  = link_to(content_tag(:div, 'Shopping Cart') + content_tag(:div, pluralize(cart.quantity, 'Item')) + content_tag(:div, content_tag(:strong, m(cart.total))), cart_path)

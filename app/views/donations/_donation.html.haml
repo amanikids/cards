@@ -8,4 +8,4 @@
     - if current_user
       - form_for donation, :url => order_donation_path(current_distributor, order) do |f|
         = f.hidden_field :received_at, :value => Time.now.to_s(:number)
-        = f.submit 'I just received this payment.'
+        = f.submit 'I just received this donation.'

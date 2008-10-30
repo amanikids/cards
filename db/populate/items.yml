@@ -17,3 +17,13 @@ check_paid:
   list: check_paid
   variant: peace_merry_christmas_25
   quantity: 4
+
+unpaid_ca:
+  list: unpaid_ca
+  variant: kili_merry_christmas_25
+  quantity: 5
+
+unpaid_uk:
+  list: unpaid_uk
+  variant: kili_merry_christmas_25
+  quantity: 5

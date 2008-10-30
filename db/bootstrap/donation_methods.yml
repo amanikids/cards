@@ -1,9 +1,19 @@
 paypal:
   name: paypal
-  title: Donating via PayPal.
-  description: Description coming soon.
+  title: PayPal
+  description:
 
 check_us:
   name: check
-  title: Mailing a Check.
-  description: Description coming soon.
+  title: Mail a Check
+  description: "Make your check payable to \"Friends of Amani US\" and send it to:\n\nDina Sciarra\n32 Teak Loop\nOscala, FL\n24472\n\nDonations are tax-deductible in the U.S."
+
+cheque_ca:
+  name: cheque
+  title: Mail a Cheque
+  description: "Make your cheque payable to \"Friends of Amani Canada\" and send it to:\n\nDanielle Kozak\nc/o St. Augustine's School\n2145 West 8th Ave\nVancouver, BC\nV6K 2A5\n\nDonations are tax-deductible in Canada."
+
+cheque_uk:
+  name: cheque
+  title: Mail a Cheque
+  description: "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nShelly Malekia\n128 Station Road West\nCanterbury, Kent\nCT2 8HY\n\nDonations are eligible for Gift Aid in the UK."

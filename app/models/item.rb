@@ -24,9 +24,7 @@ class Item < ActiveRecord::Base
   end
 
   def total
-    # Though it would be nice to say "variant_price * safe_quantity," we're
-    # subject to rounding error if we don't multiply first.
-    list.exchanged(variant.price * safe_quantity)
+    variant_price * safe_quantity
   end
 
   private

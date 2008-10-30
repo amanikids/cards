@@ -1,5 +1,4 @@
 - div_for(donation_method, :class => donation_method.name) do
   %h2= donation_method.title
   = textilize donation_method.description
-  - unless current_user
-    = render :partial => "donation_methods/#{donation_method.name}", :locals => { :order => order, :donation_method => donation_method }
+  = render :partial => "donation_methods/#{donation_method.name}", :locals => { :order => order, :donation_method => donation_method }

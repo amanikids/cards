@@ -1,5 +1,6 @@
 / colors
 !orange = rgb(242, 101, 34)
+!orange_70 = rgb(237, 120, 73)
 
 !yellow_40 = rgb(252, 230, 152)
 
@@ -24,6 +25,19 @@ h1, h2, h3, h4, h5
 a
   img
     :border none
+
+#flash
+  :position absolute
+  :top 0
+  :left 0
+
+  .message
+    :padding-top = 0.5 * !font_size
+    :padding-bottom = 0.5 * !font_size
+    :padding-left = !font_size
+    :padding-right = !font_size
+  .notice
+    :background-color = !orange_70
 
 .distributor
   :background-color = !orange

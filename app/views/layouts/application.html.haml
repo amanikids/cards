@@ -4,6 +4,7 @@
   %head
     = stylesheet_link_tag('application')
   %body
+    = render :partial => 'layouts/flash', :locals => { :flash => flash }
     = render :partial => 'layouts/header'
     = render :partial => 'layouts/distributor' if current_user
     = render :partial => 'layouts/sidebar'

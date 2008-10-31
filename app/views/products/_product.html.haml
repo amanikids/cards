@@ -3,7 +3,7 @@
     .image= image_tag product.image.path
     .content
       %h2= product.name
-      = markdown product.description
+      = textilize product.description
       - form_for Item.new(:variant => product.available_variants(current_distributor).first), :url => cart_items_path(current_distributor) do |f|
         %table
           - product.available_variants(current_distributor).each do |variant|

@@ -49,7 +49,6 @@ class DonationsControllerTest < ActionController::TestCase
         context 'update' do
           setup { put :update, :distributor_id => @distributor.to_param, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
           should_change '@donation.reload.received_at'
-          should_set_the_flash_to 'Donation updated.'
           should_redirect_to 'order_path(@distributor, @order)'
         end
       end

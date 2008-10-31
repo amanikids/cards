@@ -4,7 +4,6 @@ class ShipmentsController < ApplicationController
 
   def create
     @order.create_shipment
-    flash[:notice] = 'Shipment created.'
     redirect_to order_path(current_distributor, @order)
   end
 end

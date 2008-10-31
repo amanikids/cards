@@ -6,7 +6,7 @@
 !yellow_10 = rgb(252, 247, 227)
 
 / dimensions
-!card_width = 360px
+!card_width = 300px
 !font_size = 14px
 !logo_height = 123px
 !logo_width = 240px
@@ -119,8 +119,10 @@ a
         :padding 0
       table
         :margin-bottom = !font_size
+        tr
+          :vertical-align baseline
         .name
-          :padding-right = 5 * !font_size
+          :padding-right = 2 * !font_size
         .price
           :font-weight bold
           :text-align right
@@ -185,7 +187,9 @@ table.list
     :text-align left
     :vertical-align bottom
   tbody
+    :vertical-align baseline
     tr.even
       :background-color = !yellow_10
   tfoot
     :border-top 1px solid black
+    :vertical-align baseline

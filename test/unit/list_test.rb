@@ -4,8 +4,14 @@ class ListTest < ActiveSupport::TestCase
   should_belong_to :distributor
   should_have_many :items, :dependent => :destroy
   should_only_allow_numeric_values_for :additional_donation_amount
+  should_allow_values_for :additional_donation_amount, '', nil
   should_not_allow_values_for :additional_donation_amount, -1, :message => /greater than/
   should_not_allow_values_for :additional_donation_amount, 3.14, :message =>  /not a number/
+
+  should 'convert additional_donation_amount before validation' do
+    list = Factory.build(:list, :additional_donation_amount => ''); list.valid?
+    assert_equal 0.to_money, list.additional_donation
+  end
 
   should 'delegate currency to distributor' do
     list = List.new

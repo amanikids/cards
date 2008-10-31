@@ -1,30 +1,15 @@
+%h1
+  = @distributor.country
+  Orders &mdash;
+  = @distributor.name
+
 %h2 Inventory
 
-- if @distributor == current_user
-  %p This new website keeps track of your inventory, automatically subtracting card counts when you ship an order. This way, we can warn donors when certain cards are running low and remove the cards from the home page when they've run out entirely.
-  %p We started out with an estimate of how many cards you might have. That estimate will certainly be wrong if you've sold some of your cards in person rather than online, but that's okay:
-  %p As your counts begin to run low, just come back here and adjust them, so that we can flag cards as "almost gone" at the right time.
+%p This new website keeps track of your inventory, automatically subtracting card counts when you ship an order. This way, we can warn donors when certain cards are running low and remove the cards from the home page when they've run out entirely.
+%p We started out with an estimate of how many cards you might have. That estimate will certainly be wrong if you've sold some of your cards in person rather than online, but that's okay:
+%p As your counts begin to run low, just come back here and adjust them, so that we can flag cards as "almost gone" at the right time.
 
-  - form_for @distributor do |f|
-    %table
-      %thead
-        %tr
-          %th Front
-          %th Inside
-          %th Number of Cards on Hand
-      %tbody
-      - @distributor.inventories.each do |inventory|
-        %tr
-          - fields_for 'inventories[]', inventory do |fields|
-            %td= inventory.sku.product_name
-            %td= inventory.sku.name
-            %td= fields.text_field :actual
-      %tfoot
-        %tr
-          %td
-          %td
-          %td= f.submit 'Update Inventory'
-- else
+- form_for @distributor do |f|
   %table
     %thead
       %tr
@@ -34,9 +19,15 @@
     %tbody
     - @distributor.inventories.each do |inventory|
       %tr
-        %td= inventory.sku.product_name
-        %td= inventory.sku.name
-        %td= inventory.actual
+        - fields_for 'inventories[]', inventory do |fields|
+          %td= inventory.sku.product_name
+          %td= inventory.sku.name
+          %td= fields.text_field :actual
+    %tfoot
+      %tr
+        %td
+        %td
+        %td= f.submit 'Update Inventory'
 
 - new_orders = @distributor.orders.unshipped
 %h2= pluralize new_orders.count, 'New Order'

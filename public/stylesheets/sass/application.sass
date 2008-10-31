@@ -115,19 +115,24 @@ h1, h2, h3, h4, h5
         .running_low
           :color = !orange
 
-form.new_order
-  label
-    :display block
-  .fieldWithErrors
-    :display inline
-    input
-      :background-color #fcc
+.fieldWithErrors
+  :display inline
+  input
+    :background-color #fcc
     label
       :color #900
       :font-weight bold
-  .formError
-    :color #900
-    :display inline
+
+.formError
+  :color #900
+  :display inline
+
+.formErrors
+  :color #900
+
+form.new_order
+  label
+    :display block
 
 td.label
   :font-weight bold

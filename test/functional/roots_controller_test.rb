@@ -11,7 +11,7 @@ class RootsControllerTest < ActionController::TestCase
     end
 
     context 'when our coutry_code is COUNTRY_CODE' do
-      setup { Locator.service.stubs(:country_code).returns('COUNTRY_CODE') }
+      setup { Locator.stubs(:country_code).returns('COUNTRY_CODE') }
 
       context 'and we have a matching distributor' do
         setup { Distributor.stubs(:find_by_country_code).with('COUNTRY_CODE').returns(@custom_distributor) }

@@ -23,6 +23,7 @@
       %td.label{:colspan => 4} Total Donation
       %td.number= m order.total
 
-- if order.new_record?
-  %ul
-    %li= link_to 'Update Quantities or Make an Additional Donation', cart_path
+    - if order.new_record?
+      %tr
+        %td{:colspan => 5}
+          = link_to '&laquo; Update Quantities or Make an Additional Donation', cart_path

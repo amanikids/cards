@@ -9,17 +9,18 @@
       = a.error_message_on :name
     .field
       = a.label :line_one, 'Address'
-      = a.text_field :line_one
-      = a.error_message_on :line_one
-    .field
-      = a.text_field :line_two
-      = a.error_message_on :line_two
-    .field
-      = a.text_field :line_three
-      = a.error_message_on :line_three
-    .field
-      = a.text_field :line_four
-      = a.error_message_on :line_four
+      %div
+        = a.text_field :line_one
+        = a.error_message_on :line_one
+      %div
+        = a.text_field :line_two
+        = a.error_message_on :line_two
+      %div
+        = a.text_field :line_three
+        = a.error_message_on :line_three
+      %div
+        = a.text_field :line_four
+        = a.error_message_on :line_four
     .field
       = a.label :country
       = ActiveSupport::Deprecation.silence { a.country_select :country }

@@ -28,8 +28,11 @@
         %td.label{:colspan => 4} Total Donation
         %td.number= m @cart.total
 
-  %div
-    = link_to 'Continue Shopping', distributor_root_path(current_distributor)
-    = f.submit 'Update Quantities'
-    = link_to 'Proceed to Checkout', new_order_path(current_distributor)
+      %tr
+        %td{:colspan => 2}
+          = link_to '&laquo; Continue Shopping', distributor_root_path(current_distributor)
+          or
+          = f.submit 'Update Quantities'
+        %td.checkout{:colspan => 4}
+          = link_to 'Proceed to Checkout &raquo;', new_order_path(current_distributor)
 

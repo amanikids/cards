@@ -28,17 +28,14 @@ a
     :border none
 
 #flash
-  :position absolute
-  :top 0
-  :left 0
-
+  :margin-bottom = !font_size
   .message
     :padding-top = 0.5 * !font_size
     :padding-bottom = 0.5 * !font_size
     :padding-left = !font_size
     :padding-right = !font_size
   .notice
-    :background-color = !orange_70
+    :background-color #cfc
 
 .distributor
   :background-color = !orange
@@ -134,13 +131,13 @@ a
         .running_low
           :color = !orange
 
+.field
+  :margin-bottom = !font_size
+
 .fieldWithErrors
   :display inline
   input
     :background-color #fcc
-    label
-      :color #900
-      :font-weight bold
 
 .formError
   :color #900
@@ -153,12 +150,15 @@ form.new_order
   label
     :display block
 
+
 table
   :border 0
   :border-collapse collapse
   th, td
     :padding = 0.25 * !font_size
 
+td.checkout
+  :text-align right
 td.label
   :font-weight bold
   :text-align right

@@ -1,16 +1,16 @@
 - form_for @cart, :url => cart_path do |f|
-  %table
+  %table.list
     %thead
       %tr
+        %th Item
         %th
-        %th
-        %th Unit
-        %th Qty
-        %th Total
+        %th Suggested<br />Donation
+        %th Quantity
+        %th Subtotal
         %th
     %tbody
       - @cart.items.each do |item|
-        %tr
+        %tr{:class => cycle('odd', 'even')}
           - fields_for 'cart[items_hash][]', item do |fields|
             %td= item.product_name
             %td= item.variant_description
@@ -25,11 +25,11 @@
           = f.text_field(:additional_donation_amount, :size => 5) + '.00'
 
       %tr.total
-        %td.label{:colspan => 4} Total
+        %td.label{:colspan => 4} Total Donation
         %td.number= m @cart.total
 
   %div
-    = link_to 'Return to Shopping', distributor_root_path(current_distributor)
+    = link_to 'Continue Shopping', distributor_root_path(current_distributor)
     = f.submit 'Update Quantities'
     = link_to 'Proceed to Checkout', new_order_path(current_distributor)
 

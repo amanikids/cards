@@ -3,6 +3,7 @@
 !orange_70 = rgb(237, 120, 73)
 
 !yellow_40 = rgb(252, 230, 152)
+!yellow_10 = rgb(252, 247, 227)
 
 / dimensions
 !card_width = 360px
@@ -110,10 +111,10 @@ a
 .main
   :margin 0
   :margin-left = !logo_width
+  :padding = 2 * !font_size
 
   .product
-    :border-bottom 1px solid black
-    :padding = 2 * !font_size
+    :margin-bottom = 4 * !font_size
     .image
       :float left
       :width = !card_width
@@ -152,8 +153,25 @@ form.new_order
   label
     :display block
 
+table
+  :border 0
+  :border-collapse collapse
+  th, td
+    :padding = 0.25 * !font_size
+
 td.label
   :font-weight bold
   :text-align right
 td.number, td.number input
   :text-align right
+
+table.list
+  thead
+    :border-bottom 1px solid black
+    :text-align left
+    :vertical-align bottom
+  tbody
+    tr.even
+      :background-color = !yellow_10
+  tfoot
+    :border-top 1px solid black

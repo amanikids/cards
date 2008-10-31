@@ -1,6 +1,4 @@
 - content_for(:header) do
   = render :partial => current_cart unless current_cart.blank?
 
-.main
-  .products
-    = render :partial => @products
+= render :partial => @products

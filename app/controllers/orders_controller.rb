@@ -16,6 +16,10 @@ class OrdersController < ApplicationController
   private
 
   def load_new_order
+    params[:order] ||= {}
+    params[:order][:address] ||= {}
+    params[:order][:address][:country] ||= current_cart.distributor.country
+
     @order = current_cart.build_order(params[:order])
   end
 

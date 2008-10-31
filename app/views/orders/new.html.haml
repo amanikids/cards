@@ -2,24 +2,31 @@
 
 %h2 Shipping Address
 - form_for @order do |f|
-  - fields_for 'order[address]', @order.build_address(:country => @order.distributor.country) do |a|
+  - fields_for 'order[address]', @order.address do |a|
     .field
       = a.label :name
       = a.text_field :name
+      = a.error_message_on :name
     .field
-      = a.label :address
+      = a.label :line_one, 'Address'
       = a.text_field :line_one
+      = a.error_message_on :line_one
     .field
       = a.text_field :line_two
+      = a.error_message_on :line_two
     .field
       = a.text_field :line_three
+      = a.error_message_on :line_three
     .field
       = a.text_field :line_four
+      = a.error_message_on :line_four
     .field
       = a.label :country
-      = a.text_field :country
+      = a.country_select :country
+      = a.error_message_on :country
     .field
       = a.label :email
       = a.text_field :email
+      = a.error_message_on :email
   .field
     = f.submit 'Place my Order'

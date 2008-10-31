@@ -22,7 +22,7 @@
       = a.error_message_on :line_four
     .field
       = a.label :country
-      = a.country_select :country
+      = ActiveSupport::Deprecation.silence { a.country_select :country }
       = a.error_message_on :country
     .field
       = a.label :email

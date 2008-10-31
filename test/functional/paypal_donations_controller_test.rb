@@ -16,7 +16,10 @@ class PaypalDonationsControllerTest < ActionController::TestCase
         setup { ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:acknowledge).returns(true) }
 
         context 'the notification is complete' do
-          setup { ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:complete?).returns(true) }
+          setup do
+            ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:complete?).returns(true)
+            ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:received_at).returns(Time.now)
+          end
 
           context 'and the notification is for our Order' do
             setup { ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:item_id).returns(@order.token) }

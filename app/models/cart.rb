@@ -1,7 +1,6 @@
 class Cart < List
   validates_associated :items
 
-  # MAYBE pull blank? up from Cart to List, and validate that an Order can't be blank
   def blank?
     items.empty?
   end

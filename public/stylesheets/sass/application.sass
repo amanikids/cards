@@ -1,7 +1,7 @@
 / colors
+!green = rgb(153, 255, 153)
 !orange = rgb(242, 101, 34)
 !orange_70 = rgb(237, 120, 73)
-
 !yellow_40 = rgb(252, 230, 152)
 !yellow_10 = rgb(252, 247, 227)
 
@@ -28,14 +28,9 @@ a
     :border none
 
 #flash
-  :margin-bottom = !font_size
+  :margin-bottom = 2 * !font_size
   .message
-    :padding-top = 0.5 * !font_size
-    :padding-bottom = 0.5 * !font_size
-    :padding-left = !font_size
-    :padding-right = !font_size
-  .notice
-    :background-color #cfc
+    :padding = !font_size
 
 .distributor
   :background-color = !orange
@@ -90,6 +85,7 @@ a
 .sidebar
   :background-color = !yellow_40
   :clear both
+  / :display none
   :float left
   :width = !logo_width
 
@@ -134,17 +130,17 @@ a
 .address
   :margin-bottom = 2 * !font_size
 
-.donation, .donation_method, .shipment
+.attention, .donation, .donation_method, .shipment
   :margin-bottom = !font_size
   :padding = !font_size
   h2, form
     :margin 0
 
-.donation, .donation_method.paypal
-  :background-color #9f9
+#flash .notice, .donation, .donation_method.paypal
+  :background-color = !green
   :border 3px solid #6c6
 
-.donation_method.check, .donation_method.cheque
+.attention, .donation_method.check, .donation_method.cheque
   :background-color #eee
   :border 3px solid #ddd
   :color #666
@@ -163,10 +159,7 @@ a
   :color #900
   :display inline
 
-.formErrors
-  :color #900
-
-form.new_order
+form.new_order, form.new_session
   label
     :display block
 
@@ -186,6 +179,7 @@ td.number, td.number input
   :text-align right
 
 table.list
+  :margin-bottom = 2 * !font_size
   thead
     :border-bottom 1px solid black
     :text-align left

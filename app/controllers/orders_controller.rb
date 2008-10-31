@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
     if @order.save
       self.current_cart.destroy
       self.current_cart = nil
+      flash[:notice] = "<strong>Thanks, we've got it!</strong> See below to make your Donation."
       redirect_to order_path(current_distributor, @order)
     else
       render :action => 'new'

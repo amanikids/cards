@@ -1,4 +1,5 @@
 class Mailer < ActionMailer::Base
+  # TODO Joe -- Order Shipped email headers.
   def order_shipped(order)
     from ActionMailer::Configuration.from
     recipients "#{order.name} <#{order.email}>"
@@ -13,6 +14,7 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  # TODO Joe -- Order Thank You email headers.
   def order_thank_you(order)
     from ActionMailer::Configuration.from
     recipients "#{order.name} <#{order.email}>"

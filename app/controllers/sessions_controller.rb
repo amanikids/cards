@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
   def create
     @user = User.authenticate(params[:email], params[:password])
-    if @user
+    case @user
+    when Distributor
+      self.current_user = @user
+      redirect_to distributor_path(@user)
+    when User
       self.current_user = @user
       redirect_to distributors_path
     else

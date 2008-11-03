@@ -6,7 +6,7 @@ class SessionsControllerTest < ActionController::TestCase
   should_route :delete, '/session',     :action => 'destroy'
 
   context 'with an existing User' do
-    setup { @user = Factory.create(:user) }
+    setup { @user = Factory(:user) }
 
     context 'when User.authenticate succeeds' do
       setup { User.stubs(:authenticate).with('EMAIL', 'PASSWORD').returns(@user) }
@@ -35,6 +35,20 @@ class SessionsControllerTest < ActionController::TestCase
         setup { delete :destroy }
         should_change '@controller.current_user', :to => nil
         should_redirect_to 'new_session_path'
+      end
+    end
+  end
+
+  context 'with an existing Distributor' do
+    setup { @distributor = Factory(:distributor) }
+
+    context 'when User.authenticate succeeds' do
+      setup { User.stubs(:authenticate).with('EMAIL', 'PASSWORD').returns(@distributor) }
+
+      context 'create' do
+        setup { post :create, :email => 'EMAIL', :password => 'PASSWORD' }
+        should_change '@controller.current_user', :from => nil, :to => @distributor
+        should_redirect_to 'distributor_path(@distributor)'
       end
     end
   end

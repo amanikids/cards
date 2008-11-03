@@ -5,6 +5,16 @@ class UserTest < ActiveSupport::TestCase
   should_protect_attributes :encrypted_password, :remember_me_token, :salt
   should_require_confirmation_of :password
 
+  context 'distributor?' do
+    should 'be true for Distributor' do
+      assert Factory.build(:distributor).distributor?
+    end
+
+    should 'be false for User' do
+      assert !Factory.build(:user).distributor?
+    end
+  end
+
   context :validations do
     setup { Factory.create(:user) }
     should_require_unique_attributes :email

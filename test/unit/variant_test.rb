@@ -17,7 +17,6 @@ class VariantTest < ActiveSupport::TestCase
     end
   end
 
-  # TODO Joe -- what thresholds shall we use for available? and running_low?
   context 'with a variant of size 10' do
     setup { @variant = Factory.build(:variant, :size => 10) }
 
@@ -31,13 +30,13 @@ class VariantTest < ActiveSupport::TestCase
       assert !@variant.available?(:distributor)
     end
 
-    should 'be running_low if sku quantity is less than 6 of me' do
-      @variant.sku.stubs(:quantity).with(:distributor).returns(59)
+    should 'be running_low if sku quantity is less than 25 of me' do
+      @variant.sku.stubs(:quantity).with(:distributor).returns(249)
       assert @variant.running_low?(:distributor)
     end
 
-    should 'not be running_low if sku quantity is greater than or equal to 6 of me' do
-      @variant.sku.stubs(:quantity).with(:distributor).returns(60)
+    should 'not be running_low if sku quantity is greater than or equal to 25 of me' do
+      @variant.sku.stubs(:quantity).with(:distributor).returns(250)
       assert !@variant.running_low?(:distributor)
     end
   end

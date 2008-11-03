@@ -17,7 +17,7 @@ class Variant < ActiveRecord::Base
   end
 
   def running_low?(distributor)
-    !quantity_available?(distributor, 6)
+    !quantity_available?(distributor, 25)
   end
 
   def sku_name

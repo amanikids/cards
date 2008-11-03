@@ -1,8 +1,7 @@
-# TODO Joe -- PayPal text
 paypal:
   name: paypal
   title: Donate Online
-  description:
+  description: "Donations made in support of the Amani Children's Home Christmas and Holiday Card fundraiser are processed through Peace House Africa using PayPal. Peace House Africa is a registered 501(c)3 charity in the United States committed to bringing educational opportunities to vulnerable children in Africa. Peace House Africa sends 100% of your donation to Amani Children's Home in Tanzania. Donations made from the United States are tax-deductible."
 
 check_us:
   name: check

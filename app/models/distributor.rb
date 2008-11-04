@@ -34,6 +34,10 @@ class Distributor < User
     end
   end
 
+  def unshipped_order_count
+    orders.unshipped.count
+  end
+
   def to_param
     country_code
   end

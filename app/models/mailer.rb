@@ -1,4 +1,13 @@
 class Mailer < ActionMailer::Base
+  include ActionView::Helpers::TextHelper
+
+  def new_orders(distributor)
+    from ActionMailer::Configuration.from
+    recipients "#{distributor.name} <#{distributor.email}>"
+    subject "You have #{pluralize distributor.unshipped_order_count, 'new Amani Christmas card order'}."
+    body :distributor => distributor
+  end
+
   def order_shipped(order)
     from ActionMailer::Configuration.from
     recipients "#{order.name} <#{order.email}>"

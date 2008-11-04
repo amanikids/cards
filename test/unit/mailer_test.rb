@@ -1,14 +1,20 @@
 require 'test_helper'
 
 class MailerTest < ActionMailer::TestCase
+  context 'new_orders' do
+    setup { @message = Mailer.create_new_orders(@distributor = Factory(:distributor)) }
+    should('be to distributor email') { assert_equal [@distributor.email], @message.to }
+    should('be from application email') { assert_equal [ActionMailer::Configuration.from_address], @message.from }
+  end
+
   context 'order_thank_you' do
-    setup { @message = Mailer.create_order_thank_you(@order = Factory.create(:order)) }
+    setup { @message = Mailer.create_order_thank_you(@order = Factory(:order)) }
     should('be to email')               { assert_equal [@order.email], @message.to }
     should('be from application email') { assert_equal [ActionMailer::Configuration.from_address], @message.from }
   end
 
   context 'order_shipped' do
-    setup { @message = Mailer.create_order_shipped(@order = Factory.create(:shipment).order) }
+    setup { @message = Mailer.create_order_shipped(@order = Factory(:shipment).order) }
     should('be to email')               { assert_equal [@order.email], @message.to }
     should('be from application email') { assert_equal [ActionMailer::Configuration.from_address], @message.from }
   end

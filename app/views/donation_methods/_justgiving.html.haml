@@ -1,3 +1,13 @@
+%h3 Step 1
+%p
+  Go to
+  = link_to 'http://justgiving.com/amanichildren/donate', 'http://justgiving.com/amanichildren/donate'
+  and make your
+  = m order.total
+  donation.
+
+%h3 Step 2
+%p Let us know here, to help our record-keeping:
 - form_for order.build_donation(:donation_method => donation_method), :url => order_donation_path(current_distributor, order) do |f|
   = f.hidden_field :donation_method_id
   = f.submit "I've just made my #{m order.total} donation at JustGiving."

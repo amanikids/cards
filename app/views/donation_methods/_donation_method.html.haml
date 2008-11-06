@@ -1,4 +1,4 @@
-- div_for(donation_method, :class => donation_method.name) do
+- div_for(donation_method, :class => "#{donation_method_counter == 0 ? 'preferred' : 'other'}") do
   %h2= donation_method.title
   = textilize donation_method.description
   = render :partial => "donation_methods/#{donation_method.name}", :locals => { :order => order, :donation_method => donation_method }

@@ -63,6 +63,6 @@ class Order < List
   end
 
   def random_string
-    Time.now.to_s.split(//).sort_by { rand }.join
+    Time.now.to_default_s.split(//).sort_by { rand }.join
   end
 end

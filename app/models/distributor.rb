@@ -38,6 +38,10 @@ class Distributor < User
     update_inventories_with_items_from(order, :item_unshipped)
   end
 
+  def sold_out?
+    !any_variants_available?
+  end
+
   def to_param
     country_code
   end
@@ -52,6 +56,12 @@ class Distributor < User
   end
 
   private
+
+  def any_variants_available?
+    inventories.any? do |inventory|
+      inventory.sku.variants.any? { |variant| variant.available?(self) }
+    end
+  end
 
   def update_inventories_with_items_from(order, event)
     inventories.each do |inventory|

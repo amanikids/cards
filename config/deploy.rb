@@ -16,6 +16,7 @@ set :deploy_to,   "#{domain_path}/var/www"
 set :scm, :git
 set :local_repository,  "woodward:git/#{application}.git"
 set :repository,  "/users/home/#{user}/git/#{application}.git"
+set :branch, 'master'
 set :git_shallow_clone, 1
 set :git_enable_submodules, true
 

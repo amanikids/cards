@@ -5,6 +5,7 @@ class OrderTest < ActiveSupport::TestCase
   should_have_named_scope :unshipped, :include => :shipment, :conditions => 'shipments.id IS NULL',     :order => 'lists.created_at'
 
   should_belong_to :address
+  should_have_digest :token
   should_have_one :donation
   should_have_one :shipment
 

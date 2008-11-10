@@ -3,6 +3,7 @@ class Order < List
   named_scope :unshipped, :include => :shipment, :conditions => 'shipments.id IS NULL',     :order => 'lists.created_at'
 
   belongs_to :address
+  has_digest :token
   has_one :donation
   has_one :donation_method, :through => :donation
   has_one :shipment
@@ -13,7 +14,6 @@ class Order < List
   delegate :name, :email, :country, :to => :address
   delegate :donation_methods, :to => :distributor
 
-  before_create :write_token
   after_create  :create_shipment, :if => :immediately_shippable?
 
   def address_with_nested_attributes=(record_or_attributes)

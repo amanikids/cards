@@ -7,7 +7,7 @@ class NotificationObserverTest < ActiveSupport::TestCase
     setup { @order = Factory.create(:order) }
     context 'after_create order' do
       setup { observer.after_create(@order) }
-      before_should('deliver notification') { Mailer.expects(:deliver_order_thank_you).with(@order) }
+      before_should('deliver notification') { Mailer.expects(:deliver_order_created).with(@order) }
     end
   end
 
@@ -16,12 +16,12 @@ class NotificationObserverTest < ActiveSupport::TestCase
 
     context 'after_create shipment' do
       setup { observer.after_create(@shipment) }
-      before_should('deliver notification') { Mailer.expects(:deliver_order_shipped).with(@shipment.order) }
+      before_should('deliver notification') { Mailer.expects(:deliver_shipment_created).with(@shipment.order) }
     end
 
     context 'before_destroy shipment' do
       setup { @result = observer.before_destroy(@shipment) }
-      before_should('deliver notification') { Mailer.expects(:deliver_shipment_cancelled).with(@shipment.order) }
+      before_should('deliver notification') { Mailer.expects(:deliver_shipment_destroyed).with(@shipment.order) }
       should('return true') { assert @result }
     end
   end

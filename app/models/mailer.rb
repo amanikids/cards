@@ -8,7 +8,14 @@ class Mailer < ActionMailer::Base
     body :distributor => distributor
   end
 
-  def order_shipped(order)
+  def order_created(order)
+    from ActionMailer::Configuration.from
+    recipients "#{order.name} <#{order.email}>"
+    subject 'Thank you for your order!'
+    body :order => order
+  end
+
+  def shipment_created(order)
     from ActionMailer::Configuration.from
     recipients "#{order.name} <#{order.email}>"
     subject 'Your order has shipped.'
@@ -22,14 +29,7 @@ class Mailer < ActionMailer::Base
     end
   end
 
-  def order_thank_you(order)
-    from ActionMailer::Configuration.from
-    recipients "#{order.name} <#{order.email}>"
-    subject 'Thank you for your order!'
-    body :order => order
-  end
-
-  def shipment_cancelled(order)
+  def shipment_destroyed(order)
     from ActionMailer::Configuration.from
     recipients "#{order.name} <#{order.email}>"
     subject "Oops! We haven't shipped your order yet."

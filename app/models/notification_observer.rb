@@ -12,11 +12,11 @@ class NotificationObserver < ActiveRecord::Observer
   private
 
   def after_create_order(order)
-    Mailer.deliver_order_thank_you(order)
+    Mailer.deliver_order_created(order)
   end
 
   def after_create_shipment(shipment)
-    Mailer.deliver_order_shipped(shipment.order)
+    Mailer.deliver_shipment_created(shipment.order)
   end
 
   def before_destroy_order(order)
@@ -25,6 +25,6 @@ class NotificationObserver < ActiveRecord::Observer
   end
 
   def before_destroy_shipment(shipment)
-    Mailer.deliver_shipment_cancelled(shipment.order)
+    Mailer.deliver_shipment_destroyed(shipment.order)
   end
 end

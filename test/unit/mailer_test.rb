@@ -7,23 +7,23 @@ class MailerTest < ActionMailer::TestCase
     should('be from application email') { assert_equal [ActionMailer::Configuration.from_address], @message.from }
   end
 
-  context 'order_thank_you' do
-    setup { @message = Mailer.create_order_thank_you(@order = Factory(:order)) }
+  context 'order_created' do
+    setup { @message = Mailer.create_order_created(@order = Factory(:shipment).order) }
     should('be to email')               { assert_equal [@order.email], @message.to }
     should('be from application email') { assert_equal [ActionMailer::Configuration.from_address], @message.from }
   end
 
-  context 'order_shipped' do
-    setup { @message = Mailer.create_order_shipped(@order = Factory(:shipment).order) }
+  context 'shipment_created' do
+    setup { @message = Mailer.create_shipment_created(@order = Factory(:order)) }
     should('be to email')               { assert_equal [@order.email], @message.to }
     should('be from application email') { assert_equal [ActionMailer::Configuration.from_address], @message.from }
   end
 
-  context 'order_shipped with downloads' do
+  context 'shipment_created with downloads' do
     setup do
       @order = Factory(:shipment).order
       @order.items << Factory(:downloadable_item)
-      @message = Mailer.create_order_shipped(@order)
+      @message = Mailer.create_shipment_created(@order)
     end
 
     should 'have 2 parts' do
@@ -42,8 +42,8 @@ class MailerTest < ActionMailer::TestCase
     end
   end
 
-  context 'shipment cancelled' do
-    setup { @message = Mailer.create_shipment_cancelled(@order = Factory(:shipment).order) }
+  context 'shipment_destroyed' do
+    setup { @message = Mailer.create_shipment_destroyed(@order = Factory(:shipment).order) }
     should('be to email')               { assert_equal [@order.email], @message.to }
     should('be from application email') { assert_equal [ActionMailer::Configuration.from_address], @message.from }
   end

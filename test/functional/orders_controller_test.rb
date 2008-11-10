@@ -1,9 +1,10 @@
 require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
-  should_route :get,  '/us/orders/new',   :action => 'new',    :distributor_id => 'us'
-  should_route :post, '/us/orders',       :action => 'create', :distributor_id => 'us'
-  should_route :get,  '/us/orders/token', :action => 'show',   :distributor_id => 'us', :id => 'token'
+  should_route :get,    '/us/orders/new',   :action => 'new',     :distributor_id => 'us'
+  should_route :post,   '/us/orders',       :action => 'create',  :distributor_id => 'us'
+  should_route :get,    '/us/orders/token', :action => 'show',    :distributor_id => 'us', :id => 'token'
+  should_route :delete, '/us/orders/token', :action => 'destroy', :distributor_id => 'us', :id => 'token'
 
   context 'with a saved Distributor' do
     setup { @distributor = Factory.create(:distributor) }
@@ -49,9 +50,29 @@ class OrdersControllerTest < ActionController::TestCase
 
     context 'with a saved Order' do
       setup { @order = Factory.create(:order) }
+
       context 'show' do
         setup { get :show, :distributor_id => @distributor.to_param, :id => @order.token }
         should_assign_to :order, :equals => '@order'
+      end
+
+      context 'not logged in' do
+        setup { @controller.current_user = nil }
+
+        context 'destroy' do
+          setup { delete :destroy, :distributor_id => @distributor.to_param, :id => @order.token }
+          should_redirect_to 'new_session_path'
+        end
+      end
+
+      context 'logged in' do
+        setup { @controller.current_user = @distributor }
+
+        context 'destroy' do
+          setup { delete :destroy, :distributor_id => @distributor.to_param, :id => @order.token }
+          should_change 'Order.count', :by => -1
+          should_redirect_to 'distributor_path(@distributor)'
+        end
       end
     end
   end

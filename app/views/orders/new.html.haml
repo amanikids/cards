@@ -1,7 +1,7 @@
 = render :partial => @order
 
 %h2 Please fill in your shipping information:
-- form_for @order do |f|
+- form_for @order, :html => { :onsubmit => "return #{confirm_javascript_function('Are you sure? This will place your Order now.')};"} do |f|
   - fields_for 'order[address]', @order.address do |a|
     .field
       = a.label :name

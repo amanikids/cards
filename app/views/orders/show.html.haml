@@ -10,3 +10,10 @@
   = render :partial => @order.shipment
 - else
   = render :partial => 'shipments/pending', :locals => { :order => @order }
+
+- if current_user && @order.shipment.new_record?
+  .danger
+    %h2 Cancel Order
+    %p If you've heard from the donor that they made a mistake and don't want to have made this Order, then:
+    - form_for @order, :url => order_path(current_distributor, @order), :html => { :method => :delete, :onsubmit => "return #{confirm_javascript_function('Are you sure? This will completely destroy this Order from the database and send an email to the Donor.')};" } do |f|
+      .field= f.submit 'Cancel this Order.'

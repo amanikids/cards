@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   before_filter :ensure_current_cart, :only => %w[new create]
   before_filter :load_new_order,      :only => %w[new create]
-  before_filter :load_order,          :only => :show
+  before_filter :ensure_current_user, :only => %w[destroy]
+  before_filter :load_order,          :only => %w[show destroy]
 
   def create
     if @order.save
@@ -10,8 +11,15 @@ class OrdersController < ApplicationController
       flash[:notice] = "<strong>Thanks, we've got it!</strong> See below to make your Donation."
       redirect_to order_path(current_distributor, @order)
     else
+      flash.now[:error] = "Oops, make sure you've filled in all the required fields!"
       render :action => 'new'
     end
+  end
+
+  def destroy
+    @order.destroy
+    flash[:notice] = 'Order cancelled. An email has been sent to the Donor.'
+    redirect_to distributor_path(current_distributor)
   end
 
   private

@@ -136,7 +136,7 @@ a
 .address
   :margin-bottom = 2 * !font_size
 
-.attention, .donation, .donation_method, .shipment
+.attention, .danger, .donation, .donation_method, .shipment
   :margin-bottom = !font_size
   :padding = !font_size
   h2, form
@@ -152,6 +152,10 @@ a
   :color #666
   h2
     :color #333
+
+#flash .error, .danger
+  :background-color #fcc
+  :border 3px solid #c66
 
 .field
   :margin-bottom = !font_size

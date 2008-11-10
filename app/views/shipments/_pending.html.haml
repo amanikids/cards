@@ -2,5 +2,5 @@
   %h2 Your order has not yet shipped.
   %p We'll get it out to you in the next few days and send you an "Order Shipped" email when we do.
   - if current_user
-    - form_for order.build_shipment, :url => order_shipment_path(current_distributor, order) do |f|
+    - form_for order.build_shipment, :url => order_shipment_path(current_distributor, order), :html => { :onsubmit => "return #{confirm_javascript_function('Are you sure? This will send an email to the Donor.')};" } do |f|
       = f.submit 'I just shipped this order.'

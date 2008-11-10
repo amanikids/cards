@@ -8,6 +8,6 @@
     %h3 Here are those details again:
     = textilize donation.donation_method.description
     - if current_user
-      - form_for donation, :url => order_donation_path(current_distributor, donation.order) do |f|
+      - form_for donation, :url => order_donation_path(current_distributor, donation.order), :html => { :onsubmit => "return #{confirm_javascript_function('Are you sure?')};" } do |f|
         = f.hidden_field :received_at, :value => Time.now.to_s(:number)
         = f.submit 'I just received this donation.'

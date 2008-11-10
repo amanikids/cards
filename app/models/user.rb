@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
     user = User.find_by_email(email)
     user if user && user.digest(user.salt, password) == user.encrypted_password
   end
-  
+
   def distributor?
     type == 'Distributor'
   end

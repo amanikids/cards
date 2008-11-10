@@ -28,4 +28,11 @@ class Mailer < ActionMailer::Base
     subject 'Thank you for your order!'
     body :order => order
   end
+
+  def shipment_cancelled(order)
+    from ActionMailer::Configuration.from
+    recipients "#{order.name} <#{order.email}>"
+    subject "Oops! We haven't shipped your order yet."
+    body :order => order
+  end
 end

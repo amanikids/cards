@@ -13,12 +13,20 @@ class Inventory < ActiveRecord::Base
     initial - promised
   end
 
-  def item_unshipped(item)
+  def item_promised(item)
     increment! :promised, item.sku_count
+  end
+
+  def item_unpromised(item)
+    decrement! :promised, item.sku_count
   end
 
   def item_shipped(item)
     increment! :shipped, item.sku_count
+  end
+
+  def item_unshipped(item)
+    decrement! :shipped, item.sku_count
   end
 
   private

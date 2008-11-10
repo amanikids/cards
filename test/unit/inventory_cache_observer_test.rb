@@ -5,13 +5,22 @@ class InventoryCacheObserverTest < ActiveSupport::TestCase
 
   should 'tell order distributor to reset inventory cache after create' do
     order = Factory.build(:order)
-    order.distributor.expects(:order_unshipped).with(order)
+    order.distributor.expects(:order_created).with(order)
     observer.after_create(order)
   end
 
-  should 'tell shipment order distributor to reset inventory cache after create' do
-    shipment = Factory.build(:shipment)
-    shipment.order.distributor.expects(:order_shipped).with(shipment.order)
-    observer.after_create(shipment)
+  context 'shipment' do
+    setup { @shipment = Factory(:shipment) }
+
+    context 'after_create' do
+      setup { observer.after_create(@shipment) }
+      before_should('update inventory') { @shipment.order.distributor.expects(:shipment_created).with(@shipment.order) }
+    end
+
+    context 'before_destroy' do
+      setup { @result = observer.before_destroy(@shipment) }
+      before_should('update inventory') { @shipment.order.distributor.expects(:shipment_destroyed).with(@shipment.order) }
+      should('return true') { assert @result }
+    end
   end
 end

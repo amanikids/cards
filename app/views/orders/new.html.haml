@@ -1,7 +1,7 @@
 = render :partial => @order
 
 %h2 Please fill in your shipping information:
-- form_for @order, :html => { :onsubmit => "return #{confirm_javascript_function('Are you sure? This will place your Order now.')};"} do |f|
+- form_for @order do |f|
   - fields_for 'order[address]', @order.address do |a|
     .field
       = a.label :name
@@ -32,5 +32,5 @@
   .field.attention{:style => 'margin-top: 2em'}
     %h2 Does everything look good?
     %p
-      = f.submit 'Yes, place my Order!'
+      = f.submit 'Yes, place my Order!', :confirm => 'Are you sure? This will place your Order now.'
       = link_to 'No, I need to make some adjustments.', cart_path

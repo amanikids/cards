@@ -2,8 +2,9 @@
   .danger
     %h2 Cancel Shipment
     %p If you accidentally marked this Order as shipped, you may correct that here:
-    - form_for shipment, :url => order_shipment_path(current_distributor, shipment.order), :html => { :method => :delete, :onsubmit => "return #{confirm_javascript_function('Are you sure? This will send email to the Donor.')};" } do |f|
-      .field= f.submit 'Oops! Cancel this shipment!'
+    - form_for shipment, :url => order_shipment_path(current_distributor, shipment.order), :html => { :method => :delete } do |f|
+      .field
+        = f.submit 'Oops! Cancel this shipment!', :confirm => 'Are you sure? This will send email to the Donor.'
 
 .shipment
   - unless shipment.order.immediately_shippable?

@@ -112,28 +112,55 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
-  context 'an order with no donation' do
-    setup { @order = Factory.build(:order) }
+  context 'an existing Order' do
+    setup { @order = Factory(:order) }
+
+    should('return false for distributor_changed?') { assert !@order.distributor_changed? }
+    should('return nil for distributor_was') { assert_nil @order.distributor_was }
     should('return nil for donation_method') { assert_nil @order.donation_method }
     should('return nil for donation_created_at') { assert_nil @order.donation_created_at }
     should('return nil for donation_received_at') { assert_nil @order.donation_received_at }
-  end
-
-  context 'an order with a donation' do
-    setup { @order = Factory.create(:donation).order }
-    should('delegate donation_method to donation') { assert_equal @order.donation.donation_method, @order.donation_method }
-    should('delegate donation_created_at to donation') { assert_equal @order.donation.created_at, @order.donation_created_at }
-    should('delegate donation_received_at to donation') { assert_equal @order.donation.received_at, @order.donation_received_at }
-  end
-
-  context 'an order with no shipment' do
-    setup { @order = Factory.build(:order) }
     should('return nil for shipped_at') { assert_nil @order.shipped_at }
+
+    context 'with a donation' do
+      setup { Factory(:donation, :order => @order) }
+      should('delegate donation_method to donation') { assert_equal @order.donation.donation_method, @order.donation_method }
+      should('delegate donation_created_at to donation') { assert_equal @order.donation.created_at, @order.donation_created_at }
+      should('delegate donation_received_at to donation') { assert_equal @order.donation.received_at, @order.donation_received_at }
+    end
+
+    context 'with a shipment' do
+      setup { Factory.create(:shipment, :order => @order) }
+      should('delegate shipped_at to shipment') { assert_equal @order.shipment.created_at, @order.shipped_at }
+    end
   end
 
-  context 'an order with a shipment' do
-    setup { @order = Factory.create(:shipment).order }
-    should('delegate shipped_at to shipment') { assert_equal @order.shipment.created_at, @order.shipped_at }
+  context 'an existing USD Order' do
+    setup { @order = Factory(:order, :distributor => Factory(:distributor, :currency => 'USD')) }
+
+    context 'updating to a GBP distributor' do
+      setup do
+        @old = @order.distributor
+        @order.distributor = Factory(:distributor, :currency => 'GBP')
+      end
+
+      should('return true for distributor_changed?') { assert @order.distributor_changed? }
+      should('return @old for distributor_was') { assert_equal @old, @order.distributor_was }
+
+      context 'save without an additional donation' do
+        setup { @order.save }
+        should_not_change '@order.additional_donation_amount'
+      end
+    end
+
+    context 'with an additional donation' do
+      setup { @order.update_attributes(:additional_donation_amount => 10) }
+
+      context 'updating to a GBP distributor' do
+        setup { @order.reload.update_attributes(:distributor_id => Factory(:distributor, :currency => 'GBP').id) }
+        should_change '@order.additional_donation_amount', :to => 5
+      end
+    end
   end
 
   should 'answer token for to_param' do

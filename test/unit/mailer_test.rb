@@ -13,6 +13,12 @@ class MailerTest < ActionMailer::TestCase
     should('be from application email') { assert_equal [ActionMailer::Configuration.from_address], @message.from }
   end
 
+  context 'order_updated' do
+    setup { @message = Mailer.create_order_updated(@order = Factory(:order)) }
+    should('be to email')               { assert_equal [@order.email], @message.to }
+    should('be from application email') { assert_equal [ActionMailer::Configuration.from_address], @message.from }
+  end
+
   context 'order_destroyed' do
     setup { @message = Mailer.create_order_destroyed(@order = Factory(:order)) }
     should('be to email')               { assert_equal [@order.email], @message.to }

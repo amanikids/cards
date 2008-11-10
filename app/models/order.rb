@@ -7,7 +7,6 @@ class Order < List
   has_one :donation
   has_one :donation_method, :through => :donation
   has_one :shipment
-
   validates_presence_of :address
   validates_associated :address
 
@@ -15,6 +14,7 @@ class Order < List
   delegate :donation_methods, :to => :distributor
 
   after_create  :create_shipment, :if => :immediately_shippable?
+  before_update :exchange_additional_donation_amount, :if => :distributor_changed?
 
   def address_with_nested_attributes=(record_or_attributes)
     record = case record_or_attributes
@@ -27,6 +27,14 @@ class Order < List
   end
 
   alias_method_chain :address=, :nested_attributes
+
+  def distributor_changed?
+    distributor_id_changed?
+  end
+
+  def distributor_was
+    Distributor.find(distributor_id_was) if distributor_changed?
+  end
 
   def donation_created_at
     donation ? donation.created_at : nil
@@ -58,11 +66,8 @@ class Order < List
 
   private
 
-  def write_token
-    self.token = Digest::SHA1.hexdigest(random_string)
-  end
-
-  def random_string
-    Time.now.to_default_s.split(//).sort_by { rand }.join
+  def exchange_additional_donation_amount
+    additional_donation_was = Money.new(100 * additional_donation_amount, distributor_was.currency)
+    self.additional_donation_amount = additional_donation_was.exchange_to(distributor.currency).cents / 100
   end
 end

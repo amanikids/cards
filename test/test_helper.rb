@@ -7,6 +7,7 @@ class Test::Unit::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
 
+  # TODO reinstate backtrace filters
   # self.backtrace_silencers << :rails_vendor
   # self.backtrace_filters   << :rails_root
 end

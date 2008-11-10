@@ -11,6 +11,27 @@ class InventoryCacheObserverTest < ActiveSupport::TestCase
       before_should('update inventory') { @order.distributor.expects(:order_created).with(@order) }
     end
 
+    context 'before_update' do
+      setup { @result = observer.before_update(@order) }
+      before_should('not decrement old inventory') { @order.distributor_was.expects(:order_destroyed).with(@order).never }
+      before_should('not increment new inventory') { @order.distributor.expects(:order_created).with(@order).never }
+      should('return true') { assert @result }
+    end
+
+    context 'with a new distributor' do
+      setup do
+        @order.distributor = Factory(:distributor)
+        @order.stubs(:distributor_was).returns(stub(:order_destroyed))
+      end
+
+      context 'before_update' do
+        setup { @result = observer.before_update(@order) }
+        before_should('decrement old inventory') { @order.distributor_was.expects(:order_destroyed).with(@order) }
+        before_should('increment new inventory') { @order.distributor.expects(:order_created).with(@order) }
+        should('return true') { assert @result }
+      end
+    end
+
     context 'before_destroy' do
       setup { @result = observer.before_destroy(@order) }
       before_should('update inventory') { @order.distributor.expects(:order_destroyed).with(@order) }

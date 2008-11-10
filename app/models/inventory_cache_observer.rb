@@ -20,8 +20,7 @@ class InventoryCacheObserver < ActiveRecord::Observer
   end
 
   def before_destroy_order(order)
-    # TODO before_destroy_order
-    true
+    order.distributor.order_destroyed(order)
   end
 
   def before_destroy_shipment(shipment)

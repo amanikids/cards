@@ -20,8 +20,7 @@ class NotificationObserver < ActiveRecord::Observer
   end
 
   def before_destroy_order(order)
-    # TODO before_destroy_order
-    true
+    Mailer.deliver_order_destroyed(order)
   end
 
   def before_destroy_shipment(shipment)

@@ -15,6 +15,13 @@ class Mailer < ActionMailer::Base
     body :order => order
   end
 
+  def order_destroyed(order)
+    from ActionMailer::Configuration.from
+    recipients "#{order.name} <#{order.email}>"
+    subject 'Your order has been cancelled.'
+    body :order => order
+  end
+
   def shipment_created(order)
     from ActionMailer::Configuration.from
     recipients "#{order.name} <#{order.email}>"

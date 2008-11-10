@@ -5,21 +5,28 @@ class NotificationObserverTest < ActiveSupport::TestCase
 
   context 'with an existing Order' do
     setup { @order = Factory.create(:order) }
-    context 'after_create order' do
+
+    context 'after_create' do
       setup { observer.after_create(@order) }
       before_should('deliver notification') { Mailer.expects(:deliver_order_created).with(@order) }
+    end
+
+    context 'before_destroy' do
+      setup { @result = observer.before_destroy(@order) }
+      before_should('deliver notification') { Mailer.expects(:deliver_order_destroyed).with(@order) }
+      should('return true') { assert @result }
     end
   end
 
   context 'with an existing Shipment' do
     setup { @shipment = Factory.create(:shipment) }
 
-    context 'after_create shipment' do
+    context 'after_create' do
       setup { observer.after_create(@shipment) }
       before_should('deliver notification') { Mailer.expects(:deliver_shipment_created).with(@shipment.order) }
     end
 
-    context 'before_destroy shipment' do
+    context 'before_destroy' do
       setup { @result = observer.before_destroy(@shipment) }
       before_should('deliver notification') { Mailer.expects(:deliver_shipment_destroyed).with(@shipment.order) }
       should('return true') { assert @result }

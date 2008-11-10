@@ -22,6 +22,10 @@ class Distributor < User
     update_inventories_with_items_from(order, :item_promised)
   end
 
+  def order_destroyed(order)
+    update_inventories_with_items_from(order, :item_unpromised)
+  end
+
   def shipment_created(order)
     update_inventories_with_items_from(order, :item_shipped)
   end

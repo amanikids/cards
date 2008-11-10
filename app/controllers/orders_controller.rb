@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_filter :ensure_current_cart, :only => %w[new create]
   before_filter :load_new_order,      :only => %w[new create]
-  before_filter :ensure_current_user, :only => %w[destroy]
-  before_filter :load_order,          :only => %w[show destroy]
+  before_filter :ensure_current_user, :only => %w[update destroy]
+  before_filter :load_order,          :only => %w[show update destroy]
 
   def create
     if @order.save
@@ -14,6 +14,12 @@ class OrdersController < ApplicationController
       flash.now[:error] = "Oops, make sure you've filled in all the required fields!"
       render :action => 'new'
     end
+  end
+
+  def update
+    @order.update_attributes(params[:order])
+    flash[:notice] = 'Order updated.'
+    redirect_to order_path(@order.distributor, @order)
   end
 
   def destroy

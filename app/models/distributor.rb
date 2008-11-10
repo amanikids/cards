@@ -26,6 +26,10 @@ class Distributor < User
     update_inventories_with_items_from(order, :item_unpromised)
   end
 
+  def others
+    Distributor.ordered - [self]
+  end
+
   def shipment_created(order)
     update_inventories_with_items_from(order, :item_shipped)
   end

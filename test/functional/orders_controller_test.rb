@@ -49,7 +49,7 @@ class OrdersControllerTest < ActionController::TestCase
     end
 
     context 'with a saved Order' do
-      setup { @order = Factory.create(:order) }
+      setup { @order = Factory.create(:order, :distributor => @distributor) }
 
       context 'show' do
         setup { get :show, :distributor_id => @distributor.to_param, :id => @order.token }
@@ -59,6 +59,14 @@ class OrdersControllerTest < ActionController::TestCase
       context 'not logged in' do
         setup { @controller.current_user = nil }
 
+        context 'with another Distributor' do
+          setup { @other_distributor = Factory(:distributor) }
+          context 'update' do
+            setup { put :update, :distributor_id => @distributor.to_param, :id => @order.token, :order => { :distributor_id => @other_distributor.id } }
+            should_redirect_to 'new_session_path'
+          end
+        end
+
         context 'destroy' do
           setup { delete :destroy, :distributor_id => @distributor.to_param, :id => @order.token }
           should_redirect_to 'new_session_path'
@@ -67,6 +75,16 @@ class OrdersControllerTest < ActionController::TestCase
 
       context 'logged in' do
         setup { @controller.current_user = @distributor }
+
+        context 'with another Distributor' do
+          setup { @other_distributor = Factory(:distributor) }
+          context 'update' do
+            setup { put :update, :distributor_id => @distributor.to_param, :id => @order.token, :order => { :distributor_id => @other_distributor.id } }
+            should_change '@distributor.orders.count', :by => -1
+            should_change '@other_distributor.orders.count', :by => 1
+            should_redirect_to 'order_path(@other_distributor, @order)'
+          end
+        end
 
         context 'destroy' do
           setup { delete :destroy, :distributor_id => @distributor.to_param, :id => @order.token }

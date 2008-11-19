@@ -1,4 +1,5 @@
 class Order < List
+  named_scope :donated,   :include => :donation, :conditions => 'donations.id IS NOT NULL'
   named_scope :shipped,   :include => :shipment, :conditions => 'shipments.id IS NOT NULL', :order => 'lists.created_at'
   named_scope :unshipped, :include => :shipment, :conditions => 'shipments.id IS NULL',     :order => 'lists.created_at'
 

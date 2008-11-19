@@ -19,6 +19,10 @@ module ApplicationHelper
     value ? value : '&mdash;'
   end
 
+  def p(numerator, denominator)
+    "(#{number_to_percentage(100 * numerator.to_f / denominator, :precision => 0)})" unless denominator.zero?
+  end
+
   def paypal_donation_service_for(order, options = {})
     payment_service_for(order, ActiveMerchant::Configuration.paypal_account, options.merge(:service => :paypal)) do |service|
       service.cmd = '_donations'

@@ -1,11 +1,37 @@
 %h2 Summary
-%ul
-  %li
-    = pluralize(Order.shipped.count, 'order')
-    shipped so far.
 
-  - Distributor.ordered.each do |distributor|
-    %li
-      = m distributor.orders.map(&:total).sum.to_money.exchange_to(distributor.currency)
-      raised in
-      = distributor.country_code.upcase
+%table.list
+  %thead
+    %tr
+      %th Country
+      %th Orders
+      %th Shipped
+      %th
+      %th Donations
+      %th Received
+      %th
+  %tbody
+    - Distributor.ordered.each do |distributor|
+      - orders = distributor.orders.count
+      - shipped = distributor.orders.shipped.count
+      - total = distributor.orders.map(&:total).sum.to_money.exchange_to(distributor.currency)
+      - donated = distributor.orders.donated.map(&:total).sum.to_money.exchange_to(distributor.currency)
+      %tr{:class => cycle(:odd, :even)}
+        %td= distributor.country
+        %td.number= orders
+        %td.number= shipped
+        %td.number= p shipped, orders
+        %td.number= m total
+        %td.number= m donated
+        %td.number= p donated.cents, total.cents
+  %tfoot
+    %tr.total
+      - total = Order.all.map(&:total).sum.to_money.exchange_to('USD')
+      - donated = Order.donated.map(&:total).sum.to_money.exchange_to('USD')
+      %td.label Total
+      %td.number= Order.count
+      %td.number= Order.shipped.count
+      %td.number= p Order.shipped.count, Order.count
+      %td.number= m total
+      %td.number= m donated
+      %td.number= p donated.cents, total.cents

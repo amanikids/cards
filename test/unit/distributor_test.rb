@@ -2,8 +2,7 @@ require 'test_helper'
 
 class DistributorTest < ActiveSupport::TestCase
   should_have_many :carts
-  should_have_many :distributor_donation_methods
-  should_have_many :donation_methods, :through => :distributor_donation_methods
+  should_have_many :donation_methods
   should_have_many :inventories
   should_have_many :orders
 

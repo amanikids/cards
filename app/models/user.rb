@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   end
 
   def distributor?
-    type == 'Distributor'
+    self[:type] == 'Distributor'
   end
 
   def to_s

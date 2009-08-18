@@ -1,4 +1,114 @@
-ip_from, ip_to, country_code, country_code_with_three_characters, country
+# =============================================================================
+# = Users                                                                     =
+# =============================================================================
+User.create(:name => 'Matthew Todd', :email => 'matthew.todd@gmail.com', :password => 'NOT REALLY')
+User.create(:name => 'Joe Ventura',  :email => 'joe@amanikids.org',      :password => 'NOT REALLY')
+User.create(:name => 'Valerie Todd', :email => 'valerie@amanikids.org',  :password => 'NOT REALLY')
+
+# =============================================================================
+# = Distributors                                                              =
+# =============================================================================
+dina     = Distributor.create(:name => 'Dina Sciarra',    :email => 'amanikids@comcast.net',       :password => 'NOT REALLY', :country_code => 'us', :country => 'United States',  :currency => 'USD', :position => 1)
+danielle = Distributor.create(:name => 'Danielle Kozak',  :email => 'daniellekozak@gmail.com',     :password => 'NOT REALLY', :country_code => 'ca', :country => 'Canada',         :currency => 'CAD', :position => 2)
+shelley  = Distributor.create(:name => 'Shelley Malekia', :email => 'shelley_malekia@yahoo.co.uk', :password => 'NOT REALLY', :country_code => 'uk', :country => 'United Kingdom', :currency => 'GBP', :position => 3)
+
+# =============================================================================
+# = Donation Methods                                                          =
+# =============================================================================
+paypal = DonationMethod.new(:name => 'paypal', :title => 'Donate Online', :description => "Donations made in support of the Amani Children's Home Christmas and Holiday Card fundraiser are processed through Peace House Africa using PayPal. Peace House Africa is a registered 501(c)3 charity in the United States committed to bringing educational opportunities to vulnerable children in Africa. Peace House Africa sends 100% of your donation to Amani Children's Home in Tanzania. Donations made from the United States are tax-deductible.")
+
+dina.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
+dina.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'check', :title => 'Mail a Check', :description => "Make your check payable to \"Friends of Amani US\" and send it to:\n\nDina Sciarra\n32 Teak Loop\nOscala, FL\n24472\n\nDonations are tax-deductible in the U.S."))
+
+danielle.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
+danielle.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque payable to \"Friends of Amani Canada\" and send it to:\n\nDanielle Kozak\nc/o St. Augustine's School\n2145 West 8th Ave\nVancouver, BC\nV6K 2A5\n\nDonations are tax-deductible in Canada."))
+
+shelley.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
+shelley.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nShelly Malekia\n128 Station Road West\nCanterbury, Kent\nCT2 8HY\n\nDonations are eligible for Gift Aid in the UK."))
+
+# =============================================================================
+# = Card Number One                                                           =
+# =============================================================================
+joy = Product.create(:name => 'Joy to the World Holiday Card', :position => 1, :image => Image.create(:path => 'cards/joy_front_small.jpg'), :description => "This playful holiday card captures the fun and imagination of the Amani children and is sure to warm the hearts of your family and friends. The design features some of Tanzania's most famous wild animals beneath a festive Mt. Kilimanjaro.\n\n**Two options** are available for the inside of the cards:\n\n* Merry Christmas!\n* Happy Holidays!")
+
+returning joy.skus.create(:name => 'Merry Christmas') do |sku|
+  sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
+  sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
+  sku.inventories.create(:distributor => dina,     :initial => 2000)
+  sku.inventories.create(:distributor => danielle, :initial => 1000)
+  sku.inventories.create(:distributor => shelley,  :initial => 1000)
+end
+
+returning joy.skus.create(:name => 'Happy Holidays') do |sku|
+  sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 3)
+  sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 4)
+  sku.inventories.create(:distributor => dina,     :initial => 1500)
+  sku.inventories.create(:distributor => danielle, :initial => 750)
+  sku.inventories.create(:distributor => shelley,  :initial => 750)
+end
+
+# =============================================================================
+# = Card Number Two                                                           =
+# =============================================================================
+peace = Product.create(:name => 'Peace on Earth Holiday Card', :position => 2, :image => Image.create(:path => 'cards/peace_front_cropped_small.jpg'), :description => "\"Amani\" means Peace in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Two options** are available for the inside of the cards:\n\n* May the peace and beauty of the season be yours throughout the year. Happy Holidays!\n* May peace reign throughout the world and joy be found in every heart. Merry Christmas!")
+
+returning peace.skus.create(:name => 'Merry Christmas') do |sku|
+  sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 5)
+  sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 6)
+  sku.inventories.create(:distributor => dina,     :initial => 1000)
+  sku.inventories.create(:distributor => danielle, :initial => 0)
+  sku.inventories.create(:distributor => shelley,  :initial => 500)
+end
+
+returning peace.skus.create(:name => 'Happy Holidays') do |sku|
+  sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 7)
+  sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 8)
+  sku.inventories.create(:distributor => dina,     :initial => 500)
+  sku.inventories.create(:distributor => danielle, :initial => 0)
+  sku.inventories.create(:distributor => shelley,  :initial => 500)
+end
+
+# =============================================================================
+# = Card Number Three                                                         =
+# =============================================================================
+gift_card_pdf = Download.create(:name => 'gift_cards.pdf', :content_type => 'application/pdf')
+
+gift = Product.create(:name => 'Amani Alternative Gift Card', :position => 3, :image => Image.create(:path => 'cards/gift_front_small.jpg'), :description => "Instead of a traditional gift, you can honor your loved one by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.\n\nThis holiday season, give the gift of hope. Order you Alternative Gift Cards today!\n\nHere are some of the alternative gift options:\n\n")
+
+gift.skus.create(:name => 'Textbook'                                        ).variants.create(:cents => 400,   :currency => 'USD', :download => gift_card_pdf, :position => 9)
+gift.skus.create(:name => 'School Uniform'                                  ).variants.create(:cents => 1000,  :currency => 'USD', :download => gift_card_pdf, :position => 10)
+gift.skus.create(:name => 'Bedding (sheet and blanket)'                     ).variants.create(:cents => 1600,  :currency => 'USD', :download => gift_card_pdf, :position => 11)
+gift.skus.create(:name => 'Sports equipment (cleats, balls jerseys)'        ).variants.create(:cents => 2500,  :currency => 'USD', :download => gift_card_pdf, :position => 12)
+gift.skus.create(:name => 'Art supplies'                                    ).variants.create(:cents => 3000,  :currency => 'USD', :download => gift_card_pdf, :position => 13)
+gift.skus.create(:name => '2 Drums'                                         ).variants.create(:cents => 4000,  :currency => 'USD', :download => gift_card_pdf, :position => 14)
+gift.skus.create(:name => 'Medical supplies'                                ).variants.create(:cents => 5000,  :currency => 'USD', :download => gift_card_pdf, :position => 15)
+gift.skus.create(:name => 'Desk and chair'                                  ).variants.create(:cents => 6000,  :currency => 'USD', :download => gift_card_pdf, :position => 16)
+gift.skus.create(:name => "Part-time Carpentry Teacher's salary (per month)").variants.create(:cents => 7500,  :currency => 'USD', :download => gift_card_pdf, :position => 17)
+gift.skus.create(:name => '2 Enormous Cooking Pots'                         ).variants.create(:cents => 10000, :currency => 'USD', :download => gift_card_pdf, :position => 18)
+gift.skus.create(:name => 'First semester of secondary school'              ).variants.create(:cents => 20000, :currency => 'USD', :download => gift_card_pdf, :position => 19)
+
+# =============================================================================
+# = Locators                                                                  =
+# =============================================================================
+require 'csv'
+
+puts 'Loading Locators. (This will take a little while.)'
+count = 0
+CSV.parse(File.read(__FILE__).split('__END__').last.strip) do |row|
+  Locator.connection.execute "INSERT INTO locators (ip_from, ip_to, country_code, country_code_with_three_characters, country) VALUES (#{row.inspect[1..-2]})"
+  count += 1
+  if count % 100 == 0
+    $stdout.write '.'
+    $stdout.flush
+  end
+end
+puts
+
+# We got this data in csv format from http://ip-to-country.webhosting.info/downloads/ip-to-country.csv.zip
+# See http://ip-to-country.webhosting.info/node/view/5 for more info.
+#
+# ip_from, ip_to, country_code, country_code_with_three_characters, country
+__END__
 "33996344","33996351","GB","GBR","UNITED KINGDOM"
 "50331648","69956103","US","USA","UNITED STATES"
 "69956112","83886079","US","USA","UNITED STATES"

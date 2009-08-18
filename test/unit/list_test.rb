@@ -3,7 +3,7 @@ require 'test_helper'
 class ListTest < ActiveSupport::TestCase
   should_belong_to :distributor
   should_have_many :items, :dependent => :destroy
-  should_only_allow_numeric_values_for :additional_donation_amount
+  should_validate_numericality_of :additional_donation_amount
   should_allow_values_for :additional_donation_amount, '', nil
   should_not_allow_values_for :additional_donation_amount, -1, :message => /greater than/
   should_not_allow_values_for :additional_donation_amount, 3.14, :message =>  /not a number/

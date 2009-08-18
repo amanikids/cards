@@ -6,7 +6,7 @@ class DistributorTest < ActiveSupport::TestCase
   should_have_many :inventories
   should_have_many :orders
 
-  should_require_attributes :country_code, :currency
+  should_validate_presence_of :country_code, :currency
 
   should 'delegate to_param to country_code' do
     distributor = Factory.build(:distributor, :country_code => 'COUNTRY_CODE')

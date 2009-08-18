@@ -2,8 +2,8 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   should_have_digest :encrypted_password, :depends => :password
-  should_require_attributes :email, :password
-  should_require_confirmation_of :password
+  should_validate_presence_of :email, :password
+  should_validate_confirmation_of :password
 
   context 'distributor?' do
     should 'be true for Distributor' do
@@ -17,7 +17,7 @@ class UserTest < ActiveSupport::TestCase
 
   context :validations do
     setup { Factory.create(:user) }
-    should_require_unique_attributes :email
+    should_validate_uniqueness_of :email
   end
 
   context :before_create do

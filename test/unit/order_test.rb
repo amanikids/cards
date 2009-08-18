@@ -9,7 +9,7 @@ class OrderTest < ActiveSupport::TestCase
   should_have_one :donation
   should_have_one :shipment
 
-  should_require_attributes :address
+  should_validate_presence_of :address
 
   context 'with an unsaved Order' do
     setup { @order = Factory.build(:order, :token => nil) }

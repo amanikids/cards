@@ -4,7 +4,7 @@ class InventoryTest < ActiveSupport::TestCase
   should_belong_to :distributor
   should_belong_to :sku
 
-  should_only_allow_numeric_values_for :actual
+  should_validate_numericality_of :actual
   should_not_allow_values_for :actual, -1, :message => /greater than/
   should_not_allow_values_for :actual, 3.14, :message =>  /not a number/
 

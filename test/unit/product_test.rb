@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
-  should_require_attributes :name
+  should_validate_presence_of :name
   should_have_many :skus
   should_have_many :variants, :through => :skus
   should_have_named_scope :ordered, :order => :position

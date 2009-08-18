@@ -8,12 +8,12 @@ class DistributorsControllerTest < ActionController::TestCase
   context 'not logged in' do
     context 'index' do
       setup { get :index }
-      should_redirect_to 'new_session_path'
+      should_redirect_to('the login page') { new_session_path }
     end
 
     context 'show' do
       setup { get :show, :id => 'ID' }
-      should_redirect_to 'new_session_path'
+      should_redirect_to('the login page') { new_session_path }
     end
   end
 

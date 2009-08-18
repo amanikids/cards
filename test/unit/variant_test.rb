@@ -3,7 +3,7 @@ require 'test_helper'
 class VariantTest < ActiveSupport::TestCase
   should_belong_to :sku
   should_belong_to :download
-  should_require_attributes :cents, :currency, :sku_id
+  should_validate_presence_of :cents, :currency, :sku_id
 
   context 'with a downloadable variant' do
     setup { @variant = Factory.build(:variant_with_download) }

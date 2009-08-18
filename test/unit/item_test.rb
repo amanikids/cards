@@ -2,9 +2,9 @@ require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
   should_belong_to :variant
-  should_require_attributes :variant_id
+  should_validate_presence_of :variant_id
 
-  should_only_allow_numeric_values_for :quantity
+  should_validate_numericality_of :quantity
   should_not_allow_values_for :quantity, -1, 0, :message => /greater than/
   should_not_allow_values_for :quantity, 3.14, :message =>  /not a number/
 

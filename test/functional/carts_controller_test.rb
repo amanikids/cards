@@ -10,12 +10,12 @@ class CartsControllerTest < ActionController::TestCase
     context 'without a current cart' do
       context 'show' do
         setup { get :show, :distributor_id => @distributor.to_param }
-        should_redirect_to 'distributor_root_path(@distributor)'
+        should_redirect_to('the root product page') { distributor_root_path(@distributor) }
       end
 
       context 'update' do
         setup { put :update, :distributor_id => @distributor.to_param }
-        should_redirect_to 'distributor_root_path(@distributor)'
+        should_redirect_to('the root product page') { distributor_root_path(@distributor) }
       end
     end
 
@@ -36,7 +36,7 @@ class CartsControllerTest < ActionController::TestCase
         context 'update' do
           setup { put :update, :cart => :attributes, :distributor_id => @distributor.to_param }
           should_set_the_flash_to 'Cart updated.'
-          should_redirect_to 'cart_path(@distributor)'
+          should_redirect_to('the cart path') { cart_path(@distributor) }
         end
       end
 

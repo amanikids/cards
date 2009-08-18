@@ -1,10 +1,13 @@
 # =============================================================================
-# = Users                                                                     =
+# = Helper Methods                                                            =
 # =============================================================================
 def password(name)
   ENV[name.to_s.upcase] || (RAILS_ENV == 'production') ? raise("No password specified for #{name}") : 'foo'
 end
 
+# =============================================================================
+# = Users                                                                     =
+# =============================================================================
 User.create(:name => 'Matthew Todd', :email => 'matthew.todd@gmail.com', :password => password(:matthew))
 User.create(:name => 'Joe Ventura',  :email => 'joe@amanikids.org',      :password => password(:joe))
 User.create(:name => 'Valerie Todd', :email => 'valerie@amanikids.org',  :password => password(:valerie))
@@ -12,62 +15,61 @@ User.create(:name => 'Valerie Todd', :email => 'valerie@amanikids.org',  :passwo
 # =============================================================================
 # = Distributors                                                              =
 # =============================================================================
-us = Distributor.create(:name => 'Dina Sciarra',   :email => 'amanikids@comcast.net',      :password => password(:dina),  :country_code => 'us', :country => 'United States',  :currency => 'USD', :position => 1)
-ca = Distributor.create(:name => 'Randy Bacchus',  :email => 'randy.bacchus@sage.com',     :password => password(:randy), :country_code => 'ca', :country => 'Canada',         :currency => 'CAD', :position => 2)
-uk = Distributor.create(:name => 'Fiona McElhone', :email => 'fiona_mcelhone@hotmail.com', :password => password(:fiona), :country_code => 'uk', :country => 'United Kingdom', :currency => 'GBP', :position => 3)
+us = returning Distributor.create(:name => 'Dina Sciarra', :email => 'amanikids@comcast.net', :password => password(:dina), :country_code => 'us', :country => 'United States',  :currency => 'USD', :position => 1) do |distributor|
+  distributor.distributor_donation_methods.create(:position => 1, :donation_method => DonationMethod.create(:name => 'paypal', :title => 'Donate Online', :description => "Donations made in support of the Amani Children's Home Christmas and Holiday Card fundraiser are processed through Peace House Africa using PayPal. Peace House Africa is a registered 501(c)3 charity in the United States committed to bringing educational opportunities to vulnerable children in Africa. Peace House Africa sends 100% of your donation to Amani Children's Home in Tanzania. Donations made from the United States are tax-deductible.", :account => 'donation.notify@peacehousefoundation.org'))
+  distributor.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'check',  :title => 'Mail a Check',  :description => "Make your check payable to \"Friends of Amani US\" and send it to:\n\nDina Sciarra\n32 Teak Loop\nOscala, FL\n24472\n\nDonations are tax-deductible in the U.S."))
+end
 
-# =============================================================================
-# = Donation Methods                                                          =
-# =============================================================================
-us.distributor_donation_methods.create(:position => 1, :donation_method => DonationMethod.create(:name => 'paypal', :title => 'Donate Online', :description => "Donations made in support of the Amani Children's Home Christmas and Holiday Card fundraiser are processed through Peace House Africa using PayPal. Peace House Africa is a registered 501(c)3 charity in the United States committed to bringing educational opportunities to vulnerable children in Africa. Peace House Africa sends 100% of your donation to Amani Children's Home in Tanzania. Donations made from the United States are tax-deductible.", :account => 'donation.notify@peacehousefoundation.org'))
-us.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'check',  :title => 'Mail a Check',  :description => "Make your check payable to \"Friends of Amani US\" and send it to:\n\nDina Sciarra\n32 Teak Loop\nOscala, FL\n24472\n\nDonations are tax-deductible in the U.S."))
+ca = returning Distributor.create(:name => 'Randy Bacchus', :email => 'randy.bacchus@sage.com', :password => password(:randy), :country_code => 'ca', :country => 'Canada', :currency => 'CAD', :position => 2) do |distributor|
+  distributor.distributor_donation_methods.create(:position => 1, :donation_method => DonationMethod.create(:name => 'paypal', :title => 'Donate Online', :description => "Donations made in support of the Amani Children's Home Christmas and Holiday Card fundraiser are made through Friends of Amani Canada, a registered charity in Canada, and are processed by PayPal. Donations are tax-deductible. Friends of Amani Canada transfers 100% of donations received to Amani Children's Home in Tanzania.", :account => 'info@friendsofamani.ca'))
+  distributor.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque payable to \"Friends of Amani Canada\" and send it to:\n\nRandy Bacchus\n50 Burnhamthorpe Rd. West\nSte 700\nMississauga, ON\nL5B 3C2\n\nDonations are tax-deductible in Canada."))
+end
 
-ca.distributor_donation_methods.create(:position => 1, :donation_method => DonationMethod.create(:name => 'paypal', :title => 'Donate Online', :description => "Donations made in support of the Amani Children's Home Christmas and Holiday Card fundraiser are made through Friends of Amani Canada, a registered charity in Canada, and are processed by PayPal. Donations are tax-deductible. Friends of Amani Canada transfers 100% of donations received to Amani Children's Home in Tanzania.", :account => 'info@friendsofamani.ca'))
-ca.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque payable to \"Friends of Amani Canada\" and send it to:\n\nRandy Bacchus\n50 Burnhamthorpe Rd. West\nSte 700\nMississauga, ON\nL5B 3C2\n\nDonations are tax-deductible in Canada."))
-
-uk.distributor_donation_methods.create(:position => 1, :donation_method => DonationMethod.create(:name => 'justgiving', :title => 'Donate at JustGiving', :description => "You can make your donation to Friends of Amani UK through \"JustGiving.com\":http://justgiving.com/amanichildren/donate. Friends of Amani UK is a volunteer-run charity supporting Amani Children's Home. The money raised by Friends of Amani UK is sent to Amani Children's Home in Moshi, Tanzania.\n\nYour donations to Friends of Amani UK are tax-free and eligible for Gift Aid in the United Kingdom."))
-uk.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nFiona McElhone\nFlat B\n27 Barnsbury Park\nLondon\nN1 1HQ\n\nDonations are eligible for Gift Aid in the UK."))
+uk = returning Distributor.create(:name => 'Fiona McElhone', :email => 'fiona_mcelhone@hotmail.com', :password => password(:fiona), :country_code => 'uk', :country => 'United Kingdom', :currency => 'GBP', :position => 3) do |distributor|
+  distributor.distributor_donation_methods.create(:position => 1, :donation_method => DonationMethod.create(:name => 'justgiving', :title => 'Donate at JustGiving', :description => "You can make your donation to Friends of Amani UK through \"JustGiving.com\":http://justgiving.com/amanichildren/donate. Friends of Amani UK is a volunteer-run charity supporting Amani Children's Home. The money raised by Friends of Amani UK is sent to Amani Children's Home in Moshi, Tanzania.\n\nYour donations to Friends of Amani UK are tax-free and eligible for Gift Aid in the United Kingdom."))
+  distributor.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nFiona McElhone\nFlat B\n27 Barnsbury Park\nLondon\nN1 1HQ\n\nDonations are eligible for Gift Aid in the UK."))
+end
 
 # =============================================================================
 # = Card Number One                                                           =
 # =============================================================================
-joy = Product.create(:name => 'Joy to the World Holiday Card', :position => 1, :image => Image.create(:path => 'cards/joy_front_small.jpg'), :description => "This playful holiday card captures the fun and imagination of the Amani children and is sure to warm the hearts of your family and friends. The design features some of Tanzania's most famous wild animals beneath a festive Mt. Kilimanjaro.\n\n**Two options** are available for the inside of the cards:\n\n* Merry Christmas!\n* Happy Holidays!")
+returning Product.create(:name => 'Joy to the World Holiday Card', :position => 1, :image_path => 'cards/joy_front_small.jpg', :description => "This playful holiday card captures the fun and imagination of the Amani children and is sure to warm the hearts of your family and friends. The design features some of Tanzania's most famous wild animals beneath a festive Mt. Kilimanjaro.\n\n**Two options** are available for the inside of the cards:\n\n* Merry Christmas!\n* Happy Holidays!") do |card|
+  returning card.skus.create(:name => 'Merry Christmas') do |sku|
+    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
+    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
+    sku.inventories.create(:distributor => us, :initial => 2000)
+    sku.inventories.create(:distributor => ca, :initial => 1000)
+    sku.inventories.create(:distributor => uk, :initial => 1000)
+  end
 
-returning joy.skus.create(:name => 'Merry Christmas') do |sku|
-  sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
-  sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
-  sku.inventories.create(:distributor => us, :initial => 2000)
-  sku.inventories.create(:distributor => ca, :initial => 1000)
-  sku.inventories.create(:distributor => uk, :initial => 1000)
-end
-
-returning joy.skus.create(:name => 'Happy Holidays') do |sku|
-  sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 3)
-  sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 4)
-  sku.inventories.create(:distributor => us, :initial => 1500)
-  sku.inventories.create(:distributor => ca, :initial => 750)
-  sku.inventories.create(:distributor => uk, :initial => 750)
+  returning card.skus.create(:name => 'Happy Holidays') do |sku|
+    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 3)
+    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 4)
+    sku.inventories.create(:distributor => us, :initial => 1500)
+    sku.inventories.create(:distributor => ca, :initial => 750)
+    sku.inventories.create(:distributor => uk, :initial => 750)
+  end
 end
 
 # =============================================================================
 # = Card Number Two                                                           =
 # =============================================================================
-peace = Product.create(:name => 'Peace on Earth Holiday Card', :position => 2, :image => Image.create(:path => 'cards/peace_front_cropped_small.jpg'), :description => "\"Amani\" means Peace in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Two options** are available for the inside of the cards:\n\n* May the peace and beauty of the season be yours throughout the year. Happy Holidays!\n* May peace reign throughout the world and joy be found in every heart. Merry Christmas!")
+returning Product.create(:name => 'Peace on Earth Holiday Card', :position => 2, :image_path => 'cards/peace_front_cropped_small.jpg', :description => "\"Amani\" means Peace in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Two options** are available for the inside of the cards:\n\n* May the peace and beauty of the season be yours throughout the year. Happy Holidays!\n* May peace reign throughout the world and joy be found in every heart. Merry Christmas!") do |card|
+  returning card.skus.create(:name => 'Merry Christmas') do |sku|
+    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 5)
+    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 6)
+    sku.inventories.create(:distributor => us, :initial => 1000)
+    sku.inventories.create(:distributor => ca, :initial => 0)
+    sku.inventories.create(:distributor => uk, :initial => 500)
+  end
 
-returning peace.skus.create(:name => 'Merry Christmas') do |sku|
-  sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 5)
-  sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 6)
-  sku.inventories.create(:distributor => us, :initial => 1000)
-  sku.inventories.create(:distributor => ca, :initial => 0)
-  sku.inventories.create(:distributor => uk, :initial => 500)
-end
-
-returning peace.skus.create(:name => 'Happy Holidays') do |sku|
-  sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 7)
-  sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 8)
-  sku.inventories.create(:distributor => us, :initial => 500)
-  sku.inventories.create(:distributor => ca, :initial => 0)
-  sku.inventories.create(:distributor => uk, :initial => 500)
+  returning card.skus.create(:name => 'Happy Holidays') do |sku|
+    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 7)
+    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 8)
+    sku.inventories.create(:distributor => us, :initial => 500)
+    sku.inventories.create(:distributor => ca, :initial => 0)
+    sku.inventories.create(:distributor => uk, :initial => 500)
+  end
 end
 
 # =============================================================================
@@ -75,19 +77,19 @@ end
 # =============================================================================
 gift_card_pdf = Download.create(:name => 'gift_cards.pdf', :content_type => 'application/pdf')
 
-gift = Product.create(:name => 'Amani Alternative Gift Card', :position => 3, :image => Image.create(:path => 'cards/gift_front_small.jpg'), :description => "Instead of a traditional gift, you can honor your loved one by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.\n\nThis holiday season, give the gift of hope. Order you Alternative Gift Cards today!\n\nHere are some of the alternative gift options:\n\n")
-
-gift.skus.create(:name => 'Textbook'                                        ).variants.create(:cents => 400,   :currency => 'USD', :download => gift_card_pdf, :position => 9)
-gift.skus.create(:name => 'School Uniform'                                  ).variants.create(:cents => 1000,  :currency => 'USD', :download => gift_card_pdf, :position => 10)
-gift.skus.create(:name => 'Bedding (sheet and blanket)'                     ).variants.create(:cents => 1600,  :currency => 'USD', :download => gift_card_pdf, :position => 11)
-gift.skus.create(:name => 'Sports equipment (cleats, balls jerseys)'        ).variants.create(:cents => 2500,  :currency => 'USD', :download => gift_card_pdf, :position => 12)
-gift.skus.create(:name => 'Art supplies'                                    ).variants.create(:cents => 3000,  :currency => 'USD', :download => gift_card_pdf, :position => 13)
-gift.skus.create(:name => '2 Drums'                                         ).variants.create(:cents => 4000,  :currency => 'USD', :download => gift_card_pdf, :position => 14)
-gift.skus.create(:name => 'Medical supplies'                                ).variants.create(:cents => 5000,  :currency => 'USD', :download => gift_card_pdf, :position => 15)
-gift.skus.create(:name => 'Desk and chair'                                  ).variants.create(:cents => 6000,  :currency => 'USD', :download => gift_card_pdf, :position => 16)
-gift.skus.create(:name => "Part-time Carpentry Teacher's salary (per month)").variants.create(:cents => 7500,  :currency => 'USD', :download => gift_card_pdf, :position => 17)
-gift.skus.create(:name => '2 Enormous Cooking Pots'                         ).variants.create(:cents => 10000, :currency => 'USD', :download => gift_card_pdf, :position => 18)
-gift.skus.create(:name => 'First semester of secondary school'              ).variants.create(:cents => 20000, :currency => 'USD', :download => gift_card_pdf, :position => 19)
+returning Product.create(:name => 'Amani Alternative Gift Card', :position => 3, :image_path => 'cards/gift_front_small.jpg', :description => "Instead of a traditional gift, you can honor your loved one by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.\n\nThis holiday season, give the gift of hope. Order you Alternative Gift Cards today!\n\nHere are some of the alternative gift options:\n\n") do |card|
+  card.skus.create(:name => 'Textbook'                                        ).variants.create(:cents => 400,   :currency => 'USD', :download => gift_card_pdf, :position => 9)
+  card.skus.create(:name => 'School Uniform'                                  ).variants.create(:cents => 1000,  :currency => 'USD', :download => gift_card_pdf, :position => 10)
+  card.skus.create(:name => 'Bedding (sheet and blanket)'                     ).variants.create(:cents => 1600,  :currency => 'USD', :download => gift_card_pdf, :position => 11)
+  card.skus.create(:name => 'Sports equipment (cleats, balls jerseys)'        ).variants.create(:cents => 2500,  :currency => 'USD', :download => gift_card_pdf, :position => 12)
+  card.skus.create(:name => 'Art supplies'                                    ).variants.create(:cents => 3000,  :currency => 'USD', :download => gift_card_pdf, :position => 13)
+  card.skus.create(:name => '2 Drums'                                         ).variants.create(:cents => 4000,  :currency => 'USD', :download => gift_card_pdf, :position => 14)
+  card.skus.create(:name => 'Medical supplies'                                ).variants.create(:cents => 5000,  :currency => 'USD', :download => gift_card_pdf, :position => 15)
+  card.skus.create(:name => 'Desk and chair'                                  ).variants.create(:cents => 6000,  :currency => 'USD', :download => gift_card_pdf, :position => 16)
+  card.skus.create(:name => "Part-time Carpentry Teacher's salary (per month)").variants.create(:cents => 7500,  :currency => 'USD', :download => gift_card_pdf, :position => 17)
+  card.skus.create(:name => '2 Enormous Cooking Pots'                         ).variants.create(:cents => 10000, :currency => 'USD', :download => gift_card_pdf, :position => 18)
+  card.skus.create(:name => 'First semester of secondary school'              ).variants.create(:cents => 20000, :currency => 'USD', :download => gift_card_pdf, :position => 19)
+end
 
 # =============================================================================
 # = Locators                                                                  =

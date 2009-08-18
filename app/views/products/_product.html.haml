@@ -1,6 +1,6 @@
 - if product.available?(current_distributor)
   .product
-    .image= image_tag product.image.path
+    .image= image_tag product.image_path
     .content
       %h2= product.name
       = textilize product.description

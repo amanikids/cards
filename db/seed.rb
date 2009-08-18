@@ -1,16 +1,20 @@
 # =============================================================================
 # = Users                                                                     =
 # =============================================================================
-User.create(:name => 'Matthew Todd', :email => 'matthew.todd@gmail.com', :password => 'NOT REALLY')
-User.create(:name => 'Joe Ventura',  :email => 'joe@amanikids.org',      :password => 'NOT REALLY')
-User.create(:name => 'Valerie Todd', :email => 'valerie@amanikids.org',  :password => 'NOT REALLY')
+def password(name)
+  ENV[name.to_s.upcase] || (RAILS_ENV == 'production') ? raise("No password specified for #{name}") : 'foo'
+end
+
+User.create(:name => 'Matthew Todd', :email => 'matthew.todd@gmail.com', :password => password(:matthew))
+User.create(:name => 'Joe Ventura',  :email => 'joe@amanikids.org',      :password => password(:joe))
+User.create(:name => 'Valerie Todd', :email => 'valerie@amanikids.org',  :password => password(:valerie))
 
 # =============================================================================
 # = Distributors                                                              =
 # =============================================================================
-us = Distributor.create(:name => 'Dina Sciarra',   :email => 'amanikids@comcast.net',      :password => 'NOT REALLY', :country_code => 'us', :country => 'United States',  :currency => 'USD', :position => 1)
-ca = Distributor.create(:name => 'Randy Bacchus',  :email => 'randy.bacchus@sage.com',     :password => 'NOT REALLY', :country_code => 'ca', :country => 'Canada',         :currency => 'CAD', :position => 2)
-uk = Distributor.create(:name => 'Fiona McElhone', :email => 'fiona_mcelhone@hotmail.com', :password => 'NOT REALLY', :country_code => 'uk', :country => 'United Kingdom', :currency => 'GBP', :position => 3)
+us = Distributor.create(:name => 'Dina Sciarra',   :email => 'amanikids@comcast.net',      :password => password(:dina),  :country_code => 'us', :country => 'United States',  :currency => 'USD', :position => 1)
+ca = Distributor.create(:name => 'Randy Bacchus',  :email => 'randy.bacchus@sage.com',     :password => password(:randy), :country_code => 'ca', :country => 'Canada',         :currency => 'CAD', :position => 2)
+uk = Distributor.create(:name => 'Fiona McElhone', :email => 'fiona_mcelhone@hotmail.com', :password => password(:fiona), :country_code => 'uk', :country => 'United Kingdom', :currency => 'GBP', :position => 3)
 
 # =============================================================================
 # = Donation Methods                                                          =

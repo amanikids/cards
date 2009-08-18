@@ -29,10 +29,10 @@
         %td.number= m @cart.total
 
       %tr
-        %td{:colspan => 2}
+        %td{:colspan => 3}
           = link_to '&laquo; Continue Shopping', distributor_root_path(current_distributor)
           or
           = f.submit 'Update Quantities'
-        %td.checkout{:colspan => 4}
+        %td.checkout{:colspan => 3}
           = link_to 'Proceed to Checkout &raquo;', new_order_path(current_distributor)
 

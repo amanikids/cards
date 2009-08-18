@@ -4,6 +4,6 @@ namespace :db do
     load(File.join(RAILS_ROOT, 'db', 'seed.rb'))
   end
 
-  desc 'Reset migrations, cloning structure to test, and populate database with sample data.'
+  desc 'Reset and seed the database, cloning structure to test.'
   task :refresh => ['db:migrate:reset', 'db:test:clone', 'db:seed']
 end

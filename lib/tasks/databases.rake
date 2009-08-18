@@ -1,9 +1,13 @@
 namespace :db do
-  desc 'Populate database with real data.'
-  task :seed => :environment do
-    load(File.join(RAILS_ROOT, 'db', 'seed.rb'))
-  end
+  desc 'Drops and recreates the database from db/schema.rb for the current environment and loads the seeds.'
+  task :reset => [ 'db:drop', 'db:setup' ]
 
-  desc 'Reset and seed the database, cloning structure to test.'
-  task :refresh => ['db:migrate:reset', 'db:test:clone', 'db:seed']
+  desc 'Create the database, load the schema, and initialize with the seed data'
+  task :setup => ['db:create', 'db:schema:load', 'db:seed']
+
+  desc 'Load the seed data from db/seeds.rb'
+  task :seed => :environment do
+    seed_file = File.join(RAILS_ROOT, 'db', 'seeds.rb')
+    load(seed_file) if File.exist?(seed_file)
+  end
 end

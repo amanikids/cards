@@ -23,9 +23,9 @@ us.distributor_donation_methods.create(:position => 2, :donation_method => Donat
 ca.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
 ca.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque payable to \"Friends of Amani Canada\" and send it to:\n\nRandy Bacchus\n50 Burnhamthorpe Rd. West\nSte 700\nMississauga, ON\nL5B 3C2\n\nDonations are tax-deductible in Canada."))
 
-# TODO look at production; we might have a justgiving method there!
-uk.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
-uk.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nFiona McElhone\nFlat B\n27 Barnsbury Park\nLondon\nN1 1HQ\n\nDonations are eligible for Gift Aid in the UK."))
+uk.distributor_donation_methods.create(:position => 1, :donation_method => DonationMethod.create(:name => 'justgiving', :title => 'Donate at JustGiving', :description => "You can make your donation to Friends of Amani UK through \"JustGiving.com\":http://justgiving.com/amanichildren/donate. Friends of Amani UK is a volunteer-run charity supporting Amani Children's Home. The money raised by Friends of Amani UK is sent to Amani Children's Home in Moshi, Tanzania.\n\nYour donations to Friends of Amani UK are tax-free and eligible for Gift Aid in the United Kingdom."))
+uk.distributor_donation_methods.create(:position => 2, :donation_method => paypal)
+uk.distributor_donation_methods.create(:position => 3, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nFiona McElhone\nFlat B\n27 Barnsbury Park\nLondon\nN1 1HQ\n\nDonations are eligible for Gift Aid in the UK."))
 
 # =============================================================================
 # = Card Number One                                                           =

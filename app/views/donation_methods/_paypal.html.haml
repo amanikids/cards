@@ -1,5 +1,5 @@
-- paypal_donation_service_for order.token, :amount => order.total, :currency => order.currency do |service|
+- paypal_donation_service_for order.token, donation_method.account, :amount => order.total, :currency => order.currency do |service|
   - service.item_name = 'Contribution for Amani Christmas Cards'
-  - service.notify_url = order_paypal_donation_url(current_distributor, order)
+  - service.notify_url = order_paypal_donation_url(current_distributor, order, :donation_method_id => donation_method.id)
   - service.cancel_return_url = order_url(current_distributor, order)
   = submit_tag "Make My #{m order.total} Donation Online"

@@ -23,8 +23,8 @@ module ApplicationHelper
     "(#{number_to_percentage(100 * numerator.to_f / denominator, :precision => 0)})" unless denominator.zero?
   end
 
-  def paypal_donation_service_for(order, options = {})
-    payment_service_for(order, ActiveMerchant::Configuration.paypal_account, options.merge(:service => :paypal)) do |service|
+  def paypal_donation_service_for(order, account, options = {})
+    payment_service_for(order, (ActiveMerchant::Configuration.override_paypal_account || account), options.merge(:service => :paypal)) do |service|
       service.cmd = '_donations'
       yield service
     end

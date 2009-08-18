@@ -8,7 +8,7 @@ class PaypalDonationsControllerTest < ActionController::TestCase
 
     context 'with an existing Order and PayPal DonationMethod' do
       setup do
-        @order = Factory.create(:order)
+        @order  = Factory.create(:order)
         @method = Factory.create(:paypal_donation_method)
       end
 
@@ -25,7 +25,7 @@ class PaypalDonationsControllerTest < ActionController::TestCase
             setup { ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:item_id).returns(@order.token) }
 
             context 'create' do
-              setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token }
+              setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token, :donation_method_id => @method.id }
               should_change '@order.reload.donation', :from => nil
               should_change 'Donation.count', :by => 1
 
@@ -43,7 +43,7 @@ class PaypalDonationsControllerTest < ActionController::TestCase
             setup { ActiveMerchant::Billing::Integrations::Paypal::Notification.any_instance.stubs(:item_id).returns('not the right order token') }
 
             context 'create' do
-              setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token }
+              setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token, :donation_method_id => @method.id }
               should_not_change '@order.reload.donation'
               should_not_change 'Donation.count'
             end

@@ -20,7 +20,7 @@ class PaypalDonationsController < ApplicationController
   end
 
   def load_donation_method
-    @donation_method = DonationMethod.find_by_name('paypal') || raise(ActiveRecord::RecordNotFound)
+    @donation_method = DonationMethod.paypal.find(params[:donation_method_id])
   end
 
   def donation_received?

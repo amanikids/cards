@@ -8,23 +8,24 @@ User.create(:name => 'Valerie Todd', :email => 'valerie@amanikids.org',  :passwo
 # =============================================================================
 # = Distributors                                                              =
 # =============================================================================
-dina     = Distributor.create(:name => 'Dina Sciarra',    :email => 'amanikids@comcast.net',       :password => 'NOT REALLY', :country_code => 'us', :country => 'United States',  :currency => 'USD', :position => 1)
-danielle = Distributor.create(:name => 'Danielle Kozak',  :email => 'daniellekozak@gmail.com',     :password => 'NOT REALLY', :country_code => 'ca', :country => 'Canada',         :currency => 'CAD', :position => 2)
-shelley  = Distributor.create(:name => 'Shelley Malekia', :email => 'shelley_malekia@yahoo.co.uk', :password => 'NOT REALLY', :country_code => 'uk', :country => 'United Kingdom', :currency => 'GBP', :position => 3)
+us = Distributor.create(:name => 'Dina Sciarra',   :email => 'amanikids@comcast.net',      :password => 'NOT REALLY', :country_code => 'us', :country => 'United States',  :currency => 'USD', :position => 1)
+ca = Distributor.create(:name => 'Randy Bacchus',  :email => 'randy.bacchus@sage.com',     :password => 'NOT REALLY', :country_code => 'ca', :country => 'Canada',         :currency => 'CAD', :position => 2)
+uk = Distributor.create(:name => 'Fiona McElhone', :email => 'fiona_mcelhone@hotmail.com', :password => 'NOT REALLY', :country_code => 'uk', :country => 'United Kingdom', :currency => 'GBP', :position => 3)
 
 # =============================================================================
 # = Donation Methods                                                          =
 # =============================================================================
 paypal = DonationMethod.new(:name => 'paypal', :title => 'Donate Online', :description => "Donations made in support of the Amani Children's Home Christmas and Holiday Card fundraiser are processed through Peace House Africa using PayPal. Peace House Africa is a registered 501(c)3 charity in the United States committed to bringing educational opportunities to vulnerable children in Africa. Peace House Africa sends 100% of your donation to Amani Children's Home in Tanzania. Donations made from the United States are tax-deductible.")
 
-dina.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
-dina.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'check', :title => 'Mail a Check', :description => "Make your check payable to \"Friends of Amani US\" and send it to:\n\nDina Sciarra\n32 Teak Loop\nOscala, FL\n24472\n\nDonations are tax-deductible in the U.S."))
+us.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
+us.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'check', :title => 'Mail a Check', :description => "Make your check payable to \"Friends of Amani US\" and send it to:\n\nDina Sciarra\n32 Teak Loop\nOscala, FL\n24472\n\nDonations are tax-deductible in the U.S."))
 
-danielle.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
-danielle.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque payable to \"Friends of Amani Canada\" and send it to:\n\nDanielle Kozak\nc/o St. Augustine's School\n2145 West 8th Ave\nVancouver, BC\nV6K 2A5\n\nDonations are tax-deductible in Canada."))
+ca.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
+ca.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque payable to \"Friends of Amani Canada\" and send it to:\n\nRandy Bacchus\n50 Burnhamthorpe Rd. West\nSte 700\nMississauga, ON\nL5B 3C2\n\nDonations are tax-deductible in Canada."))
 
-shelley.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
-shelley.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nShelly Malekia\n128 Station Road West\nCanterbury, Kent\nCT2 8HY\n\nDonations are eligible for Gift Aid in the UK."))
+# TODO look at production; we might have a justgiving method there!
+uk.distributor_donation_methods.create(:position => 1, :donation_method => paypal)
+uk.distributor_donation_methods.create(:position => 2, :donation_method => DonationMethod.create(:name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nFiona McElhone\nFlat B\n27 Barnsbury Park\nLondon\nN1 1HQ\n\nDonations are eligible for Gift Aid in the UK."))
 
 # =============================================================================
 # = Card Number One                                                           =
@@ -34,17 +35,17 @@ joy = Product.create(:name => 'Joy to the World Holiday Card', :position => 1, :
 returning joy.skus.create(:name => 'Merry Christmas') do |sku|
   sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
   sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
-  sku.inventories.create(:distributor => dina,     :initial => 2000)
-  sku.inventories.create(:distributor => danielle, :initial => 1000)
-  sku.inventories.create(:distributor => shelley,  :initial => 1000)
+  sku.inventories.create(:distributor => us, :initial => 2000)
+  sku.inventories.create(:distributor => ca, :initial => 1000)
+  sku.inventories.create(:distributor => uk, :initial => 1000)
 end
 
 returning joy.skus.create(:name => 'Happy Holidays') do |sku|
   sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 3)
   sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 4)
-  sku.inventories.create(:distributor => dina,     :initial => 1500)
-  sku.inventories.create(:distributor => danielle, :initial => 750)
-  sku.inventories.create(:distributor => shelley,  :initial => 750)
+  sku.inventories.create(:distributor => us, :initial => 1500)
+  sku.inventories.create(:distributor => ca, :initial => 750)
+  sku.inventories.create(:distributor => uk, :initial => 750)
 end
 
 # =============================================================================
@@ -55,17 +56,17 @@ peace = Product.create(:name => 'Peace on Earth Holiday Card', :position => 2, :
 returning peace.skus.create(:name => 'Merry Christmas') do |sku|
   sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 5)
   sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 6)
-  sku.inventories.create(:distributor => dina,     :initial => 1000)
-  sku.inventories.create(:distributor => danielle, :initial => 0)
-  sku.inventories.create(:distributor => shelley,  :initial => 500)
+  sku.inventories.create(:distributor => us, :initial => 1000)
+  sku.inventories.create(:distributor => ca, :initial => 0)
+  sku.inventories.create(:distributor => uk, :initial => 500)
 end
 
 returning peace.skus.create(:name => 'Happy Holidays') do |sku|
   sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 7)
   sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 8)
-  sku.inventories.create(:distributor => dina,     :initial => 500)
-  sku.inventories.create(:distributor => danielle, :initial => 0)
-  sku.inventories.create(:distributor => shelley,  :initial => 500)
+  sku.inventories.create(:distributor => us, :initial => 500)
+  sku.inventories.create(:distributor => ca, :initial => 0)
+  sku.inventories.create(:distributor => uk, :initial => 500)
 end
 
 # =============================================================================

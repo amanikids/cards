@@ -33,63 +33,61 @@ end
 # =============================================================================
 # = Card Number One                                                           =
 # =============================================================================
-returning Product.create(:name => 'Joy to the World Holiday Card', :position => 1, :image_path => 'cards/joy_front_small.jpg', :description => "This playful holiday card captures the fun and imagination of the Amani children and is sure to warm the hearts of your family and friends. The design features some of Tanzania's most famous wild animals beneath a festive Mt. Kilimanjaro.\n\n**Two options** are available for the inside of the cards:\n\n* Merry Christmas!\n* Happy Holidays!") do |card|
-  returning card.skus.create(:name => 'Merry Christmas') do |sku|
+returning Product.create(:name => 'Peace on Earth', :position => 1, :image_path => 'cards/peace_on_earth_north_america.jpg', :description => "Amani means \"Peace\" in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Inside Message:** May the peace and beauty of the season be yours throughout the year.") do |card|
+  returning card.skus.create(:name => '') do |sku|
     sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
     sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
     sku.inventories.create(:distributor => us, :initial => 2000)
     sku.inventories.create(:distributor => ca, :initial => 1000)
-    sku.inventories.create(:distributor => uk, :initial => 1000)
   end
+end
 
-  returning card.skus.create(:name => 'Happy Holidays') do |sku|
-    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 3)
-    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 4)
-    sku.inventories.create(:distributor => us, :initial => 1500)
-    sku.inventories.create(:distributor => ca, :initial => 750)
-    sku.inventories.create(:distributor => uk, :initial => 750)
+returning Product.create(:name => 'Peace on Earth', :position => 2, :image_path => 'cards/peace_on_earth_uk.jpg', :description => "Amani means \"Peace\" in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.") do |card|
+  returning card.skus.create(:name => '') do |sku|
+    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
+    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
+    sku.inventories.create(:distributor => uk, :initial => 1000)
   end
 end
 
 # =============================================================================
 # = Card Number Two                                                           =
 # =============================================================================
-returning Product.create(:name => 'Peace on Earth Holiday Card', :position => 2, :image_path => 'cards/peace_front_cropped_small.jpg', :description => "\"Amani\" means Peace in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Two options** are available for the inside of the cards:\n\n* May the peace and beauty of the season be yours throughout the year. Happy Holidays!\n* May peace reign throughout the world and joy be found in every heart. Merry Christmas!") do |card|
-  returning card.skus.create(:name => 'Merry Christmas') do |sku|
-    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 5)
-    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 6)
+returning Product.create(:name => 'Christmas on the Savannah', :position => 3, :image_path => 'cards/christmas_on_the_savannah.jpg', :description => "Amani Children's Home is located in Tanzania, East Africa. The Umbrella Thorn Acacia tree, featured here, is one of Tanzania's many iconic images. Help spread the hope and joy of the holiday season with this beautiful Christmas card. The proceeds from the sale of this card will be used to fund the education of a child that Amani works with, giving them the gift of an education every day of the year.\n\n**Inside Message:** Tis the Season... for peace, love, and joy!") do |card|
+  returning card.skus.create(:name => '') do |sku|
+    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
+    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
     sku.inventories.create(:distributor => us, :initial => 1000)
-    sku.inventories.create(:distributor => ca, :initial => 0)
-    sku.inventories.create(:distributor => uk, :initial => 500)
+    sku.inventories.create(:distributor => ca, :initial => 1000)
   end
+end
 
-  returning card.skus.create(:name => 'Happy Holidays') do |sku|
-    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 7)
-    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 8)
-    sku.inventories.create(:distributor => us, :initial => 500)
-    sku.inventories.create(:distributor => ca, :initial => 0)
-    sku.inventories.create(:distributor => uk, :initial => 500)
+returning Product.create(:name => 'Christmas on the Savannah', :position => 4, :image_path => 'cards/christmas_on_the_savannah.jpg', :description => "Amani Children's Home is located in Tanzania, East Africa. The Umbrella Thorn Acacia tree, featured here, is one of Tanzania's many iconic images. Help spread the hope and joy of the holiday season with this beautiful Christmas card. The proceeds from the sale of this card will be used to fund the education of a child that Amani works with, giving them the gift of an education every day of the year.") do |card|
+  returning card.skus.create(:name => '') do |sku|
+    sku.variants.create(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
+    sku.variants.create(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
+    sku.inventories.create(:distributor => uk, :initial => 1000)
   end
 end
 
 # =============================================================================
 # = Card Number Three                                                         =
 # =============================================================================
-gift_card_pdf = Download.create(:name => 'gift_cards.pdf', :content_type => 'application/pdf')
-
-returning Product.create(:name => 'Amani Alternative Gift Card', :position => 3, :image_path => 'cards/gift_front_small.jpg', :description => "Instead of a traditional gift, you can honor your loved one by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.\n\nThis holiday season, give the gift of hope. Order you Alternative Gift Cards today!\n\nHere are some of the alternative gift options:\n\n") do |card|
-  card.skus.create(:name => 'Textbook'                                        ).variants.create(:cents => 400,   :currency => 'USD', :download => gift_card_pdf, :position => 9)
-  card.skus.create(:name => 'School Uniform'                                  ).variants.create(:cents => 1000,  :currency => 'USD', :download => gift_card_pdf, :position => 10)
-  card.skus.create(:name => 'Bedding (sheet and blanket)'                     ).variants.create(:cents => 1600,  :currency => 'USD', :download => gift_card_pdf, :position => 11)
-  card.skus.create(:name => 'Sports equipment (cleats, balls jerseys)'        ).variants.create(:cents => 2500,  :currency => 'USD', :download => gift_card_pdf, :position => 12)
-  card.skus.create(:name => 'Art supplies'                                    ).variants.create(:cents => 3000,  :currency => 'USD', :download => gift_card_pdf, :position => 13)
-  card.skus.create(:name => '2 Drums'                                         ).variants.create(:cents => 4000,  :currency => 'USD', :download => gift_card_pdf, :position => 14)
-  card.skus.create(:name => 'Medical supplies'                                ).variants.create(:cents => 5000,  :currency => 'USD', :download => gift_card_pdf, :position => 15)
-  card.skus.create(:name => 'Desk and chair'                                  ).variants.create(:cents => 6000,  :currency => 'USD', :download => gift_card_pdf, :position => 16)
-  card.skus.create(:name => "Part-time Carpentry Teacher's salary (per month)").variants.create(:cents => 7500,  :currency => 'USD', :download => gift_card_pdf, :position => 17)
-  card.skus.create(:name => '2 Enormous Cooking Pots'                         ).variants.create(:cents => 10000, :currency => 'USD', :download => gift_card_pdf, :position => 18)
-  card.skus.create(:name => 'First semester of secondary school'              ).variants.create(:cents => 20000, :currency => 'USD', :download => gift_card_pdf, :position => 19)
-end
+# gift_card_pdf = Download.create(:name => 'gift_cards.pdf', :content_type => 'application/pdf')
+#
+# returning Product.create(:name => 'Amani Alternative Gift Card', :position => 5, :image_path => 'cards/gift_front_small.jpg', :description => "Instead of a traditional gift, you can honor your loved one by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.\n\nThis holiday season, give the gift of hope. Order you Alternative Gift Cards today!\n\nHere are some of the alternative gift options:\n\n") do |card|
+#   card.skus.create(:name => 'Textbook'                                        ).variants.create(:cents => 400,   :currency => 'USD', :download => gift_card_pdf, :position => 9)
+#   card.skus.create(:name => 'School Uniform'                                  ).variants.create(:cents => 1000,  :currency => 'USD', :download => gift_card_pdf, :position => 10)
+#   card.skus.create(:name => 'Bedding (sheet and blanket)'                     ).variants.create(:cents => 1600,  :currency => 'USD', :download => gift_card_pdf, :position => 11)
+#   card.skus.create(:name => 'Sports equipment (cleats, balls jerseys)'        ).variants.create(:cents => 2500,  :currency => 'USD', :download => gift_card_pdf, :position => 12)
+#   card.skus.create(:name => 'Art supplies'                                    ).variants.create(:cents => 3000,  :currency => 'USD', :download => gift_card_pdf, :position => 13)
+#   card.skus.create(:name => '2 Drums'                                         ).variants.create(:cents => 4000,  :currency => 'USD', :download => gift_card_pdf, :position => 14)
+#   card.skus.create(:name => 'Medical supplies'                                ).variants.create(:cents => 5000,  :currency => 'USD', :download => gift_card_pdf, :position => 15)
+#   card.skus.create(:name => 'Desk and chair'                                  ).variants.create(:cents => 6000,  :currency => 'USD', :download => gift_card_pdf, :position => 16)
+#   card.skus.create(:name => "Part-time Carpentry Teacher's salary (per month)").variants.create(:cents => 7500,  :currency => 'USD', :download => gift_card_pdf, :position => 17)
+#   card.skus.create(:name => '2 Enormous Cooking Pots'                         ).variants.create(:cents => 10000, :currency => 'USD', :download => gift_card_pdf, :position => 18)
+#   card.skus.create(:name => 'First semester of secondary school'              ).variants.create(:cents => 20000, :currency => 'USD', :download => gift_card_pdf, :position => 19)
+# end
 
 # =============================================================================
 # = Locators                                                                  =

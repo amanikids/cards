@@ -12,6 +12,7 @@ class Sku < ActiveRecord::Base
   end
 
   def quantity(distributor)
-    inventory(distributor).available
+    inventory = inventory(distributor)
+    inventory ? inventory.available : 0
   end
 end

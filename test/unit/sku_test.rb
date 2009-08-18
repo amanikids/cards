@@ -23,4 +23,10 @@ class SkuTest < ActiveSupport::TestCase
     sku.stubs(:inventory).with(:distributor).returns(stub(:available => 300))
     assert_equal 300, sku.quantity(:distributor)
   end
+
+  should 'have zero quantity when inventory(distributor) is nil' do
+    sku = Factory.build(:sku)
+    sku.stubs(:inventory).with(:distributor).returns(nil)
+    assert_equal 0, sku.quantity(:distributor)
+  end
 end

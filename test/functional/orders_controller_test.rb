@@ -26,24 +26,16 @@ class OrdersControllerTest < ActionController::TestCase
           should_render_template 'new'
         end
 
-        context 'when save succeeds' do
-          setup { Order.any_instance.stubs(:save).returns(true) }
-
-          context 'create' do
-            setup { post :create, :distributor_id => @distributor.to_param }
-            should_redirect_to 'order_path(@distributor, @cart)'
-            should_change 'Cart.count', :by => -1
-            should_change '@controller.current_cart', :to => nil
-          end
+        context 'create valid' do
+          setup { post :create, :distributor_id => @distributor.to_param, :order => { :address => Factory.attributes_for(:address) } }
+          should_redirect_to 'order_path(@distributor, @controller.instance_variable_get(:@order))'
+          should_change 'Cart.count', :by => -1
+          should_change '@controller.current_cart', :to => nil
         end
 
-        context 'when save fails' do
-          setup { Order.any_instance.stubs(:save).returns(false) }
-
-          context 'create' do
-            setup { post :create, :distributor_id => @distributor.to_param }
-            should_render_template :new
-          end
+        context 'create invalid' do
+          setup { post :create, :distributor_id => @distributor.to_param }
+          should_render_template :new
         end
       end
     end

@@ -16,6 +16,7 @@ Rails::Initializer.run do |config|
   config.gem 'activemerchant', :lib => 'active_merchant'
   config.gem 'haml'
   config.gem 'money', :source => 'http://dist.leetsoft.com'
+  config.gem 'RedCloth', :lib => 'redcloth'
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )

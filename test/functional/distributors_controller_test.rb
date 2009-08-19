@@ -30,7 +30,7 @@ class DistributorsControllerTest < ActionController::TestCase
 
       context 'show' do
         setup { get :show, :id => @distributor.to_param }
-        should_assign_to :distributor, :equals => '@distributor'
+        should_assign_to(:distributor) { @distributor }
       end
 
       context 'when update_inventories succeeds' do
@@ -38,7 +38,7 @@ class DistributorsControllerTest < ActionController::TestCase
         context 'update' do
           setup { put :update, :inventories => :inventory_attributes, :id => @distributor.to_param }
           should_set_the_flash_to 'Inventory updated.'
-          should_redirect_to 'distributor_path(@distributor)'
+          should_redirect_to('the distributor page') { distributor_path(@distributor) }
         end
       end
 
@@ -60,13 +60,13 @@ class DistributorsControllerTest < ActionController::TestCase
 
     context 'index' do
       setup { get :index }
-      should_redirect_to 'distributor_path(@us_distributor)'
+      should_redirect_to('the US distributor page') { distributor_path(@us_distributor) }
     end
 
     context 'viewing and editing self' do
       context 'show' do
         setup { get :show, :id => @us_distributor.to_param }
-        should_assign_to :distributor, :equals => '@us_distributor'
+        should_assign_to(:distributor) { @us_distributor }
       end
 
       context 'when update_inventories succeeds' do
@@ -74,7 +74,7 @@ class DistributorsControllerTest < ActionController::TestCase
         context 'update' do
           setup { put :update, :inventories => :inventory_attributes, :id => @us_distributor.to_param }
           should_set_the_flash_to 'Inventory updated.'
-          should_redirect_to 'distributor_path(@distributor)'
+          should_redirect_to('the distributor page') { distributor_path(@us_distributor) }
         end
       end
 
@@ -92,12 +92,12 @@ class DistributorsControllerTest < ActionController::TestCase
 
       context 'show' do
         setup { get :show, :id => @ca_distributor.to_param }
-        should_redirect_to 'distributor_path(@us_distributor)'
+        should_redirect_to('the US distributor page') { distributor_path(@us_distributor) }
       end
 
       context 'update' do
         setup { put :update, :inventories => :inventory_attributes, :id => @ca_distributor.to_param }
-        should_redirect_to 'distributor_path(@us_distributor)'
+        should_redirect_to('the US distributor page') { distributor_path(@us_distributor) }
       end
     end
   end

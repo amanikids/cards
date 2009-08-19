@@ -17,7 +17,7 @@ class RootsControllerTest < ActionController::TestCase
         setup { Distributor.stubs(:find_by_country_code).with('COUNTRY_CODE').returns(@custom_distributor) }
         context 'index' do
           setup { get :index }
-          should_redirect_to 'distributor_root_path(@custom_distributor)'
+          should_redirect_to('the products page for that distributor') { distributor_root_path(@custom_distributor) }
         end
       end
 
@@ -25,7 +25,7 @@ class RootsControllerTest < ActionController::TestCase
         setup { Distributor.stubs(:find_by_country_code).with('COUNTRY_CODE').returns(nil) }
         context 'index' do
           setup { get :index }
-          should_redirect_to 'distributor_root_path(@default_distributor)'
+          should_redirect_to('the default products page') { distributor_root_path(@default_distributor) }
         end
       end
     end

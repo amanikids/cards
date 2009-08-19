@@ -15,7 +15,7 @@ class ItemsControllerTest < ActionController::TestCase
         should_change 'Cart.count', :by => 1
         should_change '@distributor.carts.count', :by => 1
         should_change 'Item.count', :by => 1
-        should_redirect_to 'distributor_root_path(@distributor)'
+        should_redirect_to('the products page') { distributor_root_path(@distributor) }
       end
 
       context 'with an existing cart' do
@@ -25,7 +25,7 @@ class ItemsControllerTest < ActionController::TestCase
           setup { post :create, :distributor_id => @distributor.to_param, :item => Factory.attributes_for(:item, :variant_id => Factory(:variant).id) }
           should_not_change 'Cart.count'
           should_change 'Item.count', :by => 1
-          should_redirect_to 'distributor_root_path(@distributor)'
+          should_redirect_to('the products page') { distributor_root_path(@distributor) }
         end
       end
     end
@@ -40,7 +40,7 @@ class ItemsControllerTest < ActionController::TestCase
           setup { delete :destroy, :distributor_id => @distributor.to_param, :id => @item.id }
           should_change 'Item.count', :by => -1
           should_set_the_flash_to 'Item removed.'
-          should_redirect_to 'cart_path(@distributor)'
+          should_redirect_to('the cart page') { cart_path(@distributor) }
         end
       end
     end

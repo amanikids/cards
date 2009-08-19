@@ -26,7 +26,7 @@ class DonationsControllerTest < ActionController::TestCase
           assert_nil @order.donation.received_at
         end
 
-        should_redirect_to 'order_path(@distributor, @order)'
+        should_redirect_to('the Order') { order_path(@distributor, @order) }
       end
     end
 
@@ -39,7 +39,7 @@ class DonationsControllerTest < ActionController::TestCase
         context 'update' do
           setup { put :update, :distributor_id => @distributor.to_param, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
           should_not_change '@donation.received_at'
-          should_redirect_to 'new_session_path'
+          should_redirect_to('the login page') { new_session_path }
         end
       end
 
@@ -49,7 +49,7 @@ class DonationsControllerTest < ActionController::TestCase
         context 'update' do
           setup { put :update, :distributor_id => @distributor.to_param, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
           should_change '@donation.reload.received_at'
-          should_redirect_to 'order_path(@distributor, @order)'
+          should_redirect_to('the Order') { order_path(@distributor, @donation.order) }
         end
       end
     end

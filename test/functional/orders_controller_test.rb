@@ -14,7 +14,7 @@ class OrdersControllerTest < ActionController::TestCase
 
       context 'new' do
         setup { get :new, :distributor_id => @distributor.to_param }
-        should_redirect_to 'distributor_root_path(@distributor)'
+        should_redirect_to('the products page') { distributor_root_path(@distributor) }
       end
 
       context 'with one item' do
@@ -28,7 +28,7 @@ class OrdersControllerTest < ActionController::TestCase
 
         context 'create valid' do
           setup { post :create, :distributor_id => @distributor.to_param, :order => { :address => Factory.attributes_for(:address) } }
-          should_redirect_to 'order_path(@distributor, @controller.instance_variable_get(:@order))'
+          should_redirect_to('the Order') { order_path(@distributor, @controller.instance_variable_get(:@order)) }
           should_change 'Cart.count', :by => -1
           should_change '@controller.current_cart', :to => nil
         end
@@ -45,7 +45,7 @@ class OrdersControllerTest < ActionController::TestCase
 
       context 'show' do
         setup { get :show, :distributor_id => @distributor.to_param, :id => @order.token }
-        should_assign_to :order, :equals => '@order'
+        should_assign_to(:order) { @order }
       end
 
       context 'not logged in' do
@@ -55,13 +55,13 @@ class OrdersControllerTest < ActionController::TestCase
           setup { @other_distributor = Factory(:distributor) }
           context 'update' do
             setup { put :update, :distributor_id => @distributor.to_param, :id => @order.token, :order => { :distributor_id => @other_distributor.id } }
-            should_redirect_to 'new_session_path'
+            should_redirect_to('the login page') { new_session_path }
           end
         end
 
         context 'destroy' do
           setup { delete :destroy, :distributor_id => @distributor.to_param, :id => @order.token }
-          should_redirect_to 'new_session_path'
+          should_redirect_to('the login page') { new_session_path }
         end
       end
 
@@ -74,14 +74,14 @@ class OrdersControllerTest < ActionController::TestCase
             setup { put :update, :distributor_id => @distributor.to_param, :id => @order.token, :order => { :distributor_id => @other_distributor.id } }
             should_change '@distributor.orders.count', :by => -1
             should_change '@other_distributor.orders.count', :by => 1
-            should_redirect_to 'order_path(@other_distributor, @order)'
+            should_redirect_to('the Order') { order_path(@other_distributor, @order) }
           end
         end
 
         context 'destroy' do
           setup { delete :destroy, :distributor_id => @distributor.to_param, :id => @order.token }
           should_change 'Order.count', :by => -1
-          should_redirect_to 'distributor_path(@distributor)'
+          should_redirect_to('the distributor') { distributor_path(@distributor) }
         end
       end
     end

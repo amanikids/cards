@@ -15,12 +15,12 @@ class ShipmentsControllerTest < ActionController::TestCase
 
         context 'create' do
           setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token }
-          should_redirect_to 'new_session_path'
+          should_redirect_to('the login page') { new_session_path }
         end
 
         context 'destroy' do
           setup { delete :destroy, :distributor_id => @distributor.to_param, :order_id => @order.token }
-          should_redirect_to 'new_session_path'
+          should_redirect_to('the login page') { new_session_path }
         end
       end
 
@@ -31,7 +31,7 @@ class ShipmentsControllerTest < ActionController::TestCase
           setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token }
           should_change '@order.reload.shipment', :from => nil
           should_change 'Shipment.count', :by => 1
-          should_redirect_to 'order_path(@distributor, @order)'
+          should_redirect_to('the order page') { order_path(@distributor, @order) }
         end
 
         context 'with an existing Shipment' do
@@ -41,7 +41,7 @@ class ShipmentsControllerTest < ActionController::TestCase
             setup { delete :destroy, :distributor_id => @distributor.to_param, :order_id => @order.token }
             should_change '@order.reload.shipment'
             should_change 'Shipment.count', :by => -1
-            should_redirect_to 'order_path(@distributor, @order)'
+            should_redirect_to('the order page') { order_path(@distributor, @order) }
           end
         end
       end

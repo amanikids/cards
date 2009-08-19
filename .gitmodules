@@ -1,3 +1,0 @@
-[submodule "vendor/plugins/has_digest"]
-	path = vendor/plugins/has_digest
-	url = git://github.com/matthewtodd/has_digest.git

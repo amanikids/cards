@@ -1,8 +1,8 @@
 class Product < ActiveRecord::Base
   validates_presence_of :name
 
-  has_many :skus
-  has_many :variants, :through => :skus, :order => :position, :include => :sku
+  has_many :inventories
+  has_many :variants, :order => :position
 
   named_scope :ordered, :order => :position
 
@@ -12,5 +12,14 @@ class Product < ActiveRecord::Base
 
   def available_variants(distributor)
     variants.select { |variant| variant.available?(distributor) }
+  end
+
+  def inventory(distributor)
+    inventories.detect { |inventory| inventory.distributor == distributor }
+  end
+
+  def quantity(distributor)
+    inventory = inventory(distributor)
+    inventory ? inventory.available : 0
   end
 end

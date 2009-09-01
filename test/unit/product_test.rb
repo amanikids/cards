@@ -2,9 +2,28 @@ require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
   should_validate_presence_of :name
-  should_have_many :skus
-  should_have_many :variants, :through => :skus
+  should_have_many :inventories
+  should_have_many :variants
   should_have_named_scope :ordered, :order => :position
+
+  should 'look up inventory from distributor' do
+    inventory   = Factory.create(:inventory)
+    distributor = inventory.distributor
+    product     = inventory.product
+    assert_equal inventory, product.inventory(distributor)
+  end
+
+  should 'delgate quantity to inventory(distributor).available' do
+    product = Factory.build(:product)
+    product.stubs(:inventory).with(:distributor).returns(stub(:available => 300))
+    assert_equal 300, product.quantity(:distributor)
+  end
+
+  should 'have zero quantity when inventory(distributor) is nil' do
+    product = Factory.build(:product)
+    product.stubs(:inventory).with(:distributor).returns(nil)
+    assert_equal 0, product.quantity(:distributor)
+  end
 
   should 'filter available_variants by distributor' do
     product     = Factory.build(:product)

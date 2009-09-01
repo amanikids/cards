@@ -1,8 +1,8 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class InventoryTest < ActiveSupport::TestCase
   should_belong_to :distributor
-  should_belong_to :sku
+  should_belong_to :product
 
   should_validate_numericality_of :actual
   should_not_allow_values_for :actual, -1, :message => /greater than/
@@ -22,6 +22,10 @@ class InventoryTest < ActiveSupport::TestCase
     should 'adjust inital when setting actual' do
       @inventory.update_attributes('actual' => '250')
       assert_equal 350, @inventory.reload.initial
+    end
+
+    should 'delegate product_name to product' do
+      assert_equal @inventory.product.name, @inventory.product_name
     end
   end
 end

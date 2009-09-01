@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class OrderTest < ActiveSupport::TestCase
   should_have_named_scope :shipped,   :include => :shipment, :conditions => 'shipments.id IS NOT NULL', :order => 'lists.created_at'
@@ -20,13 +20,13 @@ class OrderTest < ActiveSupport::TestCase
   end
 
   context 'a validated Order with an invalid Address' do
-    setup { @order = Order.new(:address => {}); @order.valid? }
+    setup { @order = Factory.create(:distributor).orders.build(:address => {}); @order.valid? }
     should('have errors on address') { assert @order.errors.on(:address) }
     should('address should have errors on attributes') { assert @order.address.errors.any? }
   end
 
   context 'initializing with address attributes' do
-    setup { @order = Order.new(:address => Factory.attributes_for(:address)) }
+    setup { @order = Factory.create(:distributor).orders.build(:address => Factory.attributes_for(:address)) }
     should('make an address') { assert_equal Address, @order.address.class }
     should('make a new record') { assert @order.address.new_record? }
 
@@ -128,11 +128,80 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal :token, order.to_param
   end
 
-  should 'return items_for a sku' do
+  should 'return items_for a product' do
     order = Order.new
-    match = stub(:sku => 'SKU')
-    other = stub(:sku => 'SOME OTHER SKU')
+    match = stub(:product => 'PRODUCT')
+    other = stub(:product => 'SOME OTHER PRODUCT')
     order.stubs(:items).returns [match, other]
-    assert_equal [match], order.items_for('SKU')
+    assert_equal [match], order.items_for('PRODUCT')
+  end
+
+  context 'maintaining inventory counter caches' do
+    setup do
+      @distributor = Factory.create(:distributor)
+      Factory.create(:inventory, :distributor => @distributor)
+      Factory.create(:inventory, :distributor => @distributor)
+
+      @order = Factory.build(:order, :distributor => @distributor)
+      @distributor.inventories.each do |inventory|
+        @order.items << Factory.build(:item, :variant => Factory.create(:variant, :product => inventory.product))
+      end
+
+      @capture_count_differences = lambda do |attribute, block|
+        counts = lambda do |attribute|
+          @distributor.inventories.map do |inventory|
+            inventory.reload.send(attribute)
+          end
+        end
+
+        original_counts = counts.call(attribute)
+        block.call
+        adjusted_counts = counts.call(attribute)
+        original_counts.zip(adjusted_counts).map { |o, a| a - o }
+      end
+    end
+
+    should 'increment promised inventory for each item on order create' do
+      expected_differences = @order.items.map { |item| item.product_count }
+      actual_differences = @capture_count_differences.call(:promised, lambda {
+        @order.save!
+      })
+      assert_equal expected_differences, actual_differences
+    end
+
+    should 'decrement promised inventory for each item when destroying an order' do
+      @order.save!
+
+      expected_differences = @order.items.map { |item| -item.product_count }
+      actual_differences = @capture_count_differences.call(:promised, lambda {
+        @order.destroy
+      })
+      assert_equal expected_differences, actual_differences
+    end
+
+    should 'increment shipped inventory for each item on shipment create' do
+      @order.save!
+
+      shipment = Factory.build(:shipment, :order => @order)
+
+      expected_differences = @order.items.map { |item| item.product_count }
+      actual_differences = @capture_count_differences.call(:shipped, lambda {
+        shipment.save!
+      })
+      assert_equal expected_differences, actual_differences
+    end
+
+    should 'decrement shipped inventory for each item on shipment destroy' do
+      @order.save!
+
+      shipment = Factory.build(:shipment, :order => @order)
+      shipment.save!
+
+      expected_differences = @order.items.map { |item| -item.product_count }
+      actual_differences = @capture_count_differences.call(:shipped, lambda {
+        shipment.destroy
+      })
+      assert_equal expected_differences, actual_differences
+    end
   end
 end

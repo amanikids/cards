@@ -1,26 +1,22 @@
 class Variant < ActiveRecord::Base
-  belongs_to :sku
+  belongs_to :product
   composed_of :price, :class_name => 'Money', :mapping => [%w(cents cents), %w(currency currency)]
-  validates_presence_of :cents, :currency, :sku_id
+  validates_presence_of :cents, :currency, :product_id
 
   def available?(distributor)
     quantity_available?(distributor, 1)
   end
 
   def description
-    size == 1 ? sku_name : "#{size}-pack #{sku_name}"
+    size == 1 ? '' : "#{size}-pack"
   end
 
   def product_name
-    sku.product_name
+    product.name
   end
 
   def running_low?(distributor)
     !quantity_available?(distributor, 25)
-  end
-
-  def sku_name
-    sku.name
   end
 
   def to_param
@@ -30,6 +26,6 @@ class Variant < ActiveRecord::Base
   private
 
   def quantity_available?(distributor, number_of_packs)
-    sku.quantity(distributor) >= (number_of_packs * size)
+    product.quantity(distributor) >= (number_of_packs * size)
   end
 end

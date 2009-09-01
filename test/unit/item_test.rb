@@ -8,41 +8,39 @@ class ItemTest < ActiveSupport::TestCase
   should_not_allow_values_for :quantity, -1, 0, :message => /greater than/
   should_not_allow_values_for :quantity, 3.14, :message =>  /not a number/
 
-  should 'delegate product_name to variant' do
-    item = Item.new
-    item.stubs(:variant).returns(stub(:product_name => 'PRODUCT_NAME'))
-    assert_equal 'PRODUCT_NAME', item.product_name
+  context 'delgation' do
+    setup do
+      @item = Factory.build(:item)
+    end
+
+    should 'delegate product_name to variant' do
+      assert_equal @item.variant.product_name, @item.product_name
+    end
+
+    should 'delegate product to variant' do
+      assert_equal @item.variant.product, @item.product
+    end
+
+    should 'delegate variant_description to variant' do
+      assert_equal @item.variant.description, @item.variant_description
+    end
+
+    should 'delegate variant_price to variant, converting currency' do
+      item = Factory.build(:item, :list => Factory.build(:list, :distributor => Factory.build(:distributor, :currency => 'GBP')))
+      assert_equal item.variant.price.exchange_to('GBP'), item.variant_price
+      assert_equal 'GBP', item.variant_price.currency, 'this is here because exchanged currencies compare as =='
+    end
+
+    should 'delegate variant_size to variant' do
+      assert_equal @item.variant.size, @item.variant_size
+    end
   end
 
-  should 'delegate sku to variant' do
-    item = Item.new
-    item.stubs(:variant).returns(stub(:sku => 'SKU'))
-    assert_equal 'SKU', item.sku
-  end
-
-  should 'delegate variant_description to variant' do
-    item = Item.new
-    item.stubs(:variant).returns(stub(:description => 'DESCRIPTION'))
-    assert_equal 'DESCRIPTION', item.variant_description
-  end
-
-  should 'delegate variant_price to variant, converting currency' do
-    item = Factory.build(:item, :list => Factory.build(:list, :distributor => Factory.build(:distributor, :currency => 'GBP')))
-    assert_equal item.variant.price.exchange_to('GBP'), item.variant_price
-    assert_equal 'GBP', item.variant_price.currency, 'this is here because exchanged currencies compare as =='
-  end
-
-  should 'delegate variant_size to variant' do
-    item = Item.new
-    item.stubs(:variant).returns(stub(:size => 'SIZE'))
-    assert_equal 'SIZE', item.variant_size
-  end
-
-  should 'multiply quantity and variant_size to get sku_count' do
+  should 'multiply quantity and variant_size to get product_count' do
     item = Item.new
     item.stubs(:quantity).returns(3)
     item.stubs(:variant_size).returns(7)
-    assert_equal 21, item.sku_count
+    assert_equal 21, item.product_count
   end
 
   context 'total' do

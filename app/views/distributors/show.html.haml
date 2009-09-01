@@ -13,19 +13,16 @@
   %table
     %thead
       %tr
-        %th Front
-        %th Inside
-        %th Number of Cards on Hand
+        %th Card
+        %th Number on Hand
     %tbody
     - @distributor.inventories.each do |inventory|
       %tr
         - fields_for 'inventories[]', inventory do |fields|
-          %td= inventory.sku.product_name
-          %td= inventory.sku.name
+          %td= inventory.product_name
           %td= fields.text_field :actual
     %tfoot
       %tr
-        %td
         %td
         %td= f.submit 'Update Inventory'
 

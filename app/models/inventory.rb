@@ -1,9 +1,11 @@
 class Inventory < ActiveRecord::Base
   belongs_to :distributor
-  belongs_to :sku
+  belongs_to :product
   attr_accessor :actual
   validates_numericality_of :actual, :only_integer => true, :greater_than_or_equal_to => 0
   before_save :calculate_initial
+
+  delegate :name, :to => :product, :prefix => true
 
   def actual
     @actual || initial - shipped
@@ -14,19 +16,19 @@ class Inventory < ActiveRecord::Base
   end
 
   def item_promised(item)
-    increment! :promised, item.sku_count
+    increment! :promised, item.product_count
   end
 
   def item_unpromised(item)
-    decrement! :promised, item.sku_count
+    decrement! :promised, item.product_count
   end
 
   def item_shipped(item)
-    increment! :shipped, item.sku_count
+    increment! :shipped, item.product_count
   end
 
   def item_unshipped(item)
-    decrement! :shipped, item.sku_count
+    decrement! :shipped, item.product_count
   end
 
   private

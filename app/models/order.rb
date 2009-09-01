@@ -45,8 +45,8 @@ class Order < List
     donation ? donation.received_at : nil
   end
 
-  def items_for(sku)
-    items.select { |item| item.sku == sku }
+  def items_for(product)
+    items.select { |item| item.product == product }
   end
 
   def shipped_at

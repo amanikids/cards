@@ -40,11 +40,11 @@ end
 Factory.define(:inventory) do |inventory|
   inventory.initial 300
   inventory.association :distributor
-  inventory.association :sku
+  inventory.association :product
 end
 
 Factory.define(:item) do |item|
-  item.quantity 1
+  item.quantity { (1..5).to_a.rand }
   item.association :variant
 end
 
@@ -72,11 +72,6 @@ Factory.define(:shipment) do |shipment|
   shipment.association :order
 end
 
-Factory.define(:sku) do |sku|
-  sku.name 'the blue one'
-  sku.association :product
-end
-
 Factory.define(:system_user) do |system_user|
   system_user.email { Factory.next(:email) }
   system_user.password 'foo'
@@ -90,6 +85,6 @@ end
 Factory.define(:variant) do |variant|
   variant.cents 1000
   variant.currency 'USD'
-  variant.size 5
-  variant.association :sku
+  variant.size { [10, 25].rand }
+  variant.association :product
 end

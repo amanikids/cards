@@ -26,6 +26,3 @@ config.action_mailer.default_url_options = { :host => 'shoes.local:3000' }
 # They can then be installed with "RAILS_ENV=test rake gems:install" on new installations.
 config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl',   :source => 'http://gems.github.com'
 config.gem 'thoughtbot-shoulda',      :lib => 'shoulda/rails',  :source => "http://gems.github.com"
-
-# Disable observers while testing.
-config.active_record.observers = []

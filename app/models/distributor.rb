@@ -38,7 +38,9 @@ class Distributor < User
   end
 
   def sold_out?
-    !any_variants_available?
+    inventories.none? do |inventory|
+      inventory.product.available?(self)
+    end
   end
 
   def to_param
@@ -49,6 +51,7 @@ class Distributor < User
     orders.unshipped.count
   end
 
+  # TODO this should use nested_attributes
   def update_inventories(attributes)
     attributes = attributes.stringify_keys
     inventories.map { |inventory| inventory.update_attributes attributes[inventory.id.to_s] }.all?
@@ -56,15 +59,9 @@ class Distributor < User
 
   private
 
-  def any_variants_available?
-    inventories.any? do |inventory|
-      inventory.sku.variants.any? { |variant| variant.available?(self) }
-    end
-  end
-
   def update_inventories_with_items_from(order, event)
     inventories.each do |inventory|
-      order.items_for(inventory.sku).each do |item|
+      order.items_for(inventory.product).each do |item|
         inventory.send(event, item)
       end
     end

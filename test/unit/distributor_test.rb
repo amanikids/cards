@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class DistributorTest < ActiveSupport::TestCase
   should_have_many :carts
@@ -46,6 +46,34 @@ class DistributorTest < ActiveSupport::TestCase
         should('return false') { assert !@result }
         should_not_change '@inventory.reload.actual'
       end
+    end
+  end
+
+  context '#sold_out?' do
+    should 'be true when the distributor has no inventory' do
+      distributor = Factory.create(:distributor)
+      assert_equal true, distributor.sold_out?
+    end
+
+    should 'be true when no variants are in stock for the distributor' do
+      distributor = Factory.create(:inventory, :initial => 0).distributor
+      assert_equal true, distributor.sold_out?
+    end
+
+    should 'be true when stock is left but not enough to fulfill any variants' do
+      inventory = Factory.create(:inventory, :initial => 1)
+      distributor = inventory.distributor
+      Factory.create(:variant, :product => inventory.product, :size => 2)
+
+      assert_equal true, distributor.sold_out?
+    end
+
+    should 'be false when at least one variant is in stock for the distributor' do
+      inventory = Factory.create(:inventory, :initial => 1)
+      distributor = inventory.distributor
+      Factory.create(:variant, :product => inventory.product, :size => 1)
+
+      assert_equal false, distributor.sold_out?
     end
   end
 end

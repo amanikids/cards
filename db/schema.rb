@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090901073722) do
+ActiveRecord::Schema.define(:version => 20090901082056) do
 
   create_table "addresses", :force => true do |t|
     t.string   "name"
@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(:version => 20090901073722) do
 
   create_table "inventories", :force => true do |t|
     t.integer  "distributor_id"
-    t.integer  "sku_id"
     t.integer  "initial",        :default => 0
     t.integer  "promised",       :default => 0
     t.integer  "shipped",        :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "product_id"
   end
 
   create_table "items", :force => true do |t|
@@ -93,13 +93,6 @@ ActiveRecord::Schema.define(:version => 20090901073722) do
     t.datetime "updated_at"
   end
 
-  create_table "skus", :force => true do |t|
-    t.integer  "product_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", :force => true do |t|
     t.string   "type"
     t.string   "name"
@@ -115,13 +108,13 @@ ActiveRecord::Schema.define(:version => 20090901073722) do
   end
 
   create_table "variants", :force => true do |t|
-    t.integer  "sku_id"
     t.string   "currency",   :default => "USD"
     t.integer  "cents",      :default => 0
     t.integer  "position",   :default => 0
     t.integer  "size",       :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "product_id"
   end
 
 end

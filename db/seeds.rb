@@ -71,25 +71,6 @@ returning Product.create(:name => 'Christmas on the Savannah', :position => 4, :
 end
 
 # =============================================================================
-# = Card Number Three                                                         =
-# =============================================================================
-# gift_card_pdf = Download.create(:name => 'gift_cards.pdf', :content_type => 'application/pdf')
-#
-# returning Product.create(:name => 'Amani Alternative Gift Card', :position => 5, :image_path => 'cards/gift_front_small.jpg', :description => "Instead of a traditional gift, you can honor your loved one by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.\n\nThis holiday season, give the gift of hope. Order you Alternative Gift Cards today!\n\nHere are some of the alternative gift options:\n\n") do |card|
-#   card.skus.create(:name => 'Textbook'                                        ).variants.create(:cents => 400,   :currency => 'USD', :download => gift_card_pdf, :position => 9)
-#   card.skus.create(:name => 'School Uniform'                                  ).variants.create(:cents => 1000,  :currency => 'USD', :download => gift_card_pdf, :position => 10)
-#   card.skus.create(:name => 'Bedding (sheet and blanket)'                     ).variants.create(:cents => 1600,  :currency => 'USD', :download => gift_card_pdf, :position => 11)
-#   card.skus.create(:name => 'Sports equipment (cleats, balls jerseys)'        ).variants.create(:cents => 2500,  :currency => 'USD', :download => gift_card_pdf, :position => 12)
-#   card.skus.create(:name => 'Art supplies'                                    ).variants.create(:cents => 3000,  :currency => 'USD', :download => gift_card_pdf, :position => 13)
-#   card.skus.create(:name => '2 Drums'                                         ).variants.create(:cents => 4000,  :currency => 'USD', :download => gift_card_pdf, :position => 14)
-#   card.skus.create(:name => 'Medical supplies'                                ).variants.create(:cents => 5000,  :currency => 'USD', :download => gift_card_pdf, :position => 15)
-#   card.skus.create(:name => 'Desk and chair'                                  ).variants.create(:cents => 6000,  :currency => 'USD', :download => gift_card_pdf, :position => 16)
-#   card.skus.create(:name => "Part-time Carpentry Teacher's salary (per month)").variants.create(:cents => 7500,  :currency => 'USD', :download => gift_card_pdf, :position => 17)
-#   card.skus.create(:name => '2 Enormous Cooking Pots'                         ).variants.create(:cents => 10000, :currency => 'USD', :download => gift_card_pdf, :position => 18)
-#   card.skus.create(:name => 'First semester of secondary school'              ).variants.create(:cents => 20000, :currency => 'USD', :download => gift_card_pdf, :position => 19)
-# end
-
-# =============================================================================
 # = Locators                                                                  =
 # =============================================================================
 require 'csv'

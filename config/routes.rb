@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'roots'
 
   map.resource :session
-  map.resources :distributors, :downloads
+  map.resources :distributors
 
   map.with_options(:path_prefix => '/:distributor_id') do |map|
     map.root :controller => 'products', :name_prefix => 'distributor_'

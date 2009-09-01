@@ -14,9 +14,9 @@ class Order < List
   delegate :name, :email, :country, :to => :address
   delegate :donation_methods, :to => :distributor
 
-  after_create  :create_shipment, :if => :immediately_shippable?
   before_update :exchange_additional_donation_amount, :if => :distributor_changed?
 
+  # TODO use the new nested_attributes magic
   def address_with_nested_attributes=(record_or_attributes)
     record = case record_or_attributes
              when Address
@@ -43,14 +43,6 @@ class Order < List
 
   def donation_received_at
     donation ? donation.received_at : nil
-  end
-
-  def downloads
-    items.collect(&:download).compact.uniq
-  end
-
-  def immediately_shippable?
-    items.all?(&:download) unless items.blank?
   end
 
   def items_for(sku)

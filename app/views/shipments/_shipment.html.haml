@@ -7,19 +7,5 @@
         = f.submit 'Oops! Cancel this shipment!', :confirm => 'Are you sure? This will send email to the Donor.'
 
 .shipment
-  - unless shipment.order.immediately_shippable?
-    %h2 Your order has shipped!
-    %p= "We sent it your way #{shipment.created_at.to_date.to_s(:long)}."
-
-  - if shipment.order.downloads.any?
-    %h2 Print your Gift Cards now!
-    %p Your gift cards are ready here for immediate printing. (And they're also in your email.)
-    %ul
-    - shipment.order.downloads.each do |download|
-      %li= link_to download.name, download
-    %p
-      Alternatively, you may email
-      = mail_to('joe@amanikids.org', 'joe@amanikids.org', :subject => "Please print my gift cards. [#{shipment.order.token}]", :body => order_url(shipment.order.distributor, shipment.order))
-      to have your Gift Cards printed on card stock and mailed from Tanzania. Please be sure to include your Order code,
-      = "#{shipment.order.token}, "
-      when you do.
+  %h2 Your order has shipped!
+  %p= "We sent it your way #{shipment.created_at.to_date.to_s(:long)}."

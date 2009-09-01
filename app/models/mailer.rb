@@ -34,13 +34,6 @@ class Mailer < ActionMailer::Base
     recipients "#{order.name} <#{order.email}>"
     subject 'Your order has shipped.'
     body :order => order
-
-    order.downloads.each do |download|
-      attachment(download.content_type) do |a|
-        a.body     = File.read(download.expand_path)
-        a.filename = download.name
-      end
-    end
   end
 
   def shipment_destroyed(order)

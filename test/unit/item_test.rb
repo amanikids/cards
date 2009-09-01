@@ -8,12 +8,6 @@ class ItemTest < ActiveSupport::TestCase
   should_not_allow_values_for :quantity, -1, 0, :message => /greater than/
   should_not_allow_values_for :quantity, 3.14, :message =>  /not a number/
 
-  should 'delegate download to variant' do
-    item = Item.new
-    item.stubs(:variant).returns(stub(:download => 'DOWNLOAD'))
-    assert_equal 'DOWNLOAD', item.download
-  end
-
   should 'delegate product_name to variant' do
     item = Item.new
     item.stubs(:variant).returns(stub(:product_name => 'PRODUCT_NAME'))

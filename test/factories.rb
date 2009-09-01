@@ -37,16 +37,6 @@ Factory.define(:donation_method) do |method|
   method.name 'check'
 end
 
-Factory.define(:download) do |download|
-  download.name 'gift_front.jpg'
-  download.content_type 'image/jpg'
-end
-
-Factory.define(:downloadable_item, :class => Item) do |item|
-  item.quantity 1
-  item.association :variant, :factory => :variant_with_download
-end
-
 Factory.define(:inventory) do |inventory|
   inventory.initial 300
   inventory.association :distributor
@@ -102,11 +92,4 @@ Factory.define(:variant) do |variant|
   variant.currency 'USD'
   variant.size 5
   variant.association :sku
-end
-
-Factory.define(:variant_with_download, :class => Variant) do |variant|
-  variant.cents 1000
-  variant.currency 'USD'
-  variant.association :sku
-  variant.association :download
 end

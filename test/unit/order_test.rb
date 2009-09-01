@@ -66,50 +66,10 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
-  context 'an existing Cart entirely downloadable' do
-    setup do
-      @cart = Factory.create(:cart)
-      2.times { @cart.items << Factory.create(:downloadable_item) }
-    end
-
-    context 'build_order with valid attributes' do
-      setup { @order = @cart.build_order(:address => Factory.attributes_for(:address)) }
-
-      context 'and then save the order' do
-        setup { @order.save! }
-        should_change 'Shipment.count', :by => 1
-        should('be shipped') { assert_not_nil @order.shipped_at }
-      end
-    end
-  end
-
   should 'delegate donation_methods to distributor' do
     @order = Factory.build(:order)
     @order.distributor.stubs(:donation_methods).returns('DONATION_METHODS')
     assert_equal 'DONATION_METHODS', @order.donation_methods
-  end
-
-  context 'a new Order' do
-    setup { @order = Factory.build(:order) }
-    should('not be immediately shippable') { assert !@order.immediately_shippable? }
-    should('not have any downloads') { assert_equal [], @order.downloads }
-
-    context 'with some items downloadable, some not' do
-      setup { @order.stubs(:items).returns [stub(:download => nil), stub(:download => 'DOWNLOAD_TWO')] }
-      should('not be immediately shippable') { assert !@order.immediately_shippable? }
-      should('collect downloadable variants') { assert_equal ['DOWNLOAD_TWO'], @order.downloads }
-    end
-
-    context 'with all items downloadable' do
-      setup { @order.stubs(:items).returns [stub(:download => 'DOWNLOAD_ONE'), stub(:download => 'DOWNLOAD_TWO')] }
-      should('be immediately shippable') { assert @order.immediately_shippable? }
-      should('collect downloadable variants') { assert_equal ['DOWNLOAD_ONE', 'DOWNLOAD_TWO'], @order.downloads }
-    end
-
-    context 'with duplicate downloads' do
-      setup { @order.stubs(:items).returns [stub(:download => 'DOWNLOAD_ONE'), stub(:download => 'DOWNLOAD_TWO'), stub(:download => 'DOWNLOAD_ONE')] }
-      should('uniq downloadable variants') { assert_equal ['DOWNLOAD_ONE', 'DOWNLOAD_TWO'], @order.downloads }
-    end
   end
 
   context 'an existing Order' do

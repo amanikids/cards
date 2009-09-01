@@ -1,6 +1,5 @@
 class Variant < ActiveRecord::Base
   belongs_to :sku
-  belongs_to :download
   composed_of :price, :class_name => 'Money', :mapping => [%w(cents cents), %w(currency currency)]
   validates_presence_of :cents, :currency, :sku_id
 
@@ -31,6 +30,6 @@ class Variant < ActiveRecord::Base
   private
 
   def quantity_available?(distributor, number_of_packs)
-    download || sku.quantity(distributor) >= (number_of_packs * size)
+    sku.quantity(distributor) >= (number_of_packs * size)
   end
 end

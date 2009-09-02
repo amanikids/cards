@@ -6,6 +6,7 @@ class Distributor < User
   has_many :inventories
   has_many :products, :through => :inventories
   has_many :orders
+  has_many :products, :through => :inventories
 
   validates_presence_of :country_code, :currency
   validates_uniqueness_of :country_code
@@ -16,6 +17,10 @@ class Distributor < User
 
   def self.find_by_param(param)
     find_by_country_code(param) || raise(ActiveRecord::RecordNotFound)
+  end
+
+  def available_products
+    products.select { |product| product.available?(self) }
   end
 
   def order_created(order)
@@ -39,9 +44,7 @@ class Distributor < User
   end
 
   def sold_out?
-    inventories.none? do |inventory|
-      inventory.product.available?(self)
-    end
+    available_products.empty?
   end
 
   def to_param

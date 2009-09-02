@@ -49,6 +49,18 @@ class DistributorTest < ActiveSupport::TestCase
     end
   end
 
+  context '#available_products' do
+    should 'contain all products that are available' do
+      distributor = Factory.create(:distributor)
+      available_product = Factory.create(:inventory, :initial => 10, :distributor => distributor).product
+      Factory.create(:variant, :product => available_product, :size => 10)
+      sold_out_product  = Factory.create(:inventory, :initial => 0, :distributor => distributor).product
+      Factory.create(:variant, :product => sold_out_product, :size => 10)
+
+      assert_equal [available_product], distributor.available_products
+    end
+  end
+
   context '#sold_out?' do
     should 'be true when the distributor has no inventory' do
       distributor = Factory.create(:distributor)

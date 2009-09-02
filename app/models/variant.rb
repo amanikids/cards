@@ -1,4 +1,6 @@
 class Variant < ActiveRecord::Base
+  default_scope :order => :position
+
   belongs_to :product
   composed_of :price, :class_name => 'Money', :mapping => [%w(cents cents), %w(currency currency)]
   validates_presence_of :cents, :currency, :product_id

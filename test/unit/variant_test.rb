@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class VariantTest < ActiveSupport::TestCase
   should_belong_to :product
@@ -42,5 +42,13 @@ class VariantTest < ActiveSupport::TestCase
     variant = Variant.new
     variant.stubs(:product).returns(stub(:name => 'PRODUCT_NAME'))
     assert_equal 'PRODUCT_NAME', variant.product_name
+  end
+ 
+  should 'by default be ordered by position' do
+    variants = [
+      Factory.create(:variant, :position => 2),
+      Factory.create(:variant, :position => 1)
+    ]
+    assert_equal variants.reverse.collect(&:position), Variant.all.collect(&:position)
   end
 end

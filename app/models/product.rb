@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   validates_presence_of :name
 
   has_many :inventories
-  has_many :variants, :order => :position
+  has_many :variants
 
   named_scope :ordered, :order => :position
 

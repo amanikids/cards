@@ -43,7 +43,7 @@ class VariantTest < ActiveSupport::TestCase
     variant.stubs(:product).returns(stub(:name => 'PRODUCT_NAME'))
     assert_equal 'PRODUCT_NAME', variant.product_name
   end
- 
+
   should 'by default be ordered by position' do
     variants = [
       Factory.create(:variant, :position => 2),

@@ -73,7 +73,7 @@ Locator.transaction do
   CSV.parse(File.read(__FILE__).split('__END__').last.strip) do |row|
     Locator.connection.execute <<-EOS
       INSERT INTO locators (
-        ip_from, 
+        ip_from,
         ip_to,
         country_code,
         country_code_with_three_characters,

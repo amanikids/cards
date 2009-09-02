@@ -76,7 +76,7 @@ class DistributorTest < ActiveSupport::TestCase
       assert_equal false, distributor.sold_out?
     end
   end
- 
+
   should 'by default be ordered by position' do
     expected = [
       Factory.create(:distributor, :position => 2),

@@ -44,7 +44,7 @@ class ProductTest < ActiveSupport::TestCase
     product.stubs(:available_variants).with(:distributor).returns([])
     assert !product.available?(:distributor)
   end
- 
+
   should 'by default be ordered by position' do
     products = [
       Factory.create(:product, :position => 2),

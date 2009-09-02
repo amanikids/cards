@@ -29,8 +29,8 @@ class OrdersControllerTest < ActionController::TestCase
         context 'create valid' do
           setup { post :create, :distributor_id => @distributor.to_param, :order => { :address => Factory.attributes_for(:address) } }
           should_redirect_to('the Order') { order_path(@distributor, @controller.instance_variable_get(:@order)) }
-          should_change 'Cart.count', :by => -1
-          should_change '@controller.current_cart', :to => nil
+          should_change('Cart.count', :by => -1) { Cart.count }
+          should_change('@controller.current_cart', :to => nil) { @controller.current_cart }
         end
 
         context 'create invalid' do
@@ -72,15 +72,15 @@ class OrdersControllerTest < ActionController::TestCase
           setup { @other_distributor = Factory(:distributor) }
           context 'update' do
             setup { put :update, :distributor_id => @distributor.to_param, :id => @order.token, :order => { :distributor_id => @other_distributor.id } }
-            should_change '@distributor.orders.count', :by => -1
-            should_change '@other_distributor.orders.count', :by => 1
+            should_change('@distributor.orders.count', :by => -1) { @distributor.orders.count }
+            should_change('@other_distributor.orders.count', :by => 1) { @other_distributor.orders.count }
             should_redirect_to('the Order') { order_path(@other_distributor, @order) }
           end
         end
 
         context 'destroy' do
           setup { delete :destroy, :distributor_id => @distributor.to_param, :id => @order.token }
-          should_change 'Order.count', :by => -1
+          should_change('Order.count', :by => -1) { Order.count }
           should_redirect_to('the distributor') { distributor_path(@distributor) }
         end
       end

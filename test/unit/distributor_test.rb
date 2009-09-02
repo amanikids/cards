@@ -38,13 +38,13 @@ class DistributorTest < ActiveSupport::TestCase
       context 'with valid attributes' do
         setup { @result = @distributor.update_inventories(@inventory.id => {'actual' => '200'}) }
         should('return true') { assert @result }
-        should_change '@inventory.reload.actual', :to => 200
+        should_change('@inventory.reload.actual', :to => 200) { @inventory.reload.actual }
       end
 
       context 'with invalid attributes' do
         setup { @result = @distributor.update_inventories(@inventory.id => {'actual' => 'a'}) }
         should('return false') { assert !@result }
-        should_not_change '@inventory.reload.actual'
+        should_not_change('@inventory.reload.actual') { @inventory.reload.actual }
       end
     end
   end

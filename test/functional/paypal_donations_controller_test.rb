@@ -26,8 +26,8 @@ class PaypalDonationsControllerTest < ActionController::TestCase
 
             context 'create' do
               setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token, :donation_method_id => @method.id }
-              should_change '@order.reload.donation', :from => nil
-              should_change 'Donation.count', :by => 1
+              should_change('@order.reload.donation', :from => nil) { @order.reload.donation }
+              should_change('Donation.count', :by => 1) { Donation.count }
 
               should "set the donation_method field to PayPal" do
                 assert_equal @method, @order.donation_method
@@ -44,8 +44,8 @@ class PaypalDonationsControllerTest < ActionController::TestCase
 
             context 'create' do
               setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token, :donation_method_id => @method.id }
-              should_not_change '@order.reload.donation'
-              should_not_change 'Donation.count'
+              should_not_change('@order.reload.donation') { @order.reload.donation }
+              should_not_change('Donation.count') { Donation.count }
             end
           end
         end

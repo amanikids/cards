@@ -15,8 +15,8 @@ class DonationsControllerTest < ActionController::TestCase
 
       context 'create' do
         setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token, :donation => { :donation_method_id => @donation_method.id }}
-        should_change '@order.reload.donation', :from => nil
-        should_change 'Donation.count', :by => 1
+        should_change('@order.reload.donation', :from => nil) { @order.reload.donation }
+        should_change('Donation.count', :by => 1) { Donation.count }
 
         should 'create donation with the request method' do
           assert_equal @donation_method, @order.donation.donation_method
@@ -38,7 +38,7 @@ class DonationsControllerTest < ActionController::TestCase
 
         context 'update' do
           setup { put :update, :distributor_id => @distributor.to_param, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
-          should_not_change '@donation.received_at'
+          should_not_change('@donation.received_at') { @donation.received_at }
           should_redirect_to('the login page') { new_session_path }
         end
       end
@@ -48,7 +48,7 @@ class DonationsControllerTest < ActionController::TestCase
 
         context 'update' do
           setup { put :update, :distributor_id => @distributor.to_param, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
-          should_change '@donation.reload.received_at'
+          should_change('@donation.reload.received_at') { @donation.reload.received_at }
           should_redirect_to('the Order') { order_path(@distributor, @donation.order) }
         end
       end

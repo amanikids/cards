@@ -85,6 +85,7 @@ end
 Factory.define(:variant) do |variant|
   variant.cents 1000
   variant.currency 'USD'
+  variant.name ''
   variant.size { [10, 25].rand }
   variant.association :product
 end

@@ -63,6 +63,26 @@ Product.create(:name => 'Christmas on the Savannah', :position => 4, :image_path
 end
 
 # =============================================================================
+# = Gift Cards                                                                =
+# =============================================================================
+Product.create!(:name => 'Amani Alternative Gift Cards', :position => 5, :image_path => 'cards/gift_card.jpg', :description => "Instead of a traditional gift, you can honor your loved ones by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.   For this holiday season, consider giving the gift of hope! Order your Alternative Gift Cards today! Here are some of the alternative gift options:").tap do |card|
+  [
+    ['Textbook',                                   400],
+    ['School Uniform',                            1000],
+    ['Bedding (sheet and blanket)',               1600],
+    ['Sports equipment (Cleats, balls, jerseys)', 2500],
+    ['Art supplies',                              3000],
+    ['Drums',                                     4000],
+    ['Medical Supplies',                          5000],
+    ['Desk and chair',                            6000],
+    ['Pots',                                     10000],
+    ['First semester of secondary school',       20000]
+  ].each_with_index do |(name, cost_in_cents), index|
+    card.variants.create!(:name => name, :cents => cost_in_cents, :currency => 'USD', :position => index + 1)
+  end
+end
+
+# =============================================================================
 # = Locators                                                                  =
 # =============================================================================
 require 'csv'

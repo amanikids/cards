@@ -10,7 +10,7 @@ class Variant < ActiveRecord::Base
   end
 
   def description
-    size == 1 ? '' : "#{size}-pack"
+    name.blank? ? "#{size}-pack" : name
   end
 
   def product_name

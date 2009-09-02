@@ -28,14 +28,14 @@ class VariantTest < ActiveSupport::TestCase
     end
   end
 
-  should 'have blank description when size is 1' do
-    variant = Variant.new(:size => 1)
-    assert_equal '', variant.description
+  should 'have name description name is set' do
+    variant = Factory.build(:variant, :name => 'NAME')
+    assert_equal 'NAME', variant.description
   end
 
-  should 'have n-pack description when size is greater than 1' do
-    variant = Variant.new(:size => 2)
-    assert_equal '2-pack', variant.description
+  should 'have n-pack description when name is blank' do
+    variant = Factory.build(:variant, :name => '')
+    assert_equal "#{variant.size}-pack", variant.description
   end
 
   should 'delegate product_name to product' do

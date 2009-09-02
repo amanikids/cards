@@ -69,12 +69,22 @@ require 'csv'
 
 puts 'Loading Locators. (This will take a little while.)'
 count = 0
-CSV.parse(File.read(__FILE__).split('__END__').last.strip) do |row|
-  Locator.connection.execute "INSERT INTO locators (ip_from, ip_to, country_code, country_code_with_three_characters, country) VALUES (#{row.inspect[1..-2]})"
-  count += 1
-  if count % 100 == 0
-    $stdout.write '.'
-    $stdout.flush
+Locator.transaction do
+  CSV.parse(File.read(__FILE__).split('__END__').last.strip) do |row|
+    Locator.connection.execute <<-EOS
+      INSERT INTO locators (
+        ip_from, 
+        ip_to,
+        country_code,
+        country_code_with_three_characters,
+        country
+      ) VALUES (#{row.collect {|x| ActiveRecord::Base.connection.quote(x) }.join(',')})
+    EOS
+    count += 1
+    if count % 100 == 0
+      $stdout.write '.'
+      $stdout.flush
+    end
   end
 end
 puts

@@ -36,6 +36,20 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
+  context 'donated named scope' do
+    should 'include orders that have a donation' do
+      orders = [
+        Factory.create(:order),
+        Factory.create(:order)
+      ].each do |order|
+        Factory.create(:donation, :order => order)
+      end
+
+      chaff = Factory.create(:order)
+
+      assert_equal orders, Order.donated
+    end
+  end
 
   context 'with an unsaved Order' do
     setup { @order = Factory.build(:order, :token => nil) }

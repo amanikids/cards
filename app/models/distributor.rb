@@ -4,6 +4,7 @@ class Distributor < User
   has_many :carts
   has_many :donation_methods, :order => :position
   has_many :inventories
+  has_many :products, :through => :inventories
   has_many :orders
 
   validates_presence_of :country_code, :currency

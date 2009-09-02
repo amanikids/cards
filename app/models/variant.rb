@@ -23,10 +23,6 @@ class Variant < ActiveRecord::Base
     !on_demand_product? && !quantity_available?(distributor, RUNNING_LOW_THRESHOLD)
   end
 
-  def to_param
-    unix_name
-  end
-
   private
 
   def on_demand_product?

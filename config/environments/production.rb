@@ -19,6 +19,16 @@ config.action_view.cache_template_loading            = true
 # config.action_controller.asset_host                  = "http://assets.example.com"
 
 # ActionMailer settings
-config.action_mailer.delivery_method     = :sendmail
-config.action_mailer.sendmail_settings   = { :location => '/usr/local/bin/sendmail', :arguments => '-i -t' }
-config.action_mailer.default_url_options = { :host => 'cards.amanikids.org' }
+config.action_mailer.default_url_options = {
+  :host => 'cards.amanikids.org'
+}
+
+config.action_mailer.smtp_settings = {
+  :tls => true,
+  :address => 'smtp.gmail.com',
+  :port => '587',
+  :domain => 'amanikids.org',
+  :authentication => :plain,
+  :user_name => 'cards@amanikids.org',
+  :password => ENV['SMTP_PASSWORD'] || raise('Please set ENV["SMTP_PASSWORD"].')
+}

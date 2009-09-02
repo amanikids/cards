@@ -52,4 +52,13 @@ class ProductTest < ActiveSupport::TestCase
     ]
     assert_equal products.reverse.collect(&:position), Product.all.collect(&:position)
   end
+
+  context '.on_demand' do
+    should 'return products without inventory' do
+      product_with_inventory    = Factory.create(:inventory).product
+      product_without_inventory = Factory.create(:product)
+
+      assert_equal [product_without_inventory], Product.on_demand
+    end
+  end
 end

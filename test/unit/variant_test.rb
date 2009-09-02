@@ -5,26 +5,45 @@ class VariantTest < ActiveSupport::TestCase
   should_validate_presence_of :cents, :currency, :product_id
 
   context 'with a variant of size 10' do
-    setup { @variant = Factory.build(:variant, :size => 10) }
+    setup do
+      @inventory = Factory.create(:inventory, :promised => 0)
+      @distributor = @inventory.distributor
+      @variant = Factory.create(:variant, :size => 10, :product => @inventory.product)
+    end
 
     should 'be available if product quantity is greater than or equal to 1 of me' do
-      @variant.product.stubs(:quantity).with(:distributor).returns(10)
-      assert @variant.available?(:distributor)
+      @inventory.update_attribute(:actual, 10)
+      assert @variant.available?(@distributor)
     end
 
     should 'not be available if product quantity is less than 1 of me' do
-      @variant.product.stubs(:quantity).with(:distributor).returns(9)
-      assert !@variant.available?(:distributor)
+      @inventory.update_attribute(:actual, 9)
+      assert !@variant.available?(@distributor)
     end
 
     should 'be running_low if product quantity is less than 25 of me' do
-      @variant.product.stubs(:quantity).with(:distributor).returns(249)
-      assert @variant.running_low?(:distributor)
+      @inventory.update_attribute(:actual, 249)
+      assert @variant.running_low?(@distributor)
     end
 
     should 'not be running_low if product quantity is greater than or equal to 25 of me' do
-      @variant.product.stubs(:quantity).with(:distributor).returns(250)
-      assert !@variant.running_low?(:distributor)
+      @inventory.update_attribute(:actual, 250)
+      assert !@variant.running_low?(@distributor)
+    end
+  end
+
+  context 'a variant for an on_demand Product' do
+    setup do
+      @variant = Factory.create(:variant)
+      assert @variant.product.inventories.empty?, 'PRECONDITION FAILED (We assume the factory gives us a product with no inventories.)'
+    end
+
+    should 'be available' do
+      assert @variant.available?(:any_distributor)
+    end
+
+    should 'not be running low' do
+      assert !@variant.running_low?(:any_distributor)
     end
   end
 

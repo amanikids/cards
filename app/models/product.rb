@@ -1,10 +1,14 @@
 class Product < ActiveRecord::Base
+  default_scope :order => :position
+
+  named_scope :on_demand,
+    :joins    => 'LEFT JOIN inventories ON products.id = inventories.product_id',
+    :conditions => 'inventories.id IS NULL'
+
   validates_presence_of :name
 
   has_many :inventories
   has_many :variants
-
-  default_scope :order => :position
 
   def available?(distributor)
     available_variants(distributor).any?
@@ -16,6 +20,10 @@ class Product < ActiveRecord::Base
 
   def inventory(distributor)
     inventories.detect { |inventory| inventory.distributor == distributor }
+  end
+
+  def on_demand?
+    inventories.empty?
   end
 
   def quantity(distributor)

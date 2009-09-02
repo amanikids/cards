@@ -1,4 +1,6 @@
 class Variant < ActiveRecord::Base
+  RUNNING_LOW_THRESHOLD = 25
+
   default_scope :order => :position
 
   belongs_to :product
@@ -6,7 +8,7 @@ class Variant < ActiveRecord::Base
   validates_presence_of :cents, :currency, :product_id
 
   def available?(distributor)
-    quantity_available?(distributor, 1)
+    on_demand_product? || quantity_available?(distributor, 1)
   end
 
   def description
@@ -18,7 +20,7 @@ class Variant < ActiveRecord::Base
   end
 
   def running_low?(distributor)
-    !quantity_available?(distributor, 25)
+    !on_demand_product? && !quantity_available?(distributor, RUNNING_LOW_THRESHOLD)
   end
 
   def to_param
@@ -26,6 +28,10 @@ class Variant < ActiveRecord::Base
   end
 
   private
+
+  def on_demand_product?
+    product.on_demand?
+  end
 
   def quantity_available?(distributor, number_of_packs)
     product.quantity(distributor) >= (number_of_packs * size)

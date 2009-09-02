@@ -13,7 +13,7 @@ class SessionsControllerTest < ActionController::TestCase
 
       context 'create' do
         setup { post :create, :email => 'EMAIL', :password => 'PASSWORD' }
-        should_change '@controller.current_user', :from => nil, :to => @user
+        should_change('@controller.current_user', :from => nil, :to => @user) { @controller.current_user}
         should_redirect_to('the distributors overview page') { distributors_path }
       end
     end
@@ -23,7 +23,7 @@ class SessionsControllerTest < ActionController::TestCase
 
       context 'create' do
         setup { post :create, :email => 'EMAIL', :password => 'PASSWORD' }
-        should_not_change '@controller.current_user'
+        should_not_change('@controller.current_user') { @controller.current_user }
         should_render_template :new
       end
     end
@@ -33,7 +33,7 @@ class SessionsControllerTest < ActionController::TestCase
 
       context 'destroy' do
         setup { delete :destroy }
-        should_change '@controller.current_user', :to => nil
+        should_change('@controller.current_user', :to => nil) { @controller.current_user }
         should_redirect_to('the login page') { new_session_path }
       end
     end
@@ -47,7 +47,7 @@ class SessionsControllerTest < ActionController::TestCase
 
       context 'create' do
         setup { post :create, :email => 'EMAIL', :password => 'PASSWORD' }
-        should_change '@controller.current_user', :from => nil, :to => @distributor
+        should_change('@controller.current_user', :from => nil, :to => @distributor) { @controller.current_user }
         should_redirect_to('the distributor page') { distributor_path(@distributor) }
       end
     end

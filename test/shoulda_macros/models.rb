@@ -1,17 +1,19 @@
 class Test::Unit::TestCase
   def self.should_validate_confirmation_of(*attributes)
     get_options!(attributes)
-    klass = model_class
 
     attributes.each do |attribute|
       attribute = attribute.to_sym
       attribute_confirmation = :"#{attribute}_confirmation"
 
       should "require confirmation of #{attribute}" do
-        model_instance = Factory.build(klass.name.underscore.to_sym)
-        assert_respond_to(model_instance, :"#{attribute_confirmation}=", "#{klass.name} doesn't seem to have a #{attribute_confirmation} attribute.")
-        model_instance.send(:"#{attribute_confirmation}=", model_instance.send(attribute))
-        assert_bad_value(model_instance, attribute, model_instance.send(attribute).succ, :confirmation)
+        # subject returns a new instance each time, but we need to modify it a little bit
+        object = subject
+
+        assert_respond_to(object, :"#{attribute_confirmation}=", "#{subject.class} doesn't seem to have a #{attribute_confirmation} attribute.")
+        object.send(:"#{attribute_confirmation}=", 'anything to trigger the validation')
+        assert_good_value(object, attribute, 'anything to trigger the validation', :confirmation)
+        assert_bad_value(object, attribute, 'something different', :confirmation)
       end
     end
   end

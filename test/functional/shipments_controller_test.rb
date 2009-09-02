@@ -29,8 +29,8 @@ class ShipmentsControllerTest < ActionController::TestCase
 
         context 'create' do
           setup { post :create, :distributor_id => @distributor.to_param, :order_id => @order.token }
-          should_change '@order.reload.shipment', :from => nil
-          should_change 'Shipment.count', :by => 1
+          should_change('@order.reload.shipment', :from => nil) { @order.reload.shipment }
+          should_change('Shipment.count', :by => 1) { Shipment.count }
           should_redirect_to('the order page') { order_path(@distributor, @order) }
         end
 
@@ -39,8 +39,8 @@ class ShipmentsControllerTest < ActionController::TestCase
 
           context 'destroy' do
             setup { delete :destroy, :distributor_id => @distributor.to_param, :order_id => @order.token }
-            should_change '@order.reload.shipment'
-            should_change 'Shipment.count', :by => -1
+            should_change('@order.reload.shipment') { @order.reload.shipment }
+            should_change('Shipment.count', :by => -1) { Shipment.count }
             should_redirect_to('the order page') { order_path(@distributor, @order) }
           end
         end

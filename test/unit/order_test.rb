@@ -245,4 +245,43 @@ class OrderTest < ActiveSupport::TestCase
       assert_equal expected_differences, actual_differences
     end
   end
+
+  context 'creating an Order entirely composed of on-demand products' do
+    should "assign items to one batch that doesn't have a distributor" do
+      order = Factory.build(:order)
+      order.items = (0..1).map { Factory.build(:item) }
+
+      assert_difference('Batch.count', 1) do
+        order.save!
+      end
+
+      assert_nil Batch.last.distributor
+
+      expected = [Batch.last]
+      actual = order.items.collect { |item| item.reload.batch }.uniq
+      assert_equal expected, actual
+    end
+  end
+
+  context 'creating an Order entirely composed of non-on-demand products' do
+    should "assign items to one batch that does have a distributor" do
+      distributor = Factory.create(:distributor)
+      order = Factory.build(:order, :distributor => distributor)
+
+      2.times do
+        product = Factory.create(:inventory, :distributor => distributor).product
+        order.items << Factory.build(:item, :variant => Factory.create(:variant, :product => product))
+      end
+
+      assert_difference('Batch.count', 1) do
+        order.save!
+      end
+
+      assert_equal distributor, Batch.last.distributor
+
+      expected = [Batch.last]
+      actual = order.items.collect { |item| item.reload.batch }.uniq
+      assert_equal expected, actual
+    end
+  end
 end

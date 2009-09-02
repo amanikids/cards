@@ -1,8 +1,9 @@
 class Item < ActiveRecord::Base
+  belongs_to :batch
   belongs_to :list
   belongs_to :variant
 
-  delegate :product_name, :product, :to => :variant
+  delegate :on_demand?, :product_name, :product, :to => :variant
   delegate :description, :size, :to => :variant, :prefix => true
 
   validates_presence_of :variant_id

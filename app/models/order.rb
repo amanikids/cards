@@ -24,6 +24,7 @@ class Order < List
   delegate :name, :email, :country, :to => :address
   delegate :donation_methods, :to => :distributor
 
+  after_create  :create_batches
   before_update :exchange_additional_donation_amount, :if => :distributor_changed?
 
   # TODO use the new nested_attributes magic
@@ -68,6 +69,18 @@ class Order < List
   end
 
   private
+
+  def create_batches
+    items.group_by(&:on_demand?).each do |on_demand, items|
+      distributor_for_batch = on_demand ? nil : distributor
+
+      Batch.create!(:distributor => distributor_for_batch).tap do |batch|
+        items.each do |item|
+          batch.items << item
+        end
+      end
+    end
+  end
 
   def exchange_additional_donation_amount
     additional_donation_was = Money.new(100 * additional_donation_amount, distributor_was.currency)

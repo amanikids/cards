@@ -5,10 +5,11 @@ class Variant < ActiveRecord::Base
 
   belongs_to :product
   composed_of :price, :class_name => 'Money', :mapping => [%w(cents cents), %w(currency currency)]
+  delegate :on_demand?, :to => :product
   validates_presence_of :cents, :currency, :product_id
 
   def available?(distributor)
-    on_demand_product? || quantity_available?(distributor, 1)
+    on_demand? || quantity_available?(distributor, 1)
   end
 
   def description
@@ -20,14 +21,10 @@ class Variant < ActiveRecord::Base
   end
 
   def running_low?(distributor)
-    !on_demand_product? && !quantity_available?(distributor, RUNNING_LOW_THRESHOLD)
+    !on_demand? && !quantity_available?(distributor, RUNNING_LOW_THRESHOLD)
   end
 
   private
-
-  def on_demand_product?
-    product.on_demand?
-  end
 
   def quantity_available?(distributor, number_of_packs)
     product.quantity(distributor) >= (number_of_packs * size)

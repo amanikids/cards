@@ -43,6 +43,7 @@ Factory.define(:inventory) do |inventory|
   inventory.association :product
 end
 
+# FIXME include item.association :list
 Factory.define(:item) do |item|
   item.quantity { (1..5).to_a.rand }
   item.association :variant

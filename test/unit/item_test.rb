@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
+  should_belong_to :batch
   should_belong_to :variant
   should_validate_presence_of :variant_id
 

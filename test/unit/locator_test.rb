@@ -1,7 +1,15 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class LocatorTest < ActiveSupport::TestCase
-  should_have_named_scope 'ip_address(305419896)', :conditions => ['ip_from <= ? AND ip_to >= ?', 305419896, 305419896]
+  context 'named scope for an ip address' do
+    should 'return a locator that encompasses the given ip address' do
+      too_low   = Factory.create(:locator, :ip_from => 1, :ip_to => 2)
+      matching  = Factory.create(:locator, :ip_from => 3, :ip_to => 3)
+      too_high  = Factory.create(:locator, :ip_from => 4, :ip_to => 5)
+
+      assert_equal [matching], Locator.ip_address(3)
+    end
+  end
 
   should 'convert an ip address string into an integer' do
     assert_equal 305419896, Locator.convert('18.52.86.120')

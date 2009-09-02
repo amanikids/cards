@@ -1,7 +1,9 @@
-# We got this data in csv format from http://ip-to-country.webhosting.info/downloads/ip-to-country.csv.zip
+# We got this data from http://ip-to-country.webhosting.info/downloads/ip-to-country.csv.zip
 # See http://ip-to-country.webhosting.info/node/view/5 for more info.
 class Locator < ActiveRecord::Base
-  named_scope :ip_address, lambda { |ip_address| { :conditions => ['ip_from <= ? AND ip_to >= ?', ip_address, ip_address] } }
+  # TODO should this be a class method find(:first)?
+  named_scope :ip_address, lambda {|ip_address| { 
+    :conditions => ['ip_from <= ? AND ip_to >= ?', ip_address, ip_address] }}
 
   def self.convert(string)
     string.to_s.split('.').map { |part| part.to_i.to_s(16) }.join.to_i(16)

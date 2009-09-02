@@ -1,15 +1,41 @@
 require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class OrderTest < ActiveSupport::TestCase
-  should_have_named_scope :shipped,   :include => :shipment, :conditions => 'shipments.id IS NOT NULL', :order => 'lists.created_at'
-  should_have_named_scope :unshipped, :include => :shipment, :conditions => 'shipments.id IS NULL',     :order => 'lists.created_at'
-
   should_belong_to :address
   should_have_digest :token
   should_have_one :donation
   should_have_one :shipment
 
   should_validate_presence_of :address
+
+  context 'shipped named scope' do
+    should 'include orders that have a shipment, order by created at' do
+      orders = [
+        Factory.create(:order, :created_at => 2.days.ago),
+        Factory.create(:order, :created_at => 3.days.ago)
+      ].each do |order|
+        Factory.create(:shipment, :order => order)
+      end
+
+      chaff = Factory.create(:order)
+
+      assert_equal orders.reverse, Order.shipped
+    end
+  end
+
+  context 'unshipped named scope' do
+    should 'include orders that do not have a shipment, order by created at' do
+      orders = [
+        Factory.create(:order, :created_at => 2.days.ago),
+        Factory.create(:order, :created_at => 3.days.ago)
+      ]
+
+      chaff = Factory.create(:shipment).order
+
+      assert_equal orders.reverse, Order.unshipped
+    end
+  end
+
 
   context 'with an unsaved Order' do
     setup { @order = Factory.build(:order, :token => nil) }

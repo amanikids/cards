@@ -88,3 +88,11 @@ Factory.define(:variant) do |variant|
   variant.size { [10, 25].rand }
   variant.association :product
 end
+
+Factory.define(:locator) do |locator|
+  locator.ip_from 305419896
+  locator.ip_to   305419898
+  locator.country_code 'US'
+  locator.country_code_with_three_characters 'USA'
+  locator.country 'UNITED STATES'
+end

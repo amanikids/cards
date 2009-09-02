@@ -4,7 +4,7 @@ class RootsController < ApplicationController
     country_code = Locator.country_code(request.remote_ip)
     distributor = Distributor.find_by_country_code(country_code) || Distributor.default
 
-    flash[:notice] = "<h2>Welcome!</h2><p>We think our <strong>#{distributor.country}</strong> distributor is closest to you, but we may have guessed wrong!<br />Please select our #{distributor.others.map { |d| @template.link_to d.country, distributor_root_path(d) }.to_sentence(:words_connector => 'or')} distributors if so.</p>"
+    flash[:notice] = "<h2>Welcome!</h2><p>We think our <strong>#{distributor.country}</strong> distributor is closest to you, but we may have guessed wrong!<br />Please select our #{distributor.others.map { |d| @template.link_to d.country, distributor_root_path(d) }.to_sentence(:two_words_connector => ' or ', :last_word_connector => ', or ')} distributor if so.</p>"
     redirect_to distributor_root_path(distributor)
   end
 end

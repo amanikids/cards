@@ -1,6 +1,6 @@
 class RootsController < ApplicationController
   def index
-    all_distributors = Distributor.ordered
+    all_distributors = Distributor.all
     country_code = Locator.country_code(request.remote_ip)
     distributor = Distributor.find_by_country_code(country_code) || Distributor.default
 

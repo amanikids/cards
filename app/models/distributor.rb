@@ -1,5 +1,5 @@
 class Distributor < User
-  named_scope :ordered, :order => :position
+  default_scope :order => :position
 
   has_many :carts
   has_many :donation_methods, :order => :position
@@ -26,7 +26,7 @@ class Distributor < User
   end
 
   def others
-    Distributor.ordered - [self]
+    Distributor.all - [self]
   end
 
   def shipment_created(order)

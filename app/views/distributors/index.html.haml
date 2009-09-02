@@ -11,7 +11,7 @@
       %th Received
       %th
   %tbody
-    - Distributor.ordered.each do |distributor|
+    - Distributor.all.each do |distributor|
       - orders = distributor.orders.count
       - shipped = distributor.orders.shipped.count
       - total = distributor.orders.map(&:total).sum.to_money.exchange_to(distributor.currency)

@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   has_many :inventories
   has_many :variants
 
-  named_scope :ordered, :order => :position
+  default_scope :order => :position
 
   def available?(distributor)
     available_variants(distributor).any?

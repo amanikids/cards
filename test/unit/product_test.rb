@@ -1,10 +1,9 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class ProductTest < ActiveSupport::TestCase
   should_validate_presence_of :name
   should_have_many :inventories
   should_have_many :variants
-  should_have_named_scope :ordered, :order => :position
 
   should 'look up inventory from distributor' do
     inventory   = Factory.create(:inventory)
@@ -44,5 +43,13 @@ class ProductTest < ActiveSupport::TestCase
     product = Factory.build(:product)
     product.stubs(:available_variants).with(:distributor).returns([])
     assert !product.available?(:distributor)
+  end
+ 
+  should 'by default be ordered by position' do
+    products = [
+      Factory.create(:product, :position => 2),
+      Factory.create(:product, :position => 1)
+    ]
+    assert_equal products.reverse.collect(&:position), Product.all.collect(&:position)
   end
 end

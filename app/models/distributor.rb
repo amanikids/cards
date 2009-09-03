@@ -7,6 +7,7 @@ class Distributor < User
   has_many :products, :through => :inventories
   has_many :orders
   has_many :products, :through => :inventories
+  has_many :batches
 
   validates_presence_of :country_code, :currency
   validates_uniqueness_of :country_code

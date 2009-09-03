@@ -1,8 +1,8 @@
 %tr
-  %td= link_to truncate(line.token, 5, ''), order_path(line.distributor, line)
-  %td= line.name
-  %td= m line.total
-  %td= n line.donation_method
-  %td= n line.donation_created_at
-  %td= n line.donation_received_at
+  %td= link_to truncate(line.order.token, :length => 5, :omission => ''), distributor_batch_path(@distributor, line)
+  %td= line.order.name
+  %td= m line.order.total
+  %td= n line.order.donation_method
+  %td= n line.order.donation_created_at
+  %td= n line.order.donation_received_at
   %td= n line.shipped_at

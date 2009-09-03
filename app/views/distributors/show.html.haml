@@ -26,16 +26,14 @@
         %td
         %td= f.submit 'Update Inventory'
 
-- new_orders = @distributor.orders.unshipped
-%h2= pluralize new_orders.count, 'New Order'
-- if new_orders.any?
+%h2= pluralize @unshipped.size, 'New Order'
+- if @unshipped.any?
   %table
     = render :partial => 'orders/line_header'
-    = render :partial => 'orders/line', :collection => new_orders
+    = render :partial => 'orders/line', :collection => @unshipped
 
-- shipped_orders = @distributor.orders.shipped
-%h2= pluralize shipped_orders.count, 'Shipped Order'
-- if shipped_orders.any?
+%h2= pluralize @shipped.size, 'Shipped Order'
+- if @shipped.any?
   %table
     = render :partial => 'orders/line_header'
-    = render :partial => 'orders/line', :collection => shipped_orders
+    = render :partial => 'orders/line', :collection => @shipped

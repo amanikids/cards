@@ -1,0 +1,30 @@
+= render :partial => @order, :locals => {:items => @batch.items}
+= render :partial => @order.address
+
+- if @batch.shipped?
+  %p
+    This shipment was sent on
+    %strong
+      = @batch.shipped_at
+- else
+  - form_for([@distributor, @batch]) do |f|
+    .field
+      = f.submit 'I just shipped this order.', :confirm => 'Are you sure? This will send an email to the Donor.'
+
+- if current_user && !@batch.shipped?
+  .danger
+    %h2 Transfer Order
+    %p If it seems like this shipment should be handled by a different distributor, you can transfer it here:
+    - @order.distributor.others.each do |distributor|
+      - form_for @order, :url => order_path(current_distributor, @order) do |f|
+        .field
+          = f.hidden_field :distributor_id, :value => distributor.id
+        .field
+          = f.submit "Transfer to #{distributor.name}, #{distributor.country}.", :confirm => 'Are you sure? This will transfer this Order and send an email to the Donor.'
+
+  .danger
+    %h2 Cancel Order
+    %p If you've heard from the donor that they made a mistake and don't want to have made this Order, then:
+    - form_for @order, :url => order_path(current_distributor, @order), :html => { :method => :delete } do |f|
+      .field
+        = f.submit 'Cancel this Order.', :confirm => 'Are you sure? This will completely destroy this Order from the database and send an email to the Donor.'

@@ -4,6 +4,22 @@ class DistributorsController < ApplicationController
   before_filter :load_distributor, :except => :index
   before_filter :ensure_administrator_or_current_distributor, :except => :index
 
+  def show
+    # TODO Nicer includes. Part of the problem here is that current currency
+    # is stored in the model, so items has to come back to the distributor
+    # to get the price.
+    common_includes = {:include => {
+      :items => {
+        :list => [
+          :distributor,
+          :address,
+          :donation_method,
+          {:items =>
+            [{:list => :distributor}, :variant]}]}}}
+    @unshipped = @distributor.batches.unshipped.find(:all, common_includes)
+    @shipped   = @distributor.batches.shipped.find(:all, common_includes)
+  end
+
   def update
     if @distributor.update_inventories(params[:inventories])
       flash[:notice] = 'Inventory updated.'

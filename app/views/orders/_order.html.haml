@@ -1,3 +1,4 @@
+- items ||= order.items
 %table.list
   %thead
     %tr
@@ -7,7 +8,7 @@
       %th Quantity
       %th Subtotal
   %tbody
-    - order.items.each do |item|
+    - items.each do |item|
       %tr{:class => cycle('odd', 'even')}
         %td= item.product_name
         %td= item.variant_description

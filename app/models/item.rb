@@ -7,6 +7,7 @@ class Item < ActiveRecord::Base
   delegate :description, :size, :to => :variant, :prefix => true
 
   validates_presence_of :variant_id
+  validates_presence_of :list
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0
 
   def product_count

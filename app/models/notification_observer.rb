@@ -1,8 +1,16 @@
 class NotificationObserver < ActiveRecord::Observer
-  observe :order, :shipment
+  observe :order, :batch
 
   def after_create(record)
     send "after_create_#{record.class.name.underscore}", record
+  end
+
+  def after_update(record)
+    if record.is_a?(Batch)
+      if record.shipped_at_changed? && record.shipped_at
+        Mailer.deliver_shipment_created(record)
+      end
+    end
   end
 
   def before_update(record)
@@ -19,8 +27,8 @@ class NotificationObserver < ActiveRecord::Observer
     Mailer.deliver_order_created(order)
   end
 
-  def after_create_shipment(shipment)
-    Mailer.deliver_shipment_created(shipment.order)
+  def after_create_batch(shipment)
+    true
   end
 
   def before_update_order(order)
@@ -31,7 +39,7 @@ class NotificationObserver < ActiveRecord::Observer
     end
   end
 
-  def before_update_shipment(shipment)
+  def before_update_batch(shipment)
     true
   end
 
@@ -39,7 +47,7 @@ class NotificationObserver < ActiveRecord::Observer
     Mailer.deliver_order_destroyed(order)
   end
 
-  def before_destroy_shipment(shipment)
-    Mailer.deliver_shipment_destroyed(shipment.order)
+  def before_destroy_batch(shipment)
+    true
   end
 end

@@ -32,6 +32,7 @@ class BatchTest < ActiveSupport::TestCase
   context '#ship!' do
     should 'set shipped_at to current time' do
       batch = Factory.create(:batch, :shipped_at => nil)
+      Factory.create(:item, :batch => batch, :list => Factory.create(:order))
       now = Time.zone.now
       Time.zone.stubs(:now).returns(now)
       batch.ship!
@@ -41,6 +42,7 @@ class BatchTest < ActiveSupport::TestCase
     should 'not set shipped_at when it has already been set' do
       shipped_at = 1.day.ago
       batch = Factory.create(:batch, :shipped_at => shipped_at)
+      Factory.create(:item, :batch => batch, :list => Factory.create(:order))
       batch.ship!
       assert_equal shipped_at.to_i, batch.reload.shipped_at.to_i
     end
@@ -54,6 +56,43 @@ class BatchTest < ActiveSupport::TestCase
 
       batch = order.items.first.batch
       assert_equal order, batch.order
+    end
+  end
+
+  context '#partial?' do
+    should 'return true when there exists another unshipped batch for the order' do
+      order = Factory.create(:order)
+      2.times do
+        order.items << Factory.create(:item,
+          :list => order,
+          :batch => Factory.create(:batch))
+      end
+
+      batch = order.items.first.batch
+      assert batch.partial?
+    end
+
+    should 'return false if this is the only batch for the order' do
+      order = Factory.create(:order)
+      order.items << Factory.create(:item,
+        :list => order,
+        :batch => Factory.create(:batch))
+
+      batch = order.items.first.batch
+      assert !batch.partial?
+    end
+
+    should 'return false if all other batches in the order have already shipped' do
+      order = Factory.create(:order)
+      2.times do
+        order.items << Factory.create(:item,
+          :list => order,
+          :batch => Factory.create(:batch))
+      end
+
+      batch = order.items.first.batch
+      order.items[1].batch.ship!
+      assert !batch.partial?
     end
   end
 end

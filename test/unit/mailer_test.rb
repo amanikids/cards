@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class MailerTest < ActionMailer::TestCase
   context 'new_orders' do
@@ -26,14 +26,14 @@ class MailerTest < ActionMailer::TestCase
   end
 
   context 'shipment_created' do
-    setup { @message = Mailer.create_shipment_created(@order = Factory(:shipment).order) }
-    should('be to email')               { assert_equal [@order.email], @message.to }
-    should('be from application email') { assert_equal [Mailer::FROM_ADDRESS], @message.from_addrs.map(&:to_s) }
-  end
+    setup do
+      @batch = Factory.create(:item, :list => Factory(:order), :batch => Factory(:batch)).batch
+      @message = Mailer.create_shipment_created(@batch)
+    end
 
-  context 'shipment_destroyed' do
-    setup { @message = Mailer.create_shipment_destroyed(@order = Factory(:shipment).order) }
-    should('be to email')               { assert_equal [@order.email], @message.to }
-    should('be from application email') { assert_equal [Mailer::FROM_ADDRESS], @message.from_addrs.map(&:to_s) }
+    should('be to email')               { assert_equal [@batch.order.email], @message.to }
+    should('be from application email') do
+      assert_equal [Mailer::FROM_ADDRESS], @message.from_addrs.map(&:to_s)
+    end
   end
 end

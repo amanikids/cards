@@ -2,7 +2,7 @@ require 'test_helper'
 
 class NotificationObserverTest < ActiveSupport::TestCase
   subject { NotificationObserver.instance }
-  should_observe :order, :shipment
+  should_observe :order, :batch
 
   context 'with an existing Order' do
     setup { @order = Factory.create(:order) }
@@ -31,21 +31,6 @@ class NotificationObserverTest < ActiveSupport::TestCase
     context 'before_destroy' do
       setup { @result = subject.before_destroy(@order) }
       before_should('deliver notification') { Mailer.expects(:deliver_order_destroyed).with(@order) }
-      should('return true') { assert @result }
-    end
-  end
-
-  context 'with an existing Shipment' do
-    setup { @shipment = Factory.create(:shipment) }
-
-    context 'after_create' do
-      setup { subject.after_create(@shipment) }
-      before_should('deliver notification') { Mailer.expects(:deliver_shipment_created).with(@shipment.order) }
-    end
-
-    context 'before_destroy' do
-      setup { @result = subject.before_destroy(@shipment) }
-      before_should('deliver notification') { Mailer.expects(:deliver_shipment_destroyed).with(@shipment.order) }
       should('return true') { assert @result }
     end
   end

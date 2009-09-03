@@ -17,4 +17,8 @@ class Batch < ActiveRecord::Base
   def ship!
     update_attributes!(:shipped_at => Time.zone.now) unless shipped?
   end
+
+  def partial?
+    order.items.collect(&:batch).reject {|x| x == self }.any? {|x| !x.shipped? }
+  end
 end

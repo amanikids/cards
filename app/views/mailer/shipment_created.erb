@@ -1,5 +1,9 @@
+<% if @batch.partial? -%>
+Part of your Amani Children's Home Christmas Card order has shipped. Follow the link below for more details.
+<% else -%>
 Your Amani Children's Home Christmas Card order has shipped.
+<% end -%>
 
-<%= order_url(@order.distributor, @order) %>
+<%= order_url(@batch.order.distributor, @batch.order) %>
 
 Please feel free to contact joe@amanikids.org if you have any questions.

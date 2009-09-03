@@ -125,14 +125,52 @@ class OrderTest < ActiveSupport::TestCase
 
     context 'with a donation' do
       setup { Factory(:donation, :order => @order) }
-      should('delegate donation_method to donation') { assert_equal @order.donation.donation_method, @order.donation_method }
-      should('delegate donation_created_at to donation') { assert_equal @order.donation.created_at, @order.donation_created_at }
-      should('delegate donation_received_at to donation') { assert_equal @order.donation.received_at, @order.donation_received_at }
+
+      should('delegate donation_method to donation') do
+        assert_equal @order.donation.donation_method, @order.donation_method
+      end
+
+      should('delegate donation_created_at to donation') do
+        assert_equal @order.donation.created_at, @order.donation_created_at
+      end
+
+      should('delegate donation_received_at to donation') do
+        assert_equal @order.donation.received_at, @order.donation_received_at
+      end
     end
 
-    context 'with a shipment' do
-      setup { Factory.create(:shipment, :order => @order) }
-      should('delegate shipped_at to shipment') { assert_equal @order.shipment.created_at, @order.shipped_at }
+    context '#sent?' do
+      should 'be false' do
+        assert !@order.sent?
+      end
+    end
+
+    context '#shipped_at' do
+      should 'be nil' do
+        assert_nil @order.shipped_at
+      end
+    end
+
+    context 'with shipped batches' do
+      setup do
+        @recent_batch = Factory(:batch, :shipped_at => 2.days.ago)
+        chaff_batch   = Factory(:batch, :shipped_at => 3.days.ago)
+        Factory.create(:item, :list => @order, :batch => @recent_batch)
+        Factory.create(:item, :list => @order, :batch => chaff_batch)
+        @order.reload
+      end
+
+      context '#shipped_at' do
+        should('be the most recent shipped_at date of the batches') do
+          assert_equal @recent_batch.shipped_at.to_i, @order.shipped_at.to_i
+        end
+      end
+
+      context '#sent?' do
+        should 'be true' do
+          assert @order.sent?
+        end
+      end
     end
   end
 

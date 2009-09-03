@@ -64,11 +64,16 @@ class Order < List
   end
 
   def shipped_at
-    shipment ? shipment.created_at : nil
+    items.collect {|x| x.batch.shipped_at }.compact.max
   end
 
   def to_param
     token
+  end
+
+  def sent?
+    batches = items.collect(&:batch)
+    batches.any? && batches.all?(&:shipped?)
   end
 
   private

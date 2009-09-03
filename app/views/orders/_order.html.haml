@@ -24,10 +24,13 @@
       %tr.additional_donation
         %td.label{:colspan => 4} Additional Donation
         %td.number= m order.additional_donation
+      - unless order.new_record?
+        %td
     %tr.total
       %td.label{:colspan => 4} Total Donation
       %td.number= m order.total
-
+      - unless order.new_record?
+        %td
     - if order.new_record?
       %tr
         %td{:colspan => 5}

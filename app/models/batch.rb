@@ -4,6 +4,7 @@ class Batch < ActiveRecord::Base
 
   named_scope :shipped,   :conditions => 'shipped_at IS NOT NULL'
   named_scope :unshipped, :conditions => 'shipped_at IS NULL'
+  named_scope :on_demand, :conditions => 'distributor_id IS NULL'
 
   def order
     items.first.list

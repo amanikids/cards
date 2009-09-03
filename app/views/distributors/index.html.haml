@@ -35,3 +35,15 @@
       %td.number= m total
       %td.number= m donated
       %td.number= p donated.cents, total.cents
+
+%h2= pluralize @unshipped.size, 'New Order'
+- if @unshipped.any?
+  %table
+    = render :partial => 'orders/line_header'
+    = render :partial => 'orders/line', :collection => @unshipped
+
+%h2= pluralize @shipped.size, 'Shipped Order'
+- if @shipped.any?
+  %table
+    = render :partial => 'orders/line_header'
+    = render :partial => 'orders/line', :collection => @shipped

@@ -1,5 +1,4 @@
 class BatchesController < ApplicationController
-  before_filter :find_distributor
   before_filter :find_batch
 
   before_filter :require_owner_or_admin
@@ -15,16 +14,11 @@ class BatchesController < ApplicationController
 
   protected
 
-  def find_distributor
-    @distributor = Distributor.find_by_param(params[:distributor_id])
-    raise ActiveRecord::RecordNotFound unless @distributor
-  end
-
   def find_batch
-    @batch = @distributor.batches.find(params[:id])
+    @batch = Batch.find(params[:id])
   end
 
   def require_owner_or_admin
-    return false unless current_user == @distributor || !current_user.is_a?(Distributor)
+    return false unless current_user == @batch.distributor || !current_user.is_a?(Distributor)
   end
 end

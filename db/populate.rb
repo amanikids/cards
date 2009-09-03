@@ -4,6 +4,8 @@ Order.transaction do
   100.times do
     distributor = Distributor.all.rand
 
+    all_purchasable_products = distributor.products + Product.on_demand
+
     order = Order.new(
       :address => Address.new(
         :name     => Faker::Name.name,
@@ -16,7 +18,7 @@ Order.transaction do
 
     (1..3).to_a.rand.times do
       order.items.build(
-        :variant  => distributor.products.collect(&:variants).flatten.rand,
+        :variant  => all_purchasable_products.collect(&:variants).flatten.rand,
         :quantity => (1..5).to_a.rand)
     end
 

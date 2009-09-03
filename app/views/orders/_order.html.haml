@@ -7,6 +7,8 @@
       %th Suggested<br />Donation
       %th Quantity
       %th Subtotal
+      - unless order.new_record?
+        %th Sent?
   %tbody
     - items.each do |item|
       %tr{:class => cycle('odd', 'even')}
@@ -15,6 +17,8 @@
         %td.number= m item.variant_price
         %td.number= item.quantity
         %td.number= m item.total
+        - unless order.new_record?
+          %td= item.batch.shipped? ? 'Yes' : 'No'
   %tfoot
     - if order.additional_donation_amount > 0
       %tr.additional_donation

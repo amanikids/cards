@@ -1,6 +1,8 @@
 = render :partial => @order, :locals => {:items => @batch.items}
 = render :partial => @order.address
 
+= link_to("View entire order", order_path(@order.distributor, @order))
+%p
 - if @batch.shipped?
   %p
     This shipment was sent on

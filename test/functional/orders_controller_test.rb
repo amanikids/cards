@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class OrdersControllerTest < ActionController::TestCase
   should_route :get,    '/us/orders/new',   :action => 'new',     :distributor_id => 'us'

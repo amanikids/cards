@@ -16,7 +16,7 @@
     %h2 Transfer Order
     %p If it seems like this shipment should be handled by a different distributor, you can transfer it here:
     - @order.distributor.others.each do |distributor|
-      - form_for @order, :url => order_path(current_distributor, @order) do |f|
+      - form_for @order, :url => transfer_order_path(current_distributor, @order) do |f|
         .field
           = f.hidden_field :distributor_id, :value => distributor.id
         .field

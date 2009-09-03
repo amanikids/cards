@@ -24,3 +24,26 @@ Then /^my shipment for order (.*) should be shipped$/ do |token|
   order.items.collect(&:batch).select {|b| b.distributor == @distributor }.all?(&:shipped?)
   Then %{I should see "This shipment was sent"}
 end
+
+Then /^order (.*) should be cancelled$/ do |token|
+  assert_nil Order.find_by_token(token)
+  Then %{I should see "Order cancelled. An email has been sent to the Donor."}
+end
+
+Given /^the following distributors exists:$/ do |table|
+  table.hashes.each do |distributor|
+    Factory.create(:distributor,
+      :name    => distributor["Name"],
+      :country => distributor["Country"]
+    )
+  end
+end
+
+Then /^order "([^\"]*)" should belong to "([^\"]*)"$/ do |token, name|
+  order = Order.find_by_token(token)
+  assert_equal name, order.distributor.name
+
+  order.items.reject(&:on_demand?).collect(&:batch).each do |batch|
+    assert_equal name, batch.distributor.name
+  end
+end

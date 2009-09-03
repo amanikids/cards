@@ -48,8 +48,11 @@ class BatchTest < ActiveSupport::TestCase
 
   context '#order' do
     should 'return the order of the first item' do
-      order = Factory.create(:order)
-      batch = Factory.create(:item, :list => order).batch
+      order = Factory.build(:order)
+      order.items << Factory.build(:item, :list => order)
+      order.save!
+
+      batch = order.items.first.batch
       assert_equal order, batch.order
     end
   end

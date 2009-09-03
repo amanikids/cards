@@ -4,20 +4,9 @@ class DistributorsController < ApplicationController
   before_filter :load_distributor, :except => :index
   before_filter :ensure_administrator_or_current_distributor, :except => :index
 
+  before_filter :find_batches, :only => %w[show]
+
   def show
-    # TODO Nicer includes. Part of the problem here is that current currency
-    # is stored in the model, so items has to come back to the distributor
-    # to get the price.
-    common_includes = {:include => {
-      :items => {
-        :list => [
-          :distributor,
-          :address,
-          :donation_method,
-          {:items =>
-            [{:list => :distributor}, :variant]}]}}}
-    @unshipped = @distributor.batches.unshipped.find(:all, common_includes)
-    @shipped   = @distributor.batches.shipped.find(:all, common_includes)
   end
 
   def update
@@ -25,6 +14,7 @@ class DistributorsController < ApplicationController
       flash[:notice] = 'Inventory updated.'
       redirect_to distributor_path(@distributor)
     else
+      find_batches
       render :action => 'show'
     end
   end
@@ -41,5 +31,21 @@ class DistributorsController < ApplicationController
 
   def load_distributor
     @distributor = Distributor.find_by_param(params[:id])
+  end
+
+  def find_batches
+    # TODO Nicer includes. Part of the problem here is that current currency
+    # is stored in the model, so items has to come back to the distributor
+    # to get the price.
+    common_includes = {:include => {
+      :items => {
+        :list => [
+          :distributor,
+          :address,
+          :donation_method,
+          {:items =>
+            [{:list => :distributor}, :variant]}]}}}
+    @unshipped = @distributor.batches.unshipped.find(:all, common_includes)
+    @shipped   = @distributor.batches.shipped.find(:all, common_includes)
   end
 end

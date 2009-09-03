@@ -137,7 +137,13 @@ class OrderTest < ActiveSupport::TestCase
   end
 
   context 'an existing USD Order' do
-    setup { @order = Factory(:order, :distributor => Factory(:distributor, :currency => 'USD')) }
+    setup do
+      @order = Factory.build(:order, :distributor => Factory(:distributor, :currency => 'USD'))
+      product = Factory.create(:inventory, :distributor => @order.distributor).product
+      variant = Factory.create(:variant, :product => product)
+      @order.items << Factory.build(:item, :variant => variant)
+      @order.save!
+    end
 
     context 'updating to a GBP distributor' do
       setup do
@@ -149,8 +155,15 @@ class OrderTest < ActiveSupport::TestCase
       should('return @old for distributor_was') { assert_equal @old, @order.distributor_was }
 
       context 'save without an additional donation' do
-        setup { @order.save }
+        setup { @order.save! }
         should_not_change('@order.additional_donation_amount') { @order.additional_donation_amount }
+      end
+
+      should 'transfer batch to new distributor' do
+        @order.save!
+        assert_equal [@order.distributor], @order.items.reject(&:on_demand?).collect {|x|
+          x.batch.distributor
+        }
       end
     end
 
@@ -270,7 +283,8 @@ class OrderTest < ActiveSupport::TestCase
 
       2.times do
         product = Factory.create(:inventory, :distributor => distributor).product
-        order.items << Factory.build(:item, :variant => Factory.create(:variant, :product => product))
+        variant = Factory.create(:variant, :product => product)
+        order.items << Factory.build(:item, :variant => variant)
       end
 
       assert_difference('Batch.count', 1) do

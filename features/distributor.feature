@@ -14,5 +14,15 @@ Feature: Distributor tasks
     Then my shipment for order d74280 should be shipped
 
   Scenario: Transferring an order
+    Given the following distributors exists:
+      | Name      | Country   |
+      | Don Alias | Australia |
+    When I follow "d7428"
+    And I press "Transfer to Don Alias, Australia."
+    Then order "d74280" should belong to "Don Alias"
+    And I should see "Inventory"
 
   Scenario: Cancelling an order
+    When I follow "d7428"
+    And I press "Cancel this order."
+    Then order d74280 should be cancelled

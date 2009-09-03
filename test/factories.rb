@@ -47,7 +47,6 @@ end
 Factory.define(:item) do |item|
   item.quantity { (1..5).to_a.rand }
   item.association :variant
-  item.association :batch
 end
 
 Factory.define(:batch) do |batch|

@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), '..', 'test_helper')
 class ItemTest < ActiveSupport::TestCase
   should_belong_to :batch
   should_belong_to :variant
-  should_validate_presence_of :variant_id, :list
+  should_validate_presence_of :variant_id
 
   should_validate_numericality_of :quantity
   should_not_allow_values_for :quantity, -1, 0, :message => /greater than/

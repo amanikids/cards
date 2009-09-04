@@ -51,14 +51,12 @@ class Order < List
     Distributor.find(distributor_id_was) if distributor_changed?
   end
 
-  # TODO use delegate method
-  def donation_created_at
-    donation ? donation.created_at : nil
-  end
-
-  def donation_received_at
-    donation ? donation.received_at : nil
-  end
+  # def donation_created_at
+  # def donation_received_at
+  delegate :created_at, :received_at,
+    :to        => :donation,
+    :prefix    => true,
+    :allow_nil => true
 
   def donation_made?
     donation

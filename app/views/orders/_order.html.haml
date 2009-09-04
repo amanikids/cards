@@ -8,7 +8,7 @@
       %th Quantity
       %th Subtotal
       - unless order.new_record?
-        %th Sent?
+        %th Shipped?
   %tbody
     - items.each do |item|
       %tr{:class => cycle('odd', 'even')}

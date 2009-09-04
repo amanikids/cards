@@ -21,4 +21,8 @@ class Batch < ActiveRecord::Base
   def partial?
     order.items.collect(&:batch).reject {|x| x == self }.any? {|x| !x.shipped? }
   end
+
+  def on_demand?
+    distributor.nil?
+  end
 end

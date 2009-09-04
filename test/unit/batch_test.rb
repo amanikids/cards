@@ -95,4 +95,11 @@ class BatchTest < ActiveSupport::TestCase
       assert !batch.partial?
     end
   end
+
+  context '#on_demand?' do
+    should 'be true iff distributor is nil' do
+      assert Factory.build(:batch, :distributor => nil).on_demand?
+      assert !Factory.build(:batch).on_demand?
+    end
+  end
 end

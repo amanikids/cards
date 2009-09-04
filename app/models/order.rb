@@ -25,10 +25,6 @@ class Order < List
   delegate :donation_methods, :to => :distributor
 
   after_create  :create_batches
-  with_options(:if => :distributor_changed?) do |o|
-    o.before_update :exchange_additional_donation_amount
-    o.after_update :transfer_distributor_batch
-  end
 
   before_destroy :cancellable?
 
@@ -103,19 +99,6 @@ class Order < List
           batch.items << item
         end
       end
-    end
-  end
-
-  def exchange_additional_donation_amount
-    additional_donation_was = Money.new(100 * additional_donation_amount, distributor_was.currency)
-    self.additional_donation_amount = additional_donation_was.exchange_to(distributor.currency).cents / 100
-  end
-
-  def transfer_distributor_batch
-    items_to_rebatch = items.reject(&:on_demand?)
-    unless items_to_rebatch.empty?
-      batch = items_to_rebatch.first.batch
-      batch.update_attributes!(:distributor_id => distributor_id)
     end
   end
 end

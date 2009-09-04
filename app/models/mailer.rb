@@ -17,13 +17,6 @@ class Mailer < ActionMailer::Base
     body :order => order
   end
 
-  def order_updated(order)
-    from FROM_ADDRESS
-    recipients "#{order.name} <#{order.email}>"
-    subject "We've updated your order."
-    body :order => order
-  end
-
   def order_destroyed(order)
     from FROM_ADDRESS
     recipients "#{order.name} <#{order.email}>"

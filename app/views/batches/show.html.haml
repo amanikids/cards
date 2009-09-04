@@ -40,17 +40,6 @@
       .field
         = f.submit 'I just shipped this order.', :confirm => 'Are you sure? This will send an email to the Donor.'
 
--if !@batch.shipped? && @batch.distributor
-  .danger
-    %h2 Transfer Order
-    %p If it seems like this shipment should be handled by a different distributor, you can transfer it here:
-    - @order.distributor.others.each do |distributor|
-      - form_for @order, :url => transfer_order_path(@order.distributor, @order) do |f|
-        .field
-          = f.hidden_field :distributor_id, :value => distributor.id
-        .field
-          = f.submit "Transfer to #{distributor.name}, #{distributor.country}.", :confirm => 'Are you sure? This will transfer this Order and send an email to the Donor.'
-
 - if @order.cancellable?
   .danger
     %h2 Cancel Order

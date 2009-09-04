@@ -173,47 +173,6 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
-  context 'an existing USD Order' do
-    setup do
-      @order = Factory.build(:order, :distributor => Factory(:distributor, :currency => 'USD'))
-      product = Factory.create(:inventory, :distributor => @order.distributor).product
-      variant = Factory.create(:variant, :product => product)
-      @order.items << Factory.build(:item, :variant => variant)
-      @order.save!
-    end
-
-    context 'updating to a GBP distributor' do
-      setup do
-        @old = @order.distributor
-        @order.distributor = Factory(:distributor, :currency => 'GBP')
-      end
-
-      should('return true for distributor_changed?') { assert @order.distributor_changed? }
-      should('return @old for distributor_was') { assert_equal @old, @order.distributor_was }
-
-      context 'save without an additional donation' do
-        setup { @order.save! }
-        should_not_change('@order.additional_donation_amount') { @order.additional_donation_amount }
-      end
-
-      should 'transfer batch to new distributor' do
-        @order.save!
-        assert_equal [@order.distributor], @order.items.reject(&:on_demand?).collect {|x|
-          x.batch.distributor
-        }
-      end
-    end
-
-    context 'with an additional donation' do
-      setup { @order.update_attributes(:additional_donation_amount => 10) }
-
-      context 'updating to a GBP distributor' do
-        setup { @order.reload.update_attributes(:distributor_id => Factory(:distributor, :currency => 'GBP').id) }
-        should_change('@order.additional_donation_amount', :to => 5) { @order.additional_donation_amount }
-      end
-    end
-  end
-
   should 'answer token for to_param' do
     order = Factory.build(:order, :token => :token)
     assert_equal :token, order.to_param

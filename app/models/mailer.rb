@@ -41,4 +41,11 @@ class Mailer < ActionMailer::Base
     subject "Oops! We haven't shipped your order yet."
     body :order => order
   end
+
+  def overdue_batches(batches)
+    from FROM_ADDRESS
+    recipients FROM_ADDRESS
+    subject "Yikes! We've got overdue batches!"
+    body :batches => batches
+  end
 end

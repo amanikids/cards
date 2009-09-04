@@ -1,7 +1,7 @@
 # =============================================================================
 # = Sequences                                                                 =
 # =============================================================================
-Factory.sequence(:country_code) { |n| Digest::SHA1.hexdigest(n.to_s)[0..1] }
+Factory.sequence(:country_code) { |n| (n + 10).to_s }
 Factory.sequence(:email) { |n| "user#{n}@example.com" }
 
 # =============================================================================
@@ -13,6 +13,10 @@ Factory.define(:address, :class => Address) do |address|
   address.line_two 'Anytown, GA'
   address.country 'United States'
   address.email 'bob@example.com'
+end
+
+Factory.define(:batch) do |batch|
+  batch.association :distributor
 end
 
 Factory.define(:cart) do |cart|
@@ -49,10 +53,6 @@ end
 Factory.define(:item) do |item|
   item.quantity { (1..5).to_a.rand }
   item.association :variant
-end
-
-Factory.define(:batch) do |batch|
-  batch.association :distributor
 end
 
 Factory.define(:list) do |list|

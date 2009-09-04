@@ -6,6 +6,15 @@ class Batch < ActiveRecord::Base
   named_scope :unshipped, :conditions => 'shipped_at IS NULL'
   named_scope :on_demand, :conditions => 'distributor_id IS NULL'
 
+  named_scope :overdue, lambda {
+    { :conditions => ["shipped_at IS NULL AND created_at < ?", 7.days.ago] }
+  }
+
+  def self.deliver_overdue_reminder
+    puts 'doing it'
+    Mailer.deliver_overdue_batches(overdue) unless overdue.empty?
+  end
+
   def order
     items.first.list
   end

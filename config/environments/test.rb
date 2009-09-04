@@ -27,5 +27,8 @@ config.action_mailer.default_url_options = { :host => 'shoes.local:3000' }
 config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl',   :source => 'http://gems.github.com'
 config.gem 'thoughtbot-shoulda',      :lib => false,  :source => "http://gems.github.com"
 
+config.gem 'faker'
+
+# FIXME figure out why this is required on Xavier's machine
 require 'shoulda/test_unit'
 require 'shoulda/rails'

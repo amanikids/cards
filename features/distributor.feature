@@ -33,3 +33,8 @@ Feature: Distributor tasks
     And I press "I just received this donation."
     Then the received at date for order "d74280" should be today
     And I should see "We received the donation for this order"
+
+  Scenario: Trying to view another Distributor's order
+    Given a new shipment exists for an order with token 1984c
+    When I visit the first batch for order "1984c"
+    Then I should be redirected to my home page

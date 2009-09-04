@@ -19,6 +19,8 @@ class BatchesController < ApplicationController
   end
 
   def require_owner_or_admin
-    return false unless current_user == @batch.distributor || !current_user.is_a?(Distributor)
+    unless current_user == @batch.distributor || !current_user.is_a?(Distributor)
+      redirect_to(distributor_path(current_user))
+    end
   end
 end

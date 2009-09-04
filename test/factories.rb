@@ -24,6 +24,8 @@ Factory.define(:distributor) do |distributor|
   distributor.currency 'USD'
   distributor.email { Factory.next(:email) }
   distributor.password 'foo'
+  distributor.name { Faker::Name.name }
+  distributor.country { ["United States", "Canada", "United Kingdom", "Germany", "Mexico"].rand }
 end
 
 Factory.define(:donation) do |donation|

@@ -88,11 +88,11 @@ class Order < List
     batches.none?(&:shipped?)
   end
 
-  private
-
   def batches
     items.collect(&:batch).uniq
   end
+
+  private
 
   def create_batches
     items.group_by(&:on_demand?).each do |on_demand, items|

@@ -1,7 +1,5 @@
 %h1
-  = @distributor.country
-  Orders &mdash;
-  = @distributor.name
+  = "%s Orders &mdash; %s" % [@distributor.country, @distributor.name]
 
 %h2 Inventory
 

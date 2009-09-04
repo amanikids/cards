@@ -9,6 +9,6 @@ class DonationsController < ApplicationController
 
   def update
     @order.donation.update_attributes(params[:donation])
-    redirect_to order_path(current_distributor, @order)
+    redirect_to batch_path(params[:batch_id])
   end
 end

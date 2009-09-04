@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class DonationsControllerTest < ActionController::TestCase
   should_route :post, '/us/orders/12345/donation', :action => 'create', :order_id => '12345', :distributor_id => 'us'
@@ -47,9 +47,15 @@ class DonationsControllerTest < ActionController::TestCase
         setup { @controller.current_user = Factory.create(:user) }
 
         context 'update' do
-          setup { put :update, :distributor_id => @distributor.to_param, :order_id => @donation.order.token, :donation => { :received_at => Time.now } }
+          setup do
+            put :update,
+              :distributor_id => @distributor.to_param,
+              :order_id       => @donation.order.token,
+              :batch_id       => 12345,
+              :donation       => { :received_at => Time.now }
+          end
           should_change('@donation.reload.received_at') { @donation.reload.received_at }
-          should_redirect_to('the Order') { order_path(@distributor, @donation.order) }
+          should_redirect_to('the batch') { batch_path(12345) }
         end
       end
     end

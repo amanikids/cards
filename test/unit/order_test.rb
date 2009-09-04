@@ -336,4 +336,29 @@ class OrderTest < ActiveSupport::TestCase
       assert_equal expected, actual
     end
   end
+
+  context '#donation_made?' do
+    should 'be true iff a donation exists for the order' do
+      order = Factory.build(:order)
+      assert !order.donation_made?
+
+      order.donation = Factory.build(:donation, :order => order)
+      assert order.donation_made?
+    end
+  end
+
+  context '#donation_received?' do
+    should 'be true iff a donation exists for the order and has been received' do
+      order = Factory.build(:order)
+      assert !order.donation_received?
+
+      order.donation = Factory.build(:donation,
+        :received_at => nil,
+        :order       => order)
+      assert !order.donation_received?
+
+      order.donation.received_at = 1.day.ago
+      assert order.donation_received?
+    end
+  end
 end

@@ -51,12 +51,21 @@ class Order < List
     Distributor.find(distributor_id_was) if distributor_changed?
   end
 
+  # TODO use delegate method
   def donation_created_at
     donation ? donation.created_at : nil
   end
 
   def donation_received_at
     donation ? donation.received_at : nil
+  end
+
+  def donation_made?
+    donation
+  end
+
+  def donation_received?
+    donation_received_at
   end
 
   def items_for(product)

@@ -1,4 +1,4 @@
-- items ||= order.items
+- highlight_items_for ||= nil
 %table.list
   %thead
     %tr
@@ -10,8 +10,8 @@
       - unless order.new_record?
         %th Shipped?
   %tbody
-    - items.each do |item|
-      %tr{:class => cycle('odd', 'even')}
+    - order.items.each do |item|
+      %tr{:class => [cycle('odd', 'even'), highlight?(item, highlight_items_for) ? 'highlight' : nil].join(' ')}
         %td= item.product_name
         %td= item.variant_description
         %td.number= m item.variant_price

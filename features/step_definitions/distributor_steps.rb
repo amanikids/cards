@@ -47,3 +47,16 @@ Then /^order "([^\"]*)" should belong to "([^\"]*)"$/ do |token, name|
     assert_equal name, batch.distributor.name
   end
 end
+
+
+Given /^the donor has indicated they made a donation for order "([^\"]*)"$/ do |token|
+  order = Order.find_by_token(token)
+  Factory.create(:donation,
+    :received_at => nil,
+    :order       => order)
+end
+
+Then /^the received at date for order "([^\"]*)" should be today$/ do |token|
+  order = Order.find_by_token(token)
+  assert_equal Date.today, order.donation_received_at.to_date
+end

@@ -26,3 +26,10 @@ Feature: Distributor tasks
     When I follow "d7428"
     And I press "Cancel this order."
     Then order d74280 should be cancelled
+
+  Scenario: Receiving a check for a donation
+    Given the donor has indicated they made a donation for order "d74280"
+    When I follow "d7428"
+    And I press "I just received this donation."
+    Then the received at date for order "d74280" should be today
+    And I should see "We received the donation for this order"

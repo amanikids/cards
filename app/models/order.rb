@@ -30,6 +30,8 @@ class Order < List
     o.after_update :transfer_distributor_batch
   end
 
+  before_destroy :cancellable?
+
   # TODO use the new nested_attributes magic
   def address_with_nested_attributes=(record_or_attributes)
     record = case record_or_attributes
@@ -79,11 +81,18 @@ class Order < List
   end
 
   def sent?
-    batches = items.collect(&:batch)
     batches.any? && batches.all?(&:shipped?)
   end
 
+  def cancellable?
+    batches.none?(&:shipped?)
+  end
+
   private
+
+  def batches
+    items.collect(&:batch).uniq
+  end
 
   def create_batches
     items.group_by(&:on_demand?).each do |on_demand, items|

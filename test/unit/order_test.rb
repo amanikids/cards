@@ -236,7 +236,9 @@ class OrderTest < ActiveSupport::TestCase
 
       @order = Factory.build(:order, :distributor => @distributor)
       @distributor.inventories.each do |inventory|
-        @order.items << Factory.build(:item, :variant => Factory.create(:variant, :product => inventory.product))
+        @order.items << Factory.build(:item,
+          :variant => Factory.create(:variant, :product => inventory.product),
+          :batch   => Factory.build(:batch))
       end
 
       @capture_count_differences = lambda do |attribute, block|
@@ -359,6 +361,26 @@ class OrderTest < ActiveSupport::TestCase
 
       order.donation.received_at = 1.day.ago
       assert order.donation_received?
+    end
+  end
+
+  context 'destroying an order' do
+    should 'be allowed if no batches have been shipped' do
+      order = Factory.create(:order)
+      order.items << Factory.create(:item, :batch => Factory.create(:batch))
+      order.items << Factory.create(:item, :batch => Factory.create(:batch))
+
+      assert order.destroy
+    end
+
+    should 'be forbidden if any batch for the order has been shipped' do
+      order = Factory.create(:order)
+      order.items << Factory.create(:item, :batch => Factory.create(:batch))
+      order.items << Factory.create(:item, :batch => Factory.create(:batch))
+
+      order.items[0].batch.ship!
+
+      assert !order.destroy
     end
   end
 end

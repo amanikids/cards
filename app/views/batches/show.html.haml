@@ -50,9 +50,10 @@
         .field
           = f.submit "Transfer to #{distributor.name}, #{distributor.country}.", :confirm => 'Are you sure? This will transfer this Order and send an email to the Donor.'
 
-.danger
-  %h2 Cancel Order
-  %p If you've heard from the donor that they made a mistake and don't want to have made this Order, then:
-  - form_for @order, :url => order_path(@order.distributor, @order), :html => { :method => :delete } do |f|
-    .field
-      = f.submit 'Cancel this Order.', :confirm => 'Are you sure? This will completely destroy this Order from the database and send an email to the Donor.'
+- if @order.cancellable?
+  .danger
+    %h2 Cancel Order
+    %p If you've heard from the donor that they made a mistake and don't want to have made this Order, then:
+    - form_for @order, :url => order_path(@order.distributor, @order), :html => { :method => :delete } do |f|
+      .field
+        = f.submit 'Cancel this Order.', :confirm => 'Are you sure? This will completely destroy this Order from the database and send an email to the Donor.'

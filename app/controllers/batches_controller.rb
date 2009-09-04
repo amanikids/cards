@@ -7,8 +7,13 @@ class BatchesController < ApplicationController
     @order = @batch.order
   end
 
-  def update
+  def ship
     @batch.ship!
+    redirect_to(:action => 'show')
+  end
+
+  def unship
+    @batch.unship!
     redirect_to(:action => 'show')
   end
 

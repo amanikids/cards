@@ -19,10 +19,22 @@ class MailerTest < ActionMailer::TestCase
     should('be from application email') { assert_equal [Mailer::FROM_ADDRESS], @message.from_addrs.map(&:to_s) }
   end
 
-  context 'shipment_created' do
+  context 'batch_shipped' do
     setup do
       @batch = Factory.create(:item, :list => Factory(:order), :batch => Factory(:batch)).batch
-      @message = Mailer.create_shipment_created(@batch)
+      @message = Mailer.create_batch_shipped(@batch)
+    end
+
+    should('be to email')               { assert_equal [@batch.order.email], @message.to }
+    should('be from application email') do
+      assert_equal [Mailer::FROM_ADDRESS], @message.from_addrs.map(&:to_s)
+    end
+  end
+
+  context 'batch_unshipped' do
+    setup do
+      @batch = Factory.create(:item, :list => Factory(:order), :batch => Factory(:batch)).batch
+      @message = Mailer.create_batch_unshipped(@batch)
     end
 
     should('be to email')               { assert_equal [@batch.order.email], @message.to }

@@ -238,7 +238,7 @@ class OrderTest < ActiveSupport::TestCase
 
       expected_differences = @order.items.map { |item| -item.product_count }
       actual_differences = @capture_count_differences.call(:shipped, lambda {
-        @order.batches.each {|x| x.update_attributes!(:shipped_at => nil) }
+        @order.batches.each(&:unship!)
       })
       assert_equal expected_differences, actual_differences
     end

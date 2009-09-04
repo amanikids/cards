@@ -24,12 +24,21 @@ class Mailer < ActionMailer::Base
     body :order => order
   end
 
-  def shipment_created(batch)
+  def batch_shipped(batch)
     order = batch.order
 
     from FROM_ADDRESS
     recipients "#{order.name} <#{order.email}>"
     subject 'Your order has shipped.'
     body :batch => batch
+  end
+
+  def batch_unshipped(batch)
+    order = batch.order
+
+    from FROM_ADDRESS
+    recipients "#{order.name} <#{order.email}>"
+    subject "Oops! We haven't shipped your order yet."
+    body :order => order
   end
 end

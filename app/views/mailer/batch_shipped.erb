@@ -1,12 +1,12 @@
-<% if @batch.partial? -%>
-  <% if @batch.on_demand? -%>
+<%- if @batch.partial? -%>
+  <%- if @batch.on_demand? -%>
 Your gift cards have shipped from Tanzania. The rest of your order will be on its way soon.
-  <% else -%>
+  <%- else -%>
 Your card packs are on their way. The alternative gift cards you ordered will be shipped from Tanzania soon.
-  <% end -%>
-<% else -%>
+  <%- end -%>
+<%- else -%>
 Your Amani Children's Home Christmas Card order has shipped.
-<% end -%>
+<%- end -%>
 
 <%= order_url(@batch.order.distributor, @batch.order) %>
 

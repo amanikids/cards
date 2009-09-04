@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
   map.resources :distributors
-  map.resources :batches
+  map.resources :batches, :member => { :ship => :put, :unship => :put }
 
   map.with_options(:path_prefix => '/:distributor_id') do |map|
     map.root :controller => 'products', :name_prefix => 'distributor_'

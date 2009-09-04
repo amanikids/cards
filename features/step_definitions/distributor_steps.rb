@@ -21,8 +21,14 @@ end
 
 Then /^my shipment for order (.*) should be shipped$/ do |token|
   order = Order.find_by_token(token)
-  order.batches.detect {|b| b.distributor == @distributor }.shipped?
-  Then %{I should see "This shipment was sent"}
+  assert order.batches.detect {|b| b.distributor == @distributor }.shipped?
+  Then %{I should see "This batch was shipped"}
+end
+
+Then /^my shipment for order (.*) should not be shipped$/ do |token|
+  order = Order.find_by_token(token)
+  assert !order.batches.detect {|b| b.distributor == @distributor }.shipped?
+  Then %{I should see "This batch has not yet been shipped"}
 end
 
 Then /^order (.*) should be cancelled$/ do |token|

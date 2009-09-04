@@ -15,7 +15,11 @@ class Batch < ActiveRecord::Base
   end
 
   def ship!
-    update_attributes!(:shipped_at => Time.zone.now) unless shipped?
+    update_attribute(:shipped_at, Time.zone.now) unless shipped?
+  end
+
+  def unship!
+    update_attribute(:shipped_at, nil)
   end
 
   def partial?

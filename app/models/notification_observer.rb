@@ -6,9 +6,11 @@ class NotificationObserver < ActiveRecord::Observer
   end
 
   def after_update(record)
-    if record.is_a?(Batch)
-      if record.shipped_at_changed? && record.shipped_at
-        Mailer.deliver_shipment_created(record)
+    if record.is_a?(Batch) && record.shipped_at_changed?
+      if record.shipped_at
+        Mailer.deliver_batch_shipped(record)
+      else
+        Mailer.deliver_batch_unshipped(record)
       end
     end
   end

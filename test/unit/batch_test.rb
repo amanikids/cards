@@ -42,9 +42,17 @@ class BatchTest < ActiveSupport::TestCase
     should 'not set shipped_at when it has already been set' do
       shipped_at = 1.day.ago
       batch = Factory.create(:batch, :shipped_at => shipped_at)
-      Factory.create(:item, :batch => batch, :list => Factory.create(:order))
       batch.ship!
       assert_equal shipped_at.to_i, batch.reload.shipped_at.to_i
+    end
+  end
+
+  context '#unship!' do
+    should 'set shipped_at to nil' do
+      batch = Factory.create(:batch, :shipped_at => Time.now)
+      Factory.create(:item, :batch => batch, :list => Factory.create(:order))
+      batch.unship!
+      assert_nil batch.reload.shipped_at
     end
   end
 

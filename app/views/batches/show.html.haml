@@ -29,14 +29,18 @@
 
 .attention.shipment
   %h2 Shipping
-  %p
   - if @batch.shipped?
     %p
-      This shipment was sent on
+      This batch was shipped on
       %strong
         = @batch.shipped_at.to_s(:long)
+    - form_for @batch, :url => unship_batch_path(@batch) do |f|
+      .field
+        = f.hidden_field :shipped_at, :value => nil
+        = f.submit 'Oops! Cancel this shipment!', :confirm => 'Are you sure? This will send email to the Donor.'
   - else
-    - form_for([@distributor, @batch]) do |f|
+    %p This batch has not yet been shipped.
+    - form_for @batch, :url => ship_batch_path(@batch) do |f|
       .field
         = f.submit 'I just shipped this order.', :confirm => 'Are you sure? This will send an email to the Donor.'
 

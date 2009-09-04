@@ -13,6 +13,12 @@ Feature: Distributor tasks
     And I press "I just shipped this order."
     Then my shipment for order d74280 should be shipped
 
+  Scenario: Cancelling a shipment
+    When I follow "d7428"
+    And I press "I just shipped this order."
+    And I press "Oops! Cancel this Shipment!"
+    Then my shipment for order d74280 should not be shipped
+
   Scenario: Cancelling an order
     When I follow "d7428"
     And I press "Cancel this order."

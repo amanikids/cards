@@ -1,7 +1,10 @@
 # =============================================================================
 # = Sequences                                                                 =
 # =============================================================================
-Factory.sequence(:country_code) { |n| (n + 10).to_s }
+
+# Use base 36 to get a boat load of unique country codes, otherwise we run out
+Factory.sequence(:country_code) { |n| (n + 36).to_s(36) }
+
 Factory.sequence(:email) { |n| "user#{n}@example.com" }
 
 # =============================================================================

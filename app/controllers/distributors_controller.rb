@@ -37,9 +37,8 @@ class DistributorsController < ApplicationController
   end
 
   def find_batches(base)
-    # TODO Nicer includes. Part of the problem here is that current currency
-    # is stored in the model, so items has to come back to the distributor
-    # to get the price.
+    # Part of the problem here is that current currency is stored in the
+    # model, so items has to come back to the distributor to get the price.
     common_includes = {:include => {
       :items => {
         :list => [

@@ -129,9 +129,9 @@ class OrderTest < ActiveSupport::TestCase
       end
     end
 
-    context '#sent?' do
+    context '#shipped?' do
       should 'be false' do
-        assert !@order.sent?
+        assert !@order.shipped?
       end
     end
 
@@ -156,9 +156,9 @@ class OrderTest < ActiveSupport::TestCase
         end
       end
 
-      context '#sent?' do
+      context '#shipped?' do
         should 'be true' do
-          assert @order.sent?
+          assert @order.shipped?
         end
       end
     end

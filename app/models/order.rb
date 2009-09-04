@@ -76,8 +76,7 @@ class Order < List
     token
   end
 
-  # TODO change to shipped?
-  def sent?
+  def shipped?
     batches.any? && batches.all?(&:shipped?)
   end
 

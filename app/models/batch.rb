@@ -11,7 +11,6 @@ class Batch < ActiveRecord::Base
   }
 
   def self.deliver_overdue_reminder
-    puts 'doing it'
     Mailer.deliver_overdue_batches(overdue) unless overdue.empty?
   end
 

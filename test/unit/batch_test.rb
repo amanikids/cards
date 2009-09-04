@@ -102,31 +102,4 @@ class BatchTest < ActiveSupport::TestCase
       assert !Factory.build(:batch).on_demand?
     end
   end
-
-=begin
-    should 'increment shipped inventory for each item when a batch is shipped' do
-      @order.save!
-
-      shipment = Factory.build(:shipment, :order => @order)
-
-      expected_differences = @order.items.map { |item| item.product_count }
-      actual_differences = @capture_count_differences.call(:shipped, lambda {
-        shipment.save!
-      })
-      assert_equal expected_differences, actual_differences
-    end
-
-    should 'decrement shipped inventory for each item on shipment destroy' do
-      @order.save!
-
-      shipment = Factory.build(:shipment, :order => @order)
-      shipment.save!
-
-      expected_differences = @order.items.map { |item| -item.product_count }
-      actual_differences = @capture_count_differences.call(:shipped, lambda {
-        shipment.destroy
-      })
-      assert_equal expected_differences, actual_differences
-    end
-=end
 end

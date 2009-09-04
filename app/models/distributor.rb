@@ -36,12 +36,12 @@ class Distributor < User
     Distributor.all - [self]
   end
 
-  def shipment_created(order)
-    update_inventories_with_items_from(order, :item_shipped)
+  def batch_shipped(batch)
+    update_inventories_with_items_from(batch, :item_shipped)
   end
 
-  def shipment_destroyed(order)
-    update_inventories_with_items_from(order, :item_unshipped)
+  def batch_unshipped(batch)
+    update_inventories_with_items_from(batch, :item_unshipped)
   end
 
   def sold_out?
@@ -64,9 +64,9 @@ class Distributor < User
 
   private
 
-  def update_inventories_with_items_from(order, event)
+  def update_inventories_with_items_from(container, event)
     inventories.each do |inventory|
-      order.items_for(inventory.product).each do |item|
+      container.items_for(inventory.product).each do |item|
         inventory.send(event, item)
       end
     end

@@ -187,7 +187,7 @@ class OrderTest < ActiveSupport::TestCase
       @distributor.inventories.each do |inventory|
         @order.items << Factory.build(:item,
           :variant => Factory.create(:variant, :product => inventory.product),
-          :batch   => Factory.build(:batch))
+          :batch   => Factory.build(:batch, :distributor => @distributor))
       end
 
       @capture_count_differences = lambda do |attribute, block|
@@ -218,6 +218,27 @@ class OrderTest < ActiveSupport::TestCase
       expected_differences = @order.items.map { |item| -item.product_count }
       actual_differences = @capture_count_differences.call(:promised, lambda {
         @order.destroy
+      })
+      assert_equal expected_differences, actual_differences
+    end
+
+    should 'increment shipped inventory for each item when a batch is shipped' do
+      @order.save!
+
+      expected_differences = @order.items.map { |item| item.product_count }
+      actual_differences = @capture_count_differences.call(:shipped, lambda {
+        @order.batches.each(&:ship!)
+      })
+      assert_equal expected_differences, actual_differences
+    end
+
+    should 'decrement shipped inventory for each item when a batch is unshipped' do
+      @order.save!
+      @order.batches.each(&:ship!)
+
+      expected_differences = @order.items.map { |item| -item.product_count }
+      actual_differences = @capture_count_differences.call(:shipped, lambda {
+        @order.batches.each {|x| x.update_attributes!(:shipped_at => nil) }
       })
       assert_equal expected_differences, actual_differences
     end

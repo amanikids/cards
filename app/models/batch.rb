@@ -25,4 +25,8 @@ class Batch < ActiveRecord::Base
   def on_demand?
     distributor.nil?
   end
+
+  def items_for(product)
+    items.select { |item| item.product == product }
+  end
 end

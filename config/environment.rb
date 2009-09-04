@@ -15,7 +15,10 @@ Rails::Initializer.run do |config|
   # They can then be installed with "rake gems:install" on new installations.
   config.gem 'activemerchant', :lib => 'active_merchant'
   config.gem 'haml'
-  config.gem 'matthewtodd-has_digest', :lib => 'has_digest', :source => 'http://gems.github.com'
+  config.gem 'matthewtodd-has_digest',
+    :lib     => 'has_digest',
+    :source  => 'http://gems.github.com',
+    :version => '>= 0.1.3'
   config.gem 'money'
   config.gem 'RedCloth', :lib => 'redcloth'
 

@@ -2,8 +2,7 @@ require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class OrderTest < ActiveSupport::TestCase
   should_belong_to :address
-  # FIXME has_digest needs to be updated to work with latest shoulda
-  # should_have_digest :token
+  should_have_digest :token
   should_have_one :donation
   should_have_one :shipment
 

@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # FIXME has_digest needs to be updated to work with latest shoulda
-  # should_have_digest :encrypted_password, :depends => :password
+  should_have_digest :encrypted_password, :depends => :password
   should_validate_presence_of :email, :password
   should_validate_confirmation_of :password
 

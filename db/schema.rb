@@ -1,4 +1,4 @@
-# This file is auto-generated from the current state of the database. Instead of editing this file,
+# This file is auto-generated from the current state of the database. Instead of editing this file, 
 # please use the migrations feature of Active Record to incrementally modify your database, and
 # then regenerate this schema definition.
 #
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(:version => 20090904081807) do
   end
 
   create_table "locators", :force => true do |t|
-    t.integer "ip_from"
-    t.integer "ip_to"
+    t.integer "ip_from",                            :limit => 8
+    t.integer "ip_to",                              :limit => 8
     t.string  "country_code",                       :limit => 2
     t.string  "country_code_with_three_characters", :limit => 3
     t.string  "country"

@@ -1,3 +1,5 @@
+require 'faker'
+
 Order.transaction do
   100.times do
     distributor = Distributor.all.rand

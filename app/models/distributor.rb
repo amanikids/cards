@@ -16,6 +16,12 @@ class Distributor < User
     find_by_country_code('uk')
   end
 
+  def self.deliver_new_order_reminders
+    Distributor.find_each do |distributor|
+      Mailer.deliver_new_orders(distributor) unless distributor.unshipped_batch_count.zero?
+    end
+  end
+
   def self.find_by_param(param)
     find_by_country_code(param) || raise(ActiveRecord::RecordNotFound)
   end

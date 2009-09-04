@@ -109,4 +109,42 @@ class DistributorTest < ActiveSupport::TestCase
       assert_equal 2, distributor.unshipped_batch_count
     end
   end
+
+  context '.deliver_new_order_reminders' do
+    should 'send mail to Distributors with unshipped batches' do
+      3.times { Factory.create(:batch, :shipped_at => nil) }
+      1.times { Factory.create(:batch, :shipped_at => Time.zone.now) }
+
+      assert_difference 'Mailer.deliveries.count', 3 do
+        Distributor.deliver_new_order_reminders
+      end
+    end
+  end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

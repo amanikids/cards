@@ -1,5 +1,5 @@
 class InventoryCacheObserver < ActiveRecord::Observer
-  observe :order, :shipment
+  observe :order
 
   def after_create(record)
     send "after_create_#{record.class.name.underscore}", record

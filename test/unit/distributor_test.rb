@@ -98,4 +98,15 @@ class DistributorTest < ActiveSupport::TestCase
 
     assert_equal expected, actual
   end
+
+  context '#unshipped_batch_count' do
+    should 'return the number of unshipped batches' do
+      distributor = Factory.create(:distributor)
+      batch = Factory.create(:batch, :distributor => distributor)
+      batch = Factory.create(:batch, :distributor => distributor)
+      batch = Factory.create(:batch, :distributor => distributor, :shipped_at => 1.day.ago)
+
+      assert_equal 2, distributor.unshipped_batch_count
+    end
+  end
 end

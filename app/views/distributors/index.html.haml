@@ -13,7 +13,7 @@
   %tbody
     - Distributor.all.each do |distributor|
       - orders = distributor.orders.count
-      - shipped = distributor.orders.shipped.count
+      - shipped = distributor.orders.shipped_count
       - total = distributor.orders.map(&:total).sum.to_money.exchange_to(distributor.currency)
       - donated = distributor.orders.donated.map(&:total).sum.to_money.exchange_to(distributor.currency)
       %tr{:class => cycle(:odd, :even)}
@@ -30,8 +30,8 @@
       - donated = Order.donated.map(&:total).sum.to_money.exchange_to('USD')
       %td.label Total
       %td.number= Order.count
-      %td.number= Order.shipped.count
-      %td.number= p Order.shipped.count, Order.count
+      %td.number= Order.shipped_count
+      %td.number= p Order.shipped_count, Order.count
       %td.number= m total
       %td.number= m donated
       %td.number= p donated.cents, total.cents

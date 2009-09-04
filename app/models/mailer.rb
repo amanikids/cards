@@ -6,7 +6,7 @@ class Mailer < ActionMailer::Base
   def new_orders(distributor)
     from FROM_ADDRESS
     recipients "#{distributor.name} <#{distributor.email}>"
-    subject "You have #{pluralize distributor.unshipped_order_count, 'new Amani Christmas card order'}."
+    subject "You have #{pluralize distributor.unshipped_batch_count, 'new Amani Christmas card order'}."
     body :distributor => distributor
   end
 

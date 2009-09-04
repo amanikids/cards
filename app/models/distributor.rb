@@ -52,8 +52,8 @@ class Distributor < User
     country_code
   end
 
-  def unshipped_order_count
-    orders.unshipped.count
+  def unshipped_batch_count
+    batches.unshipped.size
   end
 
   # TODO this should use nested_attributes

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class InventoryCacheObserverTest < ActiveSupport::TestCase
   subject { InventoryCacheObserver.instance }
-  should_observe :order, :shipment
+  should_observe :order
 
   context 'order' do
     setup { @order = Factory(:order) }
@@ -36,21 +36,6 @@ class InventoryCacheObserverTest < ActiveSupport::TestCase
     context 'before_destroy' do
       setup { @result = subject.before_destroy(@order) }
       before_should('update inventory') { @order.distributor.expects(:order_destroyed).with(@order) }
-      should('return true') { assert @result }
-    end
-  end
-
-  context 'shipment' do
-    setup { @shipment = Factory(:shipment) }
-
-    context 'after_create' do
-      setup { subject.after_create(@shipment) }
-      before_should('update inventory') { @shipment.order.distributor.expects(:shipment_created).with(@shipment.order) }
-    end
-
-    context 'before_destroy' do
-      setup { @result = subject.before_destroy(@shipment) }
-      before_should('update inventory') { @shipment.order.distributor.expects(:shipment_destroyed).with(@shipment.order) }
       should('return true') { assert @result }
     end
   end

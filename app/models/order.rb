@@ -3,21 +3,21 @@ class Order < List
     :include    => :donation,
     :conditions => 'donations.id IS NOT NULL'
 
-  named_scope :shipped,
-    :include    => :shipment,
-    :conditions => 'shipments.id IS NOT NULL',
-    :order      => 'lists.created_at'
-
-  named_scope :unshipped,
-    :include    => :shipment,
-    :conditions => 'shipments.id IS NULL',
-    :order      => 'lists.created_at'
+  def self.shipped_count
+    count - count(
+      :select     => 'DISTINCT lists.id',
+      :conditions => 'batches.shipped_at IS NULL',
+      :joins      => <<-EOS
+        INNER JOIN items ON items.list_id = lists.id
+        INNER JOIN batches ON items.batch_id = batches.id
+      EOS
+    )
+  end
 
   belongs_to :address
   has_digest :token
   has_one :donation
   has_one :donation_method, :through => :donation
-  has_one :shipment
   validates_presence_of :address
   validates_associated :address
 
@@ -76,6 +76,7 @@ class Order < List
     token
   end
 
+  # TODO change to shipped?
   def sent?
     batches.any? && batches.all?(&:shipped?)
   end

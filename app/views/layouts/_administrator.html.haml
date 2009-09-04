@@ -3,7 +3,7 @@
 
   - Distributor.all.each do |distributor|
     - link_text = "#{distributor.country_code.upcase} Orders"
-    - link_text << " (#{distributor.orders.unshipped.count} new)" if distributor.orders.unshipped.any?
+    - link_text << " (#{distributor.batches.unshipped.count} new)" if distributor.batches.unshipped.any?
     %li= link_to_unless_current link_text, distributor_path(distributor)
 
   %li

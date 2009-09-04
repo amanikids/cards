@@ -74,11 +74,6 @@ Factory.define(:product) do |product|
   product.name "This Year's Card"
 end
 
-Factory.define(:shipment) do |shipment|
-  shipment.created_at 1.day.ago
-  shipment.association :order
-end
-
 Factory.define(:system_user) do |system_user|
   system_user.email { Factory.next(:email) }
   system_user.password 'foo'

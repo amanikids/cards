@@ -4,35 +4,27 @@ class OrderTest < ActiveSupport::TestCase
   should_belong_to :address
   should_have_digest :token
   should_have_one :donation
-  should_have_one :shipment
 
   should_validate_presence_of :address
 
-  context 'shipped named scope' do
-    should 'include orders that have a shipment, order by created at' do
-      orders = [
-        Factory.create(:order, :created_at => 2.days.ago),
-        Factory.create(:order, :created_at => 3.days.ago)
-      ].each do |order|
-        Factory.create(:shipment, :order => order)
+  context '.shipped_count' do
+    should 'return the number of orders that have all their batches shipped' do
+      2.times do
+        order = Factory.build(:order)
+        order.items << Factory.build(:item, :batch => Factory.build(:batch))
+        order.save!
+        order.batches.each(&:ship!)
       end
 
-      chaff = Factory.create(:order)
+      chaff = Factory.build(:order)
+      # Needs at least 2 unshipped batches for an order to test distinct
+      3.times do
+        chaff.items << Factory.build(:item, :batch => Factory.build(:batch))
+      end
+      chaff.save!
+      chaff.items[0].batch.ship!
 
-      assert_equal orders.reverse, Order.shipped
-    end
-  end
-
-  context 'unshipped named scope' do
-    should 'include orders that do not have a shipment, order by created at' do
-      orders = [
-        Factory.create(:order, :created_at => 2.days.ago),
-        Factory.create(:order, :created_at => 3.days.ago)
-      ]
-
-      chaff = Factory.create(:shipment).order
-
-      assert_equal orders.reverse, Order.unshipped
+      assert_equal 2, Order.shipped_count
     end
   end
 
@@ -101,7 +93,6 @@ class OrderTest < ActiveSupport::TestCase
         setup { @order.save! }
         should_change('@order.items.count', :from => 0, :to => 2) { @order.items.count }
         should_change('@distributor.orders.count', :by => 1) { @distributor.orders.count }
-        should_not_change('@order.shipment') { @order.shipment }
       end
     end
   end
@@ -227,31 +218,6 @@ class OrderTest < ActiveSupport::TestCase
       expected_differences = @order.items.map { |item| -item.product_count }
       actual_differences = @capture_count_differences.call(:promised, lambda {
         @order.destroy
-      })
-      assert_equal expected_differences, actual_differences
-    end
-
-    should 'increment shipped inventory for each item on shipment create' do
-      @order.save!
-
-      shipment = Factory.build(:shipment, :order => @order)
-
-      expected_differences = @order.items.map { |item| item.product_count }
-      actual_differences = @capture_count_differences.call(:shipped, lambda {
-        shipment.save!
-      })
-      assert_equal expected_differences, actual_differences
-    end
-
-    should 'decrement shipped inventory for each item on shipment destroy' do
-      @order.save!
-
-      shipment = Factory.build(:shipment, :order => @order)
-      shipment.save!
-
-      expected_differences = @order.items.map { |item| -item.product_count }
-      actual_differences = @capture_count_differences.call(:shipped, lambda {
-        shipment.destroy
       })
       assert_equal expected_differences, actual_differences
     end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090902131749) do
+ActiveRecord::Schema.define(:version => 20090904081807) do
 
   create_table "addresses", :force => true do |t|
     t.string   "name"
@@ -96,12 +96,6 @@ ActiveRecord::Schema.define(:version => 20090902131749) do
   end
 
   add_index "products", ["position"], :name => "index_products_on_position"
-
-  create_table "shipments", :force => true do |t|
-    t.integer  "order_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "type"

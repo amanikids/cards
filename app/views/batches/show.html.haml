@@ -1,10 +1,28 @@
 .batch-order
   = render :partial => @order, :locals => {:highlight_items_for => current_user}
-= render :partial => @order.address
 
 %p
   = link_to("View entire order", order_path(@order.distributor, @order))
-.donation
+
+%div{:class => @batch.shipped? ? 'shipment attention' : 'shipment preferred'}
+  %h2 Shipping
+  = render :partial => @order.address
+  - if @batch.shipped?
+    %p
+      This batch was shipped on
+      %strong
+        = @batch.shipped_at.to_s(:long)
+    - form_for @batch, :url => unship_batch_path(@batch) do |f|
+      .field
+        = f.hidden_field :shipped_at, :value => nil
+        = f.submit 'Oops! Cancel this shipment!', :confirm => 'Are you sure? This will send email to the Donor.'
+  - else
+    %p This batch has not yet been shipped.
+    - form_for @batch, :url => ship_batch_path(@batch) do |f|
+      .field
+        = f.submit 'I just shipped this order.', :confirm => 'Are you sure? This will send an email to the Donor.'
+
+%div{:class => @order.donation_received? ? 'attention' : 'donation' }
   %h2 Donation
   - if @order.donation_made?
     - if @order.donation_received?
@@ -26,23 +44,6 @@
         = f.submit 'I just received this donation.', :confirm => 'Are you sure?'
   - else
     %p A donation has not yet been made for this order
-
-.attention.shipment
-  %h2 Shipping
-  - if @batch.shipped?
-    %p
-      This batch was shipped on
-      %strong
-        = @batch.shipped_at.to_s(:long)
-    - form_for @batch, :url => unship_batch_path(@batch) do |f|
-      .field
-        = f.hidden_field :shipped_at, :value => nil
-        = f.submit 'Oops! Cancel this shipment!', :confirm => 'Are you sure? This will send email to the Donor.'
-  - else
-    %p This batch has not yet been shipped.
-    - form_for @batch, :url => ship_batch_path(@batch) do |f|
-      .field
-        = f.submit 'I just shipped this order.', :confirm => 'Are you sure? This will send an email to the Donor.'
 
 - if @order.cancellable?
   .danger

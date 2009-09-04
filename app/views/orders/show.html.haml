@@ -9,7 +9,7 @@
 - if @order.sent?
   .shipment
     %h2 Your order has shipped!
-    %p= "We sent it your way #{@order.shipped_at.to_date.to_s(:long)}."
+    %p= "We sent it your way <strong>#{@order.shipped_at.to_date.to_s(:long)}</strong>."
 - else
   .shipment
     %h2 Your order has not yet shipped.

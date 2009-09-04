@@ -10,7 +10,8 @@
     - if @order.donation_received?
       %p
         We received the donation for this order on
-        = @order.donation_received_at.to_s(:long)
+        %strong
+          = @order.donation_received_at.to_s(:long)
     - else
       %p
         A donation was made for this order via
@@ -33,7 +34,7 @@
     %p
       This shipment was sent on
       %strong
-        = @batch.shipped_at
+        = @batch.shipped_at.to_s(:long)
   - else
     - form_for([@distributor, @batch]) do |f|
       .field

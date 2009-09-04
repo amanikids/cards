@@ -3,7 +3,12 @@
 # =============================================================================
 def password(name)
   name = name.to_s.upcase
-  ENV[name] || (RAILS_ENV == 'production') ? raise("No password specified for #{name}; ENV is #{ENV.inspect}") : 'foo'
+  
+  if Rails.env.production?
+    ENV[name] || raise("No password specified for #{name}; ENV keys are #{ENV.keys.sort.inspect}")
+  else
+    'foo'
+  end
 end
 
 # =============================================================================

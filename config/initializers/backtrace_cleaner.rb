@@ -1,7 +1,9 @@
+require 'rails/backtrace_cleaner'
+
 module Rails
   class BacktraceCleaner < ActiveSupport::BacktraceCleaner
     private
-      GEM_REGEX = "([A-Za-z_-]+)-([0-9.]+)"
+      GEM_REGEX = "([A-Za-z0-9_-]+)-([0-9.]+)"
 
       def add_gem_filters
         Gem.path.each do |path|

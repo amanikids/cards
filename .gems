@@ -2,3 +2,4 @@ activemerchant
 geoip
 matthewtodd-has_digest --version '>= 0.1.3' --source http://gems.github.com/
 money
+newrelic_rpm

@@ -21,6 +21,7 @@ Rails::Initializer.run do |config|
     :source  => 'http://gems.github.com',
     :version => '>= 0.1.3'
   config.gem 'money'
+  config.gem 'newrelic_rpm'
   config.gem 'RedCloth', :lib => 'redcloth'
 
   # Add additional load paths for your own custom dirs

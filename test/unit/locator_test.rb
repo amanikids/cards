@@ -15,6 +15,10 @@ class LocatorTest < ActiveSupport::TestCase
     assert_equal 305419896, Locator.convert('18.52.86.120')
   end
 
+  should 'convert an ip address string into an integer faced with 1-digit octets' do
+    assert_equal 0x01010101, Locator.convert('1.1.1.1')
+  end
+
   should 'convert nil to zero' do
     assert_equal 0, Locator.convert(nil)
   end

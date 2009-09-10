@@ -5,7 +5,9 @@ class Locator < ActiveRecord::Base
     :conditions => ['ip_from <= ? AND ip_to >= ?', ip_address, ip_address] }}
 
   def self.convert(string)
-    string.to_s.split('.').map { |part| part.to_i.to_s(16) }.join.to_i(16)
+    IPAddr.new(string).to_i
+  rescue ArgumentError
+    0
   end
 
   def self.country_code(string)

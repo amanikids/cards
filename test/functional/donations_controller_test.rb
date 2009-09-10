@@ -28,6 +28,21 @@ class DonationsControllerTest < ActionController::TestCase
 
         should_redirect_to('the Order') { order_path(@distributor, @order) }
       end
+
+      context 'create with malicious data' do
+        setup do
+          post :create, 
+            :distributor_id => @distributor.to_param,
+            :order_id       => @order.token,
+            :donation       => {
+              :received_at        => 1.day.ago.utc,
+              :donation_method_id => @donation_method.id }
+        end
+
+        should 'not mark donation as received' do
+          assert_nil @order.donation.received_at
+        end
+      end
     end
 
     context 'with an existing Order and unreceived Donation' do

@@ -7,10 +7,12 @@ class OrdersControllerTest < ActionController::TestCase
   should_route :delete, '/us/orders/token', :action => 'destroy', :distributor_id => 'us', :id => 'token'
 
   context 'with a saved Distributor' do
-    setup { @distributor = Factory.create(:distributor) }
+    setup { @distributor = Factory.create(:distributor, :name => 'The Right Distributor') }
 
     context 'with a current cart' do
-      setup { @controller.current_cart = Factory.create(:cart) }
+      setup do
+        @controller.current_cart = Factory.create(:cart, :distributor => @distributor) 
+      end
 
       context 'new' do
         setup { get :new, :distributor_id => @distributor.to_param }
@@ -27,7 +29,12 @@ class OrdersControllerTest < ActionController::TestCase
         end
 
         context 'create valid' do
-          setup { post :create, :distributor_id => @distributor.to_param, :order => { :address => Factory.attributes_for(:address) } }
+          setup do
+            post :create, :distributor_id => @distributor.to_param, :order => { 
+              :address => Factory.attributes_for(:address) }
+            assert_response :redirect
+          end
+
           should_redirect_to('the Order') { order_path(@distributor, @controller.instance_variable_get(:@order)) }
           should_change('Cart.count', :by => -1) { Cart.count }
           should_change('@controller.current_cart', :to => nil) { @controller.current_cart }
@@ -36,6 +43,23 @@ class OrdersControllerTest < ActionController::TestCase
         context 'create invalid' do
           setup { post :create, :distributor_id => @distributor.to_param }
           should_render_template :new
+        end
+
+        context 'create with malicious data' do
+          setup do
+            post :create, :distributor_id => @distributor.to_param, :order => { 
+              :address        => Factory.attributes_for(:address),
+              :token          => 'EVIL', 
+              :distributor_id => Factory.create(:distributor).id}
+          end
+
+          should 'not change the token' do
+            assert_not_equal assigns(:order).reload.token, 'EVIL'
+          end
+
+          should 'not change distributor' do
+            assert_equal assigns(:order).reload.distributor, @distributor
+          end
         end
       end
     end

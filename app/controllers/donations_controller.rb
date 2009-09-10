@@ -3,7 +3,7 @@ class DonationsController < ApplicationController
   before_filter :ensure_current_user, :only => :update
 
   def create
-    @order.create_donation(params[:donation])
+    @order.create_donation(params[:donation].except('received_at'))
     redirect_to order_path(current_distributor, @order)
   end
 

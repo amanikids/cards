@@ -1,32 +1,44 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class RootsControllerTest < ActionController::TestCase
   should_route :get, '/', :action => 'index'
 
-  context 'with some existing Distributors' do
+  context 'with US and UK Distributors' do
     setup do
-      @custom_distributor  = Factory(:distributor, :country_code => 'CUSTOM')
-      @default_distributor = Factory(:distributor, :country_code => 'DEFAULT')
-      Distributor.stubs(:default).returns(@default_distributor)
+      @us_distributor = Factory(:distributor, :country_code => 'us')
+      @uk_distributor = Factory(:distributor, :country_code => 'uk')
     end
 
-    context 'when our coutry_code is COUNTRY_CODE' do
-      setup { Locator.stubs(:country_code).returns('COUNTRY_CODE') }
-
-      context 'and we have a matching distributor' do
-        setup { Distributor.stubs(:find_by_country_code).with('COUNTRY_CODE').returns(@custom_distributor) }
-        context 'index' do
-          setup { get :index }
-          should_redirect_to('the products page for that distributor') { distributor_root_path(@custom_distributor) }
-        end
+    context 'requesting from a US IP address' do
+      setup do
+        @request.stubs(:remote_ip).returns('8.12.42.230')
+        get :index
       end
 
-      context "but we don't have a matching distributor" do
-        setup { Distributor.stubs(:find_by_country_code).with('COUNTRY_CODE').returns(nil) }
-        context 'index' do
-          setup { get :index }
-          should_redirect_to('the default products page') { distributor_root_path(@default_distributor) }
-        end
+      should_redirect_to('the US distributor') do
+        distributor_root_path(@us_distributor)
+      end
+    end
+
+    context 'requesting from a UK IP address' do
+      setup do
+        @request.stubs(:remote_ip).returns('212.58.224.138')
+        get :index
+      end
+
+      should_redirect_to('the UK distributor') do
+        distributor_root_path(@uk_distributor)
+      end
+    end
+
+    context 'requesting from an AU IP address' do
+      setup do
+        @request.stubs(:remote_ip).returns('120.100.2.230')
+        get :index
+      end
+
+      should_redirect_to('the UK distributor (the default)') do
+        distributor_root_path(@uk_distributor)
       end
     end
   end

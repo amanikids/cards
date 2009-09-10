@@ -22,9 +22,6 @@ Rails::Initializer.run do |config|
     :version => '>= 0.1.3'
   config.gem 'money'
   config.gem 'RedCloth', :lib => 'redcloth'
-  config.gem 'thoughtbot-hoptoad_notifier',
-    :lib     => 'hoptoad_notifier',
-    :source  => 'http://gems.github.com'
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )

@@ -14,3 +14,6 @@
     .main
       = render :partial => 'layouts/flash', :locals => { :flash => flash }
       = yield
+
+    - if Rails.env.production?
+      = render :partial => 'layouts/google_analytics'

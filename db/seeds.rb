@@ -71,7 +71,7 @@ end
 # =============================================================================
 # = Card Number Three (Leftover from Last Year)                               =
 # =============================================================================
-Product.create!(:name => '2008 Peace', :position => 5, :image_path => 'cards/2008_peace.jpg', :description => "\"Amani\" means Peace in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Inside Message:** May peace reign throughout the world and joy be found in every heart. Merry Christmas!").tap do |card|
+Product.create!(:name => '"Peace" around the World', :position => 5, :image_path => 'cards/2008_peace.jpg', :description => "Together, we're making a difference in the lives of Tanzania's orphans and homeless children. By giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Inside Message:** May peace reign throughout the world and joy be found in every heart. Merry Christmas!").tap do |card|
   card.variants.create!(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
   card.variants.create!(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
   card.inventories.create!(:distributor => us, :initial => 600)

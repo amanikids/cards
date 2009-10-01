@@ -97,3 +97,8 @@ Product.create!(:name => 'Amani Alternative Gift Cards', :position => 6, :image_
     card.variants.create!(:name => name, :cents => cost_in_cents, :currency => 'USD', :position => index + 1)
   end
 end
+
+# =============================================================================
+# = Warm Fuzzies                                                              =
+# =============================================================================
+puts 'Database seeding done.'

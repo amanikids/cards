@@ -69,9 +69,18 @@ Product.create!(:name => 'Christmas on the Savannah', :position => 4, :image_pat
 end
 
 # =============================================================================
+# = Card Number Three (Leftover from Last Year)                               =
+# =============================================================================
+Product.create!(:name => '2008 Peace', :position => 5, :image_path => 'cards/2008_peace.jpg', :description => "\"Amani\" means Peace in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.").tap do |card|
+  card.variants.create!(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
+  card.variants.create!(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
+  card.inventories.create!(:distributor => us, :initial => 500)
+end
+
+# =============================================================================
 # = Gift Cards                                                                =
 # =============================================================================
-Product.create!(:name => 'Amani Alternative Gift Cards', :position => 5, :image_path => 'cards/gift_card.jpg', :description => "Instead of a traditional gift, you can honor your loved ones by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.   For this holiday season, consider giving the gift of hope! Order your Alternative Gift Cards today! Here are some of the alternative gift options:").tap do |card|
+Product.create!(:name => 'Amani Alternative Gift Cards', :position => 6, :image_path => 'cards/gift_card.jpg', :description => "Instead of a traditional gift, you can honor your loved ones by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child.   For this holiday season, consider giving the gift of hope! Order your Alternative Gift Cards today! Here are some of the alternative gift options:").tap do |card|
   [
     ['Textbook',                                   400],
     ['School Uniform',                            1000],

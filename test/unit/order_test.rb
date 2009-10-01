@@ -315,7 +315,7 @@ class OrderTest < ActiveSupport::TestCase
       order.items << Factory.create(:item, :batch => Factory.create(:batch))
       order.items << Factory.create(:item, :batch => Factory.create(:batch))
 
-      assert order.destroy
+      assert order.reload.destroy
     end
 
     should 'be forbidden if any batch for the order has been shipped' do
@@ -325,7 +325,19 @@ class OrderTest < ActiveSupport::TestCase
 
       order.items[0].batch.ship!
 
-      assert !order.destroy
+      assert !order.reload.destroy
+    end
+
+    should 'work even if 2 items share a batch!' do
+      order = Factory.create(:order)
+      batch = Factory.create(:batch)
+      order.items << Factory.create(:item, :batch => batch)
+      order.items << Factory.create(:item, :batch => batch)
+
+      # NOTE the reload is very important to replicate the conditions we're
+      # seeing in the app! Otherwise each item retains its in-memory reference
+      # to the batch, and we don't see the NoMethodError.
+      assert order.reload.destroy
     end
   end
 end

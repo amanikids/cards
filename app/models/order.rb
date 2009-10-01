@@ -85,7 +85,25 @@ class Order < List
   end
 
   def batches
-    items.collect(&:batch).uniq
+    # The compact is here because of a tricky case:
+    #
+    # before_destroy, we require that the order be cancellable, which means
+    # that none of the batches are allowed to have been shipped. Except
+    # Order#before_destroy is called *after* the order's items have been
+    # :dependent => :destroy'ed, since the has_many association is defined (in
+    # the List superclass) before our before_destroy :cancellable? callback.
+    #
+    # So, by the time cancellable? is called, we've already 1-by-1 destroyed
+    # each of our items and their associated batches.
+    #
+    # That 1-by-1 part is important! Only the first item of each batch will
+    # have the opportunity to have its batch loaded; all the others will just
+    # see a nil batch.
+    #
+    # So many of our in-memory remaining items will have nil Batches, which
+    # will cause trouble in cancellable?, so we eagerly compact them away
+    # here.
+    items.collect(&:batch).uniq.compact
   end
 
   private

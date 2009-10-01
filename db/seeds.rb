@@ -16,6 +16,7 @@ end
 # =============================================================================
 User.create!(:name => 'Matthew Todd', :email => 'matthew.todd@gmail.com', :password => password(:matthew))
 User.create!(:name => 'Joe Ventura',  :email => 'joe@amanikids.org',      :password => password(:joe))
+User.create!(:name => 'Salma Daud',   :email => 'salma@amanikids.org',    :password => password(:salma))
 User.create!(:name => 'Valerie Todd', :email => 'valerie@amanikids.org',  :password => password(:valerie))
 
 # =============================================================================

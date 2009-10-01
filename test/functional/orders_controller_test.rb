@@ -11,7 +11,7 @@ class OrdersControllerTest < ActionController::TestCase
 
     context 'with a current cart' do
       setup do
-        @controller.current_cart = Factory.create(:cart, :distributor => @distributor) 
+        @controller.current_cart = Factory.create(:cart, :distributor => @distributor)
       end
 
       context 'new' do
@@ -30,7 +30,7 @@ class OrdersControllerTest < ActionController::TestCase
 
         context 'create valid' do
           setup do
-            post :create, :distributor_id => @distributor.to_param, :order => { 
+            post :create, :distributor_id => @distributor.to_param, :order => {
               :address => Factory.attributes_for(:address) }
             assert_response :redirect
           end
@@ -47,9 +47,9 @@ class OrdersControllerTest < ActionController::TestCase
 
         context 'create with malicious data' do
           setup do
-            post :create, :distributor_id => @distributor.to_param, :order => { 
+            post :create, :distributor_id => @distributor.to_param, :order => {
               :address        => Factory.attributes_for(:address),
-              :token          => 'EVIL', 
+              :token          => 'EVIL',
               :distributor_id => Factory.create(:distributor).id}
           end
 

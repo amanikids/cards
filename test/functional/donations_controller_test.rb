@@ -31,7 +31,7 @@ class DonationsControllerTest < ActionController::TestCase
 
       context 'create with malicious data' do
         setup do
-          post :create, 
+          post :create,
             :distributor_id => @distributor.to_param,
             :order_id       => @order.token,
             :donation       => {

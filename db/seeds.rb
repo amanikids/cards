@@ -42,14 +42,14 @@ end
 Product.create!(:name => 'Peace on Earth', :position => 1, :image_path => 'cards/peace_on_earth_north_america.jpg', :description => "Amani means \"Peace\" in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Inside Message:** May the peace and beauty of the season be yours throughout the year.").tap do |card|
   card.variants.create!(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
   card.variants.create!(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
-  card.inventories.create!(:distributor => us, :initial => 2000)
-  card.inventories.create!(:distributor => ca, :initial => 1000)
+  card.inventories.create!(:distributor => us, :initial => 3600)
+  card.inventories.create!(:distributor => ca, :initial => 2000)
 end
 
 Product.create!(:name => 'Peace on Earth', :position => 2, :image_path => 'cards/peace_on_earth_uk.jpg', :description => "Amani means \"Peace\" in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.").tap do |card|
   card.variants.create!(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
   card.variants.create!(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
-  card.inventories.create!(:distributor => uk, :initial => 1000)
+  card.inventories.create!(:distributor => uk, :initial => 2000)
 end
 
 # =============================================================================
@@ -58,14 +58,14 @@ end
 Product.create!(:name => 'Christmas on the Savannah', :position => 3, :image_path => 'cards/christmas_on_the_savannah.jpg', :description => "Amani Children's Home is located in Tanzania, East Africa. The Umbrella Thorn Acacia tree, featured here, is one of Tanzania's many iconic images. Help spread the hope and joy of the holiday season with this beautiful Christmas card. The proceeds from the sale of this card will be used to fund the education of a child that Amani works with, giving them the gift of an education every day of the year.\n\n**Inside Message:** Tis the Season... for peace, love, and joy!").tap do |card|
   card.variants.create!(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
   card.variants.create!(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
-  card.inventories.create!(:distributor => us, :initial => 1000)
+  card.inventories.create!(:distributor => us, :initial => 4000)
   card.inventories.create!(:distributor => ca, :initial => 1000)
 end
 
 Product.create!(:name => 'Christmas on the Savannah', :position => 4, :image_path => 'cards/christmas_on_the_savannah.jpg', :description => "Amani Children's Home is located in Tanzania, East Africa. The Umbrella Thorn Acacia tree, featured here, is one of Tanzania's many iconic images. Help spread the hope and joy of the holiday season with this beautiful Christmas card. The proceeds from the sale of this card will be used to fund the education of a child that Amani works with, giving them the gift of an education every day of the year.").tap do |card|
   card.variants.create!(:size => 10, :cents => 1200, :currency => 'USD', :position => 1)
   card.variants.create!(:size => 25, :cents => 2500, :currency => 'USD', :position => 2)
-  card.inventories.create!(:distributor => uk, :initial => 1000)
+  card.inventories.create!(:distributor => uk, :initial => 1500)
 end
 
 # =============================================================================

@@ -1,5 +1,5 @@
 .batch-order
-  = render :partial => @order, :locals => {:highlight_items_for => current_user}
+  = render :partial => @order, :locals => {:highlight_batch => @batch}
 
 %p
   = link_to("View entire order", order_path(@order.distributor, @order))

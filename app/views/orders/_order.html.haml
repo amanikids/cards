@@ -1,4 +1,4 @@
-- highlight_items_for ||= nil
+- highlight_batch ||= nil
 %table.list
   %thead
     %tr
@@ -11,7 +11,7 @@
         %th Shipped?
   %tbody
     - order.items.each do |item|
-      %tr{:class => [cycle('odd', 'even'), highlight?(item, highlight_items_for) ? 'highlight' : nil].join(' ')}
+      %tr{:class => [cycle('odd', 'even'), highlight?(item, highlight_batch) ? 'highlight' : nil].join(' ')}
         %td= item.product_name
         %td= item.variant_description
         %td.number= m item.variant_price

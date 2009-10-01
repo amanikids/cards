@@ -30,13 +30,7 @@ module ApplicationHelper
     end
   end
 
-  def highlight?(item, user)
-    if user
-      if user.is_a?(Distributor)
-        item.batch.distributor == user
-      else
-        item.batch.distributor.nil?
-      end
-    end
+  def highlight?(item, batch)
+    item.batch == batch
   end
 end

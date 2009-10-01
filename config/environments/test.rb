@@ -25,5 +25,6 @@ config.action_mailer.default_url_options = { :host => 'shoes.local:3000' }
 # Specify gems that this application depends on for testing.
 # They can then be installed with "RAILS_ENV=test rake gems:install" on new installations.
 config.gem 'faker'
+config.gem 'jeremymcanally-matchy',   :lib => 'matchy',       :source => 'http://gems.github.com'
 config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
 config.gem 'thoughtbot-shoulda',      :lib => false,          :source => "http://gems.github.com"

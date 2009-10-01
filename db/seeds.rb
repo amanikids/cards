@@ -34,7 +34,7 @@ end
 
 uk = Distributor.create!(:name => 'Fiona McElhone', :email => 'fiona_mcelhone@hotmail.com', :password => password(:fiona), :country_code => 'uk', :country => 'United Kingdom', :currency => 'GBP', :position => 3).tap do |distributor|
   distributor.donation_methods.create!(:position => 1, :name => 'justgiving', :title => 'Donate at JustGiving', :description => "You can make your donation to Friends of Amani UK through \"JustGiving.com\":http://justgiving.com/amanichildren/donate. Friends of Amani UK is a volunteer-run charity supporting Amani Children's Home. The money raised by Friends of Amani UK is sent to Amani Children's Home in Moshi, Tanzania.\n\nYour donations to Friends of Amani UK are eligible for Gift Aid in the United Kingdom.")
-  distributor.donation_methods.create!(:position => 2, :name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nFiona McElhone\nFlat B\n27 Barnsbury Park\nLondon\nN1 1HQ\n\nDonations are eligible for Gift Aid in the UK.")
+  distributor.donation_methods.create!(:position => 2, :name => 'cheque', :title => 'Mail a Cheque', :description => "Make your cheque to \"Friends of Amani UK\" and send it to:\n\nFiona McElhone\n213 Liverpool Road\nLondon\nN1 1LX\n\nDonations are eligible for Gift Aid in the UK.")
 end
 
 # =============================================================================

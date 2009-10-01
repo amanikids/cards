@@ -1,7 +1,8 @@
 class Mailer < ActionMailer::Base
   include ActionView::Helpers::TextHelper
 
-  FROM_ADDRESS = "Amani Holiday Card Orders <cards@amanikids.org>"
+  FROM_ADDRESS    = 'Amani Holiday Card Orders <cards@amanikids.org>'
+  CONTACT_ADDRESS = 'Joe Ventura <joe@amanikids.org>'
 
   def new_orders(distributor)
     from FROM_ADDRESS
@@ -14,7 +15,7 @@ class Mailer < ActionMailer::Base
     from FROM_ADDRESS
     recipients "#{order.name} <#{order.email}>"
     subject 'Thank you for your order!'
-    body :order => order
+    body :order => order, :contact_address => CONTACT_ADDRESS
   end
 
   def order_destroyed(order)
@@ -30,7 +31,7 @@ class Mailer < ActionMailer::Base
     from FROM_ADDRESS
     recipients "#{order.name} <#{order.email}>"
     subject 'Your order has shipped.'
-    body :batch => batch
+    body :batch => batch, :contact_address => CONTACT_ADDRESS
   end
 
   def batch_unshipped(batch)
@@ -39,7 +40,7 @@ class Mailer < ActionMailer::Base
     from FROM_ADDRESS
     recipients "#{order.name} <#{order.email}>"
     subject "Oops! We haven't shipped your order yet."
-    body :order => order
+    body :order => order, :contact_address => CONTACT_ADDRESS
   end
 
   def overdue_batches(batches)

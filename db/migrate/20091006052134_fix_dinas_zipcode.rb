@@ -1,7 +1,7 @@
 class FixDinasZipcode < ActiveRecord::Migration
   def self.up
-    Distributor.find_by_name('Dina Sciarra').tap do |dina|
-      dina.donation_methods.find_by_name('check').tap do |check|
+    Distributor.find_all_by_name('Dina Sciarra').each do |dina|
+      dina.donation_methods.find_all_by_name('check').each do |check|
         check.update_attributes(:description => "Make your check payable to \"Friends of Amani US\" and send it to:\n\nDina Sciarra\n32 Teak Loop\nOscala, FL\n34472")
       end
     end

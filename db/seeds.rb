@@ -214,20 +214,6 @@ Product.find_or_initialize_by_image_path('cards/gift_card.jpg').tap do |card|
     :description => "Instead of a traditional gift, you can honor your loved ones by making a donation in their name to Amani Children's Home. Just $16 will provide a set of sheets and blankets for a bed at Amani and $200 will cover the first semester of secondary school for an Amani child. For this holiday season, consider giving the gift of hope! Order your Alternative Gift Cards today! Here are some of the alternative gift options:"
   )
 
-  # First normalize any existing names
-  card.variants.each { |option| option.update_attributes!(:name => option.name.downcase.capitalize) }
-
-  # Then remove these variants we won't use after all
-  card.variants.find_by_name('Art supplies').try(:destroy)
-  card.variants.find_by_name('Medical supplies').try(:destroy)
-
-  # And rename these old variants, as necessary
-  card.variants.find_all_by_name('Textbook').each                                  { |c| c.update_attributes!(:name => 'School textbooks') }
-  card.variants.find_all_by_name('Bedding (sheet and blanket)').each               { |c| c.update_attributes!(:name => 'Bedding (sheets and blankets)') }
-  card.variants.find_all_by_name('Sports equipment (cleats, balls, jerseys)').each { |c| c.update_attributes!(:name => 'Sports equipment') }
-  card.variants.find_all_by_name('Drums').each                                     { |c| c.update_attributes!(:name => 'Traditional drums') }
-  card.variants.find_all_by_name('Pots').each                                      { |c| c.update_attributes!(:name => 'Food for 1 child for 6 months') }
-
   # Set up the options we currently offer
   card.variants.find_or_initialize_by_name('School textbooks').tap                   { |c| c.update_attributes!(:cents => 400,   :currency => 'USD') }
   card.variants.find_or_initialize_by_name('School uniform').tap                     { |c| c.update_attributes!(:cents => 1000,  :currency => 'USD') }

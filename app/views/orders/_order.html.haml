@@ -12,7 +12,7 @@
   %tbody
     - order.items.each do |item|
       %tr{:class => [cycle('odd', 'even'), highlight?(item, highlight_batch) ? 'highlight' : nil].join(' ')}
-        %td= item.product_name
+        %td= highlight_batch ? item.product_name_and_short_name : item.product_name
         %td= item.variant_description
         %td.number= m item.variant_price
         %td.number= item.quantity

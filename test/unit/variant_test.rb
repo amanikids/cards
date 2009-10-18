@@ -63,6 +63,12 @@ class VariantTest < ActiveSupport::TestCase
     assert_equal 'PRODUCT_NAME', variant.product_name
   end
 
+  should 'delegate product_short_name to product' do
+    variant = Variant.new
+    variant.stubs(:product).returns(stub(:short_name => 'PRODUCT_SHORT_NAME'))
+    assert_equal 'PRODUCT_SHORT_NAME', variant.product_short_name
+  end
+
   should 'by default be ordered by position' do
     variants = [
       Factory.create(:variant, :position => 2),

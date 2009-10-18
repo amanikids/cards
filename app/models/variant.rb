@@ -5,6 +5,7 @@ class Variant < ActiveRecord::Base
 
   belongs_to :product
   composed_of :price, :class_name => 'Money', :mapping => [%w(cents cents), %w(currency currency)]
+  delegate :name, :short_name, :to => :product, :prefix => true
   delegate :on_demand?, :to => :product
   validates_presence_of :cents, :currency, :product_id
 
@@ -14,10 +15,6 @@ class Variant < ActiveRecord::Base
 
   def description
     name.blank? ? "#{size}-pack" : name
-  end
-
-  def product_name
-    product.name
   end
 
   def running_low?(distributor)

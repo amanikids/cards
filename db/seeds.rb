@@ -140,6 +140,7 @@ Product.find_or_initialize_by_image_path('cards/peace_on_earth_north_america.jpg
   card.update_attributes!(
     :position    => 1,
     :name        => 'Peace on Earth',
+    :short_name  => 'Doves',
     :description => "Amani means \"Peace\" in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Inside Message:** May the peace and beauty of the season be yours throughout the year."
   )
 
@@ -153,6 +154,7 @@ Product.find_or_initialize_by_image_path('cards/peace_on_earth_uk.jpg').tap do |
   card.update_attributes!(
     :position    => 2,
     :name        => 'Peace on Earth',
+    :short_name  => 'Doves',
     :description => "Amani means \"Peace\" in Swahili. Through rescuing homeless children and giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace."
   )
 
@@ -168,6 +170,7 @@ Product.find_or_initialize_by_image_path('cards/christmas_on_the_savannah_north_
   card.update_attributes!(
     :position    => 3,
     :name        => 'Christmas on the Savannah',
+    :short_name  => 'Trees',
     :description => "Amani Children's Home is located in Tanzania, East Africa. The Umbrella Thorn Acacia tree, featured here, is one of Tanzania's many iconic images. Help spread the hope and joy of the holiday season with this beautiful Christmas card. The proceeds from the sale of this card will be used to fund to fund the education of children who Amani works with, giving them the gift of an education every day of the year.\n\n**Inside Message:** Tis the Season... for peace, love, and joy!"
   )
 
@@ -181,6 +184,7 @@ Product.find_or_initialize_by_image_path('cards/christmas_on_the_savannah_uk.jpg
   card.update_attributes!(
     :position    => 4,
     :name        => 'Christmas on the Savannah',
+    :short_name  => 'Trees',
     :description => "Amani Children's Home is located in Tanzania, East Africa. The Umbrella Thorn Acacia tree, featured here, is one of Tanzania's many iconic images. Help spread the hope and joy of the holiday season with this beautiful Christmas card. The proceeds from the sale of this card will be used to fund to fund the education of children who Amani works with, giving them the gift of an education every day of the year."
   )
 
@@ -196,12 +200,13 @@ Product.find_or_initialize_by_image_path('cards/2008_peace.jpg').tap do |card|
   card.update_attributes!(
     :position    => 5,
     :name        => '"Peace" around the World',
+    :short_name  => 'Stars',
     :description => "Together, we're making a difference in the lives of Tanzania's orphans and homeless children. By giving them a safe and loving home, Amani brings peace into their lives. Spread the important message of peace this Christmas season with this lovely holiday card. At the same time, you'll be ensuring that children in Tanzania have the chance to know the true meaning of peace.\n\n**Inside Message:** May peace reign throughout the world and joy be found in every heart. Merry Christmas!"
   )
 
   card.variants.find_or_initialize_by_size(10).tap { |pack| pack.update_attributes!(:position => 1, :cents => 1200, :currency => 'USD') }
   card.variants.find_or_initialize_by_size(25).tap { |pack| pack.update_attributes!(:position => 2, :cents => 2500, :currency => 'USD') }
-  card.inventories.find_or_initialize_by_distributor_id(us.id).tap { |stock| stock.update_attributes!(:initial => 600) }
+  card.inventories.find_or_initialize_by_distributor_id(us.id).tap { |stock| stock.update_attributes!(:initial => 590) }
 end
 
 # =============================================================================

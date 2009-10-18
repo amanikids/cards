@@ -18,6 +18,10 @@ class ItemTest < ActiveSupport::TestCase
       assert_equal @item.variant.product_name, @item.product_name
     end
 
+    should 'delegate product_short_name to variant' do
+      assert_equal @item.variant.product_short_name, @item.product_short_name
+    end
+
     should 'delegate product to variant' do
       assert_equal @item.variant.product, @item.product
     end
@@ -42,6 +46,22 @@ class ItemTest < ActiveSupport::TestCase
     item.stubs(:quantity).returns(3)
     item.stubs(:variant_size).returns(7)
     assert_equal 21, item.product_count
+  end
+
+  context '#product_name_and_short_name' do
+    should 'return the product name followed by the product short name in parentheses' do
+      item = Item.new
+      item.stubs(:product_name).returns('PRODUCT NAME')
+      item.stubs(:product_short_name).returns('PRODUCT SHORT NAME')
+      assert_equal 'PRODUCT NAME (PRODUCT SHORT NAME)', item.product_name_and_short_name
+    end
+
+    should 'return the product name when the product short name is blank' do
+      item = Item.new
+      item.stubs(:product_name).returns('PRODUCT NAME')
+      item.stubs(:product_short_name).returns('')
+      assert_equal 'PRODUCT NAME', item.product_name_and_short_name
+    end
   end
 
   context 'total' do

@@ -45,7 +45,7 @@ class Mailer < ActionMailer::Base
 
   def overdue_batches(batches)
     from FROM_ADDRESS
-    recipients FROM_ADDRESS
+    recipients CONTACT_ADDRESS
     subject "Yikes! We've got overdue batches!"
     body :batches => batches
   end

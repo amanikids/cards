@@ -49,8 +49,8 @@ class MailerTest < ActionMailer::TestCase
       @message = Mailer.create_overdue_batches([@batch])
     end
 
-    should('be to application email') do
-      assert_equal [Mailer::FROM_ADDRESS], @message.to_addrs.map(&:to_s)
+    should('be to contact email') do
+      assert_equal [Mailer::CONTACT_ADDRESS], @message.to_addrs.map(&:to_s)
     end
 
     should('be from application email') do

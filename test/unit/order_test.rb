@@ -348,7 +348,8 @@ class OrderTest < ActiveSupport::TestCase
       Factory.create(:inventory, :distributor => @incorrect_distributor, :product => @physical_card)
 
       @order = Factory.create(:order, :distributor => @incorrect_distributor)
-      @order.items << Factory.create(:item, :variant => Factory.create(:variant, :product => @physical_card))
+      @order.items << Factory.create(:item, :quantity => 1, :variant => Factory.create(:variant, :size => 10, :product => @physical_card))
+      @order.items << Factory.create(:item, :quantity => 1, :variant => Factory.create(:variant, :size => 25, :product => @physical_card))
       @order.items << Factory.create(:item, :variant => Factory.create(:variant, :product => @on_demand_card))
       @order.send(:create_batches)
 
@@ -356,8 +357,8 @@ class OrderTest < ActiveSupport::TestCase
       Factory.create(:inventory, :distributor => @correct_distributor, :product => @physical_card)
     end
 
-    should 'raise if any item is unavailable at the new distributor' do
-      @correct_distributor.inventories.first.update_attributes(:actual => 0)
+    should "raise if there's not enough inventory for any item at the new distributor" do
+      @correct_distributor.inventories.first.update_attributes(:actual => 34)
 
       lambda {
         @order.transfer!(@correct_distributor)

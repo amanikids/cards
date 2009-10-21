@@ -71,7 +71,13 @@ class Order < List
   end
 
   def transfer!(new_distributor)
-    raise NonTransferrable if items.any? { |item| !item.available?(new_distributor)}
+    items.reject(&:on_demand?).group_by(&:product).each do |product, items_for_product|
+      required_inventory = items_for_product.sum(&:product_count)
+
+      unless product.quantity(new_distributor) > required_inventory
+        raise NonTransferrable.new("#{distributor.name} doesn't have enough #{product.name} cards.")
+      end
+    end
   end
 
   def shipped?

@@ -11,10 +11,6 @@ class Item < ActiveRecord::Base
 
   after_create :compact_list, :if => :list
 
-  def available?(distributor)
-    variant.available?(distributor, quantity)
-  end
-
   def product_count
     quantity * variant_size
   end

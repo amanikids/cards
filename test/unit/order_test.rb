@@ -410,5 +410,11 @@ class OrderTest < ActiveSupport::TestCase
         @order.transfer!(@correct_distributor)
       end
     end
+
+    should 'email the donor their new order url' do
+      assert_difference('Mailer.deliveries.count') do
+        @order.transfer!(@correct_distributor)
+      end
+    end
   end
 end

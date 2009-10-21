@@ -13,6 +13,10 @@ class NotificationObserver < ActiveRecord::Observer
         Mailer.deliver_batch_unshipped(record)
       end
     end
+
+    if record.is_a?(Order) && record.distributor_id_changed?
+      Mailer.deliver_order_transferred(record)
+    end
   end
 
   def before_destroy(record)

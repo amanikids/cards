@@ -18,6 +18,13 @@ class Mailer < ActionMailer::Base
     body :order => order, :contact_address => CONTACT_ADDRESS
   end
 
+  def order_transferred(order)
+    from FROM_ADDRESS
+    recipients "#{order.name} <#{order.email}>"
+    subject "We've transferred your order."
+    body :order => order, :contact_address => CONTACT_ADDRESS
+  end
+
   def order_destroyed(order)
     from FROM_ADDRESS
     recipients "#{order.name} <#{order.email}>"

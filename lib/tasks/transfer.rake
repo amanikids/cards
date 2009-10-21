@@ -2,7 +2,7 @@ desc <<-DESC
 Transfer an Order to another Distributor
 Usage: rake transfer order=TOKEN to=COUNTRY_CODE
 DESC
-task :transfer do
+task :transfer => :environment do
   token        = ENV['order'] || abort(Rake.application.lookup(:transfer).comment)
   country_code = ENV['to']    || abort(Rake.application.lookup(:transfer).comment)
 

@@ -9,6 +9,10 @@ class Item < ActiveRecord::Base
   validates_presence_of :variant_id
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0
 
+  def available?(distributor)
+    variant.available?(distributor, quantity)
+  end
+
   def product_count
     quantity * variant_size
   end

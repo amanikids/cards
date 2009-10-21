@@ -1,4 +1,6 @@
 class Order < List
+  class NonTransferrable < StandardError; end
+
   named_scope :donated,
     :include    => :donation,
     :conditions => 'donations.id IS NOT NULL'
@@ -41,14 +43,6 @@ class Order < List
 
   alias_method_chain :address=, :nested_attributes
 
-  def distributor_changed?
-    distributor_id_changed?
-  end
-
-  def distributor_was
-    Distributor.find(distributor_id_was) if distributor_changed?
-  end
-
   # def donation_created_at
   # def donation_received_at
   delegate :created_at, :received_at,
@@ -74,6 +68,10 @@ class Order < List
 
   def to_param
     token
+  end
+
+  def transfer!(new_distributor)
+    raise NonTransferrable if items.any? { |item| !item.available?(new_distributor)}
   end
 
   def shipped?

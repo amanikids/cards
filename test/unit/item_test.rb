@@ -93,4 +93,24 @@ class ItemTest < ActiveSupport::TestCase
       assert_equal Money.new(5), @item.total
     end
   end
+
+  context '#available?' do
+    setup do
+      physical_card = Factory.create(:product)
+
+      @distributor  = Factory.create(:distributor)
+      @inventory    = Factory.create(:inventory, :distributor => @distributor, :product => physical_card)
+      @item         = Factory.create(:item, :variant => Factory.create(:variant, :size => 10, :product => physical_card))
+    end
+
+    should "be false when the distributor doesn't have enough inventory" do
+      @inventory.update_attributes(:actual => @item.product_count - 1)
+      @item.available?(@distributor).should == false
+    end
+
+    should "be true when the distributor does have enough inventory" do
+      @inventory.update_attributes(:actual => @item.product_count)
+      @item.available?(@distributor).should == true
+    end
+  end
 end

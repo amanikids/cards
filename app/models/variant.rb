@@ -9,8 +9,8 @@ class Variant < ActiveRecord::Base
   delegate :on_demand?, :to => :product
   validates_presence_of :cents, :currency, :product_id
 
-  def available?(distributor)
-    on_demand? || quantity_available?(distributor, 1)
+  def available?(distributor, number_of_packs = 1)
+    on_demand? || quantity_available?(distributor, number_of_packs)
   end
 
   def description

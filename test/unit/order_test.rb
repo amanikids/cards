@@ -106,8 +106,6 @@ class OrderTest < ActiveSupport::TestCase
   context 'an existing Order' do
     setup { @order = Factory(:order) }
 
-    should('return false for distributor_changed?') { assert !@order.distributor_changed? }
-    should('return nil for distributor_was') { assert_nil @order.distributor_was }
     should('return nil for donation_method') { assert_nil @order.donation_method }
     should('return nil for donation_created_at') { assert_nil @order.donation_created_at }
     should('return nil for donation_received_at') { assert_nil @order.donation_received_at }
@@ -338,6 +336,48 @@ class OrderTest < ActiveSupport::TestCase
       # seeing in the app! Otherwise each item retains its in-memory reference
       # to the batch, and we don't see the NoMethodError.
       assert order.reload.destroy
+    end
+  end
+
+  context '#transfer! an Order to the correct distributor' do
+    setup do
+      @physical_card  = Factory.create(:product)
+      @on_demand_card = Factory.create(:product)
+
+      @incorrect_distributor = Factory.create(:distributor)
+      Factory.create(:inventory, :distributor => @incorrect_distributor, :product => @physical_card)
+
+      @order = Factory.create(:order, :distributor => @incorrect_distributor)
+      @order.items << Factory.create(:item, :variant => Factory.create(:variant, :product => @physical_card))
+      @order.items << Factory.create(:item, :variant => Factory.create(:variant, :product => @on_demand_card))
+      @order.send(:create_batches)
+
+      @correct_distributor = Factory.create(:distributor)
+      Factory.create(:inventory, :distributor => @correct_distributor, :product => @physical_card)
+    end
+
+    should 'raise if any item is unavailable at the new distributor' do
+      @correct_distributor.inventories.first.update_attributes(:actual => 0)
+
+      lambda {
+        @order.transfer!(@correct_distributor)
+      }.should raise_error(Order::NonTransferrable)
+    end
+
+    should_eventually 'raise if any batch has already been shipped' do
+      @order.batches.first.ship!
+
+      lambda {
+        @order.transfer!(@correct_distributor)
+      }.should raise_error(Order::NonTransferrable)
+    end
+
+    should_eventually "restore the original distributor's inventory" do
+      expected = @order.items_for(@on_demand_card).sum(&:product_count)
+
+      assert_difference('@incorrect_distributor.inventories.first.actual', expected) do
+        @order.transfer!(@correct_distributor)
+      end
     end
   end
 end

@@ -9,6 +9,20 @@ class ItemTest < ActiveSupport::TestCase
   should_not_allow_values_for :quantity, -1, 0, :message => /greater than/
   should_not_allow_values_for :quantity, 3.14, :message =>  /not a number/
 
+  context '#create' do
+    should 'tell the list to compact!' do
+      variant = Factory.create(:variant)
+      cart    = Factory.create(:cart)
+
+      cart.items.create!(:variant => variant, :quantity => 5)
+      cart.items.create!(:variant => variant, :quantity => 2)
+
+      cart.items.reload
+      cart.items.size.should == 1
+      cart.items.first.quantity.should == 7
+    end
+  end
+
   context 'delgation' do
     setup do
       @item = Factory.build(:item)

@@ -9,6 +9,8 @@ class Item < ActiveRecord::Base
   validates_presence_of :variant_id
   validates_numericality_of :quantity, :only_integer => true, :greater_than => 0
 
+  after_create :compact_list, :if => :list
+
   def available?(distributor)
     variant.available?(distributor, quantity)
   end
@@ -34,6 +36,10 @@ class Item < ActiveRecord::Base
   end
 
   private
+
+  def compact_list
+    list.compact!
+  end
 
   def safe_quantity
     errors.on(:quantity) ? 1 : quantity

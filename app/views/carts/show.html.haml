@@ -7,17 +7,17 @@
         %th Suggested<br />Donation
         %th Quantity
         %th Subtotal
-        %th
+        %th Remove
     %tbody
-      - @cart.items.each do |item|
+      - f.fields_for :items do |item_fields|
         %tr{:class => cycle('odd', 'even')}
-          - fields_for 'cart[items_hash][]', item do |fields|
-            %td= item.product_name
-            %td= item.variant_description
-            %td.number= m item.variant_price
-            %td.number= fields.text_field :quantity, :size => 5
-            %td.number= m item.total
-            %td= link_to 'Remove', cart_item_path(current_distributor, item), :method => :delete
+          - item = item_fields.object
+          %td= item.product_name
+          %td= item.variant_description
+          %td.number= m item.variant_price
+          %td.number= item_fields.text_field :quantity, :size => 5
+          %td.number= m item.total
+          %td= item_fields.check_box :_delete
     %tfoot
       %tr.additional_donation
         %td.label{:colspan => 4} Additional Donation

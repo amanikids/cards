@@ -1,4 +1,5 @@
 class Cart < List
+  accepts_nested_attributes_for :items, :allow_destroy => true
   validates_associated :items
 
   def blank?
@@ -11,10 +12,5 @@ class Cart < List
       order.distributor = distributor
       items.each { |item| order.items.build(:list => order, :quantity => item.quantity, :variant => item.variant) }
     end
-  end
-
-  def items_hash=(attributes)
-    attributes = attributes.stringify_keys
-    items.each { |item| item.update_attributes attributes[item.id.to_s] }
   end
 end

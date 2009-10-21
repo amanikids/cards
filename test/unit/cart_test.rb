@@ -8,13 +8,13 @@ class CartTest < ActiveSupport::TestCase
       setup { @item = @cart.items.create!(:variant => Factory.create(:variant)) }
 
       context 'with valid attributes' do
-        setup { @result = @cart.update_attributes(:items_hash => { @item.id => { :quantity => 2 } }) }
+        setup { @result = @cart.update_attributes(:items_attributes => [{:id => @item.id, :quantity => 2}]) }
         should('return true') { assert @result }
         should_change('@item.reload.quantity', :to => 2) { @item.reload.quantity }
       end
 
       context 'with invalid attributes' do
-        setup { @result = @cart.update_attributes(:items_hash => { @item.id => { :quantity => 'a' } }) }
+        setup { @result = @cart.update_attributes(:items_attributes => [{:id => @item.id, :quantity => 'a'}]) }
         should('return false') { assert !@result }
         should_not_change('@item.reload.quantity') { @item.reload.quantity }
       end

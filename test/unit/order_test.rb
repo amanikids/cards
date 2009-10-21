@@ -365,7 +365,7 @@ class OrderTest < ActiveSupport::TestCase
       }.should raise_error(Order::NonTransferrable)
     end
 
-    should_eventually 'raise if any batch has already been shipped' do
+    should 'raise if any not-on-demand batch has already been shipped' do
       @order.batches.first.ship!
 
       lambda {
@@ -373,10 +373,40 @@ class OrderTest < ActiveSupport::TestCase
       }.should raise_error(Order::NonTransferrable)
     end
 
-    should_eventually "restore the original distributor's inventory" do
-      expected = @order.items_for(@on_demand_card).sum(&:product_count)
+    should 'not raise if an on-demand batch has already been shipped' do
+      @order.batches.last.ship!
 
-      assert_difference('@incorrect_distributor.inventories.first.actual', expected) do
+      lambda {
+        @order.transfer!(@correct_distributor)
+      }.should_not raise_error(Order::NonTransferrable)
+    end
+
+    should "restore the original distributor's inventory" do
+      expected = @order.items_for(@physical_card).sum(&:product_count)
+
+      assert_difference('@incorrect_distributor.inventories.first.reload.available', expected) do
+        @order.transfer!(@correct_distributor)
+      end
+    end
+
+    should "transfer the order to the new distributor" do
+      @order.transfer!(@correct_distributor)
+      @order.reload.distributor.should == @correct_distributor
+    end
+
+    should "transfer the batches to the new distributor" do
+      on_demand, physical = @order.batches.partition(&:on_demand?)
+
+      @order.transfer!(@correct_distributor)
+
+      on_demand.each { |batch| batch.reload.on_demand?.should == true }
+      physical.each  { |batch| batch.reload.distributor.should == @correct_distributor }
+    end
+
+    should "decrement the new distributor's inventory" do
+      expected = @order.items_for(@physical_card).sum(&:product_count)
+
+      assert_difference('@correct_distributor.inventories.first.reload.available', -expected) do
         @order.transfer!(@correct_distributor)
       end
     end

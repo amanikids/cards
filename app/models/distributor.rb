@@ -30,6 +30,12 @@ class Distributor < User
     products.select { |product| product.available?(self) }
   end
 
+  def can_fulfill?(order)
+    order.items.reject(&:on_demand?).group_by(&:product).all? do |product, items_for_product|
+      product.quantity(self) > items_for_product.sum(&:product_count)
+    end
+  end
+
   def order_created(order)
     update_inventories_with_items_from(order, :item_promised)
   end

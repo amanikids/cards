@@ -71,12 +71,18 @@ class Order < List
   end
 
   def transfer!(new_distributor)
-    items.reject(&:on_demand?).group_by(&:product).each do |product, items_for_product|
-      required_inventory = items_for_product.sum(&:product_count)
+    raise NonTransferrable.new("#{new_distributor.name} doesn't have the inventory to handle this Order.") unless new_distributor.can_fulfill?(self)
+    raise NonTransferrable.new("This Order has already been shipped.") unless batches.reject(&:on_demand?).none?(&:shipped?)
 
-      unless product.quantity(new_distributor) > required_inventory
-        raise NonTransferrable.new("#{distributor.name} doesn't have enough #{product.name} cards.")
+    transaction do
+      self.distributor.order_destroyed(self)
+      self.update_attributes!(:distributor => new_distributor)
+
+      self.batches.reject(&:on_demand?).each do |batch|
+        batch.update_attributes!(:distributor => new_distributor)
       end
+
+      self.distributor.order_created(self)
     end
   end
 

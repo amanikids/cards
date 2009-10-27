@@ -7,7 +7,7 @@ class Batch < ActiveRecord::Base
   named_scope :on_demand, :conditions => 'distributor_id IS NULL'
 
   named_scope :overdue, lambda {
-    { :conditions => ["shipped_at IS NULL AND created_at < ?", 7.days.ago] }
+    { :conditions => ["shipped_at IS NULL AND created_at < ?", 11.days.ago] }
   }
 
   def self.deliver_overdue_reminder

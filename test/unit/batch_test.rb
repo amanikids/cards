@@ -112,13 +112,13 @@ class BatchTest < ActiveSupport::TestCase
   end
 
   context '.deliver_overdue_reminder' do
-    should 'send an email iff any Batches are older than 7 days and unshipped' do
-      Factory.create(:batch, :shipped_at => nil, :created_at => 6.days.ago)
+    should 'send an email iff any Batches are older than 11 days and unshipped' do
+      Factory.create(:batch, :shipped_at => nil, :created_at => 10.days.ago)
       assert_no_difference('Mailer.deliveries.count') { Batch.deliver_overdue_reminder }
 
       batch = Factory.create(:item,
         :list => Factory.create(:order),
-        :batch => Factory.create(:batch, :created_at => 8.days.ago)).batch
+        :batch => Factory.create(:batch, :created_at => 12.days.ago)).batch
       assert_difference('Mailer.deliveries.count', 1) { Batch.deliver_overdue_reminder }
 
       batch.ship!

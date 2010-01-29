@@ -1,8 +1,4 @@
-.DS_Store
-config/database.yml
-config/secret.txt
 db/*.sqlite3
-doc/app
 log/*.log
 public/stylesheets/*.css
-tmp/sass*
+tmp/**/*

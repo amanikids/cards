@@ -1,5 +1,6 @@
 .heroku_gems
 bin
+config/variables.rb
 db/*.sqlite3
 log/*.log
 public/stylesheets/*.css

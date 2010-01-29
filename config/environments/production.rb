@@ -32,8 +32,3 @@ config.action_mailer.smtp_settings = {
   :user_name => 'cards@amanikids.org',
   :password => ENV['SMTP_PASSWORD'] || raise('Please set ENV["SMTP_PASSWORD"].')
 }
-
-config.action_controller.session = {
-  :session_key => '_cards_amanikids_org_session',
-  :secret      => ENV['SECRET'] || raise('Please set ENV["SECRET"].')
-}

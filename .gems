@@ -1,4 +1,3 @@
-activemerchant
-geoip
-matthewtodd-has_digest --version '>= 0.1.3' --source http://gems.github.com/
-money
+money --version '2.1.5'
+activemerchant --version '1.4.2'
+geoip --version '0.8.6'

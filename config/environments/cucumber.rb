@@ -16,10 +16,3 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 config.action_mailer.default_url_options = { :host => 'example.com' }
 
-config.gem 'cucumber',    :lib => false, :version => '>=0.3.103'
-config.gem 'webrat',      :lib => false, :version => '>=0.5.0'
-config.gem 'rspec',       :lib => false, :version => '>=1.2.8'
-config.gem 'rspec-rails', :lib => false, :version => '>=1.2.7.1'
-
-config.gem 'faker'
-config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'

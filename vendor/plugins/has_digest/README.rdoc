@@ -1,0 +1,55 @@
+=HasDigest
+
+HasDigest is an +ActiveRecord+ macro that makes it easy to write things like encrypted passwords and api tokens +before_save+. Digest attributes may either stand alone or depend on the values of other attributes. Digests with dependencies are also magically salted for models having a +salt+ attribute.
+
+See the documentation for the +has_digest+ method for options.
+
+
+==Installation
+
+As a gem:
+
+  config.gem 'matthewtodd-has_digest', :lib => 'has_digest', :source => 'http://gems.github.com'
+
+As a plugin:
+
+  script/plugin install git://github.com/matthewtodd/has_digest.git
+
+
+==Usage
+
+In your model:
+
+  class User < ActiveRecord::Base
+    has_digest :encrypted_password, :depends => :password
+  end
+
+In your migrations:
+
+  class CreateUsers < ActiveRecord::Migration
+    def self.up
+      create_table :users do |t|
+        t.string :salt, :encrypted_password, :limit => 40
+      end
+    end
+
+    def self.down
+      drop_table :users
+    end
+  end
+
+In your tests:
+
+  class UserTest < ActiveSupport::TestCase
+    should_have_digest :encrypted_password, :depends => :password
+  end
+
+Back in your model:
+
+  class User < ActiveRecord::Base
+    def authenticate(password)
+      encrypted_password == digest(salt, password)
+    end
+  end
+
+Copyright (c) 2008 Matthew Todd, released under the MIT license

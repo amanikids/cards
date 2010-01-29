@@ -1,4 +1,7 @@
+.heroku_gems
+bin
 db/*.sqlite3
 log/*.log
 public/stylesheets/*.css
 tmp/**/*
+vendor/bundle

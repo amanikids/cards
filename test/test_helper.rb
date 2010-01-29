@@ -10,6 +10,10 @@ require 'mocha'
 require 'shoulda/test_unit'
 require 'shoulda/rails'
 
+if $stdin.tty?
+  require 'redgreen'
+end
+
 class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false

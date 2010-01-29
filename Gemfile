@@ -2,11 +2,12 @@ bundle_path 'vendor/bundle'
 
 gem 'rails', '2.3.5'
 
-gem 'activemerchant', '1.4.2', :require_as => 'active_merchant'
-gem 'geoip',          '0.8.6'
-gem 'haml',           '2.2.3'
-gem 'money',          '2.1.5'
-gem 'RedCloth',       '4.1.9', :require_as => 'redcloth'
+gem 'activemerchant',   '1.4.2', :require_as => 'active_merchant'
+gem 'geoip',            '0.8.6'
+gem 'haml',             '2.2.3'
+gem 'hoptoad_notifier', '2.1.3', :require_as => 'hoptoad_notifier/rails'
+gem 'money',            '2.1.5'
+gem 'RedCloth',         '4.1.9', :require_as => 'redcloth'
 
 only(:cucumber) do
   gem 'cucumber',    '0.3.103', :require_as => false

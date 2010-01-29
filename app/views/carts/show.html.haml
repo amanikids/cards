@@ -17,7 +17,7 @@
           %td.number= m item.variant_price
           %td.number= item_fields.text_field :quantity, :size => 5
           %td.number= m item.total
-          %td= item_fields.check_box :_delete
+          %td= item_fields.check_box :_destroy
     %tfoot
       %tr.additional_donation
         %td.label{:colspan => 4} Additional Donation

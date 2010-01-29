@@ -360,25 +360,25 @@ class OrderTest < ActiveSupport::TestCase
     should "raise if there's not enough inventory for any item at the new distributor" do
       @correct_distributor.inventories.first.update_attributes(:actual => 34)
 
-      lambda {
+      assert_raise(Order::NonTransferrable) do
         @order.transfer!(@correct_distributor)
-      }.should raise_error(Order::NonTransferrable)
+      end
     end
 
     should 'raise if any not-on-demand batch has already been shipped' do
       @order.batches.first.ship!
 
-      lambda {
+      assert_raise(Order::NonTransferrable) do
         @order.transfer!(@correct_distributor)
-      }.should raise_error(Order::NonTransferrable)
+      end
     end
 
     should 'not raise if an on-demand batch has already been shipped' do
       @order.batches.last.ship!
 
-      lambda {
+      assert_nothing_raised do
         @order.transfer!(@correct_distributor)
-      }.should_not raise_error(Order::NonTransferrable)
+      end
     end
 
     should "restore the original distributor's inventory" do
@@ -391,7 +391,7 @@ class OrderTest < ActiveSupport::TestCase
 
     should "transfer the order to the new distributor" do
       @order.transfer!(@correct_distributor)
-      @order.reload.distributor.should == @correct_distributor
+      assert_equal @correct_distributor, @order.reload.distributor
     end
 
     should "transfer the batches to the new distributor" do
@@ -399,8 +399,8 @@ class OrderTest < ActiveSupport::TestCase
 
       @order.transfer!(@correct_distributor)
 
-      on_demand.each { |batch| batch.reload.on_demand?.should == true }
-      physical.each  { |batch| batch.reload.distributor.should == @correct_distributor }
+      on_demand.each { |batch| assert batch.reload.on_demand? }
+      physical.each  { |batch| assert_equal @correct_distributor, batch.reload.distributor }
     end
 
     should "decrement the new distributor's inventory" do

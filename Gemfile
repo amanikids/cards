@@ -22,8 +22,7 @@ end
 only(:test) do
   gem 'factory_girl', '1.2.3'
   gem 'faker',        '0.3.1'
-  gem 'matchy',       '0.3.1',  :git => 'git://github.com/jm/matchy.git', :ref => '2e01918ad8d601685386aa9ac5d547ffb9b70b27'
-  gem 'mocha',        '0.9.8'
+  gem 'mocha',        '0.9.8',  :require_as => false
   gem 'redgreen',     '1.2.2',  :require_as => false
   gem 'shoulda',      '2.10.2'
 end

@@ -2,7 +2,7 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path(File.dirname(__FILE__) + '/../config/environment')
 require 'test_help'
 require File.expand_path(File.dirname(__FILE__) + '/factories')
-require 'mocha'
+require 'mocha/integration/test_unit'
 
 if $stdin.tty?
   require 'redgreen'

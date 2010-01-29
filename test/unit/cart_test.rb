@@ -14,12 +14,12 @@ class CartTest < ActiveSupport::TestCase
 
       cart.compact!
 
-      item_one.reload.quantity.should == 2
-      item_two.reload.quantity.should == 1
+      assert_equal 2, item_one.reload.quantity
+      assert_equal 1, item_two.reload.quantity
 
-      lambda {
+      assert_raise(ActiveRecord::RecordNotFound) do
         item_three.reload
-      }.should raise_error(ActiveRecord::RecordNotFound)
+      end
     end
   end
 

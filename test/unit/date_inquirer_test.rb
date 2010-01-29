@@ -8,13 +8,13 @@ class DateInquirerTest < ActiveSupport::TestCase
       end
 
       should "be true on a #{day}" do
-        @date.extend(DateInquirer).send("#{day}?").should == true
+        assert @date.extend(DateInquirer).send("#{day}?")
       end
 
       should 'be false on every other day of the week' do
         (1..6).each do |step|
           date = @date + step.days
-          date.extend(DateInquirer).send("#{day}?").should == false
+          assert_equal false, date.extend(DateInquirer).send("#{day}?")
         end
       end
     end

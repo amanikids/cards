@@ -18,8 +18,8 @@ class ItemTest < ActiveSupport::TestCase
       cart.items.create!(:variant => variant, :quantity => 2)
 
       cart.items.reload
-      cart.items.size.should == 1
-      cart.items.first.quantity.should == 7
+      assert_equal 1, cart.items.size
+      assert_equal 7, cart.items.first.quantity
     end
   end
 

@@ -18,8 +18,3 @@ class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
 end
-
-# Load shoulda_macros from non-vendored gems:
-Rails.configuration.gems.reject { |gem| gem.vendor_gem? }.map { |gem| gem.specification.full_gem_path }.each do |path|
-  Shoulda.autoload_macros(File.dirname(path), File.basename(path))
-end

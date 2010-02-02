@@ -29,6 +29,6 @@ config.action_mailer.smtp_settings = {
   :port => '587',
   :domain => 'amanikids.org',
   :authentication => :plain,
-  :user_name => 'cards@amanikids.org',
+  :user_name => 'no-reply@amanikids.org',
   :password => ENV['SMTP_PASSWORD'] || raise('Please set ENV["SMTP_PASSWORD"].')
 }

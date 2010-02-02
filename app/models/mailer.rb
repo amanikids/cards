@@ -1,7 +1,7 @@
 class Mailer < ActionMailer::Base
   include ActionView::Helpers::TextHelper
 
-  FROM_ADDRESS    = 'Amani Holiday Card Orders <cards@amanikids.org>'
+  FROM_ADDRESS    = 'Amani Holiday Card Orders <no-reply@amanikids.org>'
   CONTACT_ADDRESS = 'Joe Ventura <joe@amanikids.org>'
 
   def new_orders(distributor)

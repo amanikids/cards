@@ -1,3 +1,5 @@
+source :rubygems
+
 gem 'rails', '2.3.5'
 
 gem 'activemerchant',   '1.4.2', :require => 'active_merchant'

@@ -1,28 +1,34 @@
-bundle_path 'vendor/bundle'
-
 gem 'rails', '2.3.5'
 
-gem 'activemerchant',   '1.4.2', :require_as => 'active_merchant'
+gem 'activemerchant',   '1.4.2', :require => 'active_merchant'
 gem 'geoip',            '0.8.6'
 gem 'haml',             '2.2.3'
-gem 'hoptoad_notifier', '2.1.3', :require_as => 'hoptoad_notifier/rails'
+gem 'hoptoad_notifier', '2.1.3', :require => 'hoptoad_notifier/rails'
 gem 'money',            '2.1.5'
-gem 'RedCloth',         '4.1.9', :require_as => 'redcloth'
+gem 'RedCloth',         '4.1.9', :require => 'redcloth'
 
-only(:cucumber) do
-  gem 'cucumber',    '0.3.103', :require_as => false
-  gem 'webrat',      '0.5.0',   :require_as => false
-  gem 'rspec',       '1.2.8',   :require_as => false
-  gem 'rspec-rails', '1.2.7.1', :require_as => false
+group(:development, :test, :cucumber) do
+  gem 'sqlite3-ruby', '1.2.5', :require => 'sqlite3'
+end
+
+group(:production) do
+  gem 'pg', '0.9.0'
+end
+
+group(:cucumber) do
+  gem 'cucumber',    '0.3.103', :require => false
+  gem 'webrat',      '0.5.0',   :require => false
+  gem 'rspec',       '1.2.8',   :require => false
+  gem 'rspec-rails', '1.2.7.1', :require => false
 
   gem 'factory_girl', '1.2.3'
   gem 'faker',        '0.3.1'
 end
 
-only(:test) do
+group(:test) do
   gem 'factory_girl', '1.2.3'
   gem 'faker',        '0.3.1'
-  gem 'mocha',        '0.9.8',  :require_as => false
-  gem 'redgreen',     '1.2.2',  :require_as => false
+  gem 'mocha',        '0.9.8',  :require => false
+  gem 'redgreen',     '1.2.2',  :require => false
   gem 'shoulda',      '2.10.2'
 end

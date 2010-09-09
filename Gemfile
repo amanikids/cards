@@ -15,6 +15,9 @@ group(:production) do
   gem 'pg', '0.9.0'
 end
 
+group(:development) do
+  gem 'heroku', '1.9.13', :require => false
+end
 group(:cucumber) do
   gem 'cucumber',    '0.3.103', :require => false
   gem 'webrat',      '0.5.0',   :require => false

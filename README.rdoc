@@ -1,0 +1,15 @@
+= Development
+
+  brew install postgresql # follow instructions
+
+  # optional: rvm
+  rvm gemset create amanikids-cards
+  rvm gemset use amanikids-cards
+
+  gem install bundler
+
+  git clone git://github.com/amanikids/cards.git
+  cd cards
+  bundle install
+  rake db:setup
+  rake

@@ -24,10 +24,10 @@ group(:test) do
 end
 
 group(:cucumber) do
-  gem 'cucumber',    '0.3.103', :require => false
-  gem 'webrat',      '0.5.0',   :require => false
-  gem 'rspec',       '1.2.8',   :require => false
-  gem 'rspec-rails', '1.2.7.1', :require => false
+  gem 'cucumber',     '0.3.103', :require => false
+  gem 'webrat',       '0.5.0',   :require => false
+  gem 'rspec',        '1.2.8',   :require => false
+  gem 'rspec-rails',  '1.2.7.1', :require => false
   gem 'factory_girl', '1.2.3'
   gem 'faker',        '0.3.1'
 end

@@ -24,11 +24,11 @@ config.action_mailer.default_url_options = {
 }
 
 config.action_mailer.smtp_settings = {
-  :address => 'smtp.gmail.com',
-  :port => '587',
-  :domain => 'amanikids.org',
-  :user_name => 'no-reply@amanikids.org',
-  :password => ENV['SMTP_PASSWORD'] || raise('Please set ENV["SMTP_PASSWORD"].')
-  :authentication => :plain,
+  :address              => 'smtp.gmail.com',
+  :port                 => '587',
+  :domain               => 'amanikids.org',
+  :user_name            => 'no-reply@amanikids.org',
+  :password             => ENV['SMTP_PASSWORD'] || raise('Please set ENV["SMTP_PASSWORD"].')
+  :authentication       => :plain,
   :enable_starttls_auto => true
 }

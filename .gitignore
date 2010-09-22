@@ -1,4 +1,4 @@
 .bundle
-config/variables.rb
+.environment
 log/*.log
 tmp/**/*

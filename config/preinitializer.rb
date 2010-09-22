@@ -1,7 +1,3 @@
-if File.exists?("#{RAILS_ROOT}/config/variables.rb")
-  require "#{RAILS_ROOT}/config/variables"
-end
-
 begin
   require 'rubygems'
   require 'bundler'

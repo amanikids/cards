@@ -2,13 +2,14 @@ source :rubygems
 
 gem 'rails', '2.3.9'
 
-gem 'activemerchant',   '1.4.2', :require => 'active_merchant'
-gem 'geoip',            '0.8.6'
-gem 'haml',             '3.0.18'
-gem 'money',            '2.1.5'
-gem 'pg',               '0.9.0'
-gem 'rack-contrib',     '1.0.1', :require => 'rack/contrib'
-gem 'RedCloth',         '4.1.9', :require => 'redcloth'
+gem 'activemerchant',     '1.4.2', :require => 'active_merchant'
+gem 'geoip',              '0.8.6'
+gem 'haml',               '3.0.18'
+gem 'heroku-environment', '0.0.1'
+gem 'money',              '2.1.5'
+gem 'pg',                 '0.9.0'
+gem 'rack-contrib',       '1.0.1', :require => 'rack/contrib'
+gem 'RedCloth',           '4.1.9', :require => 'redcloth'
 
 group(:development) do
   gem 'heroku', '1.9.13', :require => false

@@ -16,4 +16,9 @@
       = yield
 
     - if Rails.env.production?
-      = render :partial => 'layouts/google_analytics'
+      = javascript_include_tag 'http://www.google-analytics.com/ga.js'
+      :javascript
+        try {
+          var pageTracker = _gat._getTracker("UA-7088176-2");
+          pageTracker._trackPageview();
+        } catch(err) {}

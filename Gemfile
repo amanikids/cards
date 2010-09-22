@@ -4,7 +4,7 @@ gem 'rails', '2.3.9'
 
 gem 'activemerchant',   '1.4.2', :require => 'active_merchant'
 gem 'geoip',            '0.8.6'
-gem 'haml',             '2.2.3'
+gem 'haml',             '3.0.18'
 gem 'hoptoad_notifier', '2.1.3', :require => 'hoptoad_notifier/rails'
 gem 'money',            '2.1.5'
 gem 'pg',               '0.9.0'

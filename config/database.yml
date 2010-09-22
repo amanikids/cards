@@ -1,10 +1,18 @@
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: amanikids_cards_development
+  pool: 5
+  username: <%= Etc.getlogin %>
+  password:
 
 test: &TEST
-  adapter: sqlite3
-  database: db/test.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: amanikids_cards_test
+  pool: 5
+  username: <%= Etc.getlogin %>
+  password:
 
 cucumber:
   <<: *TEST

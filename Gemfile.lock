@@ -62,7 +62,6 @@ GEM
       rack (>= 0.4.0)
       rspec (>= 1.2.7)
     shoulda (2.10.2)
-    sqlite3-ruby (1.2.5)
     term-ansicolor (1.0.4)
     treetop (1.4.3)
       polyglot (>= 0.2.5)
@@ -90,5 +89,4 @@ DEPENDENCIES
   rspec (= 1.2.8)
   rspec-rails (= 1.2.7.1)
   shoulda (= 2.10.2)
-  sqlite3-ruby (= 1.2.5)
   webrat (= 0.5.0)

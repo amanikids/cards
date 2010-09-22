@@ -7,19 +7,13 @@ gem 'geoip',            '0.8.6'
 gem 'haml',             '2.2.3'
 gem 'hoptoad_notifier', '2.1.3', :require => 'hoptoad_notifier/rails'
 gem 'money',            '2.1.5'
+gem 'pg',               '0.9.0'
 gem 'RedCloth',         '4.1.9', :require => 'redcloth'
-
-group(:development, :test, :cucumber) do
-  gem 'sqlite3-ruby', '1.2.5', :require => 'sqlite3'
-end
-
-group(:production) do
-  gem 'pg', '0.9.0'
-end
 
 group(:development) do
   gem 'heroku', '1.9.13', :require => false
 end
+
 group(:cucumber) do
   gem 'cucumber',    '0.3.103', :require => false
   gem 'webrat',      '0.5.0',   :require => false

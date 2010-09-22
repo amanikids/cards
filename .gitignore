@@ -1,5 +1,4 @@
 config/variables.rb
-db/*.sqlite3
 log/*.log
 public/stylesheets/*.css
 tmp/**/*

@@ -1,61 +1,47 @@
 # =============================================================================
 # = Helper Methods                                                            =
 # =============================================================================
-def password(name)
-  name = name.to_s.upcase
+def make_user(name, email)
+  User.find_or_initialize_by_name(name).tap do |user|
+    user.email    = email
+    user.password = make_password if user.new_record?
+    user.save!
+  end
+end
 
+def make_distributor(position, country_code, country, currency, name, email)
+  Distributor.find_or_initialize_by_country_code(country_code).tap do |distributor|
+    distributor.position = position
+    distributor.country  = country
+    distributor.currency = currency
+    distributor.name     = name
+    distributor.email    = email
+    distributor.password = make_password if distributor.new_record?
+    distributor.save!
+  end
+end
+
+def make_password
   if Rails.env.production?
-    ENV[name] || raise("No password specified for #{name}; ENV keys are #{ENV.keys.sort.inspect}")
+    ActiveSupport::SecureRandom.hex
   else
-    'foo'
+    'secret'
   end
 end
 
 # =============================================================================
 # = Users                                                                     =
 # =============================================================================
-User.find_or_initialize_by_name('Matthew Todd').tap do |user|
-  user.update_attributes!(
-    :email    => 'matthew.todd@gmail.com',
-    :password => password(:matthew)
-  )
-end
-
-User.find_or_initialize_by_name('Joe Ventura').tap do |user|
-  user.update_attributes!(
-    :email    => 'joe@amanikids.org',
-    :password => password(:joe)
-  )
-end
-
-User.find_or_initialize_by_name('Salma Daud').tap do |user|
-  user.update_attributes!(
-    :email    => 'salma@amanikids.org',
-    :password => password(:salma)
-  )
-end
-
-User.find_or_initialize_by_name('Valerie Todd').tap do |user|
-  user.update_attributes!(
-    :email    => 'valerie@amanikids.org',
-    :password => password(:valerie)
-  )
-end
+make_user 'Matthew Todd', 'matthew.todd@gmail.com'
+make_user 'Joe Ventura',  'joe@amanikids.org'
+make_user 'Salma Daud',   'salma@amanikids.org'
+make_user 'Valerie Todd', 'valerie@amanikids.org'
 
 # =============================================================================
 # = Distributors                                                              =
 # =============================================================================
 # United States
-us = Distributor.find_or_initialize_by_country_code('us').tap do |distributor|
-  distributor.update_attributes!(
-    :position => 1,
-    :country  => 'United States',
-    :currency => 'USD',
-    :name     => 'Dina Sciarra',
-    :email    => 'amanikids@comcast.net',
-    :password => password(:dina)
-  )
-
+us = make_distributor(1, 'us', 'United States', 'USD', 'Dina Sciarra', 'amanikids@comcast.net').tap do |distributor|
   distributor.donation_methods.find_or_create_by_name('paypal').tap do |method|
     method.update_attributes!(
       :position    => 1,
@@ -77,16 +63,7 @@ us = Distributor.find_or_initialize_by_country_code('us').tap do |distributor|
 end
 
 # Canada
-ca = Distributor.find_or_initialize_by_country_code('ca').tap do |distributor|
-  distributor.update_attributes!(
-    :position => 2,
-    :country  => 'Canada',
-    :currency => 'CAD',
-    :name     => 'Randy Bacchus',
-    :email    => 'randy.bacchus@sage.com',
-    :password => password(:randy)
-  )
-
+ca = make_distributor(2, 'ca', 'Canada', 'CAD', 'Randy Bacchus', 'randy.bacchus@sage.com').tap do |distributor|
   distributor.donation_methods.find_or_initialize_by_name('paypal').tap do |method|
     method.update_attributes!(
       :position    => 1,
@@ -106,16 +83,7 @@ ca = Distributor.find_or_initialize_by_country_code('ca').tap do |distributor|
 end
 
 # United Kingdom
-uk = Distributor.find_or_initialize_by_country_code('uk').tap do |distributor|
-  distributor.update_attributes!(
-    :position => 3,
-    :country  => 'United Kingdom',
-    :currency => 'GBP',
-    :name     => 'Fiona McElhone',
-    :email    => 'fiona_mcelhone@hotmail.com',
-    :password => password(:fiona)
-  )
-
+uk = make_distributor(3, 'uk', 'United Kingdom', 'GBP', 'Fiona McElhone', 'fiona_mcelhone@hotmail.com').tap do |distributor|
   distributor.donation_methods.find_or_initialize_by_name('justgiving').tap do |method|
     method.update_attributes!(
       :position => 1,

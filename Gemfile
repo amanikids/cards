@@ -8,6 +8,7 @@ gem 'haml',             '2.2.3'
 gem 'hoptoad_notifier', '2.1.3', :require => 'hoptoad_notifier/rails'
 gem 'money',            '2.1.5'
 gem 'pg',               '0.9.0'
+gem 'rack-contrib',     '1.0.1', :require => 'rack/contrib'
 gem 'RedCloth',         '4.1.9', :require => 'redcloth'
 
 group(:development) do

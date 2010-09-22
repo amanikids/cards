@@ -1,4 +1,3 @@
 config/variables.rb
 log/*.log
-public/stylesheets/*.css
 tmp/**/*

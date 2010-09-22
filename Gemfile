@@ -15,20 +15,19 @@ group(:development) do
   gem 'heroku', '1.9.13', :require => false
 end
 
-group(:cucumber) do
-  gem 'cucumber',    '0.3.103', :require => false
-  gem 'webrat',      '0.5.0',   :require => false
-  gem 'rspec',       '1.2.8',   :require => false
-  gem 'rspec-rails', '1.2.7.1', :require => false
-
-  gem 'factory_girl', '1.2.3'
-  gem 'faker',        '0.3.1'
-end
-
 group(:test) do
   gem 'factory_girl', '1.2.3'
   gem 'faker',        '0.3.1'
   gem 'mocha',        '0.9.8',  :require => false
   gem 'redgreen',     '1.2.2',  :require => false
   gem 'shoulda',      '2.10.2'
+end
+
+group(:cucumber) do
+  gem 'cucumber',    '0.3.103', :require => false
+  gem 'webrat',      '0.5.0',   :require => false
+  gem 'rspec',       '1.2.8',   :require => false
+  gem 'rspec-rails', '1.2.7.1', :require => false
+  gem 'factory_girl', '1.2.3'
+  gem 'faker',        '0.3.1'
 end

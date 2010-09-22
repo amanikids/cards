@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '2.3.5'
+gem 'rails', '2.3.9'
 
 gem 'activemerchant',   '1.4.2', :require => 'active_merchant'
 gem 'geoip',            '0.8.6'

@@ -1,4 +1,5 @@
 .bundle
 .environment
+.rspec
 log/*.log
 tmp/**/*

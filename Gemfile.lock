@@ -46,6 +46,7 @@ GEM
     launchy (0.3.7)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
+    machinist (2.0.0.beta2)
     mail (2.2.6.1)
       activesupport (>= 2.3.6)
       mime-types
@@ -98,6 +99,7 @@ DEPENDENCIES
   haml (= 3.0.18)
   heroku (= 1.10.5)
   heroku-environment (= 0.0.1)
+  machinist (= 2.0.0.beta2)
   pg (= 0.9.0)
   rails (= 3.0.0)
   rspec-rails (= 2.0.0.beta.22)

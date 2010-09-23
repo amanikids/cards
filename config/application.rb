@@ -38,5 +38,8 @@ module Cards
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # Use machinist instead of fixtures.
+    config.generators.fixture_replacement = :machinist
   end
 end

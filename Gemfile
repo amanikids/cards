@@ -10,6 +10,7 @@ group :development do
   gem 'heroku',           '1.10.5'
 end
 
+# Include rspec-rails in :development so we get `rake spec`.
 group :development, :test do
   gem 'rspec-rails',      '2.0.0.beta.22'
 end

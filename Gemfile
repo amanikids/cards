@@ -1,33 +1,11 @@
 source :rubygems
 
-gem 'rails', '2.3.9'
+gem 'rails', '3.0.0'
 
-gem 'activemerchant',     '1.4.2', :require => 'active_merchant'
-gem 'geoip',              '0.8.6'
 gem 'haml',               '3.0.18'
 gem 'heroku-environment', '0.0.1'
-gem 'money',              '2.1.5'
 gem 'pg',                 '0.9.0'
-gem 'rack-contrib',       '1.0.1', :require => 'rack/contrib'
-gem 'RedCloth',           '4.1.9', :require => 'redcloth'
 
 group(:development) do
-  gem 'heroku', '1.9.13', :require => false
-end
-
-group(:test) do
-  gem 'factory_girl', '1.2.3'
-  gem 'faker',        '0.3.1'
-  gem 'mocha',        '0.9.8',  :require => false
-  gem 'redgreen',     '1.2.2',  :require => false
-  gem 'shoulda',      '2.10.2'
-end
-
-group(:cucumber) do
-  gem 'cucumber',     '0.3.103', :require => false
-  gem 'webrat',       '0.5.0',   :require => false
-  gem 'rspec',        '1.2.8',   :require => false
-  gem 'rspec-rails',  '1.2.7.1', :require => false
-  gem 'factory_girl', '1.2.3'
-  gem 'faker',        '0.3.1'
+  gem 'heroku', '1.10.5'
 end

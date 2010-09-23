@@ -1,9 +1,0 @@
-.donation
-  %h2= "Thank you for your donation!"
-
-  - if donation.received_at
-    %p= "We received it #{donation.received_at.to_date.to_s(:long)}."
-  - else
-    %p We'll let you know here when we've received it.
-    %h3 Here are those details again:
-    = textilize donation.donation_method.description

@@ -1,5 +1,0 @@
-- content_for(:header) do
-  = render :partial => current_cart unless current_cart.blank?
-
-= render :partial => 'distributors/sold_out', :locals => { :distributor => current_distributor } if current_distributor.sold_out?
-= render :partial => @products

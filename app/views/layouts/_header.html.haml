@@ -1,4 +1,0 @@
-.header
-  .logo= link_to image_tag('logo.jpg'), 'http://amanikids.org/'
-  %h1= link_to_unless_current cycle_letter_classes('Christmas and Holiday Cards', 'red', 'green'), current_distributor ? distributor_root_path(current_distributor) : root_path
-  = yield(:header)

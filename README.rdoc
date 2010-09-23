@@ -1,0 +1,9 @@
+= Getting Started
+
+  brew install postgresql
+  hub clone -p amanikids/cards
+  cd cards
+  bundle install
+  rake db:create:all
+  rake db:migrate
+  rake

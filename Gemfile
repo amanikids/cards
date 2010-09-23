@@ -7,7 +7,8 @@ gem 'heroku-environment', '0.0.1'
 gem 'pg',                 '0.9.0'
 
 group :development do
-  gem 'heroku', '1.10.5'
+  gem 'autotest', '4.3.2'
+  gem 'heroku',   '1.10.5'
 end
 
 group :development, :test do

@@ -13,7 +13,7 @@ development:
   encoding: unicode
   database: cards_development
   pool: 5
-  username: cards
+  username: <%= Etc.getlogin %>
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -39,7 +39,7 @@ test:
   encoding: unicode
   database: cards_test
   pool: 5
-  username: cards
+  username: <%= Etc.getlogin %>
   password:
 
 production:
@@ -47,5 +47,5 @@ production:
   encoding: unicode
   database: cards_production
   pool: 5
-  username: cards
+  username: <%= Etc.getlogin %>
   password:

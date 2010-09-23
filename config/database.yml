@@ -41,11 +41,3 @@ test:
   pool: 5
   username: <%= Etc.getlogin %>
   password:
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: cards_production
-  pool: 5
-  username: <%= Etc.getlogin %>
-  password:

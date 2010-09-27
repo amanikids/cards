@@ -1,5 +1,9 @@
 source :rubygems
 
+gem 'cacheable_assets',
+  :path    => 'vendor/extractions/cacheable_assets',
+  :require => 'cacheable_assets/railtie'
+
 gem 'haml',               '3.0.18'
 gem 'heroku-environment', '0.0.1'
 gem 'pg',                 '0.9.0'

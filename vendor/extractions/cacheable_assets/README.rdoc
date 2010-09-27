@@ -1,0 +1,3 @@
+= CacheableAssets
+
+CacheableAssets is one of my favorite things! Let me tell you about it:

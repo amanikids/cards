@@ -1,9 +1,8 @@
 require 'test/helper'
 
-class ConfigurationTest < Test::Unit::TestCase
+class FinderTest < Test::Unit::TestCase
   def setup
-    @config = Configuration.new
-    @config.static_asset_paths['public'] = ['/javascripts']
+    @finder = Finder.new('public' => ['/javascripts'])
   end
 
   def test_returns_nil_full_path_for_unconfigured_sources
@@ -15,9 +14,15 @@ class ConfigurationTest < Test::Unit::TestCase
                      'public/javascripts/application.js'
   end
 
+  def test_returns_nil_for_configured_but_nonexistent_sources
+    assert_full_path '/javascripts/does_not_exist.js', nil
+  end
+
   private
 
   def assert_full_path(path, expected)
-    assert_equal expected, @config.full_path_for(path)
+    in_fixtures_path do
+      assert_equal expected, @finder.call(path)
+    end
   end
 end

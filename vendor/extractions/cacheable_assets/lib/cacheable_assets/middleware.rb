@@ -2,8 +2,8 @@ require 'rack/contrib'
 
 module CacheableAssets
   class Middleware
-    def initialize(app, config)
-      @app = build(app, config.static_asset_paths)
+    def initialize(app, static_asset_paths)
+      @app = build(app, static_asset_paths)
     end
 
     def call(env)

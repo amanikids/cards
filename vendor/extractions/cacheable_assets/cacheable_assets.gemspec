@@ -18,7 +18,6 @@ Gem::Specification.new do |spec|
   spec.homepage = 'http://github.com/matthewtodd/cacheable_assets'
 
   spec.add_runtime_dependency 'rack-contrib'
-  spec.add_development_dependency 'mocha'
   spec.add_development_dependency 'shoe'
   spec.add_development_dependency 'rack-test'
 

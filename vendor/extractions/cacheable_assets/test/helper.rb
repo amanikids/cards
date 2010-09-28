@@ -1,5 +1,4 @@
 require 'test/unit'
-require 'mocha'
 require 'cacheable_assets'
 
 class Test::Unit::TestCase

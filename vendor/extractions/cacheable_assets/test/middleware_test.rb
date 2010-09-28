@@ -5,11 +5,11 @@ class MiddlewareTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def app
-    inner_app = proc { |env| [200, {}, 'Hello!'] }
-    config    = Configuration.new
-    config.static_asset_paths['public'] = ['/javascripts']
+    Middleware.new(inner_app, 'public' => ['/javascripts'])
+  end
 
-    Middleware.new(inner_app, config)
+  def inner_app
+    proc { |env| [200, {}, 'Hello!'] }
   end
 
   def test_delegates_unconfigured_paths_to_inner_application

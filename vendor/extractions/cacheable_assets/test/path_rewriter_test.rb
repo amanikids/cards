@@ -1,33 +1,21 @@
 require 'test/helper'
 
 class PathRewriterTest < Test::Unit::TestCase
-  def setup
-    @config   = mock
-    @rewriter = PathRewriter.new(@config)
-  end
+  def test_does_not_modify_unconfigured_paths
+    finder        = proc { |source| nil }
+    fingerprinter = proc { |source| '123' }
+    rewriter      = PathRewriter.new(finder, fingerprinter)
 
-  def test_does_not_modify_non_configured_paths
-    given_config   '/javascripts/application.js', nil
-    assert_rewrite '/javascripts/application.js', '/javascripts/application.js'
+    assert_equal '/favicon.ico',
+                 rewriter.call('/favicon.ico')
   end
 
   def test_inserts_fingerprint_in_configured_paths
-    given_config '/javascripts/application.js',
-                 'public/javascripts/application.js'
+    finder        = proc { |source| "public/#{source}" }
+    fingerprinter = proc { |source| '123' }
+    rewriter      = PathRewriter.new(finder, fingerprinter)
 
-    assert_rewrite '/javascripts/application.js',
-                   '/javascripts/application-72207595853807422212764151362751546576.js'
-  end
-
-  private
-
-  def given_config(source, path)
-    @config.expects(:full_path_for).with(source).returns(path)
-  end
-
-  def assert_rewrite(path, expected)
-    in_fixtures_path do
-      assert_equal expected, @rewriter.call(path)
-    end
+    assert_equal '/javascripts/application-123.js',
+                 rewriter.call('/javascripts/application.js')
   end
 end

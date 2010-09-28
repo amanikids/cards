@@ -11,11 +11,11 @@ GEM
     launchy (0.3.7)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
-    mocha (0.9.8)
-      rake
     rack (1.2.1)
     rack-contrib (1.0.1)
       rack (>= 0.9.1)
+    rack-test (0.5.5)
+      rack (>= 1.0)
     rake (0.8.7)
     shoe (0.6.2)
       launchy
@@ -26,6 +26,6 @@ PLATFORMS
 
 DEPENDENCIES
   cacheable_assets!
-  mocha
   rack-contrib
+  rack-test
   shoe

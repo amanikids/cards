@@ -1,7 +1,7 @@
 module CacheableAssets
   class Configuration
     DEFAULT_STATIC_ASSET_PATHS = {
-      'public' => %w( /images /javascripts )
+      'public' => %w( /favicon.ico /images /javascripts /stylesheets )
     }
 
     attr_reader :static_asset_paths

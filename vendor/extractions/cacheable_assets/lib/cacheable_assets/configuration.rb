@@ -18,15 +18,15 @@ module CacheableAssets
 
     private
 
+    def directory_root_for(source)
+      root, urls = configuration_for(source)
+      root
+    end
+
     def configuration_for(source)
       @static_asset_paths.find do |root, urls|
         urls.any? { |url| source.start_with?(url) }
       end
-    end
-
-    def directory_root_for(source)
-      root, urls = configuration_for(source)
-      root
     end
   end
 end

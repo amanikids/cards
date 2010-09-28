@@ -1,6 +1,7 @@
 require 'cacheable_assets/version'
 
 module CacheableAssets
+  autoload :Cacher,        'cacheable_assets/cacher'
   autoload :Configuration, 'cacheable_assets/configuration'
   autoload :Finder,        'cacheable_assets/finder'
   autoload :Fingerprinter, 'cacheable_assets/fingerprinter'

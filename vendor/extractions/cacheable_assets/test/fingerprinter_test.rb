@@ -2,7 +2,7 @@ require 'test/helper'
 
 class FingerprinterTest < Test::Unit::TestCase
   def setup
-    @fingerprinter = Fingerprinter::MD5.new
+    @fingerprinter = Fingerprinter.new
   end
 
   def test_returns_an_md5_digest_for_the_given_path

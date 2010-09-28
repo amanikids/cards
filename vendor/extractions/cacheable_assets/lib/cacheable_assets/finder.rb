@@ -5,14 +5,14 @@ module CacheableAssets
     end
 
     def call(source)
-      if path = path_for(source)
+      if path = filesystem_path_for(source)
         path if File.exist?(path)
       end
     end
 
     private
 
-    def path_for(source)
+    def filesystem_path_for(source)
       root, urls = configuration_for(source)
       File.join(root, source) if root
     end

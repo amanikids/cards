@@ -1,11 +1,11 @@
 require 'cacheable_assets'
 require 'rails'
-require 'rack/contrib'
 
 module CacheableAssets
   class Railtie < Rails::Railtie
-    config.app_middleware.use Rack::StaticCache,
-      :root => 'public',
-      :urls => ['/images', '/javascripts']
+    config.after_initialize do |app|
+      app.config.action_controller.asset_path = PathRewriter.new(CacheableAssets.configuration)
+      app.middleware.use Middleware, CacheableAssets.configuration
+    end
   end
 end

@@ -1,0 +1,31 @@
+PATH
+  remote: .
+  specs:
+    cacheable_assets (0.0.0)
+      rack-contrib
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    configuration (1.1.0)
+    launchy (0.3.7)
+      configuration (>= 0.0.5)
+      rake (>= 0.8.1)
+    mocha (0.9.8)
+      rake
+    rack (1.2.1)
+    rack-contrib (1.0.1)
+      rack (>= 0.9.1)
+    rake (0.8.7)
+    shoe (0.6.2)
+      launchy
+      rake
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cacheable_assets!
+  mocha
+  rack-contrib
+  shoe

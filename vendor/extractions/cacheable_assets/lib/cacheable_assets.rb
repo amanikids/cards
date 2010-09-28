@@ -9,8 +9,16 @@ module CacheableAssets
   autoload :PathRewriter,  'cacheable_assets/path_rewriter'
 
   class << self
-    def config
-      @config ||= Configuration.new
+    def configuration
+      @configuration ||= Configuration.new
+    end
+
+    def middleware
+      configuration.middleware
+    end
+
+    def path_rewriter(cache=nil)
+      configuration.path_rewriter(cache)
     end
   end
 end

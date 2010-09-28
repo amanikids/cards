@@ -7,8 +7,8 @@ class PathRewriterTest < Test::Unit::TestCase
   end
 
   def test_does_not_modify_non_configured_paths
-    given_config   '/favicon.ico', nil
-    assert_rewrite '/favicon.ico', '/favicon.ico'
+    given_config   '/javascripts/application.js', nil
+    assert_rewrite '/javascripts/application.js', '/javascripts/application.js'
   end
 
   def test_inserts_fingerprint_in_configured_paths
@@ -16,7 +16,7 @@ class PathRewriterTest < Test::Unit::TestCase
                  'public/javascripts/application.js'
 
     assert_rewrite '/javascripts/application.js',
-                   '/javascripts/application-281949768489412648962353822266799178366.js'
+                   '/javascripts/application-72207595853807422212764151362751546576.js'
   end
 
   private

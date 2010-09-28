@@ -18,11 +18,8 @@ module CacheableAssets
       source.insert(source.rindex('.'), "-#{fingerprint}")
     end
 
-    # Prefer digest of file contents over File mtime, since File mtimes change
-    # on every Heroku deploy, even if the contents don't.
-    #
-    # We additionally to_i(16) the digest since Rack::StaticCache assumes
-    # version numbers have digits and dots only.
+    # We to_i(16) the digest since Rack::StaticCache assumes version numbers
+    # have digits and dots only.
     def fingerprint(path)
       Digest::MD5.file(path).hexdigest.to_i(16)
     end

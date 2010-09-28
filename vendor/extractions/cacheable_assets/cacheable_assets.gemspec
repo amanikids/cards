@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rack-contrib'
   spec.add_development_dependency 'mocha'
   spec.add_development_dependency 'shoe'
+  spec.add_development_dependency 'rack-test'
 
   # The kooky &File.method(:basename) trick keeps us from accidentally
   # shadowing a variable named "file" in the context that evaluates this

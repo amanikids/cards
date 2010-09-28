@@ -23,7 +23,7 @@ module CacheableAssets
 
     private
 
-    class MiddlewareBuilder
+    class MiddlewareBuilder #:nodoc:
       def initialize(static_asset_paths)
         @static_asset_paths = static_asset_paths
       end

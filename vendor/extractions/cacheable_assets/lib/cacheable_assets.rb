@@ -13,6 +13,10 @@ module CacheableAssets
       @configuration ||= Configuration.new
     end
 
+    def configure
+      yield configuration
+    end
+
     def middleware
       configuration.middleware
     end

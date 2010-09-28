@@ -1,6 +1,6 @@
 module CacheableAssets
-  module Generators
-    class InitializerGenerator < Rails::Generators::Base
+  module Generators #:nodoc:
+    class InitializerGenerator < Rails::Generators::Base #:nodoc:
       source_root File.expand_path('../templates', __FILE__)
 
       def create_initializer_file

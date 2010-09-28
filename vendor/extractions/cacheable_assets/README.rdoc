@@ -1,3 +1,28 @@
 = CacheableAssets
 
-CacheableAssets is one of my favorite things! Let me tell you about it:
+Simple glue code providing sane configuration for your static assets. (Probably
+on Heroku[http://heroku.com/].)
+
+* Far-future Cache-Control headers. (Courtesy Rack::StaticCache.)
+* MD5-digest cache-busting strings written into the filepath. (Inspired by
+  asset_fingerprint[http://github.com/eliotsykes/asset_fingerprint].)
+
+== Install
+
+Works with Rails 3. In your Gemfile:
+
+ gem 'cacheable_assets', :require => 'cacheable_assets/railtie'
+
+== Configure
+
+The defaults should Just Work. But, if you're using Sass, you'll want to tweak
+them:
+
+ $ rails g cacheable_assets:initializer
+
+== Background
+
+Developed in response to learning and conversations here:
+
+* http://groups.google.com/group/heroku/browse_thread/thread/607f0dc9a3979e1b
+* http://gist.github.com/472140

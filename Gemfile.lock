@@ -65,7 +65,10 @@ GEM
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
       trollop (~> 1.16.2)
-    haml (3.0.18)
+    haml (3.0.19)
+    haml-rails (0.2)
+      haml (~> 3.0)
+      rails (~> 3.0.0.rc)
     heroku (1.10.5)
       json_pure (>= 1.2.0, < 1.5.0)
       launchy (~> 0.3.2)
@@ -142,7 +145,7 @@ DEPENDENCIES
   capybara
   cucumber-rails
   database_cleaner
-  haml
+  haml-rails
   heroku
   heroku-environment
   machinist (= 2.0.0.beta2)

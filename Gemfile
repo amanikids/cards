@@ -4,7 +4,7 @@ gem 'cacheable_assets',
   :path    => 'vendor/extractions/cacheable_assets',
   :require => 'cacheable_assets/railtie'
 
-gem 'haml'
+gem 'haml-rails'
 gem 'heroku-environment'
 gem 'pg'
 gem 'rails'

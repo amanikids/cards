@@ -39,7 +39,10 @@ module Cards
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    # Use machinist instead of fixtures.
-    config.generators.fixture_replacement = :machinist
+    # Use machinist instead of fixtures; don't generate helper files.
+    config.generators do |g|
+      g.fixture_replacement = :machinist
+      g.helper = false
+    end
   end
 end

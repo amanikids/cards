@@ -10,8 +10,8 @@ gem 'pg',                 '0.9.0'
 gem 'rails',              '3.0.0'
 
 group :development do
-  gem 'autotest',         '4.3.2'
-  gem 'heroku',           '1.10.5'
+  gem 'autotest',         '4.3.2',  :require => false
+  gem 'heroku',           '1.10.5', :require => false
 end
 
 # Include rspec-rails in :development so we get `rake spec`.

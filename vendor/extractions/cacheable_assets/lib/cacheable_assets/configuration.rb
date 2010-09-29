@@ -4,33 +4,29 @@ module CacheableAssets
       'public' => %w( /favicon.ico /images /javascripts /stylesheets )
     }
 
-    attr_reader :static_asset_paths
-
     def initialize
       @static_asset_paths = DEFAULT_STATIC_ASSET_PATHS.dup
     end
 
-    def middleware
-      MiddlewareBuilder.new(@static_asset_paths)
+    def configure(&block)
+      block.call(@static_asset_paths)
     end
 
-    def path_rewriter(cache=nil)
-      PathRewriter.new(
-        Finder.new(@static_asset_paths),
-        Cacher.new(Fingerprinter.new, cache)
-      )
+    def install_asset_path(controller, cache=nil)
+      controller.asset_path = path_rewriter(cache)
+    end
+
+    def install_middleware(stack)
+      stack.use(Middleware, @static_asset_paths)
     end
 
     private
 
-    class MiddlewareBuilder #:nodoc:
-      def initialize(static_asset_paths)
-        @static_asset_paths = static_asset_paths
-      end
-
-      def new(app)
-        Middleware.new(app, @static_asset_paths)
-      end
+    def path_rewriter(cache)
+      PathRewriter.new(
+        Finder.new(@static_asset_paths),
+        Cacher.new(Fingerprinter.new, cache)
+      )
     end
   end
 end

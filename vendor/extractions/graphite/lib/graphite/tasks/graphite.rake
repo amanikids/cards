@@ -9,7 +9,7 @@ namespace :graphite do
     Graphite::Graph.open(:rankdir => 'BT') do |graph|
       ActiveRecord::Base.send(:subclasses).each do |klass|
         klass.reflect_on_all_associations(:belongs_to).each do |association|
-          graph.edge(klass.name, association.name.to_s.classify)
+          graph.edge(klass.name, association.class_name, association.name.to_s.classify)
         end
       end
     end

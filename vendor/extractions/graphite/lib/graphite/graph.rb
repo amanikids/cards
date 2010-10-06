@@ -14,8 +14,8 @@ module Graphite
       @edges   = []
     end
 
-    def edge(from, to)
-      @edges.push([from, to])
+    def edge(from, to, label)
+      @edges.push([from, to, label])
     end
 
     def open
@@ -44,8 +44,12 @@ module Graphite
           dot.puts "  #{key}=#{value};"
         end
 
-        @edges.sort.each do |from, to|
-          dot.puts "  #{from} -> #{to};"
+        @edges.sort.each do |from, to, label|
+          if to == label
+            dot.puts "  #{from} -> #{to};"
+          else
+            dot.puts "  #{from} -> #{to} [label=#{label}];"
+          end
         end
 
         dot.puts "}"

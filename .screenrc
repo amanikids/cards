@@ -1,0 +1,29 @@
+# don't bug me
+startup_message off
+
+# so I can reattach
+sessionname "cards"
+
+# use ` instead of ^A
+escape "``"
+
+# create windows:
+# - run a shell in window 1
+screen -t shell 1
+stuff "git out && git st\012"
+# - run autotest in window 2
+screen -t autotest 2
+stuff "autotest\012"
+# - run a server in window 3
+screen -t server 3
+stuff "rails s -b 127.0.0.1\012"
+
+# arrange windows:
+# - vertically split
+split -v
+# - with autotest on the right
+focus
+select 2
+# - and the shell on the left
+focus
+select 1

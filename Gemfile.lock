@@ -4,6 +4,11 @@ PATH
     cacheable_assets (0.0.0)
       rack-contrib
 
+PATH
+  remote: vendor/extractions/graphite
+  specs:
+    graphite (0.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -145,6 +150,7 @@ DEPENDENCIES
   capybara
   cucumber-rails
   database_cleaner
+  graphite!
   haml-rails
   heroku
   heroku-environment

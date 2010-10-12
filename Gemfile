@@ -3,6 +3,9 @@ source :rubygems
 gem 'cacheable_assets',
   :path    => 'vendor/extractions/cacheable_assets',
   :require => 'cacheable_assets/railtie'
+gem 'graphite',
+  :path    => 'vendor/extractions/graphite',
+  :require => 'graphite/railtie'
 
 gem 'haml-rails'
 gem 'heroku-environment'

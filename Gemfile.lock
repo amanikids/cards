@@ -64,6 +64,7 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    faker (0.3.1)
     ffi (0.6.3)
       rake (>= 0.8.7)
     gherkin (2.2.4)
@@ -134,6 +135,7 @@ GEM
       ffi (>= 0.6.1)
       json_pure
       rubyzip
+    shoulda (2.11.3)
     term-ansicolor (1.0.5)
     thor (0.14.1)
     treetop (1.4.8)
@@ -150,6 +152,7 @@ DEPENDENCIES
   capybara
   cucumber-rails
   database_cleaner
+  faker
   graphite!
   haml-rails
   heroku
@@ -158,3 +161,4 @@ DEPENDENCIES
   pg
   rails
   rspec-rails
+  shoulda

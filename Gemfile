@@ -26,5 +26,7 @@ group :test do
   gem 'capybara'
   gem 'cucumber-rails'
   gem 'database_cleaner'
+  gem 'faker'
   gem 'machinist', '2.0.0.beta2'
+  gem 'shoulda'
 end

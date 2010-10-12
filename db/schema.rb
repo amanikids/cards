@@ -10,6 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20101012101254) do
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                   :null => false
+    t.string   "password_hash",           :null => false
+    t.string   "password_salt",           :null => false
+    t.string   "password_recovery_token", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["password_recovery_token"], :name => "index_users_on_password_recovery_token", :unique => true
 
 end

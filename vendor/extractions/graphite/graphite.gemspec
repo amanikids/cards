@@ -1,44 +1,31 @@
-$:.unshift File.expand_path('../lib', __FILE__)
+# -*- encoding: utf-8 -*-
+$:.push File.expand_path('../lib', __FILE__)
 require 'graphite/version'
 
-# Feel free to change whatever you like! This file is yours now.
-Gem::Specification.new do |spec|
-  spec.name    = 'graphite'
-  spec.version = Graphite::VERSION
+Gem::Specification.new do |s|
+  s.name        = 'graphite'
+  s.version     = Graphite::VERSION
+  s.platform    = Gem::Platform::RUBY
+  s.authors     = ['Matthew Todd']
+  s.email       = ['matthew.todd@gmail.com']
+  s.homepage    = 'http://github.com/matthewtodd/graphite'
+  s.summary     = 'Displays a simple ERD for your Rails 3 application.'
+  s.description = 'Reasonably well-behaved?'
 
-  spec.summary = 'Graphite is one of my favorite things!'
-  spec.description = <<-END.gsub(/^ */, '')
-    #{spec.summary}
+  s.rubyforge_project = 'graphite'
 
-    Further description here.
-  END
+  s.requirements = ['dot']
+  s.add_development_dependency 'shoe'
 
-  spec.author = 'Matthew Todd'
-  spec.email  = 'matthew.todd@gmail.com'
-  spec.homepage = 'http://github.com/matthewtodd/graphite'
+  s.files            = Dir['**/*.rdoc', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
+  s.test_files       = Dir['test/**/*_test.rb']
+  s.extra_rdoc_files = Dir['**/*.rdoc']
+  s.require_paths    = ['lib']
 
-  # You may find these helpful:
-  # spec.requirements = ['git'] # If your library shells out to git
-  # spec.required_rubygems_version = ">= 1.3.6" # If you depend on prerelease gems
-  # spec.add_runtime_dependency 'nokogiri' # Or what have you
-  # spec.add_development_dependency 'cucumber'
-  # spec.add_development_dependency 'redgreen'
-  # spec.add_development_dependency 'ronn'
-  spec.add_development_dependency 'shoe'
-
-  # The kooky &File.method(:basename) trick keeps us from accidentally
-  # shadowing a variable named "file" in the context that evaluates this
-  # gemspec. I actually ran into this problem with Bundler!
-  spec.files            = Dir['**/*.rdoc', 'bin/*', 'data/**/*', 'ext/**/*.{rb,c}', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
-  spec.executables      = Dir['bin/*'].map &File.method(:basename)
-  spec.extensions       = Dir['ext/**/extconf.rb']
-  spec.extra_rdoc_files = Dir['**/*.rdoc', 'ext/**/*.c']
-  spec.test_files       = Dir['test/**/*_test.rb']
-
-  spec.rdoc_options = %W(
+  s.rdoc_options = %W(
     --main README.rdoc
-    --title #{spec.full_name}
+    --title #{s.full_name}
     --inline-source
-    --webcvs http://github.com/matthewtodd/graphite/blob/v#{spec.version}/
+    --webcvs http://github.com/matthewtodd/graphite/blob/v#{s.version}/
   )
 end

@@ -1,39 +1,32 @@
-$:.unshift File.expand_path('../lib', __FILE__)
+# -*- encoding: utf-8 -*-
+$:.push File.expand_path('../lib', __FILE__)
 require 'cacheable_assets/version'
 
-# Feel free to change whatever you like! This file is yours now.
-Gem::Specification.new do |spec|
-  spec.name    = 'cacheable_assets'
-  spec.version = CacheableAssets::VERSION
+Gem::Specification.new do |s|
+  s.name        = 'cacheable_assets'
+  s.version     = CacheableAssets::VERSION
+  s.platform    = Gem::Platform::RUBY
+  s.authors     = ['Matthew Todd']
+  s.email       = ['matthew.todd@gmail.com']
+  s.homepage    = 'http://github.com/matthewtodd/cacheable_assets'
+  s.summary     = "Drop-in improvements for Rails 3's static asset serving."
+  s.description = "Adds Rack::StaticCache middleware and writes MD5 fingerprints into asset ids."
 
-  spec.summary = 'CacheableAssets is one of my favorite things!'
-  spec.description = <<-END.gsub(/^ */, '')
-    #{spec.summary}
+  s.rubyforge_project = 'cacheable_assets'
 
-    Further description here.
-  END
+  s.add_runtime_dependency 'rack-contrib'
+  s.add_development_dependency 'shoe'
+  s.add_development_dependency 'rack-test'
 
-  spec.author = 'Matthew Todd'
-  spec.email  = 'matthew.todd@gmail.com'
-  spec.homepage = 'http://github.com/matthewtodd/cacheable_assets'
+  s.files            = Dir['**/*.rdoc', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
+  s.test_files       = Dir['test/**/*_test.rb']
+  s.extra_rdoc_files = Dir['**/*.rdoc']
+  s.require_paths    = ['lib']
 
-  spec.add_runtime_dependency 'rack-contrib'
-  spec.add_development_dependency 'shoe'
-  spec.add_development_dependency 'rack-test'
-
-  # The kooky &File.method(:basename) trick keeps us from accidentally
-  # shadowing a variable named "file" in the context that evaluates this
-  # gemspec. I actually ran into this problem with Bundler!
-  spec.files            = Dir['**/*.rdoc', 'bin/*', 'data/**/*', 'ext/**/*.{rb,c}', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
-  spec.executables      = Dir['bin/*'].map &File.method(:basename)
-  spec.extensions       = Dir['ext/**/extconf.rb']
-  spec.extra_rdoc_files = Dir['**/*.rdoc', 'ext/**/*.c']
-  spec.test_files       = Dir['test/**/*_test.rb']
-
-  spec.rdoc_options = %W(
+  s.rdoc_options = %W(
     --main README.rdoc
-    --title #{spec.full_name}
+    --title #{s.full_name}
     --inline-source
-    --webcvs http://github.com/matthewtodd/cacheable_assets/blob/v#{spec.version}/
+    --webcvs http://github.com/matthewtodd/cacheable_assets/blob/v#{s.version}/
   )
 end

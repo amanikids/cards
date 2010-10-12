@@ -7,19 +7,14 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    configuration (1.1.0)
-    launchy (0.3.7)
-      configuration (>= 0.0.5)
-      rake (>= 0.8.1)
     rack (1.2.1)
     rack-contrib (1.0.1)
       rack (>= 0.9.1)
     rack-test (0.5.5)
       rack (>= 1.0)
     rake (0.8.7)
-    shoe (0.6.2)
-      launchy
-      rake
+    shoe (0.7.0)
+      rake (~> 0.8.7)
 
 PLATFORMS
   ruby

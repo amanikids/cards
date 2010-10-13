@@ -62,6 +62,12 @@ describe UserSession do
     user_session.should have(1).error_on(:base)
   end
 
+  it 'clears the password for a failed authentication' do
+    User.should_receive(:authenticate).and_return(nil)
+    user_session.save
+    user_session.password.should be_nil
+  end
+
   it 'returns truthy for a successful authentication' do
     User.should_receive(:authenticate).and_return(user)
     user_session.save.should be_true

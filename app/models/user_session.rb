@@ -1,6 +1,7 @@
 class UserSession
   include ActiveModel::MassAssignmentSecurity
   include ActiveModel::Validations
+  include ActiveModel::Validations::Callbacks
 
   attr_accessor   :email, :password, :session, :user
   attr_accessible :email, :password
@@ -16,6 +17,8 @@ class UserSession
   validates :email,    :presence  => true, :unless => :user
   validates :password, :presence  => true, :unless => :user
   validates :user,     :authentic => true, :unless => :user
+
+  after_validation :clear_password
 
   class << self
     def find(session)
@@ -66,5 +69,11 @@ class UserSession
 
   def to_param
     nil
+  end
+
+  private
+
+  def clear_password
+    self.password = nil
   end
 end

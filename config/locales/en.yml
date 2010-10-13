@@ -9,7 +9,7 @@ en:
   admin:
     user_sessions:
       new:
-        title: Sign in
+        title: "Welcome! Please sign in."
   helpers:
     submit:
       user_session:
@@ -24,4 +24,4 @@ en:
         user_session:
           attributes:
             base:
-              authentication_failed: Authentication failed
+              authentication_failed: "Oops, maybe try that again. I couldn't find anyone with that email address and password"

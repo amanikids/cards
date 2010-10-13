@@ -2,4 +2,26 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  layouts:
+    admin:
+      user_sessions:
+        title: Sign in
+  admin:
+    user_sessions:
+      new:
+        title: Sign in
+  helpers:
+    submit:
+      user_session:
+        create: Sign in
+  activemodel:
+    attributes:
+      user_session:
+        email: Email address
+        password: Password
+    errors:
+      models:
+        user_session:
+          attributes:
+            base:
+              authentication_failed: Authentication failed

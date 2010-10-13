@@ -6,4 +6,3 @@ Given /^I have signed in as an administrator$/ do
   And   %{I fill in "Password" with "#{administrator.password}"}
   And   %{I press "Sign in"}
 end
-

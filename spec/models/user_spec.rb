@@ -7,39 +7,43 @@ describe User do
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email).case_insensitive }
 
-  it 'authenticates by email and password' do
-    User.authenticate(user.email, password).should == user
+  context 'authenticate' do
+    it 'matches email and password' do
+      User.authenticate(user.email, password).should == user
+    end
+
+    it 'ignores email capitalization' do
+      User.authenticate(user.email.swapcase, password).should == user
+    end
+
+    it 'fails on bad emails' do
+      User.authenticate('different@example.com', password).should be_nil
+    end
+
+    it 'fails on bad passwords' do
+      User.authenticate(user.email, 'different').should be_nil
+    end
   end
 
-  it 'authenticates by email and password, succeeding on capitalization differences' do
-    User.authenticate(user.email.swapcase, password).should == user
-  end
+  context 'save' do
+    it 'changes the password salt when the password changes' do
+      lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_salt)
+    end
 
-  it 'authenticates by email and password, failing on bad emails' do
-    User.authenticate('different@example.com', password).should be_nil
-  end
+    it 'changes the password hash when the password changes' do
+      lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_hash)
+    end
 
-  it 'authenticates by email and password, failing on bad passwords' do
-    User.authenticate(user.email, 'different').should be_nil
-  end
+    it 'does not usually change the password salt' do
+      lambda { user.save }.should_not change(user, :password_salt)
+    end
 
-  it 'does not change the password salt on every save' do
-    lambda { user.save }.should_not change(user, :password_salt)
-  end
+    it 'does not usually change the password hash' do
+      lambda { user.save }.should_not change(user, :password_hash)
+    end
 
-  it 'changes the password salt when the password changes' do
-    lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_salt)
-  end
-
-  it 'does not change the password hash on every save' do
-    lambda { user.save }.should_not change(user, :password_hash)
-  end
-
-  it 'changes the password hash when the password changes' do
-    lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_hash)
-  end
-
-  it 'changes the password recovery token on every save' do
-    lambda { user.save }.should change(user, :password_recovery_token)
+    it 'changes the password recovery token' do
+      lambda { user.save }.should change(user, :password_recovery_token)
+    end
   end
 end

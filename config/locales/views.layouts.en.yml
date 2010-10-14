@@ -5,7 +5,7 @@ en:
         title: Cards
         nav:
           identity:
-            signed_in: "Signed in as %{email}."
+            signed_in_as: "Signed in as"
             sign_out_prompt: "Not you?"
             sign_out: "Sign out."
           products: Products

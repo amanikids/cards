@@ -7,8 +7,10 @@
     = stylesheet_link_tag 'screen'
   %body
     %nav
-      .identity
-        = t('.nav.identity.signed_in', :email => current_user.email)
+      .session
+        = t('.nav.identity.signed_in_as')
+        %span.identity= current_user.email
+        &mdash;
         = t('.nav.identity.sign_out_prompt')
         = link_to t('.nav.identity.sign_out'), admin_destroy_user_session_path
       %ul

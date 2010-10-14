@@ -1,0 +1,8 @@
+en:
+  activemodel:
+    errors:
+      models:
+        user_session:
+          attributes:
+            base:
+              authentication_failed: "Oops, maybe try that again. I couldn't find anyone with that email address and password"

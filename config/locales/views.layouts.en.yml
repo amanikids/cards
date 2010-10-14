@@ -1,0 +1,13 @@
+en:
+  layouts:
+    admin:
+      application:
+        title: Cards
+        nav:
+          identity:
+            signed_in: "Signed in as %{email}."
+            sign_out_prompt: "Not you?"
+            sign_out: "Sign out."
+          products: Products
+      user_sessions:
+        title: Sign in

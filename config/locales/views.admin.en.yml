@@ -1,0 +1,9 @@
+en:
+  admin:
+    products:
+      index:
+        title: Products
+        new: Add a new Product
+    user_sessions:
+      new:
+        title: "Welcome! Please sign in."

@@ -1,4 +1,6 @@
-* Distributor sends cards to Seller.
-* Seller records & pays for an in-person order from their own inventory.
-* Seller records & pays for an order from the website.
-* Distributors print & mail gift cards.
+* Sell Products
+* Sell SKUs
+* Sell Packagings
+* Ship Orders
+* Track Inventory
+* Resell

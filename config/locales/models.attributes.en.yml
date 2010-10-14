@@ -1,6 +1,12 @@
+# TODO mix-in an rspec example group to test that there's a translation for
+# every accessible attribute. (This would make future translation of the site
+# easier. Spanish and German, perhaps?)
 en:
   activemodel:
     attributes:
+      product:
+        name: Name
+        price: Price
       user_session:
         email: Email address
         password: Password

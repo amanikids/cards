@@ -6,7 +6,7 @@ Feature: Administrators manage products
   Scenario: Creating a product
     Given I have signed in as an administrator
     When I follow "Products"
-    And I follow "Add a new Product"
+    And I follow "Create a new Product"
     And I fill in "Name" with "Poinsettia Card"
     And I fill in "Price" with "10"
     And I press "Create Product"

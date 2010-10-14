@@ -3,7 +3,9 @@ en:
     products:
       index:
         title: Products
-        new: Add a new Product
+        new: Create a new Product
+      new:
+        title: Create a new Product
     user_sessions:
       new:
         title: "Welcome! Please sign in."

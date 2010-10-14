@@ -6,3 +6,8 @@ Given /^I have signed in as an administrator$/ do
   And   %{I fill in "Password" with "secret"}
   And   %{I press "Sign in"}
 end
+
+Then /^I should see the following products:$/ do |expected|
+  expected.diff! tableish('table#products tbody tr', 'td')
+end
+

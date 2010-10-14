@@ -1,0 +1,15 @@
+%h1= t('.title')
+
+= form_for [:admin, @product] do |form|
+  - if @product.errors.present?
+    .errors
+      = @product.errors.full_messages.to_sentence.concat('.')
+  .fields
+    .field
+      = form.label :name
+      = form.text_field :name, :autofocus => true
+    .field
+      = form.label :price
+      = form.text_field :price
+  .buttons
+    = form.submit

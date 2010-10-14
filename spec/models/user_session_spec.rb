@@ -6,6 +6,9 @@ describe UserSession do
   let(:user)         { mock_model(User) }
   let(:session)      { { :user_id => 42 } }
 
+  it { should allow_mass_assignment_of(:email) }
+  it { should allow_mass_assignment_of(:password) }
+
   it 'finds users by session ids' do
     User.should_receive(:find).with(42).and_return(user)
     UserSession.find(session).user.should == user

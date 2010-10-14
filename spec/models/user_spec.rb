@@ -25,6 +25,12 @@ describe User do
     end
   end
 
+  context 'create' do
+    it 'randomizes the password if none is given' do
+      User.create!(:email => 'bob@example.com').password_hash.should_not be_nil
+    end
+  end
+
   context 'save' do
     it 'changes the password salt when the password changes' do
       lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_salt)
@@ -32,6 +38,14 @@ describe User do
 
     it 'changes the password hash when the password changes' do
       lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_hash)
+    end
+
+    it 'ignores nil passwords' do
+      lambda { user.update_attributes(:password => nil) }.should_not change(user, :password_hash)
+    end
+
+    it 'ignores blank passwords' do
+      lambda { user.update_attributes(:password => '') }.should_not change(user, :password_hash)
     end
 
     it 'does not usually change the password salt' do

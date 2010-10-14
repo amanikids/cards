@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
     :presence   => true,
     :uniqueness => true
 
-  before_save :randomize_password_recovery_token
+  before_create :randomize_password, :unless => :password_hash?
+  before_save   :randomize_password_recovery_token
 
   class << self
     def authenticate(email, password)
@@ -20,6 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def password=(password)
+    return if password.blank?
     self.password_salt = ActiveSupport::SecureRandom.hex(64)
     self.password_hash = hash_password(password)
   end
@@ -32,6 +34,10 @@ class User < ActiveRecord::Base
 
   def normalize_email
     self.email = self.email.to_s.downcase
+  end
+
+  def randomize_password
+    self.password = ActiveSupport::SecureRandom.hex(64)
   end
 
   def randomize_password_recovery_token

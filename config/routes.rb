@@ -15,5 +15,9 @@ Cards::Application.routes.draw do
 
   resources :products, :only => :index
 
+  resource :cart, :only => :show do
+    resources :items, :only => :create
+  end
+
   root :to => redirect('/products', :status => 302)
 end

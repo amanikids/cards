@@ -1,6 +1,7 @@
 %w( kathleen matthew ).each do |name|
-  User.create!(
-    :email    => "#{name}@amanikids.org",
-    :password => Rails.env.development? ? 'secret' : nil
-  )
+  User.find_or_create_by_email "#{name}@amanikids.org"
+end
+
+if Rails.env.development?
+  require Rails.root.join('db', 'seeds', 'development')
 end

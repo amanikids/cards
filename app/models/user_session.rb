@@ -28,15 +28,9 @@ class UserSession
     end
   end
 
-  def initialize(session=nil, user_or_attributes={})
-    self.session = session
-
-    case user_or_attributes
-    when User
-      self.user = user_or_attributes
-    else
-      self.attributes = user_or_attributes
-    end
+  def initialize(session=nil, credentials={})
+    self.session     = session
+    self.credentials = credentials
   end
 
   def attributes=(attributes)
@@ -75,5 +69,14 @@ class UserSession
 
   def clear_password
     self.password = nil
+  end
+
+  def credentials=(credentials)
+    case credentials
+    when User
+      self.user = credentials
+    else
+      self.attributes = credentials
+    end
   end
 end

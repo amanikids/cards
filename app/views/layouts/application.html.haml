@@ -4,5 +4,6 @@
     %meta{:charset => Cards::Application.config.encoding}
     %title= t('.title')
     = csrf_meta_tag
+    = stylesheet_link_tag 'screen'
   %body
     = yield

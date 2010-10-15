@@ -9,5 +9,9 @@ en:
             sign_out_prompt: "Not you?"
             sign_out: "Sign out."
           products: Products
+
       user_sessions:
         title: Sign in
+
+    application:
+      title: "Amani Children's Home"

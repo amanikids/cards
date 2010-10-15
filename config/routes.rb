@@ -12,4 +12,8 @@ Cards::Application.routes.draw do
 
     root :to => redirect('/admin/products', :status => 302)
   end
+
+  resources :products, :only => :index
+
+  root :to => redirect('/products', :status => 302)
 end

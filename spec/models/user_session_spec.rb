@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe UserSession do
+  it_behaves_like 'an ActiveModel'
+
   let(:user_session) { UserSession.new(session, credentials) }
   let(:credentials)  { { :email => 'bob@example.com', :password => 'secret' } }
   let(:user)         { mock_model(User) }

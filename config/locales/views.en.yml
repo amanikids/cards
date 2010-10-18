@@ -1,4 +1,8 @@
 en:
+  carts:
+    cart:
+      title: Your Cart
+
   products:
     index:
       title: Welcome!

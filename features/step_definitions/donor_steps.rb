@@ -8,7 +8,11 @@ When /^I make the payment$/ do
   pending # express the regexp above with the code you wish you had
 end
 
-Then /^I should see the following order:$/ do |expected|
+Then /^I see the following cart:$/ do |expected|
+  expected.diff! tableish('table#cart tbody tr', 'td')
+end
+
+Then /^I see the following order:$/ do |expected|
   expected.diff! tableish('table#order tbody tr', 'td')
 end
 

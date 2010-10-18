@@ -10,9 +10,12 @@ Feature: Donors buy products
       | Poinsettia | 10    |
     And I am on the home page
     When I press "Add to Cart"
+    And I see the following cart:
+      | Poinsettia | 1     | 10 |
+      |            | Total | 10 |
     And I press "Checkout"
     And I press "Make Payment"
     And I make the payment
-    Then I should see the following order:
+    Then I see the following order:
       | Poinsettia | 1     | 10 |
       |            | Total | 10 |

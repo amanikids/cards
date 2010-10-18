@@ -13,11 +13,11 @@ Cards::Application.routes.draw do
     root :to => redirect('/admin/products', :status => 302)
   end
 
-  resources :products, :only => :index
+  resources :products,
+    :only => :index
 
-  resource :cart, :only => :show do
-    resources :items, :only => :create
-  end
+  resources :items,
+    :only => :create
 
   root :to => redirect('/products', :status => 302)
 end

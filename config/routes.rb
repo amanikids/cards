@@ -3,9 +3,9 @@ Cards::Application.routes.draw do
     controller :user_sessions do
       # TODO learn how to make these custom routes be named
       # 'new_admin_user_session' instead of 'admin_new_user_session'
-      get  '/sign-in'  => :new,     :as => 'new_user_session'
-      post '/sign-in'  => :create,  :as => 'user_sessions'
-      get  '/sign-out' => :destroy, :as => 'destroy_user_session'
+      get  '/sign_in'  => :new,     :as => 'new_user_session'
+      post '/sign_in'  => :create,  :as => 'user_sessions'
+      get  '/sign_out' => :destroy, :as => 'destroy_user_session'
     end
 
     resources :products

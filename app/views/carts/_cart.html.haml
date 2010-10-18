@@ -1,5 +1,6 @@
 %section[cart]
   %h1= t('.title')
+
   %table#cart
     %tbody
       - cart.items.each do |item|
@@ -8,3 +9,4 @@
           %td= item.quantity
           %td= item.price
 
+  %p= link_to t('.checkout'), checkout_root_path

@@ -19,5 +19,9 @@ Cards::Application.routes.draw do
   resources :items,
     :only => :create
 
+  namespace :checkout do
+    root :to => redirect('/checkout/billing', :status => 302)
+  end
+
   root :to => redirect('/products', :status => 302)
 end

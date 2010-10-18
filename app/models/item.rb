@@ -2,8 +2,12 @@ class Item < ActiveRecord::Base
   belongs_to :cart
   belongs_to :product
 
-  attr_readonly :cart_id, :product_id, :unit_price
-  attr_accessible :product_id, :quantity
+  attr_accessible :product_id
+  attr_accessible :quantity
+
+  attr_readonly :cart_id
+  attr_readonly :product_id
+  attr_readonly :unit_price
 
   validates :quantity,
     :numericality => {
@@ -11,6 +15,13 @@ class Item < ActiveRecord::Base
       :only_integer => true }
 
   before_create :populate_unit_price
+
+  delegate :name,
+    :to => :product
+
+  def price
+    quantity * unit_price
+  end
 
   private
 

@@ -1,2 +1,10 @@
 %section[cart]
   %h1= t('.title')
+  %table#cart
+    %tbody
+      - cart.items.each do |item|
+        %tr
+          %td= item.name
+          %td= item.quantity
+          %td= item.price
+

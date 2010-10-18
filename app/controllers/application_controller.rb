@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_cart
-    @current_cart ||= Cart.find(session) || Cart.new(session)
+    @current_cart ||= Cart.find(session[:cart_id])
   end
 
   helper_method :current_cart

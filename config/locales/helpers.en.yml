@@ -1,8 +1,8 @@
 en:
   helpers:
     submit:
-      checkout:
-        create: Check out with PayPal
+      checkout_pay_pal:
+          create: Check out with PayPal
       item:
         create: Add to Cart
       user_session:

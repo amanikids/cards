@@ -8,7 +8,8 @@ Cards::Application.routes.draw do
       get  '/sign_out' => :destroy, :as => 'destroy_user_session'
     end
 
-    resources :products
+    resources :products,
+      :only => [:index, :new, :create]
 
     root :to => redirect('/admin/products', :status => 302)
   end
@@ -20,7 +21,7 @@ Cards::Application.routes.draw do
     :only => :create
 
   namespace :checkout do
-    root :to => redirect('/checkout/billing', :status => 302)
+    resource :pay_pal, :only => :create
   end
 
   root :to => redirect('/products', :status => 302)

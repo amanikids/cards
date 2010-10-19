@@ -9,7 +9,6 @@
           %td= item.quantity
           %td= item.price
 
-  = form_tag checkout_root_path do
+  = form_for Checkout::PayPal.new(cart), :url => checkout_pay_pal_path do |form|
     .buttons
-      = image_submit_tag 'https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif',
-        :alt => t('helpers.submit.checkout.create')
+      = form.submit

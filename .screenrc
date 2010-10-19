@@ -30,9 +30,8 @@ stuff "cd log\012"
 # arrange windows:
 # - vertically split
 split -v
-# - with autotest on the right
-focus
+# - with autotest on the left
 select 2
-# - and the shell on the left
+# - and the shell on the right
 focus
 select 1

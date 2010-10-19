@@ -11,6 +11,7 @@ gem 'haml-rails'
 gem 'heroku-environment'
 gem 'pg'
 gem 'rails'
+gem 'rest-client', :require => 'restclient'
 
 group :development do
   gem 'autotest', :require => false
@@ -29,4 +30,5 @@ group :test do
   gem 'faker'
   gem 'machinist', '2.0.0.beta2'
   gem 'shoulda'
+  gem 'webmock', :require => 'webmock/rspec'
 end

@@ -9,6 +9,6 @@
           %td= item.quantity
           %td= item.price
 
-  = form_for Checkout::PayPal.new(cart), :url => checkout_pay_pal_path do |form|
+  = form_tag checkout_paypal_path do
     .buttons
-      = form.submit
+      = submit_tag t('helpers.submit.checkout_paypal.create')

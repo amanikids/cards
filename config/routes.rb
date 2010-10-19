@@ -21,7 +21,9 @@ Cards::Application.routes.draw do
     :only => :create
 
   namespace :checkout do
-    resource :pay_pal, :only => :create
+    controller :pay_pal do
+      post '/paypal' => :create, :as => 'paypal'
+    end
   end
 
   root :to => redirect('/products', :status => 302)

@@ -9,4 +9,7 @@
           %td= item.quantity
           %td= item.price
 
-  %p= link_to t('.checkout'), checkout_root_path
+  = form_tag checkout_root_path do
+    .buttons
+      = image_submit_tag 'https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif',
+        :alt => t('helpers.submit.checkout.create')

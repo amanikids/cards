@@ -12,8 +12,7 @@ Feature: Donors buy products
     When I press "Add to Cart"
     And I see the following cart:
       | Poinsettia | 1 | 10 |
-    And I follow "Proceed to Checkout"
-    And I press "Make Payment"
+    And I press "Check out with PayPal"
     And I make the payment
     Then I see the following order:
       | Poinsettia | 1 | 10 |

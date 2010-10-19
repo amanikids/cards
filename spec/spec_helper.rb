@@ -26,7 +26,4 @@ RSpec.configure do |config|
   config.before :each do
     Machinist.reset_before_test
   end
-
-  # Make WebMock helpers available.
-  config.include(WebMock::API)
 end

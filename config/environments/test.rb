@@ -32,4 +32,9 @@ Cards::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Don't really buy stuff. :-)
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+  end
 end

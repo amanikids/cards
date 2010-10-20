@@ -22,9 +22,10 @@ Cards::Application.routes.draw do
 
   namespace :checkout do
     controller :pay_pal do
-      post '/paypal'          => :create, :as => 'paypal'
-      get  '/paypal/callback' => :callback
-      get  '/paypal/cancel'   => :cancel
+      post '/paypal'         => :create, :as => 'paypal'
+      get  '/paypal/cancel'  => :cancel
+      get  '/paypal/review'  => :review
+      post '/paypal/confirm' => :confirm
     end
   end
 

@@ -1,66 +1,42 @@
 class Checkout::PayPalController < ApplicationController
+  before_filter :build_gateway
+
   def create
-    set_up_purchase(current_cart.total) do |result|
-      if result.success?
-        redirect_to gateway.redirect_url_for(result.token)
-      else
-        # FIXME set a proper flash notice
-        redirect_to root_path
-      end
+    @result = @gateway.setup_purchase(
+      current_cart.total,
+      :return_url           => url_for(:action => 'callback'),
+      :cancel_return_url    => url_for(:action => 'cancel'),
+      :allow_guest_checkout => true
+    )
+
+    if @result.success?
+      redirect_to @gateway.redirect_url_for(@result.token)
+    else
+      redirect_to root_path, :alert => t('flash.alert.paypal.error')
     end
   end
 
   def callback
-    look_up_details(params[:token]) do |result|
-      if result.success?
-        # TODO save address, save other things?
-        # TODO redirect to review
-        render :text => result.inspect
-      else
-        redirect_to root_path, :error => 'FIXME'
-      end
+    @result = @gateway.details_for(params[:token])
+
+    if @result.success?
+      render :text => @result.inspect
+    else
+      redirect_to root_path, :alert => t('flash.alert.paypal.error')
     end
   end
 
   def cancel
-    redirect_to root_path, :error => 'FIXME'
-  end
-
-  def review
-
-  end
-
-  def confirm
-    purchase(current_cart.total) do |result|
-      if result.success?
-        # TODO figure out what to do
-      else
-        redirect_to root_path, :error => 'FIXME'
-      end
-    end
+    redirect_to root_path, :notice => t('flash.notice.paypal.cancel')
   end
 
   private
 
-  # TODO will need to use different credentials for different countries
-  # TODO may need to extend PaypalExpressGateway for different countries
-  def gateway
-    @gateway ||= ActiveMerchant::Billing::PaypalExpressGateway.new(
+  def build_gateway
+    @gateway = ActiveMerchant::Billing::PaypalExpressGateway.new(
       :login     => ENV['PAYPAL_LOGIN'],
       :password  => ENV['PAYPAL_PASSWORD'],
       :signature => ENV['PAYPAL_SIGNATURE']
     )
-  end
-
-  def set_up_purchase(total, &block)
-    gateway.setup_purchase(total,
-      :return_url           => url_for(:action => 'callback'),
-      :cancel_return_url    => url_for(:action => 'cancel'),
-      :allow_guest_checkout => true
-    ).tap(&block)
-  end
-
-  def look_up_details(token, &block)
-    gateway.details_for(token).tap(&block)
   end
 end

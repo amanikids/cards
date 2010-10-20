@@ -19,7 +19,7 @@ class ShamPayPal < Sinatra::Base
 
   # Web UI Methods ----------------------------------------------------
   def _express_checkout(params)
-    redirect @@xml_request['ReturnURL']
+    redirect @@xml_request['ReturnURL'] + '?token=42&PayerID=1234567890'
   end
 
   # API Methods -------------------------------------------------------

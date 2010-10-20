@@ -8,11 +8,10 @@ Feature: Donors buy products
     Given these products are for sale:
       | name       | price |
       | Poinsettia | 10    |
+    And I will be using PayPal Express Checkout
     And I am on the home page
     When I press "Add to Cart"
-    And I see the following cart:
-      | Poinsettia | 1 | 10 |
     And I press "Check out with PayPal"
-    And I make the payment
+    And I press "Confirm my Order"
     Then I see the following order:
       | Poinsettia | 1 | 10 |

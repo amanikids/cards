@@ -16,6 +16,10 @@ class Store < ActiveRecord::Base
   validates :currency,
     :presence => true
 
+  def products
+    Product.all
+  end
+
   def to_param
     slug
   end

@@ -3,6 +3,10 @@ require 'spec_helper'
 describe Store do
   let(:store) { Store.make! }
 
+  context 'associations' do
+    it { pending; should have_many(:products) }
+  end
+
   context 'attributes' do
     it { should allow_mass_assignment_of(:name) }
     it { should allow_mass_assignment_of(:slug) }

@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
     current_cart.save!
     session[:cart_id] = current_cart.id
   end
+
+  def forget_current_cart
+    session.delete(:cart_id)
+  end
 end

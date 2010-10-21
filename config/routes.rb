@@ -14,9 +14,6 @@ Cards::Application.routes.draw do
     root :to => redirect('/admin/products', :status => 302)
   end
 
-  resources :products,
-    :only => :index
-
   resources :items,
     :only => :create
 
@@ -32,5 +29,5 @@ Cards::Application.routes.draw do
   resources :orders,
     :only => :show
 
-  root :to => redirect('/products', :status => 302)
+  root :to => 'products#index'
 end

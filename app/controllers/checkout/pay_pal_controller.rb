@@ -1,6 +1,6 @@
 class Checkout::PayPalController < ApplicationController
   before_filter :build_gateway
-  before_filter :store_params_in_session, :only => :review
+  before_filter :store_paypal_params_in_session, :only => :review
 
   def create
     @result = @gateway.setup_purchase(
@@ -13,46 +13,45 @@ class Checkout::PayPalController < ApplicationController
     if @result.success?
       redirect_to @gateway.redirect_url_for(@result.token)
     else
-      redirect_to root_path, :alert => t('flash.alert.paypal.error')
+      redirect_to root_path,
+        :alert => t('flash.alert.paypal.error', :message => @result.message)
     end
   end
 
   def cancel
-    redirect_to root_path, :notice => t('flash.notice.paypal.cancel')
+    redirect_to root_path,
+      :notice => t('flash.notice.paypal.cancel')
   end
 
   def review
-    @result = @gateway.details_for(session[:paypal_token])
+    @result = @gateway.details_for(session[:paypal][:token])
 
     if @result.success?
       @order = Order.new
       @order.cart = current_cart
     else
-      redirect_to root_path, :alert => t('flash.alert.paypal.error')
+      redirect_to root_path,
+        :alert => t('flash.alert.paypal.error', :message => @result.message)
     end
   end
 
   def confirm
-    @result = @gateway.purchase(
-      current_cart.total,
-      :payer_id => session[:paypal_payer_id],
-      :token    => session[:paypal_token]
-    )
+    @result = @gateway.purchase(current_cart.total, session[:paypal])
 
     if @result.success?
       @order = Order.new
       @order.cart = current_cart
       @order.build_payment.tap do |payment|
-        payment.details = PayPalPaymentDetails.new(
-          :payer_id => session[:paypal_payer_id],
-          :token    => session[:paypal_token]
-        )
+        payment.details = PayPalPaymentDetails.new(session[:paypal])
       end
       @order.save!
-      session.clear
-      redirect_to @order
+      forget_current_cart
+      forget_paypal_params
+      redirect_to @order,
+        :notice => t('flash.notice.order.create')
     else
-      redirect_to root_path, :alert => t('flash.alert.paypal.error')
+      redirect_to root_path,
+        :alert => t('flash.alert.paypal.error', :message => @result.message)
     end
   end
 
@@ -66,11 +65,17 @@ class Checkout::PayPalController < ApplicationController
     )
   end
 
-  def store_params_in_session
+  def store_paypal_params_in_session
     if params[:token] && params[:PayerID]
-      session[:paypal_payer_id] = params[:PayerID]
-      session[:paypal_token]    = params[:token]
+      session[:paypal] = {
+        :token    => params[:token],
+        :payer_id => params[:PayerID]
+      }
       redirect_to :action => 'review'
     end
+  end
+
+  def forget_paypal_params
+    session.delete(:paypal)
   end
 end

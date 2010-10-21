@@ -1,0 +1,12 @@
+en:
+  flash:
+    alert:
+      paypal:
+        error: "Sorry, we had trouble communicating with PayPal: %{message} Perhaps you could try again?"
+
+    notice:
+      order:
+        create: "Thank you for your order!"
+
+      paypal:
+        cancel: "Checkout canceled."

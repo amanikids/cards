@@ -6,6 +6,7 @@ en:
   checkout:
     pay_pal:
       review:
+        title: Confirm your Order
         submit: Confirm your Order
 
   orders:

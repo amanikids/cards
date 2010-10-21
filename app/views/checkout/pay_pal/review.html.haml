@@ -1,3 +1,7 @@
+%h1= t('.title')
+
+= render('carts/cart', :cart => @order.cart)
+
 = form_tag checkout_paypal_path, :method => :put do
   .buttons
     = submit_tag t('.submit')

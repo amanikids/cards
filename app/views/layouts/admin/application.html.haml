@@ -6,6 +6,7 @@
     = csrf_meta_tag
     = stylesheet_link_tag 'screen'
   %body
+    = render('layouts/flash', :flash => flash) if flash.present?
     %nav
       .session
         = t('.nav.identity.signed_in_as')

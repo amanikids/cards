@@ -1,4 +1,4 @@
-class PayPalAccount < ActiveRecord::Base
+class PaypalAccount < ActiveRecord::Base
   attr_accessible :login
   attr_accessible :password
   attr_accessible :signature

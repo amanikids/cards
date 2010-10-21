@@ -1,4 +1,4 @@
-class Checkout::PayPalController < ApplicationController
+class Checkout::PaypalController < ApplicationController
   before_filter :load_paypal_account
   before_filter :store_paypal_params_in_session, :only => :review
 
@@ -42,7 +42,7 @@ class Checkout::PayPalController < ApplicationController
       @order = Order.new
       @order.cart = current_cart
       @order.build_payment.tap do |payment|
-        payment.details = PayPalPaymentDetails.new(session[:paypal])
+        payment.details = PaypalPaymentDetails.new(session[:paypal])
       end
       @order.save!
       forget_current_cart
@@ -58,7 +58,7 @@ class Checkout::PayPalController < ApplicationController
   private
 
   def load_paypal_account
-    @gateway = PayPalAccount.first
+    @gateway = PaypalAccount.first
   end
 
   def store_paypal_params_in_session

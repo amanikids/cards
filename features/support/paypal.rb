@@ -1,4 +1,4 @@
-class ShamPayPal < Sinatra::Base
+class ShamPaypal < Sinatra::Base
   get '/cgi-bin/webscr' do
     send params[:cmd].underscore, params
   end

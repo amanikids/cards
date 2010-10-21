@@ -1,4 +1,4 @@
-PayPalAccount.find_or_initialize_by_login(ENV['PAYPAL_LOGIN').tap do |account|
+PaypalAccount.find_or_initialize_by_login(ENV['PAYPAL_LOGIN').tap do |account|
   account.update_attributes!(
     :password  => ENV['PAYPAL_PASSWORD'],
     :signature => ENV['PAYPAL_SIGNATURE']

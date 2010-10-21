@@ -1,7 +1,7 @@
 Given /^there is a store called "([^"]*)" that uses PayPal$/ do |name|
   Store.make!(:name => name)
 
-  ShamPayPal.new.tap do |paypal|
+  ShamPaypal.new.tap do |paypal|
     ShamRack.mount(paypal, 'api-3t.sandbox.paypal.com', 443)
     Capybara.app = Rack::URLMap.new(
       'https://www.sandbox.paypal.com/' => paypal,

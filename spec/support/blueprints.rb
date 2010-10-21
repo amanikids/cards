@@ -19,16 +19,16 @@ Order.blueprint do
 end
 
 Payment.blueprint do
-  details { PayPalPaymentDetails.make }
+  details { PaypalPaymentDetails.make }
 end
 
-PayPalAccount.blueprint do
+PaypalAccount.blueprint do
   login     { Faker::Internet.email }
   password  { Faker.letterify('????????') }
   signature { Faker.letterify('????????????????????????????????') }
 end
 
-PayPalPaymentDetails.blueprint do
+PaypalPaymentDetails.blueprint do
   payer_id { Faker::Internet.email }
   token    { 42 }
 end
@@ -42,7 +42,7 @@ Store.blueprint do
   name { Faker::Address.city }
   slug { Faker.letterify('??') }
   currency { 'USD' }
-  paypal_account { PayPalAccount.make }
+  paypal_account { PaypalAccount.make }
 end
 
 User.blueprint do

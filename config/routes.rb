@@ -18,7 +18,7 @@ Cards::Application.routes.draw do
     :only => :create
 
   namespace :checkout do
-    controller :pay_pal do
+    controller :paypal do
       post '/paypal'        => :create, :as => 'paypal'
       get  '/paypal/cancel' => :cancel
       get  '/paypal'        => :review

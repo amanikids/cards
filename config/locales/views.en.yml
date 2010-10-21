@@ -4,7 +4,7 @@ en:
       total: Total
 
   checkout:
-    pay_pal:
+    paypal:
       review:
         title: Confirm your Order
         submit: Confirm your Order

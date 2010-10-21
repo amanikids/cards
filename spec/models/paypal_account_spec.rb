@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PayPalAccount do
+describe PaypalAccount do
   context 'assignment' do
     it { should allow_mass_assignment_of(:login) }
     it { should allow_mass_assignment_of(:password) }

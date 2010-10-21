@@ -14,20 +14,24 @@ Cards::Application.routes.draw do
     root :to => redirect('/admin/products', :status => 302)
   end
 
-  resources :items,
-    :only => :create
+  scope '/:store_id', :constraints => { :store_id => /[a-z][a-z]/ } do
+    resources :items,
+      :only => :create
 
-  namespace :checkout do
-    controller :paypal do
-      post '/paypal'        => :create, :as => 'paypal'
-      get  '/paypal/cancel' => :cancel
-      get  '/paypal'        => :review
-      put  '/paypal'        => :confirm
+    namespace :checkout do
+      controller :paypal do
+        post '/paypal'        => :create, :as => 'paypal'
+        get  '/paypal/cancel' => :cancel
+        get  '/paypal'        => :review
+        put  '/paypal'        => :confirm
+      end
     end
+
+    resources :orders,
+      :only => :show
+
+    root :to => 'stores#show', :as => 'store'
   end
 
-  resources :orders,
-    :only => :show
-
-  root :to => 'products#index'
+  root :to => 'stores#index'
 end

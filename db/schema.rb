@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20101021133044) do
     t.datetime "updated_at"
   end
 
+  add_index "stores", ["slug"], :name => "index_stores_on_slug", :unique => true
+
   create_table "users", :force => true do |t|
     t.string   "email",                   :null => false
     t.string   "password_hash",           :null => false

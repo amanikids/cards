@@ -11,7 +11,12 @@ class Store < ActiveRecord::Base
     :format => {
       :allow_blank => true,
       :with        => /\A[a-z][a-z]\z/ },
-    :presence => true
+    :presence => true,
+    :uniqueness => true
   validates :currency,
     :presence => true
+
+  def to_param
+    slug
+  end
 end

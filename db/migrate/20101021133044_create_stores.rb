@@ -7,9 +7,17 @@ class CreateStores < ActiveRecord::Migration
       t.references :paypal_account, :null => false
       t.timestamps
     end
+
+    change_table :stores do |t|
+      t.index :slug, :unique => true
+    end
   end
 
   def self.down
+    change_table :stores do |t|
+      t.remove_index :slug
+    end
+
     drop_table :stores
   end
 end

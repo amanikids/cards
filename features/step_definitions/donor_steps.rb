@@ -15,6 +15,14 @@ Given /^I will be using PayPal Express Checkout$/ do
   )
 end
 
+Then /^I see an empty cart$/ do
+  tableish('table.cart tbody tr', 'td').should be_empty
+end
+
+Then /^I see the following cart:$/ do |expected|
+  expected.diff! tableish('table.cart tbody tr', 'td')
+end
+
 Then /^I see the following order:$/ do |expected|
   expected.diff! tableish('table.order tbody tr', 'td')
 end

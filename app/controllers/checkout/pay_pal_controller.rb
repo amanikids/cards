@@ -49,6 +49,7 @@ class Checkout::PayPalController < ApplicationController
         )
       end
       @order.save!
+      session.clear
       redirect_to @order
     else
       redirect_to root_path, :alert => t('flash.alert.paypal.error')

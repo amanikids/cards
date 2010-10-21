@@ -9,8 +9,15 @@ Feature: Donors buy products
       | Poinsettia | 10    |
     And I will be using PayPal Express Checkout
     And I am on the home page
+
     When I press "Add to Cart"
-    And I press "Check out with PayPal"
+    Then I see the following cart:
+      | Poinsettia | 1 | 10 |
+
+    When I press "Check out with PayPal"
     And I press "Confirm my Order"
     Then I see the following order:
       | Poinsettia | 1 | 10 |
+
+    When I go to the home page
+    Then I see an empty cart

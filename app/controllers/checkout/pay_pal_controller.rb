@@ -1,5 +1,6 @@
 class Checkout::PayPalController < ApplicationController
   before_filter :build_gateway
+  before_filter :store_params_in_session, :only => :review
 
   def create
     @result = @gateway.setup_purchase(
@@ -21,37 +22,36 @@ class Checkout::PayPalController < ApplicationController
   end
 
   def review
-    @result = @gateway.details_for(params[:token])
+    @result = @gateway.details_for(session[:paypal_token])
 
     if @result.success?
-      @order = Order.new(
-        :cart  => current_cart,
-        :email => @result.email,
-        :address_attributes => @result.address,
-        :payment_attribtues => {
-          :token    => @result.token,
-          :payer_id => @result.payer_id
-        }
-      )
+      @order = Order.new
+      @order.cart = current_cart
     else
       redirect_to root_path, :alert => t('flash.alert.paypal.error')
     end
   end
 
   def confirm
-    @order = Order.new(params[:order])
+    @result = @gateway.purchase(
+      current_cart.total,
+      :payer_id => session[:paypal_payer_id],
+      :token    => session[:paypal_token]
+    )
 
-    if @order.valid?
-      @result = @gateway.purchase(@order.total, @order.payment_attributes)
-
-      if @result.success?
-        @order.save
-        redirect_to @order
-      else
-        redirect_to root_path, :alert => t('flash.alert.paypal.error')
+    if @result.success?
+      @order = Order.new
+      @order.cart = current_cart
+      @order.build_payment.tap do |payment|
+        payment.details = PayPalPaymentDetails.new(
+          :payer_id => session[:paypal_payer_id],
+          :token    => session[:paypal_token]
+        )
       end
+      @order.save
+      redirect_to @order
     else
-      # FIXME do something!
+      redirect_to root_path, :alert => t('flash.alert.paypal.error')
     end
   end
 
@@ -63,5 +63,13 @@ class Checkout::PayPalController < ApplicationController
       :password  => ENV['PAYPAL_PASSWORD'],
       :signature => ENV['PAYPAL_SIGNATURE']
     )
+  end
+
+  def store_params_in_session
+    if params[:token] && params[:PayerID]
+      session[:paypal_payer_id] = params[:PayerID]
+      session[:paypal_token]    = params[:token]
+      redirect_to :action => 'review'
+    end
   end
 end

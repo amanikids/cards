@@ -13,6 +13,19 @@ Item.blueprint do
   quantity { 1 }
 end
 
+Order.blueprint do
+  cart
+  payment
+end
+
+Payment.blueprint do
+  # Attributes here
+end
+
+PayPalPaymentDetails.blueprint do
+  # Attributes here
+end
+
 Product.blueprint do
   name  { Faker::Name.first_name }
   price { 10 }

@@ -4,6 +4,11 @@ en:
       title: Your Cart
       checkout: Proceed to Checkout
 
+  checkout:
+    pay_pal:
+      review:
+        submit: Confirm my Order
+
   products:
     index:
       title: Welcome!

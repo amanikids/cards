@@ -4,13 +4,14 @@ Feature: Donors buy products
   So that I can greet my friends and support Amani
 
   Scenario: Buying a product
-    Given these products are for sale:
+    Given there is a store called "Canada" that uses PayPal
+    And these products are for sale:
       | name       | price |
       | Poinsettia | 10    |
-    And I will be using PayPal Express Checkout
     And I am on the home page
 
-    When I press "Add to Cart"
+    When I follow "Canada"
+    And I press "Add to Cart"
     Then I see the following cart:
       | Poinsettia | 1 | 10 |
 

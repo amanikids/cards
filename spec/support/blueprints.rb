@@ -38,6 +38,13 @@ Product.blueprint do
   price { 10 }
 end
 
+Store.blueprint do
+  name { Faker::Address.city }
+  slug { Faker.letterify('??') }
+  currency { 'USD' }
+  paypal_account { PayPalAccount.make }
+end
+
 User.blueprint do
   email { Faker::Internet.email }
 end

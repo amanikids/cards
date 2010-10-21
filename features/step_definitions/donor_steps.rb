@@ -5,6 +5,8 @@ Given /^these products are for sale:$/ do |table|
 end
 
 Given /^I will be using PayPal Express Checkout$/ do
+  PayPalAccount.make!
+
   paypal = ShamPayPal.new
 
   ShamRack.mount(paypal, 'api-3t.sandbox.paypal.com', 443)

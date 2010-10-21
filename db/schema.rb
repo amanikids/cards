@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101021085647) do
+ActiveRecord::Schema.define(:version => 20101021124623) do
 
   create_table "carts", :force => true do |t|
     t.datetime "created_at"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(:version => 20101021085647) do
   end
 
   add_index "orders", ["token"], :name => "index_orders_on_token", :unique => true
+
+  create_table "pay_pal_accounts", :force => true do |t|
+    t.string   "login",      :null => false
+    t.string   "password",   :null => false
+    t.string   "signature",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pay_pal_payment_details", :force => true do |t|
     t.string   "payer_id",   :null => false

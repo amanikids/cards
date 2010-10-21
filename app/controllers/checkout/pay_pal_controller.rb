@@ -1,5 +1,5 @@
 class Checkout::PayPalController < ApplicationController
-  before_filter :build_gateway
+  before_filter :load_paypal_account
   before_filter :store_paypal_params_in_session, :only => :review
 
   def create
@@ -57,12 +57,8 @@ class Checkout::PayPalController < ApplicationController
 
   private
 
-  def build_gateway
-    @gateway = ActiveMerchant::Billing::PaypalExpressGateway.new(
-      :login     => ENV['PAYPAL_LOGIN'],
-      :password  => ENV['PAYPAL_PASSWORD'],
-      :signature => ENV['PAYPAL_SIGNATURE']
-    )
+  def load_paypal_account
+    @gateway = PayPalAccount.first
   end
 
   def store_paypal_params_in_session

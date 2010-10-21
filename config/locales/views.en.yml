@@ -10,6 +10,13 @@ en:
       review:
         submit: Confirm my Order
 
+  orders:
+    show:
+      title: Your Order
+
+    order:
+      total: Total
+
   products:
     index:
       title: Welcome!

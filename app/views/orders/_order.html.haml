@@ -5,3 +5,7 @@
         %td= item.name
         %td= item.quantity
         %td= item.price
+  %tfoot
+    %tr
+      %td{:colspan => 2}= t('.total')
+      %td= order.cart.total

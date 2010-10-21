@@ -2,6 +2,7 @@ en:
   carts:
     cart:
       title: Your Cart
+      total: Total
       checkout: Proceed to Checkout
 
   checkout:

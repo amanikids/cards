@@ -8,6 +8,10 @@
           %td= item.name
           %td= item.quantity
           %td= item.price
+    %tfoot
+      %tr
+        %td{:colspan => 2}= t('.total')
+        %td= cart.total
 
   = form_tag checkout_paypal_path do
     .buttons

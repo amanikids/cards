@@ -24,5 +24,5 @@ Then /^I see the following cart:$/ do |expected|
 end
 
 Then /^I see the following order:$/ do |expected|
-  expected.diff! tableish('table.order tbody tr', 'td')
+  Then %{I see the following cart:}, expected
 end

@@ -15,7 +15,7 @@ Feature: Donors buy products
       | Poinsettia | 1 | 10 |
 
     When I press "Check out with PayPal"
-    And I press "Confirm my Order"
+    And I press "Confirm your Order"
     Then I see the following order:
       | Poinsettia | 1 | 10 |
 

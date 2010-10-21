@@ -1,18 +1,11 @@
-%section[cart]
-  %h1= t('.title')
-
-  %table.cart
-    %tbody
-      - cart.items.each do |item|
-        %tr
-          %td= item.name
-          %td= item.quantity
-          %td= item.price
-    %tfoot
+%table.cart
+  %tbody
+    - cart.items.each do |item|
       %tr
-        %td{:colspan => 2}= t('.total')
-        %td= cart.total
-
-  = form_tag checkout_paypal_path do
-    .buttons
-      = submit_tag t('helpers.submit.checkout_paypal.create')
+        %td= item.name
+        %td= item.quantity
+        %td= item.price
+  %tfoot
+    %tr
+      %td{:colspan => 2}= t('.total')
+      %td= cart.total

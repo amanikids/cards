@@ -2,4 +2,12 @@
   %h1= t('.title')
 
 = render(@products)
-= render(current_cart) unless current_cart.empty?
+
+- unless current_cart.empty?
+  %section[current_cart]
+    %h1= t('.cart.title')
+    = render(current_cart)
+    = form_tag checkout_paypal_path do
+      .buttons
+        = submit_tag t('helpers.submit.checkout_paypal.create')
+    

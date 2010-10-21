@@ -1,22 +1,19 @@
 en:
   carts:
     cart:
-      title: Your Cart
       total: Total
-      checkout: Proceed to Checkout
 
   checkout:
     pay_pal:
       review:
-        submit: Confirm my Order
+        submit: Confirm your Order
 
   orders:
     show:
       title: Your Order
 
-    order:
-      total: Total
-
   products:
     index:
       title: Welcome!
+      cart:
+        title: Your Cart

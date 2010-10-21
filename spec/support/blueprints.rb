@@ -19,11 +19,12 @@ Order.blueprint do
 end
 
 Payment.blueprint do
-  # Attributes here
+  details { PayPalPaymentDetails.make }
 end
 
 PayPalPaymentDetails.blueprint do
-  # Attributes here
+  payer_id { Faker::Internet.email }
+  token    { 42 }
 end
 
 Product.blueprint do

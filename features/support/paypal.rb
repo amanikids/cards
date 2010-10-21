@@ -18,6 +18,8 @@ class ShamPayPal < Sinatra::Base
   end
 
   # Web UI Methods ----------------------------------------------------
+  # TODO perhaps express checkout shouldn't redirect immediately; perhaps we
+  # should have to push a button instead?
   def _express_checkout(params)
     redirect @@xml_request['ReturnURL'] + '?token=42&PayerID=1234567890'
   end
@@ -29,7 +31,9 @@ class ShamPayPal < Sinatra::Base
     return <<-XML
       <SetExpressCheckoutResponse>
         <Ack>Success</Ack>
-        <Token>42</Token>
+        <SetExpressCheckoutResponseDetails>
+          <Token>42</Token>
+        </SetExpressCheckoutResponseDetails>
       </SetExpressCheckoutResponse>
     XML
   end
@@ -57,6 +61,17 @@ class ShamPayPal < Sinatra::Base
           </PaymentDetails>
         </GetExpressCheckoutDetailsResponseDetails>
       </GetExpressCheckoutDetailsResponse>
+    XML
+  end
+
+  def do_express_checkout_payment_request(xml)
+    return <<-XML
+      <DoExpressCheckoutPaymentResponse>
+        <Ack>Success</Ack>
+        <DoExpressCheckoutPaymentResponseDetails>
+          <Token>42</Token>
+        </DoExpressCheckoutPaymentResponseDetails>
+      </DoExpressCheckoutPaymentResponse>
     XML
   end
 

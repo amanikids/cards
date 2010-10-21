@@ -1,0 +1,7 @@
+%table[order]
+  %tbody
+    - order.cart.items.each do |item|
+      %tr
+        %td= item.name
+        %td= item.quantity
+        %td= item.price

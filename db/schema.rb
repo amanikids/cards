@@ -29,9 +29,12 @@ ActiveRecord::Schema.define(:version => 20101021085647) do
   create_table "orders", :force => true do |t|
     t.integer  "cart_id",    :null => false
     t.integer  "payment_id", :null => false
+    t.string   "token",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "orders", ["token"], :name => "index_orders_on_token", :unique => true
 
   create_table "pay_pal_payment_details", :force => true do |t|
     t.string   "payer_id",   :null => false

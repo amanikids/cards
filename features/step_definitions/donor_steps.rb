@@ -16,5 +16,5 @@ Given /^I will be using PayPal Express Checkout$/ do
 end
 
 Then /^I see the following order:$/ do |expected|
-  expected.diff! tableish('table#order tbody tr', 'td')
+  expected.diff! tableish('table.order tbody tr', 'td')
 end

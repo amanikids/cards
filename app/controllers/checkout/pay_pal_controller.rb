@@ -48,7 +48,7 @@ class Checkout::PayPalController < ApplicationController
           :token    => session[:paypal_token]
         )
       end
-      @order.save
+      @order.save!
       redirect_to @order
     else
       redirect_to root_path, :alert => t('flash.alert.paypal.error')

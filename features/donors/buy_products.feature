@@ -3,7 +3,6 @@ Feature: Donors buy products
   I want to buy some Christmas cards from Amani
   So that I can greet my friends and support Amani
 
-  @wip
   Scenario: Buying a product
     Given these products are for sale:
       | name       | price |

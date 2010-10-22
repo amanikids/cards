@@ -21,10 +21,9 @@ class Checkout::PaypalController < ApplicationController
     end
   end
 
-  def cancel
-    redirect_to error_path, :notice => t('flash.checkout.paypal.cancel')
-  end
-
+  # TODO review and confirm should both look up the details! They will use the
+  # same method to build up the order, so that I don't have to pass all those
+  # parameters around.
   def review
     @result = @gateway.details_for(params[:token])
 
@@ -47,15 +46,18 @@ class Checkout::PaypalController < ApplicationController
       @order = Order.new
       @order.cart = current_cart
       @order.build_payment.tap do |payment|
-        payment.details = PaypalPaymentDetails.new(session[:paypal])
+        payment.details = PaypalPaymentDetails.new(:token => params[:token], :payer_id => params[:PayerID])
       end
       @order.save!
       forget_current_cart
-      forget_paypal_params
       redirect_to [@store, @order], :notice => t('flash.checkout.paypal.order.created')
     else
       redirect_to error_path, :alert => error_alert(@result)
     end
+  end
+
+  def cancel
+    redirect_to error_path, :notice => t('flash.checkout.paypal.cancel')
   end
 
   private

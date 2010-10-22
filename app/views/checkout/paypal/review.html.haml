@@ -1,7 +1,9 @@
-%h1= t('.title')
+%section[@order]
+  %h1= t('.title')
+  = render('carts/cart', :cart => @order.cart)
 
-= render('carts/cart', :cart => @order.cart)
-
-= form_tag store_checkout_paypal_path(@store), :method => :put do
-  .buttons
-    = submit_tag t('.submit')
+  = form_tag store_checkout_paypal_path(@store), :method => :put do
+    .buttons
+      = hidden_field_tag :token,   params[:token]
+      = hidden_field_tag :PayerID, params[:PayerID]
+      = submit_tag t('.submit')

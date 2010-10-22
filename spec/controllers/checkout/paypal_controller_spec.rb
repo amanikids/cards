@@ -50,6 +50,8 @@ describe Checkout::PaypalController do
   end
 
   context 'PUT confirm' do
+    it 'does stuff on success'
+
     it 'redirects to the store on failure' do
       paypal_account.should_receive(:purchase) { failure(:message => 'BOOM') }
       put :confirm, :store_id => store.slug, :token => 42, :PayerID => 'BOB'

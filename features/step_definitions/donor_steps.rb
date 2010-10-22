@@ -16,8 +16,10 @@ Given /^these products are for sale:$/ do |table|
   end
 end
 
+# FIXME need to clean up these cart/order steps
 Then /^I see an empty cart$/ do
-  tableish('table.cart tbody tr', 'td').should be_empty
+  cart = tableish('table.cart tbody tr', 'td')
+  table(cart).diff!([]) unless cart.empty?
 end
 
 Then /^I see the following cart:$/ do |expected|
@@ -25,5 +27,7 @@ Then /^I see the following cart:$/ do |expected|
 end
 
 Then /^I see the following order:$/ do |expected|
-  Then %{I see the following cart:}, expected
+  with_scope('.order') do
+    Then %{I see the following cart:}, expected
+  end
 end

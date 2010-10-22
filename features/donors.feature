@@ -24,4 +24,5 @@ Feature: Donors buy products
       | Poinsettia | 1 | 10 |
 
     When I go to the home page
+    And I follow "Canada"
     Then I see an empty cart

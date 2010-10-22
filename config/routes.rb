@@ -14,7 +14,7 @@ Cards::Application.routes.draw do
     root :to => redirect('/admin/products', :status => 302)
   end
 
-  scope '/:store_id', :constraints => { :store_id => /[a-z][a-z]/ } do
+  scope '/:store_id', :as => 'store', :constraints => { :store_id => /[a-z][a-z]/ } do
     resources :items,
       :only => :create
 
@@ -30,7 +30,7 @@ Cards::Application.routes.draw do
     resources :orders,
       :only => :show
 
-    root :to => 'stores#show', :as => 'store'
+    root :to => 'stores#show'
   end
 
   root :to => 'stores#index'

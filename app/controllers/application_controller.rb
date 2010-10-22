@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
   def forget_current_cart
     session.delete(:cart_id)
   end
+
+  def load_store
+    @store = Store.find_by_slug!(params[:store_id])
+  end
 end

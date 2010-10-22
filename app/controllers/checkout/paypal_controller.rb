@@ -1,4 +1,5 @@
 class Checkout::PaypalController < ApplicationController
+  before_filter :load_store
   before_filter :load_paypal_account
   before_filter :store_paypal_params_in_session, :only => :review
 
@@ -13,13 +14,13 @@ class Checkout::PaypalController < ApplicationController
     if @result.success?
       redirect_to @gateway.redirect_url_for(@result.token)
     else
-      redirect_to root_path,
+      redirect_to store_root_path(@store),
         :alert => t('flash.alert.paypal.error', :message => @result.message)
     end
   end
 
   def cancel
-    redirect_to root_path,
+    redirect_to store_root_path(@store),
       :notice => t('flash.notice.paypal.cancel')
   end
 
@@ -30,7 +31,7 @@ class Checkout::PaypalController < ApplicationController
       @order = Order.new
       @order.cart = current_cart
     else
-      redirect_to root_path,
+      redirect_to store_root_path(@store),
         :alert => t('flash.alert.paypal.error', :message => @result.message)
     end
   end
@@ -47,10 +48,10 @@ class Checkout::PaypalController < ApplicationController
       @order.save!
       forget_current_cart
       forget_paypal_params
-      redirect_to @order,
+      redirect_to [@store, @order],
         :notice => t('flash.notice.order.create')
     else
-      redirect_to root_path,
+      redirect_to store_root_path(@store),
         :alert => t('flash.alert.paypal.error', :message => @result.message)
     end
   end
@@ -58,7 +59,7 @@ class Checkout::PaypalController < ApplicationController
   private
 
   def load_paypal_account
-    @gateway = PaypalAccount.first
+    @gateway = @store.paypal_account
   end
 
   def store_paypal_params_in_session

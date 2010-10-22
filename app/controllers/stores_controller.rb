@@ -1,9 +1,7 @@
 class StoresController < ApplicationController
+  before_filter :load_store, :only => :show
+
   def index
     @stores = Store.all
-  end
-
-  def show
-    @store = Store.find_by_slug!(params[:store_id])
   end
 end

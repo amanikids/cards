@@ -2,6 +2,6 @@
 
 = render('carts/cart', :cart => @order.cart)
 
-= form_tag checkout_paypal_path, :method => :put do
+= form_tag store_checkout_paypal_path(@store), :method => :put do
   .buttons
     = submit_tag t('.submit')

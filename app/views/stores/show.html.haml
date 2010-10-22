@@ -7,7 +7,6 @@
   %section[current_cart]
     %h1= t('.cart.title')
     = render(current_cart)
-    = form_tag checkout_paypal_path do
+    = form_tag store_checkout_paypal_path(@store) do
       .buttons
         = submit_tag t('helpers.submit.checkout_paypal.create')
-    

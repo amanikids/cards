@@ -32,5 +32,5 @@ group :test do
   gem 'nokogiri'
   gem 'sham_rack'
   gem 'shoulda'
-  gem 'sinatra'
+  gem 'sinatra', :require => 'sinatra/base'
 end

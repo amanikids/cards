@@ -1,12 +1,9 @@
 en:
   flash:
-    alert:
-      paypal:
-        error: "Sorry, we had trouble communicating with PayPal: %{message} Perhaps you could try again?"
-
-    notice:
-      order:
-        create: "Thank you for your order!"
-
+    checkout:
       paypal:
         cancel: "Checkout canceled."
+        error: "Sorry, we had trouble communicating with PayPal: %{message} Perhaps you could try again?"
+        not_in_progress: "Sorry, it seems like you haven't been to PayPal yet. Perhaps you could try again?"
+        order:
+          created: "Thank you for your order!"

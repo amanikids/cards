@@ -4,7 +4,7 @@ describe Store do
   let(:store) { Store.make! }
 
   context 'associations' do
-    it { pending; should have_many(:products) }
+    it 'should have_many(:products)'
   end
 
   context 'attributes' do

@@ -13,8 +13,10 @@ en:
     show:
       title: Your Order
 
-  products:
+  stores:
     index:
+      title: 'Welcome! Choose your country.'
+    show:
       title: Welcome!
       cart:
         title: Your Cart

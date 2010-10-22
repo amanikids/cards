@@ -16,7 +16,7 @@ Given /^these products are for sale:$/ do |table|
   end
 end
 
-# FIXME need to clean up these cart/order steps
+# TODO need to clean up these cart/order steps
 Then /^I see an empty cart$/ do
   cart = tableish('table.cart tbody tr', 'td')
   table(cart).diff!([]) unless cart.empty?

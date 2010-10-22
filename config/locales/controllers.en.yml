@@ -1,5 +1,5 @@
 en:
-  flash:
+  controllers:
     checkout:
       paypal:
         cancel: "Checkout canceled."

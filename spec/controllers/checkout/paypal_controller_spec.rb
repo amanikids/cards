@@ -53,6 +53,7 @@ describe Checkout::PaypalController do
     it 'does stuff on success'
 
     it 'redirects to the store on failure' do
+      paypal_account.should_receive(:details_for).with(42) { success }
       paypal_account.should_receive(:purchase) { failure(:message => 'BOOM') }
       put :confirm, :store_id => store.slug, :token => 42, :PayerID => 'BOB'
       response.should redirect_to(store_root_path(store))

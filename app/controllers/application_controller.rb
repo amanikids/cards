@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Cart management ---------------------------------------------------
   def current_cart
     @current_cart ||= begin
                         if session[:cart_id]
@@ -25,7 +26,23 @@ class ApplicationController < ActionController::Base
     session.delete(:cart_id)
   end
 
+  # Loaders -----------------------------------------------------------
   def load_store
     @store = Store.find_by_slug!(params[:store_id])
+  end
+
+  # Translations ------------------------------------------------------
+  def translate(key, options={})
+    super scope_key_by_controller(key), options
+  end
+
+  alias :t :translate
+
+  def scope_key_by_controller(key)
+    if key.starts_with?('.')
+      "controllers.#{self.class.name.underscore.tr('/', '.')}#{key}"
+    else
+      key
+    end
   end
 end

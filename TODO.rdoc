@@ -1,6 +1,16 @@
+== Big-Picture Arc
+
 * Sell Products
 * Sell SKUs
 * Sell Packagings
 * Ship Orders
 * Track Inventory
 * Resell
+
+== Completeness
+
+* Cart: Remove items
+* Cart: Collapse items
+* Cart: Set quantity on adding
+* Cart: Use real PayPal-hosted submit button
+* Payment: JustGiving

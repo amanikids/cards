@@ -1,6 +1,6 @@
-class CreatePaypalPaymentDetails < ActiveRecord::Migration
+class CreatePaypalPayments < ActiveRecord::Migration
   def self.up
-    create_table :paypal_payment_details do |t|
+    create_table :paypal_payments do |t|
       t.string :payer_id, :null => false
       t.string :token, :null => false
       t.timestamps
@@ -8,6 +8,6 @@ class CreatePaypalPaymentDetails < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :paypal_payment_details
+    drop_table :paypal_payments
   end
 end

@@ -27,21 +27,15 @@ ActiveRecord::Schema.define(:version => 20101021133044) do
   end
 
   create_table "orders", :force => true do |t|
-    t.integer  "cart_id",    :null => false
-    t.integer  "payment_id", :null => false
-    t.string   "token",      :null => false
+    t.integer  "cart_id",      :null => false
+    t.integer  "payment_id",   :null => false
+    t.string   "payment_type", :null => false
+    t.string   "token",        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "orders", ["token"], :name => "index_orders_on_token", :unique => true
-
-  create_table "payments", :force => true do |t|
-    t.integer  "details_id",   :null => false
-    t.string   "details_type", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "paypal_accounts", :force => true do |t|
     t.string   "login",      :null => false
@@ -51,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20101021133044) do
     t.datetime "updated_at"
   end
 
-  create_table "paypal_payment_details", :force => true do |t|
+  create_table "paypal_payments", :force => true do |t|
     t.string   "payer_id",   :null => false
     t.string   "token",      :null => false
     t.datetime "created_at"

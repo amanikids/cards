@@ -1,4 +1,4 @@
-class PaypalPaymentDetails < ActiveRecord::Base
+class PaypalPayment < ActiveRecord::Base
   attr_accessible :payer_id
   attr_accessible :token
 

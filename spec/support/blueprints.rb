@@ -15,11 +15,7 @@ end
 
 Order.blueprint do
   cart
-  payment
-end
-
-Payment.blueprint do
-  details { PaypalPaymentDetails.make }
+  payment { PaypalPayment.make }
 end
 
 PaypalAccount.blueprint do
@@ -28,7 +24,7 @@ PaypalAccount.blueprint do
   signature { Faker.letterify('????????????????????????????????') }
 end
 
-PaypalPaymentDetails.blueprint do
+PaypalPayment.blueprint do
   payer_id { Faker::Internet.email }
   token    { 42 }
 end

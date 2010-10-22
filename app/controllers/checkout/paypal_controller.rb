@@ -43,7 +43,7 @@ class Checkout::PaypalController < ApplicationController
     redirect_to error_path, :notice => t('.cancel')
   end
 
-  private
+  private # --------------------------------------------------------------------
 
   def load_paypal_account
     @gateway = @store.paypal_account
@@ -56,8 +56,7 @@ class Checkout::PaypalController < ApplicationController
 
     @order = Order.new
     @order.cart    = current_cart
-    @order.payment = Payment.new
-    @order.payment.details = PaypalPaymentDetails.new(
+    @order.payment = PaypalPayment.new(
       :token    => params[:token],
       :payer_id => params[:PayerID]
     )

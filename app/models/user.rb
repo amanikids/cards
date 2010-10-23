@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :password
 
-  before_validation :normalize_email
+  before_validation :downcase_email
 
   validates :email,
     :presence   => true,
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def normalize_email
+  def downcase_email
     self.email = self.email.to_s.downcase
   end
 

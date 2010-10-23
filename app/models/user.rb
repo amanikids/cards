@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   composed_of :password_hash,
-    :class_name => 'BCrypt::Password',
-    :mapping    => %w(password_hash to_s)
+    :class_name => 'BCrypt::Password'
 
   attr_accessible :email
   attr_accessible :password

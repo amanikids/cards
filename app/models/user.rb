@@ -12,12 +12,9 @@ class User < ActiveRecord::Base
 
   class << self
     def authenticate(email, password)
-      find_by_email(email.downcase).try(:authenticate, password)
+      user = find_by_email(email.downcase)
+      user if user && user.password == password
     end
-  end
-
-  def authenticate(password)
-    self.password == password ? self : nil
   end
 
   def password

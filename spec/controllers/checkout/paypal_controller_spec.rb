@@ -1,19 +1,17 @@
 require 'spec_helper'
 
 describe Checkout::PaypalController do
-  let(:paypal_account) do
-    mock_model(PaypalAccount)
+  let 'paypal_account' do
+    mock_model PaypalAccount
   end
 
-  let(:store) do
-    stub_model(Store, :paypal_account => paypal_account, :slug => 'us')
+  let 'store' do
+    stub_model Store, :paypal_account => paypal_account, :slug => 'us'
   end
 
   before do
     Store.stub(:find_by_slug!).with(store.slug) { store }
   end
-
-  it 'should ensure the cart is not empty'
 
   context 'POST create' do
     it 'redirects to paypal on success' do
@@ -50,8 +48,6 @@ describe Checkout::PaypalController do
   end
 
   context 'PUT confirm' do
-    it 'does stuff on success'
-
     it 'redirects to the store on failure' do
       paypal_account.should_receive(:details_for).with(42) { success }
       paypal_account.should_receive(:purchase) { failure(:message => 'BOOM') }

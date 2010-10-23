@@ -1,10 +1,8 @@
 require 'spec_helper'
 
 describe Store do
-  let(:store) { Store.make! }
-
-  context 'associations' do
-    it 'should have_many(:products)'
+  let 'store' do
+    Store.make!
   end
 
   context 'attributes' do

@@ -25,27 +25,31 @@ describe User do
     end
   end
 
+  it 'changes the password hash when the password changes' do
+    lambda { user.password = 'changed' }.should change {
+      user.password_hash
+    }
+  end
+
+  it 'ignores blank passwords' do
+    lambda { user.password = '' }.should_not change {
+      user.password_hash
+    }
+  end
+
   context 'randomize_password!' do
-    it 'changes the stored password hash' do
-      lambda { user.randomize_password! }.should change { user.reload.password_hash }
+    it 'changes the password hash and saves the user' do
+      lambda { user.randomize_password! }.should change {
+        user.reload.password_hash
+      }
     end
   end
 
   context 'save' do
-    it 'changes the password hash when the password changes' do
-      lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_hash)
-    end
-
-    it 'ignores blank passwords' do
-      lambda { user.update_attributes(:password => '') }.should_not change(user, :password_hash)
-    end
-
-    it 'does not usually change the password hash' do
-      lambda { user.save }.should_not change(user, :password_hash)
-    end
-
     it 'changes the password recovery token' do
-      lambda { user.save }.should change(user, :password_recovery_token)
+      lambda { user.save }.should change {
+        user.password_recovery_token
+      }
     end
   end
 end

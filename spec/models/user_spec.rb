@@ -25,9 +25,9 @@ describe User do
     end
   end
 
-  context 'create' do
-    it 'randomizes the password if none is given' do
-      User.create!(:email => 'bob@example.com').password_hash.should_not be_nil
+  context 'randomize_password!' do
+    it 'changes the stored password hash' do
+      lambda { user.randomize_password! }.should change { user.reload.password_hash }
     end
   end
 

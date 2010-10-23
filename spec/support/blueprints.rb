@@ -42,5 +42,6 @@ Store.blueprint do
 end
 
 User.blueprint do
-  email { Faker::Internet.email }
+  email    { Faker::Internet.email }
+  password { ActiveSupport::SecureRandom.hex(64) }
 end

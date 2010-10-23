@@ -39,7 +39,6 @@ class User < ActiveRecord::Base
   end
 
   def randomize_password_recovery_token
-    # http://www.apps.ietf.org/rfc/rfc4648.html#sec-5
-    self.password_recovery_token = ActiveSupport::SecureRandom.base64(15).tr('+/=', '-_ ').strip
+    self.password_recovery_token = ActiveSupport::SecureRandom.base64url(15)
   end
 end

@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  composed_of :password_hash,
+    :class_name => 'BCrypt::Password',
+    :mapping    => %w(password_hash to_s)
+
   attr_accessible :email
   attr_accessible :password
 
@@ -13,12 +17,8 @@ class User < ActiveRecord::Base
   class << self
     def authenticate(email, password)
       user = find_by_email(email.downcase)
-      user if user && user.password == password
+      user if user && user.password_hash.is_password?(password)
     end
-  end
-
-  def password
-    BCrypt::Password.new(password_hash)
   end
 
   def password=(password)

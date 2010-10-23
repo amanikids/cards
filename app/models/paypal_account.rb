@@ -1,4 +1,6 @@
 class PaypalAccount < ActiveRecord::Base
+  has_one :store
+
   attr_accessible :login
   attr_accessible :password
   attr_accessible :signature
@@ -8,7 +10,7 @@ class PaypalAccount < ActiveRecord::Base
   validates :signature, :presence => true
 
   def setup_purchase(amount, options={})
-    gateway.setup_purchase(amount, options)
+    gateway.setup_purchase(amount, options.merge(:currency => store.currency))
   end
 
   def redirect_url_for(token)
@@ -20,7 +22,7 @@ class PaypalAccount < ActiveRecord::Base
   end
 
   def purchase(amount, options={})
-    gateway.purchase(amount, options)
+    gateway.purchase(amount, options.merge(:currency => store.currency))
   end
 
   private

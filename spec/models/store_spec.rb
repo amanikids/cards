@@ -5,6 +5,10 @@ describe Store do
     Store.make!
   end
 
+  context 'associations' do
+    it { should belong_to(:paypal_account) }
+  end
+
   context 'attributes' do
     it { should allow_mass_assignment_of(:name) }
     it { should allow_mass_assignment_of(:slug) }

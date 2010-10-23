@@ -32,10 +32,6 @@ describe User do
   end
 
   context 'save' do
-    it 'changes the password salt when the password changes' do
-      lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_salt)
-    end
-
     it 'changes the password hash when the password changes' do
       lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_hash)
     end
@@ -46,10 +42,6 @@ describe User do
 
     it 'ignores blank passwords' do
       lambda { user.update_attributes(:password => '') }.should_not change(user, :password_hash)
-    end
-
-    it 'does not usually change the password salt' do
-      lambda { user.save }.should_not change(user, :password_salt)
     end
 
     it 'does not usually change the password hash' do

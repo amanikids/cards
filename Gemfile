@@ -8,6 +8,7 @@ gem 'graphite',
   :require => 'graphite/railtie'
 
 gem 'activemerchant'
+gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'haml-rails'
 gem 'heroku-environment'
 gem 'pg'

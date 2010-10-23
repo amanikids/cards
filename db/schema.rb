@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(:version => 20101021133044) do
   create_table "users", :force => true do |t|
     t.string   "email",                   :null => false
     t.string   "password_hash",           :null => false
-    t.string   "password_salt",           :null => false
     t.string   "password_recovery_token", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"

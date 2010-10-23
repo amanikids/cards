@@ -17,20 +17,19 @@ class User < ActiveRecord::Base
   end
 
   def authenticate(password)
-    hash_password(password) == password_hash ? self : nil
+    self.password == password ? self : nil
+  end
+
+  def password
+    BCrypt::Password.new(password_hash)
   end
 
   def password=(password)
     return if password.blank?
-    self.password_salt = ActiveSupport::SecureRandom.hex(64)
-    self.password_hash = hash_password(password)
+    self.password_hash = BCrypt::Password.create(password)
   end
 
   private
-
-  def hash_password(password)
-    Digest::SHA512.hexdigest("#{password_salt}::#{password}")
-  end
 
   def normalize_email
     self.email = self.email.to_s.downcase

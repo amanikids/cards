@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe User do
-  let!(:password) { 'secret' }
-  let!(:user)     { User.make!(:password => password) }
+  let 'user' do
+    User.make! :password => 'password'
+  end
 
   context 'attributes' do
     it { should allow_mass_assignment_of(:email) }
@@ -12,24 +13,24 @@ describe User do
 
   context 'validations' do
     it { should validate_presence_of(:email) }
-    it { should validate_uniqueness_of(:email).case_insensitive }
+    it { user; should validate_uniqueness_of(:email).case_insensitive }
   end
 
   context 'authenticate' do
     it 'matches email and password' do
-      User.authenticate(user.email, password).should == user
+      User.authenticate(user.email, 'password').should == user
     end
 
     it 'ignores email capitalization' do
-      User.authenticate(user.email.swapcase, password).should == user
+      User.authenticate(user.email.swapcase, 'password').should == user
     end
 
     it 'fails on bad emails' do
-      User.authenticate('different@example.com', password).should be_nil
+      User.authenticate('different@example.com', 'password').should be_nil
     end
 
     it 'fails on bad passwords' do
-      User.authenticate(user.email, 'different').should be_nil
+      User.authenticate(user.email, 'bad password').should be_nil
     end
   end
 

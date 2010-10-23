@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password
+  attr_accessible :email
+  attr_accessible :password
 
   before_validation :downcase_email
 

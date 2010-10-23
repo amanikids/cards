@@ -22,8 +22,9 @@ class User < ActiveRecord::Base
   end
 
   def password=(password)
-    return if password.blank?
-    self.password_hash = BCrypt::Password.create(password)
+    unless password.blank?
+      self.password_hash = BCrypt::Password.create(password)
+    end
   end
 
   private

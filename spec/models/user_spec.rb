@@ -4,8 +4,16 @@ describe User do
   let!(:password) { 'secret' }
   let!(:user)     { User.make!(:password => password) }
 
-  it { should validate_presence_of(:email) }
-  it { should validate_uniqueness_of(:email).case_insensitive }
+  context 'attributes' do
+    it { should allow_mass_assignment_of(:email) }
+    it { should allow_mass_assignment_of(:password) }
+    it { should_not allow_mass_assignment_of(:password_recovery_token) }
+  end
+
+  context 'validations' do
+    it { should validate_presence_of(:email) }
+    it { should validate_uniqueness_of(:email).case_insensitive }
+  end
 
   context 'authenticate' do
     it 'matches email and password' do

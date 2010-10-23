@@ -36,10 +36,6 @@ describe User do
       lambda { user.update_attributes(:password => 'changed') }.should change(user, :password_hash)
     end
 
-    it 'ignores nil passwords' do
-      lambda { user.update_attributes(:password => nil) }.should_not change(user, :password_hash)
-    end
-
     it 'ignores blank passwords' do
       lambda { user.update_attributes(:password => '') }.should_not change(user, :password_hash)
     end

@@ -17,9 +17,9 @@ stuff "autotest\012"
 # - run a server in window 3
 screen -t server 3
 stuff "rails s -b 127.0.0.1\012"
-# - look at logs in window 4
-screen -t logs 4
-stuff "cd log\012"
+# - run spork for cucumber in window 4
+screen -t "spork (cucumber)" 4
+stuff "spork cucumber\012"
 
 # arrange windows:
 # - vertically split

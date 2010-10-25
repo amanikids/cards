@@ -48,6 +48,13 @@ class UserSession
     session[:user_id] = nil
   end
 
+  # stolen from rspec-rails
+  def errors_on(attribute)
+    self.valid?
+    [self.errors[attribute]].flatten.compact
+  end
+  alias :error_on :errors_on
+
   def persisted?
     false
   end

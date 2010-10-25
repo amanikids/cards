@@ -1,3 +1,5 @@
+# Lock down models against mass assignment.
+#
 # This is an experiment, suggested by
 # http://guides.rubyonrails.org/security.html#countermeasures
-ActiveRecord::Base.send(:attr_accessible, nil)
+ActiveRecord::Base.send(:attr_accessible)

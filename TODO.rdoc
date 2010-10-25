@@ -1,6 +1,5 @@
 == Big-Picture Arc
 
-* Sell Products
 * Sell SKUs
 * Sell Packagings
 * Ship Orders

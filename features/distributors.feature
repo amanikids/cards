@@ -6,5 +6,6 @@ Feature: Distributors ship products
   @wip
   Scenario: Shipping an order
     Given an unshipped order for "Canada"
-    When I have signed in as the distributor for "Canada"
-    Then I should see the order
+    And I have signed in as the distributor for "Canada"
+    When I press "Ship this Order" for the order
+    Then I should see that the order has been shipped

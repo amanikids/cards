@@ -15,6 +15,12 @@ Given /^I have signed in as the distributor for "([^"]*)"$/ do |name|
 end
 
 Given /^an unshipped order for "([^"]*)"$/ do |name|
-  store = Store.find_by_name(name) || Store.make!(:name => name)
-  order = Order.make!(:store => store)
+  store  = Store.find_by_name(name) || Store.make!(:name => name)
+  @order = Order.make!(:store => store)
+end
+
+When /^I press "([^"]*)" for the order$/ do |label|
+  with_scope(dom_id(@order)) do
+    When %{I press "#{label}"}
+  end
 end

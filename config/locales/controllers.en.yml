@@ -1,5 +1,9 @@
 en:
   controllers:
+    distributor:
+      application:
+        distributor_required: 'Please sign in as a distributor.'
+
     checkout:
       paypal:
         cancel: "Checkout canceled."

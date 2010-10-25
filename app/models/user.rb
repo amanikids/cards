@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def distributor?
+    false
+  end
+
   def password=(password)
     unless password.blank?
       self.password_hash = BCrypt::Password.create(password)

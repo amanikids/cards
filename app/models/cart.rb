@@ -1,5 +1,5 @@
 class Cart < ActiveRecord::Base
-  has_many :items
+  has_many :items, :inverse_of => :cart
 
   def empty?
     items.blank?

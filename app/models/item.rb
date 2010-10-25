@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  belongs_to :cart
+  belongs_to :cart, :inverse_of => :items
   belongs_to :product
 
   attr_accessible :product_id

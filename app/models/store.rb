@@ -1,5 +1,5 @@
 class Store < ActiveRecord::Base
-  has_one :distributor
+  has_one :distributor, :inverse_of => :store
 
   belongs_to :paypal_account
 

@@ -34,4 +34,5 @@ group :test do
   gem 'sham_rack'
   gem 'shoulda'
   gem 'sinatra', :require => 'sinatra/base'
+  gem 'spork'
 end

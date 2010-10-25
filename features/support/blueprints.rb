@@ -1,5 +1,9 @@
-require 'spec/support/blueprints'
+Spork.prefork do
+  require 'spec/support/blueprints'
+end
 
-Before do
-  Machinist.reset_before_test
+Spork.each_run do
+  Before do
+    Machinist.reset_before_test
+  end
 end

@@ -14,7 +14,7 @@ Given /^I have signed in as the distributor for "([^"]*)"$/ do |name|
   And   %{I press "Sign in"}
 end
 
-Given /^an unshipped order for "([^"]*)"$/ do |store|
-  store = Store.find_by_name(name) || Store.make!(:name => store)
+Given /^an unshipped order for "([^"]*)"$/ do |name|
+  store = Store.find_by_name(name) || Store.make!(:name => name)
   order = Order.make!(:store => store)
 end

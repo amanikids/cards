@@ -61,4 +61,10 @@ describe User do
       }
     end
   end
+
+  it 'is a distributor when associated with a distributor record' do
+    lambda { Distributor.make!(:user => user) }.should change {
+      user.distributor?
+    }.to(true)
+  end
 end

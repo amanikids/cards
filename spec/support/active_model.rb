@@ -1,7 +1,3 @@
-class UserSession
-  include RSpec::Rails::Extensions::ActiveRecord::InstanceMethods
-end
-
 shared_examples_for 'an ActiveModel' do
   include ActiveModel::Lint::Tests
 

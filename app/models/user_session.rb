@@ -3,8 +3,13 @@ class UserSession
   include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
 
-  attr_accessor   :email, :password, :session, :user
-  attr_accessible :email, :password
+  attr_accessor :email
+  attr_accessor :password
+  attr_accessor :session
+  attr_accessor :user
+
+  attr_accessible :email
+  attr_accessible :password
 
   class AuthenticValidator < ActiveModel::Validator
     def validate(record)

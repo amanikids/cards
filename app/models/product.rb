@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
-  attr_accessible :name, :price
+  attr_accessible :name
+  attr_accessible :price
 
   validates :name,
     :presence => true,

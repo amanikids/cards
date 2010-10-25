@@ -13,7 +13,7 @@ module NavigationHelpers
     when /the administrator home page/
       '/admin'
     when /the distributor home page/
-      '/distributors'
+      '/distributor'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

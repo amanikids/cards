@@ -6,6 +6,7 @@ describe Order do
   context 'associations' do
     it { should belong_to(:cart) }
     it { should belong_to(:payment) }
+    it { should belong_to(:store) }
   end
 
   context 'create' do

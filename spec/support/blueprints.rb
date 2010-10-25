@@ -16,6 +16,7 @@ end
 Order.blueprint do
   cart
   payment { PaypalPayment.make }
+  store
 end
 
 PaypalAccount.blueprint do

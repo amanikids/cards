@@ -1,4 +1,6 @@
 class Store < ActiveRecord::Base
+  has_one :distributor
+
   belongs_to :paypal_account
 
   attr_accessible :name

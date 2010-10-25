@@ -10,12 +10,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101025082215) do
+ActiveRecord::Schema.define(:version => 20101025090247) do
 
   create_table "carts", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "distributors", :force => true do |t|
+    t.integer  "store_id",   :null => false
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "distributors", ["store_id"], :name => "index_distributors_on_store_id"
+  add_index "distributors", ["user_id"], :name => "index_distributors_on_user_id"
 
   create_table "items", :force => true do |t|
     t.integer  "cart_id",    :null => false

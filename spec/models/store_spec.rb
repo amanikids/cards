@@ -6,6 +6,7 @@ describe Store do
   end
 
   context 'associations' do
+    it { should have_one(:distributor) }
     it { should belong_to(:paypal_account) }
   end
 

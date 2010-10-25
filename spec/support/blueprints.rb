@@ -7,6 +7,11 @@ end
 Cart.blueprint do
 end
 
+Distributor.blueprint do
+  store
+  user
+end
+
 Item.blueprint do
   cart
   product

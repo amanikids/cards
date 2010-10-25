@@ -1,11 +1,18 @@
-# Given /^I have signed in as the distributor for "([^"]*)"$/ do |store|
-#   distributor = User.make!(:password => 'secret')
+Given /^I have signed in as the distributor for "([^"]*)"$/ do |name|
+  store = Store.find_by_name(name) ||
+    Store.make!(:name => name)
 
-#   Given %{I am on the distributor home page}
-#   When  %{I fill in "Email" with "#{distributor.email}"}
-#   And   %{I fill in "Password" with "secret"}
-#   And   %{I press "Sign in"}
-# end
+  distributor = store.distributor ||
+    Distributor.make!(:store => store)
+
+  user = distributor.user
+  user.update_attributes(:password => 'secret')
+
+  Given %{I am on the distributor home page}
+  When  %{I fill in "Email" with "#{user.email}"}
+  And   %{I fill in "Password" with "secret"}
+  And   %{I press "Sign in"}
+end
 
 Given /^an unshipped order for "([^"]*)"$/ do |store|
   store = Store.find_by_name(name) || Store.make!(:name => store)

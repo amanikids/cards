@@ -1,6 +1,6 @@
 %h1= t('.title')
 
-= form_for [:distributor, @user_session] do |form|
+= form_for [:distribute, @user_session] do |form|
   - if @user_session.errors.present?
     .errors
       = @user_session.errors.full_messages.to_sentence.concat('.')

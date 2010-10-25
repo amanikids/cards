@@ -1,6 +1,6 @@
 en:
   controllers:
-    distributor:
+    distribute:
       application:
         distributor_required: 'Please sign in as a distributor.'
 

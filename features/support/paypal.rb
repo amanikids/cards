@@ -17,6 +17,11 @@ class ShamPaypal < Sinatra::Base
     abort env['sinatra.error'].message
   end
 
+  # Setup Methods -----------------------------------------------------
+  class << self
+    attr_accessor :shipping_address
+  end
+
   # Web UI Methods ----------------------------------------------------
   def _express_checkout(params)
     redirect @@xml_request['ReturnURL'] + '?token=42&PayerID=1234567890'
@@ -37,6 +42,10 @@ class ShamPaypal < Sinatra::Base
   end
 
   def get_express_checkout_details_request(xml)
+    shipping_address_xml = self.class.shipping_address.map { |field, value|
+      "<#{field}>#{value}</#{field}>"
+    }.join
+
     return <<-XML
       <GetExpressCheckoutDetailsResponse>
         <Ack>Success</Ack>
@@ -48,13 +57,7 @@ class ShamPaypal < Sinatra::Base
           </PayerInfo>
           <PaymentDetails>
             <ShipToAddress>
-              <Name>Bob Loblaw</Name>
-              <Street1>123 Main St.</Street1>
-              <Street2></Street2>
-              <CityName>Anytown</CityName>
-              <StateOrProvince>AB</StateOrProvince>
-              <Country>US</Country>
-              <PostalCode>12345</PostalCode>
+              #{shipping_address_xml}
             </ShipToAddress>
           </PaymentDetails>
         </GetExpressCheckoutDetailsResponseDetails>
@@ -75,6 +78,7 @@ class ShamPaypal < Sinatra::Base
 
   private
 
+  # TODO work this into the class attr_accessor scheme.
   def capture_xml_request(xml)
     @@xml_request ||= {}
     xml.elements.each do |element|

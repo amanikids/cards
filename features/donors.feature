@@ -15,9 +15,22 @@ Feature: Donors buy products
     Then I see the following cart:
       | Poinsettia | 1 | 10 |
 
-    When I press "Check out with PayPal"
+    When my PayPal shipping address is:
+      | Name            | Bob Loblaw    |
+      | Street1         | 123 Main St.  |
+      | Street2         |               |
+      | CityName        | Anytown       |
+      | StateOrProvince | NY            |
+      | Country         | United States |
+      | PostalCode      | 12345         |
+    And I press "Check out with PayPal"
     Then I see the following order:
       | Poinsettia | 1 | 10 |
+    And I see the following address:
+      | name    | Bob Loblaw        |
+      | line_1  | 123 Main St.      |
+      | line_2  | Anytown, NY 12345 |
+      | country | United States     |
 
     When I press "Confirm your Order"
     Then I see the following order:

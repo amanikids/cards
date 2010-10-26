@@ -16,6 +16,12 @@ Given /^these products are for sale:$/ do |table|
   end
 end
 
+When /^my PayPal shipping address is:$/ do |table|
+  ShamPaypal.configure do |app|
+    app.shipping_address = table.raw
+  end
+end
+
 # TODO need to clean up these cart/order steps
 Then /^I see an empty cart$/ do
   cart = tableish('table.cart tbody tr', 'td')
@@ -30,4 +36,8 @@ Then /^I see the following order:$/ do |expected|
   with_scope('.order') do
     Then %{I see the following cart:}, expected
   end
+end
+
+Then /^I see the following address:$/ do |expected|
+  expected.transpose.diff! tableish('.address', 'div')
 end

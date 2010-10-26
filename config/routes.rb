@@ -23,10 +23,10 @@ Cards::Application.routes.draw do
       get  '/sign_out' => :destroy, :as => 'destroy_user_session'
     end
 
-    resources :orders,
-      :only => [:index]
+    resources :stores,
+      :only => [:index, :show]
 
-    root :to => redirect('/distributor/orders', :status => 302)
+    root :to => redirect('/distributor/stores', :status => 302)
   end
 
   scope '/:store_id', :as => 'store', :constraints => { :store_id => /[a-z][a-z]/ } do

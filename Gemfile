@@ -15,8 +15,9 @@ gem 'pg'
 gem 'rails'
 
 group :development do
-  gem 'autotest', :require => false
-  gem 'heroku',   :require => false
+  gem 'autotest',       :require => false
+  gem 'autotest-growl', :require => false
+  gem 'heroku',         :require => false
 end
 
 # Include rspec-rails in :development so we get `rake spec`.

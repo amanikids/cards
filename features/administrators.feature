@@ -12,3 +12,9 @@ Feature: Administrators manage products
     And I press "Create Product"
     Then I should see the following products:
       | Poinsettia Card | 10 |
+
+  @wip
+  Scenario: Signing in as a non-administrator
+    Given I am a regular user
+    When I sign in on the administrator home page
+    Then I should see "Please sign in as an administrator."

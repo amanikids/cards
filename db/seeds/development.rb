@@ -1,4 +1,9 @@
+Product.find_or_initialize_by_name('Poinsettia').tap do |card|
+  card.update_attributes!(:price => 10)
+end
+
 Store.find_or_initialize_by_slug('us').tap do |store|
+  store.distributor    = User.find_by_email!('matthew@amanikids.org')
   store.paypal_account = PaypalAccount.find_or_initialize_by_login(ENV['PAYPAL_LOGIN']).tap do |account|
     account.update_attributes!(
       :password  => ENV['PAYPAL_PASSWORD'],
@@ -12,10 +17,22 @@ Store.find_or_initialize_by_slug('us').tap do |store|
   )
 end
 
-Product.find_or_initialize_by_name('Poinsettia').tap do |card|
-  card.update_attributes!(:price => 10)
-end
-
 User.find_each do |user|
   user.update_attributes!(:password => 'secret')
+end
+
+Cart.create!.tap do |cart|
+  cart.items.create!(
+    :product_id => Product.first.id,
+    :quantity   => 1
+  )
+
+  Order.new.tap do |order|
+    order.cart    = cart
+    order.payment = PaypalPayment.create!(
+      :token    => 'foo',
+      :payer_id => 'bar'
+    )
+    order.store   = Store.first
+  end.save!
 end

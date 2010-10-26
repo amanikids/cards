@@ -3,6 +3,9 @@ class Store < ActiveRecord::Base
     :class_name => 'User',
     :inverse_of => :stores
 
+  has_many :orders,
+    :inverse_of => :store
+
   belongs_to :paypal_account
 
   attr_accessible :currency

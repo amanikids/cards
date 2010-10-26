@@ -16,8 +16,6 @@ Given /^an unshipped order for "([^"]*)"$/ do |name|
   @order = Order.make!(:store => store)
 end
 
-When /^I press "([^"]*)" for the order$/ do |label|
-  with_scope(dom_id(@order)) do
-    When %{I press "#{label}"}
-  end
+When /^I press "([^"]*)" for the order$/ do |button|
+  When %{I press "#{button}" within "##{dom_id(@order)}"}
 end

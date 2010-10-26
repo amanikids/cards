@@ -1,5 +1,8 @@
 class Store < ActiveRecord::Base
-  belongs_to :distributor, :class_name => 'User'
+  belongs_to :distributor,
+    :class_name => 'User',
+    :inverse_of => :stores
+
   belongs_to :paypal_account
 
   attr_accessible :currency

@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  has_many :stores,
+    :foreign_key => :distributor_id,
+    :inverse_of  => :distributor
+
   composed_of :password_hash,
     :class_name => 'BCrypt::Password'
 
@@ -21,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def distributor?
-    false
+    not stores.count.zero?
   end
 
   def password=(password)

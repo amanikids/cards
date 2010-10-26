@@ -5,6 +5,10 @@ describe User do
     User.make! :password => 'password'
   end
 
+  context 'associations' do
+    it { should have_many(:stores) }
+  end
+
   context 'attributes' do
     it { should allow_mass_assignment_of(:email) }
     it { should allow_mass_assignment_of(:password) }
@@ -60,5 +64,11 @@ describe User do
         user.password_recovery_token
       }
     end
+  end
+
+  it 'is a distributor when associated with a Store' do
+    lambda { Store.make!(:distributor => user) }.should change {
+      user.distributor?
+    }
   end
 end

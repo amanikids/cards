@@ -1,0 +1,11 @@
+en:
+  distributor:
+    stores:
+      index:
+        title: "Please select your store."
+      show:
+        title: "Here are all your orders. Thank you!"
+
+    user_sessions:
+      new:
+        title: "Welcome! Please sign in."

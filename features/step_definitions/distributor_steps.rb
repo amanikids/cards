@@ -19,3 +19,7 @@ end
 When /^I press "([^"]*)" for the order$/ do |button|
   When %{I press "#{button}" within "##{dom_id(@order)}"}
 end
+
+Then /^I should see that the order has been shipped$/ do
+  Then %{I should see "Shipped less than a minute ago" within ".shipped ##{dom_id(@order)}"}
+end

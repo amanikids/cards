@@ -1,2 +1,17 @@
 %h1= t('.title')
-= render(@store.orders)
+
+%section.unshipped
+  %h1= t('.unshipped.title')
+  = render(                                        |
+    :as         => :order,                         |
+    :partial    => 'distributor/orders/unshipped', |
+    :collection => @store.orders.unshipped         |
+  )                                                |
+
+%section.shipped
+  %h1= t('.shipped.title')
+  = render(                                        |
+    :as         => :order,                         |
+    :partial    => 'distributor/orders/shipped',   |
+    :collection => @store.orders.shipped           |
+  )                                                |

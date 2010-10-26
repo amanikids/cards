@@ -1,14 +1,20 @@
 en:
   distributor:
     orders:
-      order:
+      unshipped:
         ship: "Ship this Order"
+      shipped:
+        time: "Shipped %{time} ago."
 
     stores:
       index:
         title: "Please select your store."
       show:
         title: "Here are all your orders. Thank you!"
+        unshipped:
+          title: Unshipped orders
+        shipped:
+          title: Shipped orders
 
     user_sessions:
       new:

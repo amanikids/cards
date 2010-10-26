@@ -19,6 +19,14 @@ Order.blueprint do
   store
 end
 
+Order.blueprint(:shipped) do
+  shipped_at { Time.zone.now }
+end
+
+Order.blueprint(:unshipped) do
+  shipped_at { nil }
+end
+
 PaypalAccount.blueprint do
   login     { Faker::Internet.email }
   password  { Faker.letterify('????????') }

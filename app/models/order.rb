@@ -1,4 +1,7 @@
 class Order < ActiveRecord::Base
+  scope :shipped,   where(arel_table[:shipped_at].eq(nil).not)
+  scope :unshipped, where(arel_table[:shipped_at].eq(nil))
+
   belongs_to :cart
   belongs_to :payment, :polymorphic => true
   belongs_to :store, :inverse_of => :orders

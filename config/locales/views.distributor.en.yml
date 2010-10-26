@@ -1,5 +1,9 @@
 en:
   distributor:
+    orders:
+      order:
+        ship: "Ship this Order"
+
     stores:
       index:
         title: "Please select your store."

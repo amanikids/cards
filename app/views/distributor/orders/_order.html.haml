@@ -1,2 +1,5 @@
 %section[order]
   = render('carts/cart', :cart => order.cart)
+  = form_for [:distributor, @store, order] do |form|
+    .buttons
+      = form.submit t('.ship')

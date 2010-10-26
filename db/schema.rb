@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101025082215) do
+ActiveRecord::Schema.define(:version => 20101026095719) do
 
   create_table "carts", :force => true do |t|
     t.datetime "created_at"
@@ -34,8 +34,10 @@ ActiveRecord::Schema.define(:version => 20101025082215) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "store_id",     :null => false
+    t.datetime "shipped_at"
   end
 
+  add_index "orders", ["shipped_at"], :name => "index_orders_on_shipped_at"
   add_index "orders", ["store_id"], :name => "index_orders_on_store_id"
   add_index "orders", ["token"], :name => "index_orders_on_token", :unique => true
 

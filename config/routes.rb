@@ -24,7 +24,10 @@ Cards::Application.routes.draw do
     end
 
     resources :stores,
-      :only => [:index, :show]
+      :only => [:index, :show] do
+      resources :orders,
+        :only => [:update]
+    end
 
     root :to => redirect('/distributor/stores', :status => 302)
   end

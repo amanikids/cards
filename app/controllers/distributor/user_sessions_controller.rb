@@ -1,4 +1,4 @@
-class Distribute::UserSessionsController < Distribute::ApplicationController
+class Distributor::UserSessionsController < Distributor::ApplicationController
   skip_before_filter :require_current_user, :only => %w( new create )
 
   def new
@@ -8,7 +8,7 @@ class Distribute::UserSessionsController < Distribute::ApplicationController
   def create
     @user_session = UserSession.new(session, params[:user_session])
     if @user_session.save
-      redirect_to distribute_root_path
+      redirect_to distributor_root_path
     else
       render :new
     end

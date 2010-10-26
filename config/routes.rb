@@ -14,10 +14,10 @@ Cards::Application.routes.draw do
     root :to => redirect('/admin/products', :status => 302)
   end
 
-  namespace :distribute do
+  namespace :distributor do
     controller :user_sessions do
       # TODO learn how to make these custom routes be named
-      # 'new_distribute_user_session' instead of 'distribute_new_user_session'
+      # 'new_distributor_user_session' instead of 'distributor_new_user_session'
       get  '/sign_in'  => :new,     :as => 'new_user_session'
       post '/sign_in'  => :create,  :as => 'user_sessions'
       get  '/sign_out' => :destroy, :as => 'destroy_user_session'
@@ -26,7 +26,7 @@ Cards::Application.routes.draw do
     resources :orders,
       :only => [:index]
 
-    root :to => redirect('/distribute/orders', :status => 302)
+    root :to => redirect('/distributor/orders', :status => 302)
   end
 
   scope '/:store_id', :as => 'store', :constraints => { :store_id => /[a-z][a-z]/ } do

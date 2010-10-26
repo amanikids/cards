@@ -13,7 +13,7 @@ screen -t shell 1
 stuff "git out && git st\012"
 # - run autotest in window 2
 screen -t autotest 2
-stuff "autotest\012"
+stuff "AUTOFEATURE=true autotest\012"
 # - run a server in window 3
 screen -t server 3
 stuff "rails s -b 127.0.0.1\012"

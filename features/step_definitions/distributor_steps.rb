@@ -7,10 +7,7 @@ Given /^I am the distributor for "([^"]*)"$/ do |name|
   store = Store.find_by_name(name) ||
     Store.make!(:name => name)
 
-  distributor = store.distributor ||
-    Distributor.make!(:store => store)
-
-  @user = distributor.user
+  @user = store.distributor
   @user.update_attributes(:password => 'secret')
 end
 

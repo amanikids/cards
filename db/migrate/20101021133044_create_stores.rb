@@ -4,6 +4,7 @@ class CreateStores < ActiveRecord::Migration
       t.string :name, :null => false
       t.string :slug, :null => false
       t.string :currency, :null => false
+      t.references :distributor, :null => false
       t.references :paypal_account, :null => false
       t.timestamps
     end

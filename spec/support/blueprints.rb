@@ -7,11 +7,6 @@ end
 Cart.blueprint do
 end
 
-Distributor.blueprint do
-  store
-  user
-end
-
 Item.blueprint do
   cart
   product
@@ -41,9 +36,10 @@ Product.blueprint do
 end
 
 Store.blueprint do
-  name { Faker::Address.city }
-  slug { Faker.letterify('??') }
-  currency { 'USD' }
+  name           { Faker::Address.city }
+  slug           { Faker.letterify('??') }
+  currency       { 'USD' }
+  distributor    { User.make }
   paypal_account { PaypalAccount.make }
 end
 

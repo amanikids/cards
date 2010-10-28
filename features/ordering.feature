@@ -29,7 +29,8 @@ Feature: Donors buy products
     And I see the following address:
       | Bob Loblaw        |
       | 123 Main St.      |
-      | Anytown, NY 12345 |
+      | Anytown, NY       |
+      | 12345             |
       | United States     |
     When I press "Confirm your Order"
     Then I see the following order:

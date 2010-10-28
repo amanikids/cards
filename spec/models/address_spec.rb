@@ -42,8 +42,12 @@ describe Address do
       address.line_1.should == '123 Main St.'
     end
 
-    it 'merges the city, state, zip' do
-      address.line_2.should == 'Anytown, NY 09876'
+    it 'merges the city and state' do
+      address.line_2.should == 'Anytown, NY'
+    end
+
+    it 'copies the zipcode' do
+      address.line_3.should == '09876'
     end
 
     it 'copies the country' do
@@ -68,8 +72,12 @@ describe Address do
       address.line_2.should == 'Apt. 4'
     end
 
-    it 'merges the city, state, zip into line 3' do
-      address.line_3.should == 'Anytown, NY 09876'
+    it 'merges the city and state into line 3' do
+      address.line_3.should == 'Anytown, NY'
+    end
+
+    it 'copies the zipcode into line 4' do
+      address.line_4.should == '09876'
     end
   end
 end

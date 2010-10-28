@@ -52,9 +52,13 @@ class Checkout::PaypalController < ApplicationController
   def build_order
     result = @gateway.details_for(params[:token])
 
-    redirect_to error_path, :alert => error_alert(result) unless result.success?
+    unless result.success?
+      redirect_to error_path, :alert => error_alert(result)
+      return
+    end
 
     @order = Order.new
+    @order.address = Address.from_paypal_details(result.address)
     @order.cart    = current_cart
     @order.payment = PaypalPayment.new(
       :token    => params[:token],

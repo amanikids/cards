@@ -16,4 +16,42 @@ describe Address do
     it { should validate_presence_of(:line_2) }
     it { should validate_presence_of(:country) }
   end
+
+  context 'from paypal details' do
+    let 'address' do
+      Address.from_paypal_details(
+        'name'     => 'Bob Loblaw',
+        'address1' => '123 Main St.',
+        'address2' => 'Apt. 4',
+        'city'     => 'Anytown',
+        'state'    => 'NY',
+        'country'  => 'USA',
+        'zip'      => '09876'
+      )
+    end
+
+    it 'builds a new record' do
+      address.should be_a_new_record
+    end
+
+    it 'copies the name' do
+      address.name.should == 'Bob Loblaw'
+    end
+
+    it 'copies the address1' do
+      address.line_1.should == '123 Main St.'
+    end
+
+    it 'copies the address2' do
+      address.line_2.should == 'Apt. 4'
+    end
+
+    it 'merges the city, state, zip' do
+      address.line_3.should == 'Anytown, NY 09876'
+    end
+
+    it 'copies the country' do
+      address.country.should == 'USA'
+    end
+  end
 end

@@ -28,6 +28,12 @@ Cart.create!.tap do |cart|
   )
 
   Order.new.tap do |order|
+    order.address = Address.create!(
+      :name    => 'Bob Loblaw',
+      :line_1  => '123 Main St.',
+      :line_2  => 'Anytown, NY 09876',
+      :country => 'United States'
+    )
     order.cart    = cart
     order.payment = PaypalPayment.create!(
       :token    => 'foo',

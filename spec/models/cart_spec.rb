@@ -8,6 +8,7 @@ describe Cart do
   context 'associations' do
     it { should belong_to(:store) }
     it { should have_many(:items) }
+    it { should have_one(:order) }
   end
 
   it 'is empty when it has no items' do

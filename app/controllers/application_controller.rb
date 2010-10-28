@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def current_cart
     @current_cart ||= begin
                         if session[:cart_id]
-                          @store.carts.find(session[:cart_id])
+                          @store.carts.find_by_id(session[:cart_id]) || @store.carts.build
                         else
                           @store.carts.build
                         end

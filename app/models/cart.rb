@@ -1,5 +1,12 @@
 class Cart < ActiveRecord::Base
-  has_many :items, :inverse_of => :cart
+  belongs_to :store,
+    :inverse_of => :carts
+
+  has_many :items,
+    :inverse_of => :cart
+
+  has_one :order,
+    :inverse_of => :cart
 
   def empty?
     items.blank?

@@ -36,7 +36,7 @@ end
 
 Given /^an unshipped order for "([^"]*)"$/ do |name|
   store  = Store.find_by_name(name) || Store.make!(:name => name)
-  @order = Order.make!(:store => store)
+  @order = Order.make!(:cart => Cart.make!(:store => store))
 end
 
 # Shams ---------------------------------------------------------------

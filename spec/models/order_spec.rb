@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Order do
-  let(:order) { Order.make! }
+  let 'order' do
+    Order.make!
+  end
 
   context 'scopes' do
     it 'shows shipped orders' do
@@ -25,7 +27,7 @@ describe Order do
     it { should belong_to(:address) }
     it { should belong_to(:cart) }
     it { should belong_to(:payment) }
-    it { should belong_to(:store) }
+    it { should have_one(:store) }
   end
 
   context 'create' do

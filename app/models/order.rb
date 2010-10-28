@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
   belongs_to :address
   belongs_to :cart
   belongs_to :payment, :polymorphic => true
-  belongs_to :store, :inverse_of => :orders
+  has_one :store, :through => :cart
 
   before_create :randomize_token
 

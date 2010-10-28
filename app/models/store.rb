@@ -1,10 +1,13 @@
 class Store < ActiveRecord::Base
+  has_many :carts,
+    :inverse_of => :store
+
   belongs_to :distributor,
     :class_name => 'User',
     :inverse_of => :stores
 
   has_many :orders,
-    :inverse_of => :store
+    :through => :carts
 
   belongs_to :paypal_account
 

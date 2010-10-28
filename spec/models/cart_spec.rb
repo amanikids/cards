@@ -1,9 +1,14 @@
 require 'spec_helper'
 
 describe Cart do
-  let(:cart) { Cart.make! }
+  let 'cart' do
+    Cart.make!
+  end
 
-  it { should have_many(:items) }
+  context 'associations' do
+    it { should belong_to(:store) }
+    it { should have_many(:items) }
+  end
 
   it 'is empty when it has no items' do
     cart.should be_empty

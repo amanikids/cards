@@ -20,6 +20,7 @@ Address.blueprint do
 end
 
 Cart.blueprint do
+  store
 end
 
 Item.blueprint do
@@ -32,7 +33,6 @@ Order.blueprint do
   address
   cart
   payment { PaypalPayment.make }
-  store
 end
 
 Order.blueprint(:shipped) do

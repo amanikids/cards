@@ -1,5 +1,5 @@
-Product.find_or_initialize_by_name('Poinsettia').tap do |card|
-  card.update_attributes!(:price => 10)
+User.find_each do |user|
+  user.update_attributes!(:password => 'secret')
 end
 
 Store.find_or_initialize_by_slug('us').tap do |store|
@@ -10,35 +10,34 @@ Store.find_or_initialize_by_slug('us').tap do |store|
       :signature => ENV['PAYPAL_SIGNATURE']
     )
   end
-
   store.update_attributes!(
     :name     => 'United States',
     :currency => 'USD'
   )
-end
 
-User.find_each do |user|
-  user.update_attributes!(:password => 'secret')
-end
+  store.products.find_or_initialize_by_name('Poinsettia').tap do |card|
+    card.update_attributes!(:price => 10)
+  end
 
-Cart.create!.tap do |cart|
-  cart.items.create!(
-    :product_id => Product.first.id,
-    :quantity   => 1
-  )
-
-  Order.new.tap do |order|
-    order.address = Address.create!(
-      :name    => 'Bob Loblaw',
-      :line_1  => '123 Main St.',
-      :line_2  => 'Anytown, NY 09876',
-      :country => 'United States'
+  store.carts.create!.tap do |cart|
+    cart.items.create!(
+      :product_id => store.products.first.id,
+      :quantity   => 1
     )
-    order.cart    = cart
-    order.payment = PaypalPayment.create!(
-      :token    => 'foo',
-      :payer_id => 'bar'
-    )
-    order.store   = Store.first
-  end.save!
+
+    Order.new.tap do |order|
+      order.address = Address.create!(
+        :name    => 'Bob Loblaw',
+        :line_1  => '123 Main St.',
+        :line_2  => 'Anytown, NY 09876',
+        :country => 'United States'
+      )
+      order.cart    = cart
+      order.payment = PaypalPayment.create!(
+        :token    => 'foo',
+        :payer_id => 'bar'
+      )
+    end.save!
+  end
 end
+

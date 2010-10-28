@@ -11,6 +11,9 @@ class Store < ActiveRecord::Base
 
   belongs_to :paypal_account
 
+  has_many :products,
+    :inverse_of => :store
+
   attr_accessible :currency
   attr_accessible :name
   attr_accessible :slug
@@ -25,10 +28,6 @@ class Store < ActiveRecord::Base
       :with        => /\A[a-z][a-z]\z/ },
     :presence => true,
     :uniqueness => true
-
-  def products
-    Product.all
-  end
 
   def to_param
     slug

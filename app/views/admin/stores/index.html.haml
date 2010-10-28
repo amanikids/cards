@@ -1,0 +1,5 @@
+%h1= t('.title')
+
+%ul
+  - @stores.each do |store|
+    %li[store]= link_to store.name, [:admin, store]

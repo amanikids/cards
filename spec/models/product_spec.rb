@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Product do
+  context 'associations' do
+    it { should belong_to(:store) }
+  end
+
   context 'assignment' do
     it { should allow_mass_assignment_of(:name) }
     it { should allow_mass_assignment_of(:price) }

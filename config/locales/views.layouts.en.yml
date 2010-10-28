@@ -8,7 +8,7 @@ en:
             signed_in_as: "Signed in as"
             sign_out_prompt: "Not you?"
             sign_out: "Sign out."
-          products: Products
+          stores: Stores
 
       user_sessions:
         title: Sign in

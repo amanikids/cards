@@ -4,8 +4,10 @@ Feature: Administrators manage products
   So that we won't need a developer to do it
 
   Scenario: Creating a product
-    Given I have signed in as an administrator
-    When I follow "Products"
+    Given there is a store called "Canada"
+    And I have signed in as an administrator
+    When I follow "Stores"
+    And I follow "Canada"
     And I follow "Create a new Product"
     And I fill in "Name" with "Poinsettia Card"
     And I fill in "Price" with "10"

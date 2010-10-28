@@ -8,10 +8,13 @@ Cards::Application.routes.draw do
       get  '/sign_out' => :destroy, :as => 'destroy_user_session'
     end
 
-    resources :products,
-      :only => [:index, :new, :create]
+    resources :stores,
+      :only => [:index, :show] do
+      resources :products,
+        :only => [:new, :create]
+    end
 
-    root :to => redirect('/admin/products', :status => 302)
+    root :to => redirect('/admin/stores', :status => 302)
   end
 
   namespace :distributor do

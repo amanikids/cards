@@ -1,18 +1,22 @@
 class Admin::ProductsController < Admin::ApplicationController
-  def index
-    @products = Product.all
-  end
+  before_filter :load_store
 
   def new
-    @product = Product.new
+    @product = @store.products.build
   end
 
   def create
-    @product = Product.new(params[:product])
+    @product = @store.products.build(params[:product])
     if @product.save
-      redirect_to :action => :index
+      redirect_to [:admin, @store]
     else
       render :new
     end
+  end
+
+  private
+
+  def load_store
+    @store = Store.find_by_slug!(params[:store_id])
   end
 end

@@ -57,6 +57,7 @@ end
 Product.blueprint do
   name  { Faker::Name.first_name }
   price { 10 }
+  store
 end
 
 Store.blueprint do

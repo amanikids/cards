@@ -4,8 +4,9 @@ Feature: Donors buy products
   So that I can greet my friends and support Amani
 
   Scenario: Buying a product
-    Given there is a store called "Canada" that uses PayPal
-    And these products are for sale:
+    Given there is a store called "Canada"
+    And that store uses PayPal
+    And that store sells these products:
       | name       | price |
       | Poinsettia | 10    |
     And I am on the home page

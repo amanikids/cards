@@ -1,6 +1,6 @@
 %h1= t('.title')
 
-= form_for [:admin, @product] do |form|
+= form_for [:admin, @store, @product] do |form|
   - if @product.errors.present?
     .errors
       = @product.errors.full_messages.to_sentence.concat('.')

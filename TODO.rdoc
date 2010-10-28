@@ -6,6 +6,7 @@
 
 == Completeness
 
+* Admin: Ensure administrator
 * Cart: Remove items
 * Cart: Collapse items
 * Cart: Set quantity on adding

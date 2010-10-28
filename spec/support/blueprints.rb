@@ -4,6 +4,21 @@ Machinist.configure do |config|
   config.cache_objects = false
 end
 
+class Faker::Address
+  class << self
+    def city_state_zip
+      "#{city}, #{us_state_abbr} #{zip_code}"
+    end
+  end
+end
+
+Address.blueprint do
+  name   { Faker::Name.name }
+  line_1 { Faker::Address.street_address }
+  line_2 { Faker::Address.city_state_zip }
+  country { 'United States' }
+end
+
 Cart.blueprint do
 end
 
@@ -14,6 +29,7 @@ Item.blueprint do
 end
 
 Order.blueprint do
+  address
   cart
   payment { PaypalPayment.make }
   store

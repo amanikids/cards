@@ -27,10 +27,10 @@ Feature: Donors buy products
     Then I see the following order:
       | Poinsettia | 1 | 10 |
     And I see the following address:
-      | name    | Bob Loblaw        |
-      | line_1  | 123 Main St.      |
-      | line_2  | Anytown, NY 12345 |
-      | country | United States     |
+      | Bob Loblaw        |
+      | 123 Main St.      |
+      | Anytown, NY 12345 |
+      | United States     |
 
     When I press "Confirm your Order"
     Then I see the following order:

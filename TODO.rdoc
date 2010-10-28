@@ -1,13 +1,12 @@
 == Big-Picture Arc
 
-* Sell SKUs
 * Sell Packagings
-* Ship Orders
 * Track Inventory
 * Resell
 
 == Completeness
 
+* Cart: Should be store-specific
 * Cart: Recover if cart doesn't exist with session[:cart_id]
 * Cart: Remove items
 * Cart: Collapse items
@@ -16,4 +15,4 @@
 * Checkout: Ensure the cart is not empty
 * Order: Send email on create
 * Payment: JustGiving
-* Payment: Respond to PayPal notifications
+* Payment: Respond to PayPal notifications?

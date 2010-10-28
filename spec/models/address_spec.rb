@@ -22,7 +22,7 @@ describe Address do
       Address.from_paypal_details(
         'name'     => 'Bob Loblaw',
         'address1' => '123 Main St.',
-        'address2' => 'Apt. 4',
+        'address2' => '',
         'city'     => 'Anytown',
         'state'    => 'NY',
         'country'  => 'USA',
@@ -42,16 +42,34 @@ describe Address do
       address.line_1.should == '123 Main St.'
     end
 
-    it 'copies the address2' do
-      address.line_2.should == 'Apt. 4'
-    end
-
     it 'merges the city, state, zip' do
-      address.line_3.should == 'Anytown, NY 09876'
+      address.line_2.should == 'Anytown, NY 09876'
     end
 
     it 'copies the country' do
       address.country.should == 'USA'
+    end
+  end
+
+  context 'from paypal details, with an address2' do
+    let 'address' do
+      Address.from_paypal_details(
+        'name'     => 'Bob Loblaw',
+        'address1' => '123 Main St.',
+        'address2' => 'Apt. 4',
+        'city'     => 'Anytown',
+        'state'    => 'NY',
+        'country'  => 'USA',
+        'zip'      => '09876'
+      )
+    end
+
+    it 'copies the address2' do
+      address.line_2.should == 'Apt. 4'
+    end
+
+    it 'merges the city, state, zip into line 3' do
+      address.line_3.should == 'Anytown, NY 09876'
     end
   end
 end

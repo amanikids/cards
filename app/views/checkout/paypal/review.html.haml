@@ -1,6 +1,7 @@
 %section[@order]
   %h1= t('.title')
   = render('carts/cart', :cart => @order.cart)
+  = render('addresses/address', :address => @order.address)
 
   = form_tag store_checkout_paypal_path(@store), :method => :put do
     .buttons

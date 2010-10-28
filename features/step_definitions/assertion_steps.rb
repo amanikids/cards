@@ -23,5 +23,5 @@ Then /^I see the following order:$/ do |expected|
 end
 
 Then /^I see the following address:$/ do |expected|
-  expected.diff! tableish('.address', 'div')
+  expected.diff! tableish('.address div', 'span')
 end

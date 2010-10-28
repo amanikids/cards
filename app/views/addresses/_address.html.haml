@@ -1,0 +1,15 @@
+.address
+  %div
+    %span= address.name
+  %div
+    %span= address.line_1
+  %div
+    %span= address.line_2
+  - if address.line_3?
+    %div
+      %span= address.line_3
+  - if address.line_4?
+    %div
+      %span= address.line_4
+  %div
+    %span= address.country

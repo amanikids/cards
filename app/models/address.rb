@@ -13,11 +13,19 @@ class Address < ActiveRecord::Base
 
   class << self
     def from_paypal_details(d)
+      city_state_zip = "#{d['city']}, #{d['state']} #{d['zip']}"
+
       new.tap do |address|
         address.name    = d['name']
         address.line_1  = d['address1']
-        address.line_2  = d['address2']
-        address.line_3  = "#{d['city']}, #{d['state']} #{d['zip']}"
+
+        if d['address2'].present?
+          address.line_2 = d['address2']
+          address.line_3 = city_state_zip
+        else
+          address.line_2 = city_state_zip
+        end
+
         address.country = d['country']
       end
     end

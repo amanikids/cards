@@ -31,7 +31,6 @@ Feature: Donors buy products
       | 123 Main St.      |
       | Anytown, NY 12345 |
       | United States     |
-
     When I press "Confirm your Order"
     Then I see the following order:
       | Poinsettia | 1 | 10 |

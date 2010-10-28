@@ -12,7 +12,7 @@ class Distributor::ApplicationController < ApplicationController
 
     unless current_user.distributor?
       redirect_to distributor_new_user_session_path,
-        :alert => t('controllers.distributor.application.distributor_required')
+        :alert => t('controllers.distributor.application_controller.distributor_required')
     end
   end
 

@@ -1,11 +1,11 @@
 en:
   controllers:
     distributor:
-      application:
+      application_controller:
         distributor_required: 'Please sign in as a distributor.'
 
     checkout:
-      paypal:
+      paypal_controller:
         cancel: "Checkout canceled."
         error: "Sorry, we had trouble communicating with PayPal: %{message} Perhaps you could try again?"
         not_in_progress: "Sorry, it seems like you haven't been to PayPal yet. Perhaps you could try again?"

@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe User do
+  it_behaves_like 'a model with translated attributes'
+
   let 'user' do
     User.make! :password => 'password'
   end

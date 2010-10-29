@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe PaypalAccount do
+  it_behaves_like 'a model with translated attributes'
+
   let 'paypal_account' do
     PaypalAccount.make!
   end

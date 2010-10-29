@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Product do
+  it_behaves_like 'a model with translated attributes'
+
   context 'associations' do
     it { should have_many(:packagings) }
     it { should belong_to(:store) }

@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Address do
+  it_behaves_like 'a model with translated attributes'
+
   context 'assignment' do
     it { should allow_mass_assignment_of(:name) }
     it { should allow_mass_assignment_of(:line_1) }

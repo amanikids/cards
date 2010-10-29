@@ -60,10 +60,10 @@ class Checkout::PaypalController < ApplicationController
     @order = Order.new
     @order.address = Address.from_paypal_details(result.address)
     @order.cart    = current_cart
-    @order.payment = PaypalPayment.new(
-      :token    => params[:token],
-      :payer_id => params[:PayerID]
-    )
+    @order.payment = PaypalPayment.new.tap do |payment|
+      payment.token    = params[:token]
+      payment.payer_id = params[:PayerID]
+    end
     @order.store = @store
   end
 

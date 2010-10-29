@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Order do
+  it_behaves_like 'a model with translated attributes'
+
   let 'order' do
     Order.make!
   end

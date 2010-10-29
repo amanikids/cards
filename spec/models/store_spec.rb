@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Store do
+  it_behaves_like 'a model with translated attributes'
+
   let 'store' do
     Store.make!
   end

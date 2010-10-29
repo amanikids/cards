@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Cart do
+  it_behaves_like 'a model with translated attributes'
+
   let 'cart' do
     Cart.make!
   end

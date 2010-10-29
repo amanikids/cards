@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Packaging do
+  it_behaves_like 'a model with translated attributes'
+
   let 'packaging' do
     Packaging.make!
   end

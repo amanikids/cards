@@ -1,12 +1,34 @@
-# TODO mix-in an rspec example group to test that there's a translation for
-# every accessible attribute. (This would make future translation of the site
-# easier. Spanish and German, perhaps?)
 en:
   activemodel:
     attributes:
+      address:
+        name: Name
+        line_1: 'Line 1'
+        line_2: 'Line 2'
+        line_3: 'Line 3'
+        line_4: 'Line 4'
+        country: Country
+      item:
+        packaging_id: Packaging
+        quantity: Quantity
+      packaging:
+        name: Name
+        price: Price
+        size: Size
+      paypal_account:
+        login: Login
+        password: Password
+        signature: Signature
       product:
         name: Name
         price: Price
+      store:
+        name: Name
+        slug: Slug
+        currency: Currency
       user_session:
+        email: Email address
+        password: Password
+      user:
         email: Email address
         password: Password

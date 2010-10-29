@@ -9,5 +9,6 @@ class Product < ActiveRecord::Base
 
   validates :name,
     :presence => true,
-    :uniqueness => true
+    :uniqueness => {
+      :scope => :store_id }
 end

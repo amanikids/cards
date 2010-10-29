@@ -23,9 +23,9 @@ describe Cart do
   it 'totals up its items' do
     2.times do
       Item.make!(
-        :cart     => cart,
-        :product  => Product.make!(:price => 1000),
-        :quantity => 3
+        :cart      => cart,
+        :packaging => Packaging.make!(:price => 1000),
+        :quantity  => 3
       )
     end
 

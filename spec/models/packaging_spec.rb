@@ -23,4 +23,8 @@ describe Packaging do
     it { should validate_presence_of(:size) }
     it { should validate_numericality_of(:size) }
   end
+
+  it 'delegates product_name to product' do
+    packaging.product_name.should == packaging.product.name
+  end
 end

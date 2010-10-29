@@ -25,7 +25,7 @@ end
 
 Item.blueprint do
   cart
-  product
+  packaging
   quantity { 1 }
 end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101029065232) do
+ActiveRecord::Schema.define(:version => 20101029073243) do
 
   create_table "addresses", :force => true do |t|
     t.string   "name",       :null => false
@@ -32,12 +32,12 @@ ActiveRecord::Schema.define(:version => 20101029065232) do
   add_index "carts", ["store_id"], :name => "index_carts_on_store_id"
 
   create_table "items", :force => true do |t|
-    t.integer  "cart_id",    :null => false
-    t.integer  "product_id", :null => false
-    t.integer  "quantity",   :null => false
-    t.integer  "unit_price", :null => false
+    t.integer  "cart_id",      :null => false
+    t.integer  "quantity",     :null => false
+    t.integer  "unit_price",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "packaging_id", :null => false
   end
 
   create_table "orders", :force => true do |t|

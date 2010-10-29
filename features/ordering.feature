@@ -8,15 +8,15 @@ Feature: Donors buy products
     And that store uses PayPal
     And that store sells "Poinsettia" cards
     And those cards come in these packagings:
-      | size | price |
-      | 10   | 1000  |
-      | 25   | 2500  |
+      | name    | size | price |
+      | 10-pack | 10   | 1000  |
+      | 25-pack | 25   | 2500  |
     And I am on the home page
 
     When I follow "Canada"
-    And I press "Add to Cart"
+    And I press "Add to Cart" for a "10-pack" of "Poinsettia" cards
     Then I see the following cart:
-      | Poinsettia | 1 | 10 |
+      | Poinsettia | 10-pack | 1 | 1000 |
 
     When my PayPal shipping address is:
       | Name            | Bob Loblaw    |
@@ -28,7 +28,7 @@ Feature: Donors buy products
       | PostalCode      | 12345         |
     And I press "Check out with PayPal"
     Then I see the following order:
-      | Poinsettia | 1 | 10 |
+      | Poinsettia | 10-pack | 1 | 1000 |
     And I see the following address:
       | Bob Loblaw        |
       | 123 Main St.      |
@@ -38,7 +38,7 @@ Feature: Donors buy products
 
     When I press "Confirm your Order"
     Then I see the following order:
-      | Poinsettia | 1 | 10 |
+      | Poinsettia | 10-pack | 1 | 1000 |
 
     When I go to the home page
     And I follow "Canada"

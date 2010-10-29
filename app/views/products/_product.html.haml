@@ -1,7 +1,13 @@
 %section[product]
   %h1= product.name
 
-  = form_for [@store, Item.new] do |form|
-    .buttons
-      = form.hidden_field :product_id, :value => product.id
-      = form.submit
+  %ul
+    - product.packagings.each do |packaging|
+      %li[packaging]
+        %div= packaging.name
+        %div= packaging.price
+
+        = form_for [@store, Item.new] do |form|
+          .buttons
+            = form.hidden_field :packaging_id, :value => packaging.id
+            = form.submit

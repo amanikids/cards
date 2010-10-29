@@ -1,5 +1,6 @@
 class Packaging < ActiveRecord::Base
-  belongs_to :product
+  belongs_to :product,
+    :inverse_of => :packagings
 
   attr_accessible :name
   attr_accessible :price
@@ -19,4 +20,8 @@ class Packaging < ActiveRecord::Base
       :greater_than_or_equal_to => 1,
       :only_integer => true },
     :presence => true
+
+  delegate :name,
+    :prefix => true,
+    :to => :product
 end

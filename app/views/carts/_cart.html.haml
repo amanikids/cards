@@ -2,10 +2,11 @@
   %tbody
     - cart.items.each do |item|
       %tr
+        %td= item.product_name
         %td= item.name
         %td= item.quantity
         %td= item.price
   %tfoot
     %tr
-      %td{:colspan => 2}= t('.total')
+      %td{:colspan => 3}= t('.total')
       %td= cart.total

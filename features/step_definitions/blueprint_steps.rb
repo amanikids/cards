@@ -12,18 +12,25 @@ Given /^I am a regular user$/ do
 end
 
 # Other Entities ------------------------------------------------------
-Given /^there is a store called "([^"]*)"$/ do |name|
-  @store = Store.find_by_name(name) || Store.make!(:name => name)
-end
+Given /^there is an FOA group with a PayPal account$/ do
+  @account = PaypalAccount.make
 
-Given /^that store uses PayPal$/ do
   ShamPaypal.new.tap do |paypal|
     ShamRack.mount(paypal, 'api-3t.sandbox.paypal.com', 443)
     Capybara.app = Rack::URLMap.new(
       'https://www.sandbox.paypal.com/' => paypal,
-      'http://www.example.com/'         => Rails.application
+      'http://www.example.com/'         => Capybara.app
     )
   end
+end
+
+Given /^there is an FOA group with a JustGiving account$/ do
+  @account = nil
+end
+
+Given /^there is a store called "([^"]*)"( that uses that account)?$/ do |name, uses_account|
+  attributes = uses_account ? { :paypal_account => @account } : {}
+  @store = Store.make!(attributes.merge(:name => name))
 end
 
 Given /^that store sells "([^"]*)" cards$/ do |name|

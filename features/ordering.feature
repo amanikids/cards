@@ -1,16 +1,16 @@
-Feature: Donors buy products
+Feature: Donors order cards
   As a donor
-  I want to buy some Christmas cards from Amani
+  I want to order some Christmas cards from Amani
   So that I can greet my friends and support Amani
 
-  Scenario: Buying a product
-    Given there is a store called "Canada"
-      And that store uses PayPal
+  Scenario: Ordering products (with PayPal)
+    Given there is an FOA group with a PayPal account
+      And there is a store called "Canada" that uses that account
       And that store sells "Poinsettia" cards
       And those cards come in these packagings:
           | name    | size | price |
-          | 10-pack | 10   | 1000  |
-          | 25-pack | 25   | 2500  |
+          | 10-pack | 10   |  1000 |
+          | 25-pack | 25   |  2500 |
       And I am on the home page
 
      When I follow "Canada"
@@ -43,3 +43,14 @@ Feature: Donors buy products
      When I go to the home page
       And I follow "Canada"
      Then I see an empty cart
+
+  @wip
+  Scenario: Ordering products (with JustGiving)
+    Given there is an FOA group with a JustGiving account
+      And there is a store called "United Kingdom" that uses that account
+      And that store sells "Poinsettia" cards
+      And those cards come in these packagings:
+          | name    | size | price |
+          | 10-pack | 10   |   500 |
+          | 25-pack | 25   |  1250 |
+      And I am on the home page

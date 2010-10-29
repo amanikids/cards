@@ -20,11 +20,20 @@ class ShamPaypal < Sinatra::Base
   # Setup Methods -----------------------------------------------------
   class << self
     attr_accessor :shipping_address
+    attr_accessor :xml_request
+  end
+
+  def shipping_address
+    self.class.shipping_address
+  end
+
+  def xml_request
+    self.class.xml_request ||= {}
   end
 
   # Web UI Methods ----------------------------------------------------
   def _express_checkout(params)
-    redirect @@xml_request['ReturnURL'] + '?token=42&PayerID=1234567890'
+    redirect xml_request['ReturnURL'] + '?token=42&PayerID=1234567890'
   end
 
   # API Methods -------------------------------------------------------
@@ -42,7 +51,7 @@ class ShamPaypal < Sinatra::Base
   end
 
   def get_express_checkout_details_request(xml)
-    shipping_address_xml = self.class.shipping_address.map { |field, value|
+    shipping_address_xml = shipping_address.map { |field, value|
       "<#{field}>#{value}</#{field}>"
     }.join
 
@@ -78,14 +87,12 @@ class ShamPaypal < Sinatra::Base
 
   private
 
-  # TODO work this into the class attr_accessor scheme.
   def capture_xml_request(xml)
-    @@xml_request ||= {}
     xml.elements.each do |element|
       if element.elements.any?
         capture_xml_request(element)
       else
-        @@xml_request[element.name] = element.text
+        xml_request[element.name] = element.text
       end
     end
   end

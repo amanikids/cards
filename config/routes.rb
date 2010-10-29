@@ -36,6 +36,13 @@ Cards::Application.routes.draw do
       :only => :create
 
     namespace :checkout do
+      controller :justgiving do
+        post '/justgiving'         => :create, :as => 'justgiving'
+        get  '/justgiving/address' => :address, :as => 'justgiving_address'
+        put  '/justgiving/address' => :update_address
+        get  '/justgiving/review'  => :review, :as => 'justgiving_review'
+      end
+
       controller :paypal do
         post '/paypal'        => :create, :as => 'paypal'
         get  '/paypal/cancel' => :cancel

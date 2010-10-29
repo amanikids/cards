@@ -15,7 +15,7 @@ Feature: Donors order cards
 
      When I follow "Canada"
       And I press "Add to Cart" for a "10-pack" of "Poinsettia" cards
-     Then I see the following cart:
+     Then I should see the following cart:
           | Poinsettia | 10-pack | 1 | 1000 |
 
      When my PayPal shipping address is:
@@ -27,9 +27,9 @@ Feature: Donors order cards
           | Country         | United States |
           | PostalCode      | 12345         |
       And I press "Check out with PayPal"
-     Then I see the following order:
+     Then I should see the following order:
           | Poinsettia | 10-pack | 1 | 1000 |
-      And I see the following address:
+      And I should see the following address:
           | Bob Loblaw    |
           | 123 Main St.  |
           | Anytown, NY   |
@@ -37,12 +37,12 @@ Feature: Donors order cards
           | United States |
 
      When I press "Confirm your Order"
-     Then I see that order again
-      And I see that address again
+     Then I should see that order again
+      And I should see that address again
 
      When I go to the home page
       And I follow "Canada"
-     Then I see an empty cart
+     Then I should see an empty cart
 
   Scenario: Ordering products (with JustGiving)
     Given there is an FOA group with a JustGiving account
@@ -76,9 +76,9 @@ Feature: Donors order cards
           | United Kingdom        |
 
      When I press "Donate with JustGiving"
-     Then I see that order again
-      And I see that address again
+     Then I should see that order again
+      And I should see that address again
 
      When I go to the home page
       And I follow "United Kingdom"
-     Then I see an empty cart
+     Then I should see an empty cart

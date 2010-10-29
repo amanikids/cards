@@ -1,0 +1,7 @@
+%section[@order]
+  %h1= t('.title')
+  = render('orders/order', :order => @order)
+
+  = form_tag store_checkout_justgiving_path(@store), :method => :put do
+    .buttons
+      = submit_tag t('.submit')

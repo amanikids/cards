@@ -2,27 +2,64 @@ User.find_each do |user|
   user.update_attributes!(:password => 'secret')
 end
 
+Store.find_or_initialize_by_slug('uk').tap do |store|
+  store.account     = JustgivingAccount.find_or_create_by_charity_identifier('182061')
+  store.distributor = User.find_by_email!('matthew@amanikids.org')
+  store.update_attributes!(
+    :name     => 'United Kindgom',
+    :currency => 'GBP'
+  )
+
+  store.products.find_or_create_by_name('Poinsettia').tap do |card|
+    card.packagings.find_or_initialize_by_size(10) do |packaging|
+      packaging.update_attributes!(
+        :name  => '10-pack',
+        :price => 1000
+      )
+    end
+
+    card.packagings.find_or_initialize_by_size(25) do |packaging|
+      packaging.update_attributes!(
+        :name  => '25-pack',
+        :price => 2500
+      )
+    end
+  end
+end
+
 Store.find_or_initialize_by_slug('us').tap do |store|
-  store.distributor    = User.find_by_email!('matthew@amanikids.org')
-  store.paypal_account = PaypalAccount.find_or_initialize_by_login(ENV['PAYPAL_LOGIN']).tap do |account|
+  store.account = PaypalAccount.find_or_initialize_by_login(ENV['PAYPAL_LOGIN']).tap do |account|
     account.update_attributes!(
       :password  => ENV['PAYPAL_PASSWORD'],
       :signature => ENV['PAYPAL_SIGNATURE']
     )
   end
+  store.distributor = User.find_by_email!('matthew@amanikids.org')
   store.update_attributes!(
     :name     => 'United States',
     :currency => 'USD'
   )
 
-  store.products.find_or_initialize_by_name('Poinsettia').tap do |card|
-    card.update_attributes!(:price => 10)
+  store.products.find_or_create_by_name('Poinsettia').tap do |card|
+    card.packagings.find_or_initialize_by_size(10) do |packaging|
+      packaging.update_attributes!(
+        :name  => '10-pack',
+        :price => 1000
+      )
+    end
+
+    card.packagings.find_or_initialize_by_size(25) do |packaging|
+      packaging.update_attributes!(
+        :name  => '25-pack',
+        :price => 2500
+      )
+    end
   end
 
   store.carts.create!.tap do |cart|
     cart.items.create!(
-      :product_id => store.products.first.id,
-      :quantity   => 1
+      :packaging_id => store.products.first.packagings.first.id,
+      :quantity     => 1
     )
 
     Order.new.tap do |order|
@@ -33,10 +70,11 @@ Store.find_or_initialize_by_slug('us').tap do |store|
         :country => 'United States'
       )
       order.cart    = cart
-      order.payment = PaypalPayment.create!(
-        :token    => 'foo',
-        :payer_id => 'bar'
-      )
+      order.payment = PaypalPayment.new.tap do |payment|
+        payment.token    = 'foo',
+        payment.payer_id = 'bar'
+        payment.save!
+      end
     end.save!
   end
 end

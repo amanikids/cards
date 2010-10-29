@@ -1,17 +1,16 @@
 # Users ---------------------------------------------------------------
 Given /^I am an administrator$/ do
-  @user = User.make!(:password => 'secret')
+  @user = User.make!
 end
 
 # TODO refactor to "I am the distributor for that store"
 Given /^I am the distributor for "([^"]*)"$/ do |name|
   Given %{there is a store called "#{name}"}
   @user = @store.distributor
-  @user.update_attributes(:password => 'secret')
 end
 
 Given /^I am a regular user$/ do
-  @user = User.make!(:password => 'secret')
+  @user = User.make!
 end
 
 # Other Entities ------------------------------------------------------

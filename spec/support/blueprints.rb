@@ -74,7 +74,13 @@ Store.blueprint do
   paypal_account { PaypalAccount.make }
 end
 
+# Pre-calculate the password hash once, to make specs significantly faster.
+# NOTE that this does mean some specs / features need to know that we're using
+# "secret" as the password here. I think the regained speed's probably worth
+# the trade-off.
+SECRET_PASSWORD = BCrypt::Password.create('secret')
+
 User.blueprint do
-  email    { Faker::Internet.email }
-  password { ActiveSupport::SecureRandom.hex(64) }
+  email         { Faker::Internet.email }
+  password_hash { SECRET_PASSWORD }
 end

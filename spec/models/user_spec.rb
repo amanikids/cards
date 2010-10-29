@@ -4,7 +4,7 @@ describe User do
   it_behaves_like 'a model with translated attributes'
 
   let 'user' do
-    User.make! :password => 'password'
+    User.make!
   end
 
   context 'associations' do
@@ -24,19 +24,19 @@ describe User do
 
   context 'authenticate' do
     it 'matches email and password' do
-      User.authenticate(user.email, 'password').should == user
+      User.authenticate(user.email, 'secret').should == user
     end
 
     it 'ignores email capitalization' do
-      User.authenticate(user.email.swapcase, 'password').should == user
+      User.authenticate(user.email.swapcase, 'secret').should == user
     end
 
     it 'fails on bad emails' do
-      User.authenticate('different@example.com', 'password').should be_nil
+      User.authenticate('different@example.com', 'secret').should be_nil
     end
 
     it 'fails on bad passwords' do
-      User.authenticate(user.email, 'bad password').should be_nil
+      User.authenticate(user.email, 'bad secret').should be_nil
     end
   end
 

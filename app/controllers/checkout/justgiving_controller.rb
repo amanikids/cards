@@ -1,7 +1,7 @@
 class Checkout::JustgivingController < ApplicationController
   before_filter :load_store
-  before_filter :load_address, :only => %w(address update_address review)
-  before_filter :build_order,  :only => %w(review)
+  before_filter :load_address, :only => %w(address update_address review donate)
+  before_filter :build_order,  :only => %w(review donate)
 
   def create
     redirect_to :action => 'address'
@@ -20,6 +20,10 @@ class Checkout::JustgivingController < ApplicationController
   end
 
   def donate
+    redirect_to @store.account.redirect_url(
+      :amount  => @order.cart.total,
+      :exitUrl => store_checkout_justgiving_url(@store, :donation_identifier => 'JUSTGIVING-DONATION-ID')
+    )
   end
 
   def confirm

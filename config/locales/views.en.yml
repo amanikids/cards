@@ -4,6 +4,11 @@ en:
       total: Total
 
   checkout:
+    justgiving:
+      review:
+        title: Confirm your Order
+        submit: Donate with JustGiving
+
     paypal:
       review:
         title: Confirm your Order

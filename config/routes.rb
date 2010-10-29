@@ -41,6 +41,8 @@ Cards::Application.routes.draw do
         get  '/justgiving/address' => :address, :as => 'justgiving_address'
         put  '/justgiving/address' => :update_address
         get  '/justgiving/review'  => :review, :as => 'justgiving_review'
+        put  '/justgiving'         => :donate
+        get  '/justgiving'         => :confirm
       end
 
       controller :paypal do

@@ -9,12 +9,10 @@ class ApplicationController < ActionController::Base
 
   # Cart management ---------------------------------------------------
   def current_cart
-    @current_cart ||= begin
-                        if session[:cart_id]
-                          @store.carts.find_by_id(session[:cart_id]) || @store.carts.build
-                        else
-                          @store.carts.build
-                        end
+    @current_cart ||= if session[:cart_id]
+                        @store.carts.find_by_id(session[:cart_id]) || @store.carts.build
+                      else
+                        @store.carts.build
                       end
   end
 

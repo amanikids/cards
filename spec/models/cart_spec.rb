@@ -4,7 +4,7 @@ describe Cart do
   it_behaves_like 'a model with translated attributes'
 
   let 'cart' do
-    Cart.make!
+    Cart.make
   end
 
   context 'associations' do
@@ -14,22 +14,20 @@ describe Cart do
   end
 
   it 'is empty when it has no items' do
+    cart.stub(:items).and_return([])
     cart.should be_empty
   end
 
   it 'is not empty when it has some items' do
-    Item.make!(:cart => cart)
+    cart.stub(:items).and_return([:item])
     cart.should_not be_empty
   end
 
   it 'totals up its items' do
-    2.times do
-      Item.make!(
-        :cart      => cart,
-        :packaging => Packaging.make!(:price => 1000),
-        :quantity  => 3
-      )
-    end
+    cart.stub(:items).and_return([
+      stub(:price => 2000),
+      stub(:price => 4000)
+    ])
 
     cart.total.should == 6000
   end

@@ -4,7 +4,8 @@ Feature: Distributors ship products
   So that I can ship them
 
   Scenario: Shipping an order
-    Given an unshipped order for "Canada"
+    Given there is a store called "Canada"
+    And there is an unshipped order for that store
     And I have signed in as the distributor for "Canada"
     When I follow "Canada"
     And I press "Ship this Order" for the order

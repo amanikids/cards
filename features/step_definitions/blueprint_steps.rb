@@ -38,9 +38,7 @@ Given /^those cards come in these packagings:$/ do |table|
   end
 end
 
-# TODO refactor to "an unshipped order for that store"
-Given /^an unshipped order for "([^"]*)"$/ do |name|
-  Given %{there is a store called "#{name}"}
+Given /^there is an unshipped order for that store$/ do
   @order = Order.make!(:cart => Cart.make!(:store => @store))
 end
 

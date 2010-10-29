@@ -29,9 +29,13 @@ Given /^that store uses PayPal$/ do
   end
 end
 
-Given /^that store sells these products:$/ do |table|
+Given /^that store sells "([^"]*)" cards$/ do |name|
+  @product = Product.make!(:name => name, :store => @store)
+end
+
+Given /^those cards come in these packagings:$/ do |table|
   table.hashes.each do |attributes|
-    Product.make!(attributes.merge(:store => @store))
+    Packaging.make!(attributes.merge(:product => @product))
   end
 end
 

@@ -10,6 +10,7 @@ describe Product do
     it { should allow_mass_assignment_of(:price) }
   end
 
+  # TODO scope name uniqueness to store! (db constraints?)
   context 'validations' do
     before { Product.make! }
     it { should validate_presence_of(:name) }

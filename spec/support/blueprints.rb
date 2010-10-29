@@ -43,6 +43,13 @@ Order.blueprint(:unshipped) do
   shipped_at { nil }
 end
 
+Packaging.blueprint do
+  name  { Faker::Name.first_name }
+  price { 1000 }
+  product
+  size  { 10 }
+end
+
 PaypalAccount.blueprint do
   login     { Faker::Internet.email }
   password  { Faker.letterify('????????') }

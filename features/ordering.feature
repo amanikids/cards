@@ -6,9 +6,11 @@ Feature: Donors buy products
   Scenario: Buying a product
     Given there is a store called "Canada"
     And that store uses PayPal
-    And that store sells these products:
-      | name       | price |
-      | Poinsettia | 10    |
+    And that store sells "Poinsettia" cards
+    And those cards come in these packagings:
+      | size | price |
+      | 10   | 1000  |
+      | 25   | 2500  |
     And I am on the home page
 
     When I follow "Canada"

@@ -20,8 +20,22 @@ Then /^I see the following order:$/ do |expected|
   with_scope('.order') do
     Then %{I see the following cart:}, expected
   end
+
+  # Save it for further assertions
+  @previously_expected_order = expected
 end
 
 Then /^I see the following address:$/ do |expected|
   expected.diff! tableish('.address div', 'span')
+  # Save it for further assertions
+  @previously_expected_address = expected
 end
+
+Then /^I see that order again$/ do
+  Then %{I see the following order:}, @previously_expected_order
+end
+
+Then /^I see that address again$/ do
+  Then %{I see the following address:}, @previously_expected_address
+end
+

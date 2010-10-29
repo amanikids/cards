@@ -37,8 +37,8 @@ Feature: Donors buy products
           | United States |
 
      When I press "Confirm your Order"
-     Then I see the following order:
-          | Poinsettia | 10-pack | 1 | 1000 |
+     Then I see that order again
+      And I see that address again
 
      When I go to the home page
       And I follow "Canada"

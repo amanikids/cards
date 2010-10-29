@@ -3,6 +3,7 @@ Feature: Administrators manage products
   I want to manage the products on the site by myself
   So that we won't need a developer to do it
 
+  @wip
   Scenario: Creating a product
     Given there is a store called "Canada"
     And I have signed in as an administrator

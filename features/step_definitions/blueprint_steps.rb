@@ -25,11 +25,11 @@ Given /^there is an FOA group with a PayPal account$/ do
 end
 
 Given /^there is an FOA group with a JustGiving account$/ do
-  @account = nil
+  @account = JustgivingAccount.make
 end
 
 Given /^there is a store called "([^"]*)"( that uses that account)?$/ do |name, uses_account|
-  attributes = uses_account ? { :paypal_account => @account } : {}
+  attributes = uses_account ? { :account => @account } : {}
   @store = Store.make!(attributes.merge(:name => name))
 end
 

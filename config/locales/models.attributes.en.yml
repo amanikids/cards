@@ -11,6 +11,8 @@ en:
       item:
         packaging_id: Packaging
         quantity: Quantity
+      justgiving_account:
+        charity_identifier: 'Charity ID'
       packaging:
         name: Name
         price: Price

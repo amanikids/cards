@@ -1,4 +1,8 @@
 class Store < ActiveRecord::Base
+  belongs_to :account,
+    :inverse_of => :store,
+    :polymorphic => true
+
   has_many :carts,
     :inverse_of => :store
 
@@ -8,8 +12,6 @@ class Store < ActiveRecord::Base
 
   has_many :orders,
     :through => :carts
-
-  belongs_to :paypal_account
 
   has_many :products,
     :inverse_of => :store

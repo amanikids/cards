@@ -8,10 +8,10 @@ describe Store do
   end
 
   context 'associations' do
+    it { should belong_to(:account) }
     it { should have_many(:carts) }
     it { should belong_to(:distributor) }
     it { should have_many(:orders) }
-    it { should belong_to(:paypal_account) }
     it { should have_many(:products) }
   end
 

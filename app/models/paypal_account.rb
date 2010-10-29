@@ -1,5 +1,7 @@
 class PaypalAccount < ActiveRecord::Base
-  has_one :store
+  has_one :store,
+    :as => :account,
+    :inverse_of => :account
 
   attr_accessible :login
   attr_accessible :password

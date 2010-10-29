@@ -29,6 +29,10 @@ Item.blueprint do
   quantity { 1 }
 end
 
+JustgivingAccount.blueprint do
+  charity_identifier { 42 }
+end
+
 Order.blueprint do
   address
   cart
@@ -67,11 +71,11 @@ Product.blueprint do
 end
 
 Store.blueprint do
-  name           { Faker::Address.city }
-  slug           { Faker.letterify('??') }
-  currency       { 'USD' }
-  distributor    { User.make }
-  paypal_account { PaypalAccount.make }
+  account     { PaypalAccount.make }
+  currency    { 'USD' }
+  distributor { User.make }
+  name        { Faker::Address.city }
+  slug        { Faker.letterify('??') }
 end
 
 # Pre-calculate the password hash once, to make specs significantly faster.

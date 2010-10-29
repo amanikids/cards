@@ -6,7 +6,8 @@ describe Checkout::PaypalController do
   end
 
   let 'store' do
-    stub_model Store, :paypal_account => paypal_account, :slug => 'us'
+    paypal_account.stub(:set_store_target)
+    stub_model Store, :account => paypal_account, :slug => 'us'
   end
 
   before do

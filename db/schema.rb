@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101029090406) do
+ActiveRecord::Schema.define(:version => 20101029120356) do
 
   create_table "addresses", :force => true do |t|
     t.string   "name",       :null => false
@@ -38,6 +38,12 @@ ActiveRecord::Schema.define(:version => 20101029090406) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "packaging_id", :null => false
+  end
+
+  create_table "justgiving_accounts", :force => true do |t|
+    t.string   "charity_identifier"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "orders", :force => true do |t|
@@ -91,13 +97,14 @@ ActiveRecord::Schema.define(:version => 20101029090406) do
   add_index "products", ["store_id"], :name => "index_products_on_store_id"
 
   create_table "stores", :force => true do |t|
-    t.string   "name",              :null => false
-    t.string   "slug",              :null => false
-    t.string   "currency",          :null => false
-    t.integer  "distributor_id",    :null => false
-    t.integer  "paypal_account_id", :null => false
+    t.string   "name",           :null => false
+    t.string   "slug",           :null => false
+    t.string   "currency",       :null => false
+    t.integer  "distributor_id", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id",     :null => false
+    t.string   "account_type",   :null => false
   end
 
   add_index "stores", ["slug"], :name => "index_stores_on_slug", :unique => true

@@ -46,7 +46,7 @@ class Checkout::PaypalController < ApplicationController
   private # --------------------------------------------------------------------
 
   def load_paypal_account
-    @gateway = @store.paypal_account
+    @gateway = @store.account
   end
 
   def build_order

@@ -44,7 +44,6 @@ Feature: Donors order cards
       And I follow "Canada"
      Then I see an empty cart
 
-  @wip
   Scenario: Ordering products (with JustGiving)
     Given there is an FOA group with a JustGiving account
       And there is a store called "United Kingdom" that uses that account

@@ -53,3 +53,32 @@ Feature: Donors order cards
           | 10-pack | 10   |   500 |
           | 25-pack | 25   |  1250 |
       And I am on the home page
+
+     When I follow "United Kingdom"
+      And I press "Add to Cart" for a "10-pack" of "Poinsettia" cards
+      And I press "Check out"
+      And I fill in the following:
+          | Name    | Bob Loblaw            |
+          | Line 1  | Little Hedge          |
+          | Line 2  | Brighton              |
+          | Line 3  | Southamptonsfordshire |
+          | Line 4  | 42Y X93               |
+          | Country | United Kingdom        |
+      And I press "Proceed"
+     Then I should see the following order:
+          | Poinsettia | 10-pack | 1 | 500 |
+      And I should see the following address:
+          | Bob Loblaw            |
+          | Little Hedge          |
+          | Brighton              |
+          | Southamptonsfordshire |
+          | 42Y X93               |
+          | United Kingdom        |
+
+     When I press "Donate with JustGiving"
+     Then I see that order again
+      And I see that address again
+
+     When I go to the home page
+      And I follow "United Kingdom"
+     Then I see an empty cart

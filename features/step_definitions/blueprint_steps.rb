@@ -3,9 +3,7 @@ Given /^I am an administrator$/ do
   @user = User.make!
 end
 
-# TODO refactor to "I am the distributor for that store"
-Given /^I am the distributor for "([^"]*)"$/ do |name|
-  Given %{there is a store called "#{name}"}
+Given /^I am the distributor for that store$/ do
   @user = @store.distributor
 end
 

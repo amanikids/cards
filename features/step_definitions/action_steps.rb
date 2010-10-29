@@ -3,8 +3,8 @@ Given /^I have signed in as an administrator$/ do
   And   %{I have signed in on the administrator home page}
 end
 
-Given /^I have signed in as the distributor for "([^"]*)"$/ do |name|
-  Given %{I am the distributor for "#{name}"}
+Given /^I have signed in as the distributor for that store$/ do
+  Given %{I am the distributor for that store}
   And   %{I have signed in on the distributor home page}
 end
 

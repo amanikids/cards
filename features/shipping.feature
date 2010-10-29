@@ -6,7 +6,7 @@ Feature: Distributors ship products
   Scenario: Shipping an order
     Given there is a store called "Canada"
     And there is an unshipped order for that store
-    And I have signed in as the distributor for "Canada"
+    And I have signed in as the distributor for that store
     When I follow "Canada"
     And I press "Ship this Order" for the order
     Then I should see that the order has been shipped

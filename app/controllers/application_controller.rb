@@ -1,4 +1,8 @@
+require 'concerns/controller_scoped_translations'
+
 class ApplicationController < ActionController::Base
+  include Concerns::ControllerScopedTranslations
+
   protect_from_forgery
 
   private
@@ -29,20 +33,5 @@ class ApplicationController < ActionController::Base
   # Loaders -----------------------------------------------------------
   def load_store
     @store = Store.find_by_slug!(params[:store_id])
-  end
-
-  # Translations ------------------------------------------------------
-  def translate(key, options={})
-    super scope_key_by_controller(key), options
-  end
-
-  alias :t :translate
-
-  def scope_key_by_controller(key)
-    if key.starts_with?('.')
-      "controllers.#{self.class.name.underscore.tr('/', '.')}#{key}"
-    else
-      key
-    end
   end
 end

@@ -17,6 +17,7 @@ class Checkout::JustgivingController < ApplicationController
   end
 
   def review
+    # work done in before_filters; need a real method here for RSpec?
   end
 
   def donate

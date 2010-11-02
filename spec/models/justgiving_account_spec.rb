@@ -20,18 +20,8 @@ describe JustgivingAccount do
   end
 
   it 'builds a redirect url' do
-    uri_hash(justgiving_account.redirect_url(12, 'http://example.com')).should ==
-      uri_hash('http://v3.staging.justgiving.com/donation/direct/charity/42?amount=12&exitUrl=http%3A%2F%2Fexample.com%3Fdonation_identifier%3DJUSTGIVING-DONATION-ID&frequency=single')
-  end
-
-  private
-
-  def uri_hash(uri)
-    uri = URI.parse(uri.to_s)
-    {
-      :host  => uri.host,
-      :path  => uri.path,
-      :query => Rack::Utils.parse_query(uri.query)
-    }
+    justgiving_account.redirect_url(12, 'http://example.com').should be_a_url_like(
+      'http://v3.staging.justgiving.com/donation/direct/charity/42?amount=12&exitUrl=http%3A%2F%2Fexample.com%3Fdonation_identifier%3DJUSTGIVING-DONATION-ID&frequency=single'
+    )
   end
 end

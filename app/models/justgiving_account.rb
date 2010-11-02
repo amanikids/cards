@@ -20,10 +20,6 @@ class JustgivingAccount < ActiveRecord::Base
 
   private
 
-  def append_donation_id(string)
-    "#{string}?#{DONATION_ID_KEY}=#{DONATION_ID_PLACEHOLDER}"
-  end
-
   def redirect_url_host
     'v3.staging.justgiving.com'
   end
@@ -36,5 +32,9 @@ class JustgivingAccount < ActiveRecord::Base
     { :amount    => amount,
       :exitUrl   => return_url,
       :frequency => 'single' }.to_query
+  end
+
+  def append_donation_id(url)
+    "#{url}?#{DONATION_ID_KEY}=#{DONATION_ID_PLACEHOLDER}"
   end
 end

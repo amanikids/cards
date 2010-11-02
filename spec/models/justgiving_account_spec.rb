@@ -20,12 +20,18 @@ describe JustgivingAccount do
   end
 
   it 'builds a redirect url' do
-    justgiving_account.redirect_url.should ==
-      'http://v3.staging.justgiving.com/donation/direct/charity/42?frequency=single'
+    uri_hash(justgiving_account.redirect_url(12, 'http://example.com')).should ==
+      uri_hash('http://v3.staging.justgiving.com/donation/direct/charity/42?amount=12&exitUrl=http%3A%2F%2Fexample.com%3Fdonation_identifier%3DJUSTGIVING-DONATION-ID&frequency=single')
   end
 
-  it 'builds a redirect url, appending and escaping any given parameters' do
-    justgiving_account.redirect_url(:foo => 'has spaces').should ==
-      'http://v3.staging.justgiving.com/donation/direct/charity/42?frequency=single&foo=has%20spaces'
+  private
+
+  def uri_hash(uri)
+    uri = URI.parse(uri.to_s)
+    {
+      :host  => uri.host,
+      :path  => uri.path,
+      :query => Rack::Utils.parse_query(uri.query)
+    }
   end
 end

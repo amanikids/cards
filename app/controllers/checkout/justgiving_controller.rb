@@ -21,8 +21,8 @@ class Checkout::JustgivingController < ApplicationController
 
   def donate
     redirect_to @store.account.redirect_url(
-      :amount  => @order.cart.total,
-      :exitUrl => store_checkout_justgiving_url(@store, :donation_identifier => 'JUSTGIVING-DONATION-ID')
+      @order.cart.total,
+      store_checkout_justgiving_url(@store)
     )
   end
 

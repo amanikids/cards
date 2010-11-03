@@ -36,9 +36,12 @@ Given /^there is an FOA group with a JustGiving account$/ do
   end
 end
 
-Given /^there is a store called "([^"]*)"( that uses that account)?$/ do |name, uses_account|
-  attributes = uses_account ? { :account => @account } : {}
-  @store = Store.make!(attributes.merge(:name => name))
+Given /^there is a store called "([^"]*)"(?: with currency "([^"]*)")?( that uses that account)?$/ do |name, currency, uses_account|
+  attributes = {}
+  attributes[:account]  = @account if uses_account
+  attributes[:currency] = currency if currency
+  attributes[:name]     = name
+  @store = Store.make!(attributes)
 end
 
 Given /^that store sells "([^"]*)" cards$/ do |name|

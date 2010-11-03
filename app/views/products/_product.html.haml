@@ -5,7 +5,7 @@
     - product.packagings.each do |packaging|
       %li[packaging]
         %div= packaging.name
-        %div= packaging.price
+        %div= format_currency(packaging.price, product.store.currency)
 
         = form_for [@store, Item.new] do |form|
           .buttons

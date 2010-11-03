@@ -5,7 +5,7 @@ Feature: Donors order cards
 
   Scenario: Ordering products (with PayPal)
     Given there is an FOA group with a PayPal account
-      And there is a store called "Canada" that uses that account
+      And there is a store called "United States" with currency "USD" that uses that account
       And that store sells "Poinsettia" cards
       And those cards come in these packagings:
           | name    | size | price |
@@ -13,10 +13,10 @@ Feature: Donors order cards
           | 25-pack | 25   |  2500 |
       And I am on the home page
 
-     When I follow "Canada"
+     When I follow "United States"
       And I press "Add to Cart" for a "10-pack" of "Poinsettia" cards
      Then I should see the following cart:
-          | Poinsettia | 10-pack | 1 | 1000 |
+          | Poinsettia | 10-pack | 1 | 10.00 USD |
 
      When my PayPal shipping address is:
           | Name            | Bob Loblaw    |
@@ -28,7 +28,7 @@ Feature: Donors order cards
           | PostalCode      | 12345         |
       And I press "Check out with PayPal"
      Then I should see the following order:
-          | Poinsettia | 10-pack | 1 | 1000 |
+          | Poinsettia | 10-pack | 1 | 10.00 USD |
       And I should see the following address:
           | Bob Loblaw    |
           | 123 Main St.  |
@@ -41,12 +41,12 @@ Feature: Donors order cards
       And I should see that address again
 
      When I go to the home page
-      And I follow "Canada"
+      And I follow "United States"
      Then I should see an empty cart
 
   Scenario: Ordering products (with JustGiving)
     Given there is an FOA group with a JustGiving account
-      And there is a store called "United Kingdom" that uses that account
+      And there is a store called "United Kingdom" with currency "GBP" that uses that account
       And that store sells "Poinsettia" cards
       And those cards come in these packagings:
           | name    | size | price |
@@ -66,7 +66,7 @@ Feature: Donors order cards
           | Country | United Kingdom        |
       And I press "Proceed"
      Then I should see the following order:
-          | Poinsettia | 10-pack | 1 | 500 |
+          | Poinsettia | 10-pack | 1 | 5.00 GBP |
       And I should see the following address:
           | Bob Loblaw            |
           | Little Hedge          |

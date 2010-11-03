@@ -5,8 +5,8 @@
         %td= item.product_name
         %td= item.name
         %td= item.quantity
-        %td= item.price
+        %td= format_currency(item.price, cart.store.currency)
   %tfoot
     %tr
       %td{:colspan => 3}= t('.total')
-      %td= cart.total
+      %td= format_currency(cart.total, cart.store.currency)

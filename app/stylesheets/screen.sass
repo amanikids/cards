@@ -3,11 +3,14 @@
 @import colors
 @import base
 
+$body_width = 600px
+
 body
   margin: 3em auto
-  width: 600px
+  width: $body_width
 
 h1
+  font-family: 'Century Gothic', Verdana, Arial, sans-serif
   font-size: 161.6%
 
 form
@@ -55,3 +58,13 @@ section
 
 section.cart
   background-color: #ffc
+
+section.product
+  clear: left
+  .image
+    float: left
+    width: $body_width / 2
+    img
+      width: $body_width / 2
+  .content
+    margin-left: $body_width / 2 + 12px

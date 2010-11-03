@@ -1,15 +1,16 @@
 %section[product]
-  %h1= product.name
-  %p= product.description
-  %p= image_tag(product.image_path)
+  .image= image_tag(product.image_path)
+  .content
+    %h1= product.name
+    %p= product.description
 
-  %ul
-    - product.packagings.order(:price).each do |packaging|
-      %li[packaging]
-        %div= packaging.name
-        %div= format_currency(packaging.price, product.store.currency)
+    %ul
+      - product.packagings.order(:price).each do |packaging|
+        %li[packaging]
+          %div= packaging.name
+          %div= format_currency(packaging.price, product.store.currency)
 
-        = form_for [@store, Item.new] do |form|
-          .buttons
-            = form.hidden_field :packaging_id, :value => packaging.id
-            = form.submit
+          = form_for [@store, Item.new] do |form|
+            .buttons
+              = form.hidden_field :packaging_id, :value => packaging.id
+              = form.submit

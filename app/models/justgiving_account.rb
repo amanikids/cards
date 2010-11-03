@@ -28,8 +28,8 @@ class JustgivingAccount < ActiveRecord::Base
     "/donation/direct/charity/#{charity_identifier}"
   end
 
-  def redirect_url_query(amount, return_url)
-    { :amount    => amount,
+  def redirect_url_query(amount_in_shillings, return_url)
+    { :amount    => amount_in_shillings / 100,
       :exitUrl   => return_url,
       :frequency => 'single' }.to_query
   end

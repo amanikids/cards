@@ -19,9 +19,7 @@ describe JustgivingAccount do
     it { should validate_presence_of(:charity_identifier) }
   end
 
-  it 'builds a redirect url' do
-    justgiving_account.redirect_url(12, 'http://example.com').should be_a_url_like(
-      'http://v3.staging.justgiving.com/donation/direct/charity/42?amount=12&exitUrl=http%3A%2F%2Fexample.com%3Fdonation_identifier%3DJUSTGIVING-DONATION-ID&frequency=single'
-    )
+  it 'builds a redirect url, converting shillings to pounds' do
+    justgiving_account.redirect_url(1200, 'http://example.com').should be_a_url_like('http://v3.staging.justgiving.com/donation/direct/charity/42?amount=12&exitUrl=http%3A%2F%2Fexample.com%3Fdonation_identifier%3DJUSTGIVING-DONATION-ID&frequency=single')
   end
 end

@@ -68,7 +68,6 @@ class Checkout::JustgivingController < ApplicationController
     @order.payment = JustgivingPayment.new.tap do |payment|
       payment.donation_identifier = params[:donation_identifier]
     end
-    @order.store = @store
   end
 
   def address_path

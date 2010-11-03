@@ -64,7 +64,6 @@ class Checkout::PaypalController < ApplicationController
       payment.token    = params[:token]
       payment.payer_id = params[:PayerID]
     end
-    @order.store = @store
   end
 
   def error_alert(result)

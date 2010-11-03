@@ -15,7 +15,7 @@ class JustgivingAccount < ActiveRecord::Base
     URI::HTTP.build(
       :host  => redirect_url_host,
       :path  => redirect_url_path,
-      :query => redirect_url_query(amount, append_donation_id(return_url)))
+      :query => redirect_url_query(amount, append_donation_id(return_url))).to_s
   end
 
   private

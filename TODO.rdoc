@@ -1,6 +1,5 @@
 == Big-Picture Arc
 
-* Sell Packagings
 * Track Inventory
 * Resell
 
@@ -11,7 +10,8 @@
 * Cart: Collapse items
 * Cart: Set quantity on adding
 * Cart: Use real PayPal-hosted submit button
-* Checkout: Ensure the cart is not empty
+* Checkout: Ensure cart
+* JustGiving: Production URL
 * Order: Send email on create
-* Payment: JustGiving
+* Order: Render a payment partial
 * Payment: Respond to PayPal notifications?

@@ -31,7 +31,7 @@ Store.find_or_initialize_by_slug('uk').tap do |store|
     end
   end
 
-  store.products.find_or_initialize_by_name('Pinebough').tap do |card|
+  store.products.find_or_initialize_by_name('Pine Bough').tap do |card|
     card.update_attributes!(
       :description => Faker::Lorem.paragraph,
       :image_path  => '2010/pinebough.jpg'
@@ -87,7 +87,7 @@ Store.find_or_initialize_by_slug('us').tap do |store|
     end
   end
 
-  store.products.find_or_initialize_by_name('Pinebough').tap do |card|
+  store.products.find_or_initialize_by_name('Pine Bough').tap do |card|
     card.update_attributes!(
       :description => Faker::Lorem.paragraph,
       :image_path  => '2010/pinebough.jpg'

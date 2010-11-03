@@ -6,5 +6,8 @@
     = csrf_meta_tag
     = stylesheet_link_tag 'screen'
   %body
+    %header
+      %h1= t('.header.title')
+      %h2= t('.header.subtitle')
     = render('layouts/flash', :flash => flash) if flash.present?
     = yield

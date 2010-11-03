@@ -15,3 +15,6 @@ en:
 
     application:
       title: "Amani Children's Home"
+      header:
+        title: "Amani Children's Home"
+        subtitle: "Rescuing Children. Restoring Hope. Transforming Lives."

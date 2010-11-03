@@ -16,7 +16,7 @@ Feature: Donors order cards
      When I follow "United States"
       And I press "Add to Cart" for a "10-pack" of "Poinsettia" cards
      Then I should see the following cart:
-          | Poinsettia | 10-pack | 1 | 10.00 USD |
+          | Poinsettia | 10-pack | 1 | $10.00 |
 
      When my PayPal shipping address is:
           | Name            | Bob Loblaw    |
@@ -28,7 +28,7 @@ Feature: Donors order cards
           | PostalCode      | 12345         |
       And I press "Check out with PayPal"
      Then I should see the following order:
-          | Poinsettia | 10-pack | 1 | 10.00 USD |
+          | Poinsettia | 10-pack | 1 | $10.00 |
       And I should see the following address:
           | Bob Loblaw    |
           | 123 Main St.  |
@@ -66,7 +66,7 @@ Feature: Donors order cards
           | Country | United Kingdom        |
       And I press "Proceed"
      Then I should see the following order:
-          | Poinsettia | 10-pack | 1 | 5.00 GBP |
+          | Poinsettia | 10-pack | 1 | £5.00 |
       And I should see the following address:
           | Bob Loblaw            |
           | Little Hedge          |

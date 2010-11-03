@@ -4,7 +4,7 @@
   %p= image_tag(product.image_path)
 
   %ul
-    - product.packagings.each do |packaging|
+    - product.packagings.order(:price).each do |packaging|
       %li[packaging]
         %div= packaging.name
         %div= format_currency(packaging.price, product.store.currency)

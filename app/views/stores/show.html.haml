@@ -1,10 +1,10 @@
 %header
   %h1= t('.title')
 
-= render(@store.products)
-
 - unless current_cart.empty?
   %section[current_cart]
     %h1= t('.cart.title')
     = render(current_cart)
     = render(@store.account)
+
+= render(@store.products)

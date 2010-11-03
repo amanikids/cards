@@ -1,5 +1,7 @@
 %section[product]
   %h1= product.name
+  %p= product.description
+  %p= image_tag(product.image_path)
 
   %ul
     - product.packagings.each do |packaging|

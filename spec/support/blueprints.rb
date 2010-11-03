@@ -70,7 +70,9 @@ PaypalPayment.blueprint do
 end
 
 Product.blueprint do
-  name  { Faker::Name.first_name }
+  name  { 'Poinsettia' }
+  description { Faker::Lorem.sentence }
+  image_path { '2010/poinsettia.jpg' }
   store
 end
 

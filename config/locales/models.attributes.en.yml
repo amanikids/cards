@@ -23,7 +23,8 @@ en:
         signature: Signature
       product:
         name: Name
-        price: Price
+        description: Description
+        image_path: Image
       store:
         name: Name
         slug: Slug

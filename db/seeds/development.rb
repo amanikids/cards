@@ -10,7 +10,12 @@ Store.find_or_initialize_by_slug('uk').tap do |store|
     :currency => 'GBP'
   )
 
-  store.products.find_or_create_by_name('Poinsettia').tap do |card|
+  store.products.find_or_initialize_by_name('Poinsettia').tap do |card|
+    card.update_attributes!(
+      :description => 'Lovely, just lovely!',
+      :image_path  => '2010/poinsettia.jpg'
+    )
+
     card.packagings.find_or_initialize_by_size(10) do |packaging|
       packaging.update_attributes!(
         :name  => '10-pack',
@@ -40,7 +45,12 @@ Store.find_or_initialize_by_slug('us').tap do |store|
     :currency => 'USD'
   )
 
-  store.products.find_or_create_by_name('Poinsettia').tap do |card|
+  store.products.find_or_initialize_by_name('Poinsettia').tap do |card|
+    card.update_attributes!(
+      :description => 'Lovely, just lovely!',
+      :image_path  => '2010/poinsettia.jpg'
+    )
+
     card.packagings.find_or_initialize_by_size(10) do |packaging|
       packaging.update_attributes!(
         :name  => '10-pack',

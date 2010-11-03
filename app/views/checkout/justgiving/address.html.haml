@@ -1,6 +1,9 @@
 %h1= t('.title')
 
 = form_for @address, :url => store_checkout_justgiving_address_path(@store), :html => { :method => 'put' } do |form|
+  - if @address.errors.present?
+    .errors
+      = @address.errors.full_messages.to_sentence.concat('.')
   .fields
     .field
       = form.label :name

@@ -3,7 +3,7 @@ class Checkout::PaypalController < ApplicationController
   before_filter :load_paypal_account
 
   verify :params => [:token, :PayerID], :only => [:review, :confirm],
-    :add_flash   => { :alert => I18n.t('controllers.checkout.paypal.not_in_progress') },
+    :add_flash   => { :alert => I18n.t('controllers.checkout.paypal_controller.not_in_progress') },
     :redirect_to => :error_path
 
   before_filter :build_order, :only => [:review, :confirm]

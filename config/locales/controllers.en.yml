@@ -5,6 +5,11 @@ en:
         distributor_required: 'Please sign in as a distributor.'
 
     checkout:
+      justgiving_controller:
+        not_in_progress: "Sorry, it seems like you haven't been to JustGiving yet. Perhaps you could try again?"
+        order:
+          created: "Thank you for your order!"
+
       paypal_controller:
         cancel: "Checkout canceled."
         error: "Sorry, we had trouble communicating with PayPal: %{message} Perhaps you could try again?"

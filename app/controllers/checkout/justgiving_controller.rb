@@ -12,7 +12,7 @@ class Checkout::JustgivingController < ApplicationController
     :only => %w(review donate complete)
 
   verify :params => [:donation_identifier],
-    :add_flash => { :alert => I18n.t('controllers.checkout.justgiving.not_in_progress') },
+    :add_flash => { :alert => I18n.t('controllers.checkout.justgiving_controller.not_in_progress') },
     :only => %w(complete),
     :redirect_to => :error_path
 

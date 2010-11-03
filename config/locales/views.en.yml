@@ -5,6 +5,9 @@ en:
 
   checkout:
     justgiving:
+      address:
+        title: Enter your Shipping Address
+
       review:
         title: Confirm your Order
         submit: Donate with JustGiving

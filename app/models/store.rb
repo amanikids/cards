@@ -17,6 +17,7 @@ class Store < ActiveRecord::Base
     :inverse_of => :store
 
   attr_accessible :currency
+  attr_accessible :description
   attr_accessible :name
   attr_accessible :slug
 

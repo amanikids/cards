@@ -79,6 +79,7 @@ end
 Store.blueprint do
   account     { PaypalAccount.make }
   currency    { 'USD' }
+  description { Faker::Lorem.sentence }
   distributor { User.make }
   name        { Faker::Address.city }
   slug        { Faker.letterify('??') }

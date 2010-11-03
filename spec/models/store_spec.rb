@@ -16,9 +16,10 @@ describe Store do
   end
 
   context 'attributes' do
+    it { should allow_mass_assignment_of(:currency) }
+    it { should allow_mass_assignment_of(:description) }
     it { should allow_mass_assignment_of(:name) }
     it { should allow_mass_assignment_of(:slug) }
-    it { should allow_mass_assignment_of(:currency) }
   end
 
   context 'validations' do

@@ -7,7 +7,8 @@ Store.find_or_initialize_by_slug('uk').tap do |store|
   store.distributor = User.find_by_email!('matthew@amanikids.org')
   store.update_attributes!(
     :name     => 'United Kindgom',
-    :currency => 'GBP'
+    :currency => 'GBP',
+    :description => Faker::Lorem.paragraphs(2).join("\n\n")
   )
 
   store.products.find_or_initialize_by_name('Poinsettia').tap do |card|
@@ -63,7 +64,8 @@ Store.find_or_initialize_by_slug('us').tap do |store|
   store.distributor = User.find_by_email!('matthew@amanikids.org')
   store.update_attributes!(
     :name     => 'United States',
-    :currency => 'USD'
+    :currency => 'USD',
+    :description => Faker::Lorem.paragraphs(2).join("\n\n")
   )
 
   store.products.find_or_initialize_by_name('Poinsettia').tap do |card|

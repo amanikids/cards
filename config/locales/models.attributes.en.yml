@@ -26,9 +26,10 @@ en:
         description: Description
         image_path: Image
       store:
+        currency: Currency
+        description: Description
         name: Name
         slug: Slug
-        currency: Currency
       user_session:
         email: Email address
         password: Password

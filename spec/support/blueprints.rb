@@ -33,6 +33,10 @@ JustgivingAccount.blueprint do
   charity_identifier { 42 }
 end
 
+JustgivingPayment.blueprint do
+  donation_identifier { 42 }
+end
+
 Order.blueprint do
   address
   cart

@@ -45,9 +45,32 @@ describe Checkout::JustgivingController do
 
   context 'GET review' do
     it 'assigns to @order' do
-      Address.stub(:new).and_return mock_model(Address)
+      session[:address_id] = 42
+      Address.stub(:find).with(42).and_return mock_model(Address)
       get :review, :store_id => store.slug
       assigns[:order].should be_a_new_record
+    end
+  end
+
+  context 'GET complete' do
+    def do_get(donation_identifier=42)
+      session[:address_id] = 42
+      Address.stub(:find).with(42).and_return mock_model(Address)
+      get :complete, :store_id => store.slug, :donation_identifier => donation_identifier
+    end
+
+    it 'redirects to the store if not given a donation identifier' do
+      do_get(nil)
+      response.should redirect_to(store_root_path(store))
+    end
+
+    it 'creates an order' do
+      lambda { do_get }.should change(Order, :count)
+    end
+
+    it 'redirects to the order' do
+      do_get
+      response.should redirect_to([store, assigns[:order]])
     end
   end
 end

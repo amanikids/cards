@@ -42,7 +42,7 @@ Cards::Application.routes.draw do
         put  '/justgiving/address' => :update_address
         get  '/justgiving/review'  => :review, :as => 'justgiving_review'
         put  '/justgiving'         => :donate
-        get  '/justgiving'         => :confirm
+        get  '/justgiving'         => :complete
       end
 
       controller :paypal do

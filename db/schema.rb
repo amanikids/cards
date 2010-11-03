@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101029120356) do
+ActiveRecord::Schema.define(:version => 20101103074307) do
 
   create_table "addresses", :force => true do |t|
     t.string   "name",       :null => false
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(:version => 20101029120356) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "justgiving_payments", :force => true do |t|
+    t.string   "donation_identifier", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "justgiving_payments", ["donation_identifier"], :name => "index_justgiving_payments_on_donation_identifier", :unique => true
 
   create_table "orders", :force => true do |t|
     t.integer  "cart_id",      :null => false

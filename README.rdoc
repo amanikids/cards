@@ -1,9 +1,10 @@
 = Getting Started
 
   brew install postgresql
-  hub clone -p amanikids/cards
-  cd cards
   bundle install
-  rake db:create:all
-  rake db:migrate
+  rake db:setup
   rake
+
+Since we deploy to Heroku, I'm also using postgres in development to avoid
+running into any leaky-abstraction differences between development and
+production.

@@ -21,7 +21,7 @@ class JustgivingAccount < ActiveRecord::Base
   private
 
   def redirect_url_host
-    'v3.staging.justgiving.com'
+    Rails.env.production? ? 'www.justgiving.com' : 'v3.staging.justgiving.com'
   end
 
   def redirect_url_path

@@ -11,7 +11,6 @@
 * Cart: Set quantity on adding
 * Cart: Use real PayPal-hosted submit button
 * Checkout: Ensure cart
-* JustGiving: Production URL
 * Order: Send email on create
 * Order: Render a payment partial
 * Payment: Respond to PayPal notifications?

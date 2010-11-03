@@ -19,13 +19,21 @@ Given /^there is an FOA group with a PayPal account$/ do
     ShamRack.mount(paypal, 'api-3t.sandbox.paypal.com', 443)
     Capybara.app = Rack::URLMap.new(
       'https://www.sandbox.paypal.com/' => paypal,
-      'http://www.example.com/'         => Capybara.app
+      'http://www.example.com/' => Capybara.app
     )
   end
 end
 
 Given /^there is an FOA group with a JustGiving account$/ do
   @account = JustgivingAccount.make
+
+  ShamJustgiving.new.tap do |justgiving|
+    ShamRack.mount(justgiving, 'v3.staging.justgiving.com', 80)
+    Capybara.app = Rack::URLMap.new(
+      'http://v3.staging.justgiving.com/' => justgiving,
+      'http://www.example.com/' => Capybara.app
+    )
+  end
 end
 
 Given /^there is a store called "([^"]*)"( that uses that account)?$/ do |name, uses_account|

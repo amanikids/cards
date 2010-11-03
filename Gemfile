@@ -20,8 +20,10 @@ group :development do
   gem 'heroku',         :require => false
 end
 
+# Include faker in :development so we can seed with lorem.
 # Include rspec-rails in :development so we get `rake spec`.
 group :development, :test do
+  gem 'faker'
   gem 'rspec-rails'
 end
 
@@ -29,7 +31,6 @@ group :test do
   gem 'capybara'
   gem 'cucumber-rails'
   gem 'database_cleaner'
-  gem 'faker'
   gem 'machinist', '2.0.0.beta2'
   gem 'nokogiri'
   gem 'sham_rack'

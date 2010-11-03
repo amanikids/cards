@@ -12,7 +12,7 @@ Store.find_or_initialize_by_slug('uk').tap do |store|
 
   store.products.find_or_initialize_by_name('Poinsettia').tap do |card|
     card.update_attributes!(
-      :description => 'Lovely, just lovely!',
+      :description => Faker::Lorem.paragraph,
       :image_path  => '2010/poinsettia.jpg'
     )
 
@@ -33,7 +33,7 @@ Store.find_or_initialize_by_slug('uk').tap do |store|
 
   store.products.find_or_initialize_by_name('Pinebough').tap do |card|
     card.update_attributes!(
-      :description => 'Lovely, just lovely!',
+      :description => Faker::Lorem.paragraph,
       :image_path  => '2010/pinebough.jpg'
     )
 
@@ -68,7 +68,7 @@ Store.find_or_initialize_by_slug('us').tap do |store|
 
   store.products.find_or_initialize_by_name('Poinsettia').tap do |card|
     card.update_attributes!(
-      :description => 'Lovely, just lovely!',
+      :description => Faker::Lorem.paragraph,
       :image_path  => '2010/poinsettia.jpg'
     )
 
@@ -89,7 +89,7 @@ Store.find_or_initialize_by_slug('us').tap do |store|
 
   store.products.find_or_initialize_by_name('Pinebough').tap do |card|
     card.update_attributes!(
-      :description => 'Lovely, just lovely!',
+      :description => Faker::Lorem.paragraph,
       :image_path  => '2010/pinebough.jpg'
     )
 

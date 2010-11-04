@@ -6,9 +6,11 @@
         %td= item.name
         %td= item.quantity
         %td= format_currency(item.price, cart.store.currency)
-        %td= button_to(t('.remove'), [@store, item], :method => :delete)
+        - if cart.mutable?
+          %td= button_to(t('.remove'), [@store, item], :method => :delete)
   %tfoot
     %tr
       %td{:colspan => 3}= t('.total')
       %td= format_currency(cart.total, cart.store.currency)
-      %td &nbsp;
+      - if cart.mutable?
+        %td &nbsp;

@@ -12,6 +12,10 @@ class Cart < ActiveRecord::Base
     items.blank?
   end
 
+  def mutable?
+    order.blank?
+  end
+
   def total
     items.inject(0) { |total, item| total += item.price }
   end

@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   scope :unshipped, where(arel_table[:shipped_at].eq(nil))
 
   belongs_to :address
-  belongs_to :cart
+  belongs_to :cart, :inverse_of => :order
   belongs_to :payment, :polymorphic => true
   has_one :store, :through => :cart
 

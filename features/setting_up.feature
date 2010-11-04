@@ -55,8 +55,22 @@ Feature: Administrators set up the site
      Then I should see "Store created"
       And I should see "Canada"
 
-  @wip
   Scenario: Setting up stores with JustGiving accounts
+    Given there is a JustGiving account with charity id "12345"
+      And there is a user with email address "bob@example.com"
+      And I have signed in as an administrator
+     When I follow "Stores"
+      And I follow "Create a new Store"
+      And I fill in the following:
+          | Name        | United Kingdom                    |
+          | Currency    | GBP                               |
+          | Description | Support the Amani kids, governor? |
+          | Slug        | uk                                |
+      And I select "12345" from "Account"
+      And I select "bob@example.com" from "Distributor"
+      And I press "Create Store"
+     Then I should see "Store created"
+      And I should see "United Kingdom"
 
   @wip
   Scenario: Activating Stores

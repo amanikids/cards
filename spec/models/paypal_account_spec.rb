@@ -52,4 +52,12 @@ describe PaypalAccount do
       paypal_account.purchase(10)
     end
   end
+
+  context '#display_name' do
+    it { paypal_account.display_name.should == paypal_account.login }
+  end
+
+  context '#type_slash_id' do
+    it { paypal_account.type_slash_id.should == "PaypalAccount/#{paypal_account.id}" }
+  end
 end

@@ -27,6 +27,14 @@ class PaypalAccount < ActiveRecord::Base
     gateway.purchase(amount, options.merge(:currency => store.currency))
   end
 
+  def display_name
+    login
+  end
+
+  def type_slash_id
+    "#{self.class.name}/#{id}"
+  end
+
   private
 
   def gateway

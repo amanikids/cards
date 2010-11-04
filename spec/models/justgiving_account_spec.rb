@@ -22,4 +22,12 @@ describe JustgivingAccount do
   it 'builds a redirect url, converting shillings to pounds' do
     justgiving_account.redirect_url(1200, 'http://example.com').should be_a_url_like('http://v3.staging.justgiving.com/donation/direct/charity/42?amount=12&exitUrl=http%3A%2F%2Fexample.com%3Fdonation_identifier%3DJUSTGIVING-DONATION-ID&frequency=single')
   end
+
+  context '#display_name' do
+    it { justgiving_account.display_name.should == justgiving_account.charity_identifier }
+  end
+
+  context '#type_slash_id' do
+    it { justgiving_account.type_slash_id.should == "JustgivingAccount/#{justgiving_account.id}" }
+  end
 end

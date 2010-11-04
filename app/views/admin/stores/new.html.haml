@@ -19,7 +19,7 @@
       = form.text_area :description
     .field
       = form.label :account_id
-      = form.collection_select :account_id, PaypalAccount.all, :id, :login
+      = form.collection_select :account_id, Account.all, :type_slash_id, :display_name
     .field
       = form.label :distributor_id
       = form.collection_select :distributor_id, User.all, :id, :email

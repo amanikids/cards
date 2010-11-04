@@ -18,6 +18,14 @@ class JustgivingAccount < ActiveRecord::Base
       :query => redirect_url_query(amount, append_donation_id(return_url))).to_s
   end
 
+  def display_name
+    charity_identifier
+  end
+
+  def type_slash_id
+    "#{self.class.name}/#{id}"
+  end
+
   private
 
   def redirect_url_host

@@ -40,8 +40,13 @@ Given /^there is an FOA group with a JustGiving account$/ do
   end
 end
 
+# TODO combine these steps with the above.
 Given /^there is a PayPal account with login "([^"]*)"$/ do |login|
   @account = PaypalAccount.make!(:login => login)
+end
+
+Given /^there is a JustGiving account with charity id "([^"]*)"$/ do |charity_identifier|
+  @account = JustgivingAccount.make!(:charity_identifier => charity_identifier)
 end
 
 Given /^there is a store(?: called "([^"]*)")?(?: with currency "([^"]*)")?( that uses that account)?$/ do |name, currency, uses_account|

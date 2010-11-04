@@ -25,7 +25,7 @@ class Admin::StoresController < Admin::ApplicationController
 
     if params_store = params[:store]
       if account_id = params_store[:account_id]
-        @store.account = PaypalAccount.find(account_id)
+        @store.account = Account.find(account_id)
       end
     end
   end

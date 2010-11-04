@@ -36,7 +36,7 @@ Feature: Donors order cards
           | 12345         |
           | United States |
 
-     When I press "Confirm your Order"
+     When I press "Confirm your order"
      Then I should see that order again
       And I should see that address again
 

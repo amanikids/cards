@@ -3,6 +3,7 @@ en:
     submit:
       address:
         create: Proceed
+        update: Proceed
       checkout_justgiving:
         create: Check out
       checkout_paypal:

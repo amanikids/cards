@@ -8,6 +8,7 @@ describe User do
   end
 
   context 'associations' do
+    it { should have_one(:administrator) }
     it { should have_many(:stores) }
   end
 
@@ -66,6 +67,12 @@ describe User do
         user.password_recovery_token
       }
     end
+  end
+
+  it 'is an administrator when associated with an Administrator' do
+    expect { Administrator.make!(:user => user) }.to change {
+      user.administrator?
+    }
   end
 
   it 'is a distributor when associated with a Store' do

@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_one :administrator,
+    :inverse_of => :user
+
   has_many :stores,
     :foreign_key => :distributor_id,
     :inverse_of  => :distributor
@@ -22,6 +25,10 @@ class User < ActiveRecord::Base
       user = find_by_email(email.downcase)
       user if user && user.password_hash.is_password?(password)
     end
+  end
+
+  def administrator?
+    administrator.present?
   end
 
   def distributor?

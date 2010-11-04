@@ -5,7 +5,6 @@
 
 == Completeness
 
-* Admin: Ensure administrator
 * Cart: Use real PayPal-hosted submit button
 * Checkout: Ensure cart
 * Order: Send email on create

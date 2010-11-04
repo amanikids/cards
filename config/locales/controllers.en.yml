@@ -1,5 +1,9 @@
 en:
   controllers:
+    admin:
+      application_controller:
+        administrator_required: 'Please sign in as an administrator.'
+
     distributor:
       application_controller:
         distributor_required: 'Please sign in as a distributor.'

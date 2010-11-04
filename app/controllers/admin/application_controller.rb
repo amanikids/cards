@@ -6,6 +6,14 @@ class Admin::ApplicationController < ApplicationController
   private
 
   def require_current_user
-    redirect_to admin_new_user_session_path unless current_user
+    unless current_user
+      redirect_to admin_new_user_session_path
+      return
+    end
+
+    unless current_user.administrator?
+      redirect_to admin_new_user_session_path,
+        :alert => t('controllers.admin.application_controller.administrator_required')
+    end
   end
 end

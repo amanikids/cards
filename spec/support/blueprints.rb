@@ -19,6 +19,10 @@ Address.blueprint do
   country { 'United States' }
 end
 
+Administrator.blueprint do
+  user
+end
+
 Cart.blueprint do
   store
 end

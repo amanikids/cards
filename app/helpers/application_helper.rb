@@ -11,4 +11,13 @@ module ApplicationHelper
 
     number_to_currency cents / 100, options
   end
+
+  def public_image_paths
+    images = Rails.root.join('public', 'images')
+
+    images.enum_for(:find).
+      select  { |file| file.file? }.
+      collect { |file| file.relative_path_from(images) }.
+      sort
+  end
 end

@@ -15,12 +15,19 @@ en:
       new:
         title: 'Create a new PayPal account'
 
+    products:
+      new:
+        title: 'Create a new Product'
+
     stores:
       index:
         title: Stores
         new: 'Create a new Store'
       new:
         title: 'Create a new Store'
+      show:
+        new:
+          product: 'Create a new Product'
 
     users:
       index:

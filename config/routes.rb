@@ -20,7 +20,7 @@ Cards::Application.routes.draw do
     resources :stores,
       :only => %w(index new create show) do
       resources :products,
-        :only => [:new, :create]
+        :only => %w(new create)
     end
 
     root :to => redirect('/admin/accounts', :status => 302)

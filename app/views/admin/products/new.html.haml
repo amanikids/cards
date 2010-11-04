@@ -9,7 +9,10 @@
       = form.label :name
       = form.text_field :name, :autofocus => true
     .field
-      = form.label :price
-      = form.text_field :price
+      = form.label :image_path
+      = form.select :image_path, public_image_paths
+    .field
+      = form.label :description
+      = form.text_area :description
   .buttons
     = form.submit

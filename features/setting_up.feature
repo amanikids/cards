@@ -75,8 +75,22 @@ Feature: Administrators set up the site
   @wip
   Scenario: Activating Stores
 
-  @wip
   Scenario: Setting up products
+    Given there is a store called "United States"
+      And I have signed in as an administrator
+     When I follow "Stores"
+      And I follow "United States"
+      And I follow "Create a new Product"
+      And I fill in the following:
+          | Name        | Poinsettia   |
+          | Description | Just lovely! |
+      And I select "2010/poinsettia.jpg" from "Image"
+      And I press "Create Product"
+     Then I should see "Product created"
+      And I should see "Poinsettia"
+
+  @wip
+  Scenario: Setting up Packagings
 
   Scenario: Signing in as a non-administrator
     Given I am a regular user

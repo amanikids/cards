@@ -5,7 +5,7 @@
     %p= product.description
 
     %ul
-      - product.packagings.order(:price).each do |packaging|
+      - product.packagings.each do |packaging|
         %li[packaging]
           %div= packaging.name
           %div= format_currency(packaging.price, product.store.currency)

@@ -7,7 +7,6 @@
 
 * Admin: Ensure administrator
 * Cart: Collapse items
-* Cart: Set quantity on adding
 * Cart: Use real PayPal-hosted submit button
 * Checkout: Ensure cart
 * Order: Send email on create

@@ -11,6 +11,8 @@ Cards::Application.routes.draw do
       :only => %w(index)
     resources :paypal_accounts,
       :only => %w(new create)
+    resources :justgiving_accounts,
+      :only => %w(new create)
 
     resources :stores,
       :only => [:index, :show] do

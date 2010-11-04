@@ -1,6 +1,7 @@
 en:
   activerecord:
     models:
+      justgiving_account: 'JustGiving account'
       paypal_account: 'PayPal account'
 
     attributes:

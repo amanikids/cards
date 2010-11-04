@@ -5,6 +5,7 @@ en:
         title: Accounts
         new:
           paypal: 'Create a new PayPal account'
+          justgiving: 'Create a new JustGiving account'
     paypal_accounts:
       new:
         title: 'Create a new PayPal account'

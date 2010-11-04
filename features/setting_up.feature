@@ -15,8 +15,15 @@ Feature: Administrators set up the site
      Then I should see "PayPal account created"
       And I should see "bob.example.com"
 
-  @wip
   Scenario: Setting up JustGiving accounts
+    Given I have signed in as an administrator
+     When I follow "Accounts"
+      And I follow "Create a new JustGiving account"
+      And I fill in the following:
+          | Charity ID | 12345 |
+      And I press "Create JustGiving account"
+     Then I should see "JustGiving account created"
+      And I should see "12345"
 
   @wip
   Scenario: Setting up users

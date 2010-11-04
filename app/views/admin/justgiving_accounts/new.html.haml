@@ -1,0 +1,13 @@
+%h1= t('.title')
+
+= form_for [:admin, @justgiving_account] do |form|
+  - if @justgiving_account.errors.present?
+    .errors
+      = @justgiving_account.errors.full_messages.to_sentence.concat('.')
+  .fields
+    .field
+      = form.label :charity_identifier
+      = form.text_field :charity_identifier
+  .buttons
+    = form.submit
+

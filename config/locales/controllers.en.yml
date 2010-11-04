@@ -3,6 +3,9 @@ en:
     admin:
       application_controller:
         administrator_required: 'Please sign in as an administrator.'
+      justgiving_accounts_controller:
+        create:
+          success: 'JustGiving account created.'
       paypal_accounts_controller:
         create:
           success: 'PayPal account created.'

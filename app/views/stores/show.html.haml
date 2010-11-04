@@ -6,7 +6,6 @@
 
 %header
   %h1= t('.title')
-  %p= t('.blurb.one')
-  %p= t('.blurb.two')
+  = simple_format(@store.description)
 
 = render(@store.products)

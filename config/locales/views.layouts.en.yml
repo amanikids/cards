@@ -9,6 +9,7 @@ en:
             sign_out_prompt: "Not you?"
             sign_out: "Sign out."
           accounts: Accounts
+          stores: Stores
           users: Users
 
       user_sessions:

@@ -3,3 +3,4 @@
 %ul
   - @stores.each do |store|
     %li[store]= link_to store.name, [:admin, store]
+  %li= link_to t('.new'), new_admin_store_path

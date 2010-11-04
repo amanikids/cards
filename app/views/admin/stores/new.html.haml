@@ -1,0 +1,27 @@
+%h1= t('.title')
+
+= form_for [:admin, @store] do |form|
+  - if @store.errors.present?
+    .errors
+      = @store.errors.full_messages.to_sentence.concat('.')
+  .fields
+    .field
+      = form.label :name
+      = form.text_field :name
+    .field
+      = form.label :slug
+      = form.text_field :slug
+    .field
+      = form.label :currency
+      = form.text_field :currency
+    .field
+      = form.label :description
+      = form.text_area :description
+    .field
+      = form.label :account_id
+      = form.collection_select :account_id, PaypalAccount.all, :id, :login
+    .field
+      = form.label :distributor_id
+      = form.collection_select :distributor_id, User.all, :id, :email
+  .buttons
+    = form.submit

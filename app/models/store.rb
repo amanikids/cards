@@ -18,6 +18,7 @@ class Store < ActiveRecord::Base
 
   attr_accessible :currency
   attr_accessible :description
+  attr_accessible :distributor_id
   attr_accessible :name
   attr_accessible :slug
 

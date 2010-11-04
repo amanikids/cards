@@ -18,6 +18,7 @@ describe Store do
   context 'attributes' do
     it { should allow_mass_assignment_of(:currency) }
     it { should allow_mass_assignment_of(:description) }
+    it { should allow_mass_assignment_of(:distributor_id) }
     it { should allow_mass_assignment_of(:name) }
     it { should allow_mass_assignment_of(:slug) }
   end

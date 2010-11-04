@@ -11,6 +11,10 @@ Given /^I am a regular user$/ do
   @user = User.make!
 end
 
+Given /^there is a user with email address "([^"]*)"$/ do |email|
+  @user = User.make!(:email => email)
+end
+
 # Other Entities ------------------------------------------------------
 Given /^there is an FOA group with a PayPal account$/ do
   @account = PaypalAccount.make
@@ -34,6 +38,10 @@ Given /^there is an FOA group with a JustGiving account$/ do
       'http://www.example.com/' => Capybara.app
     )
   end
+end
+
+Given /^there is a PayPal account with login "([^"]*)"$/ do |login|
+  @account = PaypalAccount.make!(:login => login)
 end
 
 Given /^there is a store(?: called "([^"]*)")?(?: with currency "([^"]*)")?( that uses that account)?$/ do |name, currency, uses_account|

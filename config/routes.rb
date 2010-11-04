@@ -18,7 +18,7 @@ Cards::Application.routes.draw do
       :only => %w(index new create)
 
     resources :stores,
-      :only => [:index, :show] do
+      :only => %w(index new create show) do
       resources :products,
         :only => [:new, :create]
     end

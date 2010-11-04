@@ -38,11 +38,28 @@ Feature: Administrators set up the site
   @wip
   Scenario: Setting up administrators
 
-  @wip
   Scenario: Setting up stores with PayPal accounts
+    Given there is a PayPal account with login "bob.example.com"
+      And there is a user with email address "bob@example.com"
+      And I have signed in as an administrator
+     When I follow "Stores"
+      And I follow "Create a new Store"
+      And I fill in the following:
+          | Name        | Canada                      |
+          | Currency    | CAD                         |
+          | Description | Support the Amani kids, eh? |
+          | Slug        | ca                          |
+      And I select "bob.example.com" from "Account"
+      And I select "bob@example.com" from "Distributor"
+      And I press "Create Store"
+     Then I should see "Store created"
+      And I should see "Canada"
 
   @wip
   Scenario: Setting up stores with JustGiving accounts
+
+  @wip
+  Scenario: Activating Stores
 
   @wip
   Scenario: Setting up products

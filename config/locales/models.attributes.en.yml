@@ -32,6 +32,7 @@ en:
       store:
         currency: Currency
         description: Description
+        distributor_id: Distributor
         name: Name
         slug: Slug
       user:

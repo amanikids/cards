@@ -1,6 +1,7 @@
 en:
   carts:
     cart:
+      remove: Remove
       total: Total
 
   checkout:

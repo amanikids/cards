@@ -21,6 +21,10 @@ When /^I press "([^"]*)" for a "([^"]*)" of "([^"]*)" cards$/ do |button, packag
   When %{I press "#{button}" within "##{dom_id(packaging)}"}
 end
 
+When /^I press "([^"]*)" for the (\d+)(?:st|nd|rd|th) item in my cart$/ do |button, index|
+  When %{I press "#{button}" within ".cart .item:nth-child(#{index})"}
+end
+
 When /^I press "([^"]*)" for the order$/ do |button|
   When %{I press "#{button}" within "##{dom_id(@order)}"}
 end

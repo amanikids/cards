@@ -8,11 +8,14 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
+    when /the home\s?page for that store/
+      store_root_path(@store)
+
     when /the home\s?page/
       '/'
-    when /the administrator home page/
+    when /the administrator home\s?page/
       '/admin'
-    when /the distributor home page/
+    when /the distributor home\s?page/
       '/distributor'
 
     # Add more mappings here.

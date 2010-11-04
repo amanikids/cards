@@ -36,11 +36,11 @@ Given /^there is an FOA group with a JustGiving account$/ do
   end
 end
 
-Given /^there is a store called "([^"]*)"(?: with currency "([^"]*)")?( that uses that account)?$/ do |name, currency, uses_account|
+Given /^there is a store(?: called "([^"]*)")?(?: with currency "([^"]*)")?( that uses that account)?$/ do |name, currency, uses_account|
   attributes = {}
   attributes[:account]  = @account if uses_account
   attributes[:currency] = currency if currency
-  attributes[:name]     = name
+  attributes[:name]     = name     if name
   @store = Store.make!(attributes)
 end
 

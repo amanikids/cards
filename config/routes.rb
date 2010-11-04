@@ -33,7 +33,7 @@ Cards::Application.routes.draw do
 
   scope '/:store_id', :as => 'store', :constraints => { :store_id => /[a-z][a-z]/ } do
     resources :items,
-      :only => :create
+      :only => [:create, :destroy]
 
     namespace :checkout do
       controller :justgiving do

@@ -42,20 +42,20 @@ describe User do
   end
 
   it 'changes the password hash when the password changes' do
-    lambda { user.password = 'changed' }.should change {
+    expect { user.password = 'changed' }.to change {
       user.password_hash
     }
   end
 
   it 'ignores blank passwords' do
-    lambda { user.password = '' }.should_not change {
+    expect { user.password = '' }.to_not change {
       user.password_hash
     }
   end
 
   context 'randomize_password!' do
     it 'changes the password hash and saves the user' do
-      lambda { user.randomize_password! }.should change {
+      expect { user.randomize_password! }.to change {
         user.reload.password_hash
       }
     end
@@ -63,7 +63,7 @@ describe User do
 
   context 'save' do
     it 'changes the password recovery token' do
-      lambda { user.save }.should change {
+      expect { user.save }.to change {
         user.password_recovery_token
       }
     end
@@ -76,7 +76,7 @@ describe User do
   end
 
   it 'is a distributor when associated with a Store' do
-    lambda { Store.make!(:distributor => user) }.should change {
+    expect { Store.make!(:distributor => user) }.to change {
       user.distributor?
     }
   end

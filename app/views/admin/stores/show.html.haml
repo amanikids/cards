@@ -2,5 +2,5 @@
 
 %ul
   - @store.products.each do |product|
-    %li[product]= product.name
+    %li[product]= link_to(product.name, admin_product_path(product))
   %li= link_to(t('.new.product'), new_admin_store_product_path(@store))

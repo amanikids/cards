@@ -15,9 +15,16 @@ en:
       new:
         title: 'Create a new PayPal account'
 
+    packagings:
+      new:
+        title: 'Create a new Packaging'
+
     products:
       new:
         title: 'Create a new Product'
+      show:
+        new:
+          packaging: 'Create a new Packaging'
 
     stores:
       index:

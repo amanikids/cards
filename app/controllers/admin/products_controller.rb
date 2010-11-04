@@ -1,6 +1,10 @@
 class Admin::ProductsController < Admin::ApplicationController
-  before_filter :load_store
-  before_filter :build_product
+  before_filter :load_store,
+    :only => %w(new create)
+  before_filter :build_product,
+    :only => %w(new create)
+  before_filter :load_product,
+    :only => %w(show)
 
   def create
     if @product.save
@@ -18,5 +22,9 @@ class Admin::ProductsController < Admin::ApplicationController
 
   def build_product
     @product = @store.products.build(params[:product])
+  end
+
+  def load_product
+    @product = Product.find(params[:id])
   end
 end

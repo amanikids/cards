@@ -89,8 +89,21 @@ Feature: Administrators set up the site
      Then I should see "Product created"
       And I should see "Poinsettia"
 
-  @wip
   Scenario: Setting up Packagings
+    Given there is a store called "United States"
+      And that store sells "Poinsettia" cards
+      And I have signed in as an administrator
+     When I follow "Stores"
+      And I follow "United States"
+      And I follow "Poinsettia"
+      And I follow "Create a new Packaging"
+      And I fill in the following:
+          | Name  | 10-pack |
+          | Size  | 10      |
+          | Price | 1000    |
+      And I press "Create Packaging"
+     Then I should see "Packaging created"
+      And I should see "10-pack"
 
   Scenario: Signing in as a non-administrator
     Given I am a regular user

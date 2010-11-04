@@ -1,0 +1,8 @@
+%h1= @product.name
+= image_tag @product.image_path
+= simple_format @product.description
+
+%ul
+  - @product.packagings.each do |packaging|
+    %li[packaging]= packaging.name
+  %li= link_to(t('.new.packaging'), new_admin_product_packaging_path(@product))

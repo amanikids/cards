@@ -6,6 +6,9 @@ en:
       justgiving_accounts_controller:
         create:
           success: 'JustGiving account created.'
+      packagings_controller:
+        create:
+          success: 'Packaging created.'
       paypal_accounts_controller:
         create:
           success: 'PayPal account created.'

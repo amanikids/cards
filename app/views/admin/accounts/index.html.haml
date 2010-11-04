@@ -1,0 +1,5 @@
+%h1= t('.title')
+
+%ul
+  = render(@accounts)
+  %li= link_to t('.new.paypal'), new_admin_paypal_account_path

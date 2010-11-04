@@ -1,4 +1,8 @@
 en:
+  activerecord:
+    models:
+      paypal_account: 'PayPal account'
+
   activemodel:
     attributes:
       address:

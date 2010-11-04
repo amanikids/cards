@@ -1,4 +1,5 @@
 Cards::Application.routes.draw do
+  # Admin routes ------------------------------------------------------
   namespace :admin do
     controller :user_sessions do
       get  '/sign_in'  => :new,     :as => 'new_user_session'
@@ -6,15 +7,21 @@ Cards::Application.routes.draw do
       get  '/sign_out' => :destroy, :as => 'destroy_user_session'
     end
 
+    resources :accounts,
+      :only => %w(index)
+    resources :paypal_accounts,
+      :only => %w(new create)
+
     resources :stores,
       :only => [:index, :show] do
       resources :products,
         :only => [:new, :create]
     end
 
-    root :to => redirect('/admin/stores', :status => 302)
+    root :to => redirect('/admin/accounts', :status => 302)
   end
 
+  # Distributor routes ------------------------------------------------
   namespace :distributor do
     controller :user_sessions do
       get  '/sign_in'  => :new,     :as => 'new_user_session'
@@ -31,6 +38,7 @@ Cards::Application.routes.draw do
     root :to => redirect('/distributor/stores', :status => 302)
   end
 
+  # Donor routes ------------------------------------------------------
   scope '/:store_id', :as => 'store', :constraints => { :store_id => /[a-z][a-z]/ } do
     resources :items,
       :only => [:create, :destroy]

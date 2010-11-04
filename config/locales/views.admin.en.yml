@@ -1,14 +1,14 @@
 en:
   admin:
-    products:
-      new:
-        title: Create a new Product
-    stores:
+    accounts:
       index:
-        title: Select a Store
-      show:
+        title: Accounts
         new:
-          product: Create a new Product
+          paypal: 'Create a new PayPal account'
+    paypal_accounts:
+      new:
+        title: 'Create a new PayPal account'
+
     user_sessions:
       new:
         title: "Welcome! Please sign in."

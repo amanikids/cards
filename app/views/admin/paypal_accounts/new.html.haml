@@ -1,0 +1,18 @@
+%h1= t('.title')
+
+= form_for [:admin, @paypal_account] do |form|
+  - if @paypal_account.errors.present?
+    .errors
+      = @paypal_account.errors.full_messages.to_sentence.concat('.')
+  .fields
+    .field
+      = form.label :login
+      = form.text_field :login
+    .field
+      = form.label :password
+      = form.text_field :password
+    .field
+      = form.label :signature
+      = form.text_field :signature
+  .buttons
+    = form.submit

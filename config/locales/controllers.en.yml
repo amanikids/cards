@@ -3,6 +3,9 @@ en:
     admin:
       application_controller:
         administrator_required: 'Please sign in as an administrator.'
+      paypal_accounts_controller:
+        create:
+          success: 'PayPal account created.'
 
     distributor:
       application_controller:

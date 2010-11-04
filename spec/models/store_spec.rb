@@ -27,6 +27,7 @@ describe Store do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:slug) }
     it { should validate_presence_of(:currency) }
+    it { should validate_presence_of(:description) }
 
     it { should validate_format_of(:slug).with('us') }
     it { should validate_format_of(:slug).not_with('US').with_message(:invalid) }

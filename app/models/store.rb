@@ -24,6 +24,8 @@ class Store < ActiveRecord::Base
 
   validates :currency,
     :presence => true
+  validates :description,
+    :presence => true
   validates :name,
     :presence => true
   validates :slug,

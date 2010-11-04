@@ -11,7 +11,7 @@ class Item < ActiveRecord::Base
 
   validates :quantity,
     :numericality => {
-      :greater_than_or_equal_to => 0,
+      :greater_than => 0,
       :only_integer => true }
 
   before_create :populate_unit_price

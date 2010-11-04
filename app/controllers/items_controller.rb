@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
   def create
     current_cart.items.create!(params[:item])
+    current_cart.compact!
     redirect_to store_root_path(@store)
   end
 

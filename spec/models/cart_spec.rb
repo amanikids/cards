@@ -13,6 +13,24 @@ describe Cart do
     it { should have_one(:order) }
   end
 
+  context '#compact!' do
+    it 'combines items that reference the same packaging' do
+      packaging_one = Packaging.make!
+      packaging_two = Packaging.make!
+
+      Item.make!(:cart => cart, :packaging => packaging_one, :quantity => 1)
+      Item.make!(:cart => cart, :packaging => packaging_two, :quantity => 2)
+      Item.make!(:cart => cart, :packaging => packaging_one, :quantity => 3)
+      Item.make!(:cart => cart, :packaging => packaging_one, :quantity => 4)
+
+      cart.compact!.reload
+
+      cart.should have(2).items
+      cart.items.find_by_packaging_id(packaging_one.id).quantity.should == 8
+      cart.items.find_by_packaging_id(packaging_two.id).quantity.should == 2
+    end
+  end
+
   it 'is empty when it has no items' do
     cart.stub(:items).and_return([])
     cart.should be_empty

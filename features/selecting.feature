@@ -16,8 +16,15 @@ Feature: Selecting items
     When I want a "10-pack" of "Poinsettia" cards
      And I select 2 of that packaging
      And I press "Add to Cart" for that packaging
-     Then I should see the following cart:
-          | Poinsettia | 10-pack | 2 | $20.00 |
+    Then I should see the following cart:
+         | Poinsettia | 10-pack | 2 | $20.00 |
+
+  Scenario: Adding an item multiple times
+    When I want a "10-pack" of "Poinsettia" cards
+     And I press "Add to Cart" for that packaging
+     And I press "Add to Cart" for that packaging
+    Then I should see the following cart:
+         | Poinsettia | 10-pack | 2 | $20.00 |
 
   Scenario: Removing items
      When I press "Add to Cart" for a "10-pack" of "Poinsettia" cards

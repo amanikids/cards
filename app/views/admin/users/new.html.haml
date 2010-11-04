@@ -1,0 +1,12 @@
+%h1= t('.title')
+
+= form_for [:admin, @user] do |form|
+  - if @user.errors.present?
+    .errors
+      = @user.errors.full_messages.to_sentence.concat('.')
+  .fields
+    .field
+      = form.label :email
+      = form.email_field :email
+  .buttons
+    = form.submit

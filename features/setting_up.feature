@@ -25,8 +25,18 @@ Feature: Administrators set up the site
      Then I should see "JustGiving account created"
       And I should see "12345"
 
-  @wip
   Scenario: Setting up users
+    Given I have signed in as an administrator
+     When I follow "Users"
+      And I follow "Create a new User"
+      And I fill in the following:
+          | Email address | bob@example.com |
+      And I press "Create User"
+     Then I should see "User created"
+      And I should see "bob@example.com"
+
+  @wip
+  Scenario: Setting up administrators
 
   @wip
   Scenario: Setting up stores with PayPal accounts

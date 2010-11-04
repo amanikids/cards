@@ -14,6 +14,9 @@ Cards::Application.routes.draw do
     resources :justgiving_accounts,
       :only => %w(new create)
 
+    resources :users,
+      :only => %w(index new create)
+
     resources :stores,
       :only => [:index, :show] do
       resources :products,

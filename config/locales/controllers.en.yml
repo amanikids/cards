@@ -9,6 +9,9 @@ en:
       paypal_accounts_controller:
         create:
           success: 'PayPal account created.'
+      users_controller:
+        create:
+          success: 'User created.'
 
     distributor:
       application_controller:

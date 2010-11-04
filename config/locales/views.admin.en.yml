@@ -6,9 +6,18 @@ en:
         new:
           paypal: 'Create a new PayPal account'
           justgiving: 'Create a new JustGiving account'
+    justgiving_accounts:
+      new:
+        title: 'Create a new JustGiving account'
     paypal_accounts:
       new:
         title: 'Create a new PayPal account'
+    users:
+      index:
+        title: Users
+        new: 'Create a new User'
+      new:
+        title: 'Create a new User'
 
     user_sessions:
       new:

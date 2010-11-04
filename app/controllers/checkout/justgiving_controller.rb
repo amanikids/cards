@@ -49,10 +49,6 @@ class Checkout::JustgivingController < ApplicationController
 
   private
 
-  def load_store
-    @store = Store.find_by_slug!(params[:store_id])
-  end
-
   def build_address
     @address ||= if session[:address_id]
                    Address.find_by_id(session[:address_id]) || Address.new

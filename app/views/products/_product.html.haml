@@ -13,4 +13,5 @@
           = form_for [@store, Item.new] do |form|
             .buttons
               = form.hidden_field :packaging_id, :value => packaging.id
+              = form.select :quantity, (1..10)
               = form.submit

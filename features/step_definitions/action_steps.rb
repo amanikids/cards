@@ -15,10 +15,23 @@ Given /^I (?:have )?sign(?:ed)? in on (.+)$/ do |page_name|
   And   %{I press "Sign in"}
 end
 
+When /^I want a "([^"]*)" of "([^"]*)" cards$/ do |packaging, product|
+  @product   = Product.find_by_name!(product)
+  @packaging = @product.packagings.find_by_name!(packaging)
+end
+
+When /^I select (\d+) of that packaging$/ do |value|
+  When %{I select "#{value}" from "item_quantity" within "##{dom_id(@packaging)}"}
+end
+
+When /^I press "([^"]*)" for that packaging$/ do |button|
+  When %{I press "#{button}" within "##{dom_id(@packaging)}"}
+end
+
+# TODO possibly inline this step?
 When /^I press "([^"]*)" for a "([^"]*)" of "([^"]*)" cards$/ do |button, packaging, product|
-  product   = Product.find_by_name!(product)
-  packaging = product.packagings.find_by_name!(packaging)
-  When %{I press "#{button}" within "##{dom_id(packaging)}"}
+  When %{I want a "#{packaging}" of "#{product}" cards}
+  When %{I press "#{button}" for that packaging}
 end
 
 When /^I press "([^"]*)" for the (\d+)(?:st|nd|rd|th) item in my cart$/ do |button, index|

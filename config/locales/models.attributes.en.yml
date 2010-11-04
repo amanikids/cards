@@ -3,7 +3,6 @@ en:
     models:
       paypal_account: 'PayPal account'
 
-  activemodel:
     attributes:
       address:
         name: Name
@@ -34,9 +33,12 @@ en:
         description: Description
         name: Name
         slug: Slug
-      user_session:
+      user:
         email: Email address
         password: Password
-      user:
+
+  activemodel:
+    attributes:
+      user_session:
         email: Email address
         password: Password

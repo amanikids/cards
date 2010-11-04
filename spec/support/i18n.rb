@@ -2,7 +2,7 @@ shared_examples_for 'a model with translated attributes' do
   RSpec::Matchers.define :have_a_translation_for do |attribute|
     match do |model_class|
       begin
-        I18n.translate(attribute, :raise => true, :scope => ['activemodel', 'attributes', model_class.name.underscore])
+        I18n.translate(attribute, :raise => true, :scope => [model_class.i18n_scope, 'attributes', model_class.name.underscore])
       rescue I18n::MissingTranslationData
         false
       end

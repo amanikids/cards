@@ -2,7 +2,7 @@ class StoresController < ApplicationController
   before_filter :load_store, :only => :show
 
   def index
-    @stores = Store.open.order(:name)
+    @stores = Store.active.order(:name)
   end
 
   def show

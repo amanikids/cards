@@ -11,8 +11,7 @@ describe ApplicationController do
   end
 
   let 'store' do
-    # TODO set open in the blueprints. (But need to rename it for it to work!)
-    Store.make!(:open => true)
+    Store.make!
   end
 
   it 'handles a missing cart id' do

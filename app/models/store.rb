@@ -1,5 +1,5 @@
 class Store < ActiveRecord::Base
-  scope :open, where(:open => true)
+  scope :active, where(:active => true)
 
   belongs_to :account,
     :inverse_of => :store,
@@ -19,11 +19,11 @@ class Store < ActiveRecord::Base
     :inverse_of => :store
 
   attr_accessible :account_type_slash_id
+  attr_accessible :active
   attr_accessible :currency
   attr_accessible :description
   attr_accessible :distributor_id
   attr_accessible :name
-  attr_accessible :open
   attr_accessible :slug
 
   validates :currency,

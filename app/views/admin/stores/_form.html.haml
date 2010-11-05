@@ -22,7 +22,7 @@
       = form.label :distributor_id
       = form.collection_select :distributor_id, User.all, :id, :email
     .field
-      = form.label :open
-      = form.check_box :open
+      = form.label :active
+      = form.check_box :active
   .buttons
     = form.submit

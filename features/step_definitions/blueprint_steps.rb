@@ -49,12 +49,12 @@ Given /^there is a JustGiving account with charity id "([^"]*)"$/ do |charity_id
   @account = JustgivingAccount.make!(:charity_identifier => charity_identifier)
 end
 
-Given /^there is a( not-yet-open)? store(?: called "([^"]*)")?(?: with currency "([^"]*)")?( that uses that account)?$/ do |is_closed, name, currency, uses_account|
+Given /^there is a( not-yet-active)? store(?: called "([^"]*)")?(?: with currency "([^"]*)")?( that uses that account)?$/ do |inactive, name, currency, uses_account|
   attributes = {}
   attributes[:account]  = @account if uses_account
   attributes[:currency] = currency if currency
   attributes[:name]     = name     if name
-  attributes[:open]     = is_closed ? false : true
+  attributes[:active]     = inactive ? false : true
   @store = Store.make!(attributes)
 end
 

@@ -8,12 +8,12 @@ Feature: Donors browse the site
     Then I should see "not yet accepting orders"
 
   Scenario: There aren't any open stores
-    Given there is a not-yet-open store
+    Given there is a not-yet-active store
      When I go to the home page
      Then I should see "not yet accepting orders"
 
   Scenario: Closed stores don't show up
-    Given there is a not-yet-open store called "Australia"
+    Given there is a not-yet-active store called "Australia"
      When I go to the home page
      Then I should not see "Australia"
 

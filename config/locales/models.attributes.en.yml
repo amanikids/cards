@@ -31,11 +31,11 @@ en:
         image_path: Image
       store:
         account_type_slash_id: Account
+        active: Active
         currency: Currency
         description: Description
         distributor_id: Distributor
         name: Name
-        open: Open
         slug: Slug
       user:
         email: Email address

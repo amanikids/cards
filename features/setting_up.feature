@@ -72,13 +72,13 @@ Feature: Administrators set up the site
      Then I should see "Store created"
       And I should see "United Kingdom"
 
-  Scenario: Opening Stores
-    Given there is a not-yet-open store called "United States"
+  Scenario: Activating Stores
+    Given there is a not-yet-active store called "United States"
       And I have signed in as an administrator
      When I follow "Stores"
       And I follow "United States"
       And I follow "Edit this Store"
-      And I check "Open"
+      And I check "Active"
       And I press "Update Store"
      Then I should see "Store updated"
      When I go to the home page

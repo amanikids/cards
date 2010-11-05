@@ -8,12 +8,12 @@ describe Store do
   end
 
   context 'scopes' do
-    it 'loads open Stores' do
-      store = Store.make!(:open => true)
-      chaff = Store.make!(:open => false)
+    it 'loads active Stores' do
+      store = Store.make!(:active => true)
+      chaff = Store.make!(:active => false)
 
-      Store.open.should include(store)
-      Store.open.should_not include(chaff)
+      Store.active.should include(store)
+      Store.active.should_not include(chaff)
     end
   end
 
@@ -27,11 +27,11 @@ describe Store do
 
   context 'attributes' do
     it { should allow_mass_assignment_of(:account_type_slash_id) }
+    it { should allow_mass_assignment_of(:active) }
     it { should allow_mass_assignment_of(:currency) }
     it { should allow_mass_assignment_of(:description) }
     it { should allow_mass_assignment_of(:distributor_id) }
     it { should allow_mass_assignment_of(:name) }
-    it { should allow_mass_assignment_of(:open) }
     it { should allow_mass_assignment_of(:slug) }
   end
 

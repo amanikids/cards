@@ -82,6 +82,7 @@ end
 
 Store.blueprint do
   account     { PaypalAccount.make }
+  active      { true }
   currency    { 'USD' }
   description { Faker::Lorem.sentence }
   distributor { User.make }

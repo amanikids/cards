@@ -1,5 +1,5 @@
 class Admin::UserSessionsController < Admin::ApplicationController
-  skip_before_filter :require_current_user, :only => %w( new create )
+  skip_before_filter :require_current_user, :only => [:new, :create]
 
   def new
     @user_session = UserSession.new(session)

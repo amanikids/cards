@@ -23,6 +23,10 @@ class Checkout::PaypalController < ApplicationController
     end
   end
 
+  def review
+    # work done in before_filters; need method for it to work?!
+  end
+
   def confirm
     result = @gateway.purchase(
       current_cart.total,

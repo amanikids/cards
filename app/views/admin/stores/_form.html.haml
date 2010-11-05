@@ -1,0 +1,28 @@
+= form_for [:admin, @store] do |form|
+  - if @store.errors.present?
+    .errors
+      = @store.errors.full_messages.to_sentence.concat('.')
+  .fields
+    .field
+      = form.label :name
+      = form.text_field :name
+    .field
+      = form.label :slug
+      = form.text_field :slug
+    .field
+      = form.label :currency
+      = form.text_field :currency
+    .field
+      = form.label :description
+      = form.text_area :description
+    .field
+      = form.label :account_type_slash_id
+      = form.collection_select :account_type_slash_id, Account.all, :type_slash_id, :display_name
+    .field
+      = form.label :distributor_id
+      = form.collection_select :distributor_id, User.all, :id, :email
+    .field
+      = form.label :open
+      = form.check_box :open
+  .buttons
+    = form.submit

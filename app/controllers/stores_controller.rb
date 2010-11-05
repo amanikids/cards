@@ -4,4 +4,8 @@ class StoresController < ApplicationController
   def index
     @stores = Store.order(:name)
   end
+
+  def show
+    # work done in before_filters; need this method for it to work?!
+  end
 end

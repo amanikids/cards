@@ -16,10 +16,12 @@ class Store < ActiveRecord::Base
   has_many :products,
     :inverse_of => :store
 
+  attr_accessible :account_type_slash_id
   attr_accessible :currency
   attr_accessible :description
   attr_accessible :distributor_id
   attr_accessible :name
+  attr_accessible :open
   attr_accessible :slug
 
   validates :currency,
@@ -34,6 +36,15 @@ class Store < ActiveRecord::Base
       :with        => /\A[a-z][a-z]\z/ },
     :presence => true,
     :uniqueness => true
+
+  delegate :type_slash_id,
+    :allow_nil => true,
+    :prefix => true,
+    :to => :account
+
+  def account_type_slash_id=(account_type_slash_id)
+    self.account = Account.find(account_type_slash_id)
+  end
 
   def to_param
     slug

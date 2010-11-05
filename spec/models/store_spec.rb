@@ -16,10 +16,12 @@ describe Store do
   end
 
   context 'attributes' do
+    it { should allow_mass_assignment_of(:account_type_slash_id) }
     it { should allow_mass_assignment_of(:currency) }
     it { should allow_mass_assignment_of(:description) }
     it { should allow_mass_assignment_of(:distributor_id) }
     it { should allow_mass_assignment_of(:name) }
+    it { should allow_mass_assignment_of(:open) }
     it { should allow_mass_assignment_of(:slug) }
   end
 
@@ -35,6 +37,10 @@ describe Store do
     it { should validate_format_of(:slug).not_with('usa').with_message(:invalid) }
 
     it { store; should validate_uniqueness_of(:slug) }
+  end
+
+  it 'delegates type_slash_id to account' do
+    store.account_type_slash_id.should == store.account.type_slash_id
   end
 
   it 'uses slug for to_param' do

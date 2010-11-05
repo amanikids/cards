@@ -1,10 +1,12 @@
 class Admin::PackagingsController < Admin::ApplicationController
-  before_filter :load_product,
-    :only => %w(new create)
-  before_filter :build_packaging,
-    :only => %w(new create)
+  before_filter :load_product, :only => [:new, :create]
+
+  def new
+    @packaging = @product.packagings.build(params[:packaging])
+  end
 
   def create
+    @packaging = @product.packagings.build(params[:packaging])
     if @packaging.save
       redirect_to [:admin, @product], :notice => t('.create.success')
     else
@@ -16,9 +18,5 @@ class Admin::PackagingsController < Admin::ApplicationController
 
   def load_product
     @product = Product.find(params[:product_id])
-  end
-
-  def build_packaging
-    @packaging = @product.packagings.build(params[:packaging])
   end
 end

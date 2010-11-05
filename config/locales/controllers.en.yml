@@ -18,6 +18,8 @@ en:
       stores_controller:
         create:
           success: 'Store created.'
+        update:
+          success: 'Store updated.'
       users_controller:
         create:
           success: 'User created.'

@@ -1,12 +1,14 @@
 class Admin::StoresController < Admin::ApplicationController
-  before_filter :build_store,
-    :only => %w(new create)
-
   def index
     @stores = Store.order(:name)
   end
 
+  def new
+    @store = Store.new(params[:store])
+  end
+
   def create
+    @store = Store.new(params[:store])
     if @store.save
       redirect_to admin_stores_path, :notice => t('.create.success')
     else
@@ -18,15 +20,16 @@ class Admin::StoresController < Admin::ApplicationController
     @store = Store.find_by_slug!(params[:id])
   end
 
-  private
+  def edit
+    @store = Store.find_by_slug!(params[:id])
+  end
 
-  def build_store
-    @store = Store.new(params[:store])
-
-    if params_store = params[:store]
-      if account_id = params_store[:account_id]
-        @store.account = Account.find(account_id)
-      end
+  def update
+    @store = Store.find_by_slug!(params[:id])
+    if @store.update_attributes(params[:store])
+      redirect_to admin_stores_path, :notice => t('.update.success')
+    else
+      render 'edit'
     end
   end
 end

@@ -2,18 +2,18 @@ class Checkout::JustgivingController < ApplicationController
   before_filter :load_store
 
   before_filter :build_address,
-    :only => %w(address update_address)
+    :only => [:address, :update_address]
 
   verify :session => [:address_id],
-    :only => %w(review donate complete),
+    :only => [:review, :donate, :complete],
     :redirect_to => :address_path
 
   before_filter :build_order,
-    :only => %w(review donate complete)
+    :only => [:review, :donate, :complete]
 
   verify :params => [:donation_identifier],
     :add_flash => { :alert => I18n.t('controllers.checkout.justgiving_controller.not_in_progress') },
-    :only => %w(complete),
+    :only => [:complete],
     :redirect_to => :error_path
 
   def create
@@ -30,7 +30,7 @@ class Checkout::JustgivingController < ApplicationController
   end
 
   def review
-    # work done in before_filters; need a real method here for RSpec?
+    # method must be here for before_filters to work?!
   end
 
   def donate

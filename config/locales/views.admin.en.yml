@@ -35,6 +35,7 @@ en:
       show:
         new:
           product: 'Create a new Product'
+        edit: 'Edit this Store'
 
     users:
       index:

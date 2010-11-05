@@ -4,14 +4,15 @@
     %h1= product.name
     %p= product.description
 
-    %ul
-      - product.packagings.each do |packaging|
-        %li[packaging]
-          %div= packaging.name
-          %div= format_currency(packaging.price, product.store.currency)
-
-          = form_for [@store, Item.new] do |form|
-            .buttons
-              = form.hidden_field :packaging_id, :value => packaging.id
-              = form.select :quantity, (1..10)
-              = form.submit
+    %table.packagings
+      %tbody
+        - product.packagings.each do |packaging|
+          %tr[packaging]
+            %td= packaging.name
+            %td.price= format_currency(packaging.price, product.store.currency)
+            %td.buttons
+              = form_for [@store, Item.new] do |form|
+                .buttons
+                  = form.hidden_field :packaging_id, :value => packaging.id
+                  = form.select :quantity, (1..10)
+                  = form.submit

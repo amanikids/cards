@@ -63,7 +63,7 @@ section.cart
   background-color: #ffc
 
 section.product
-  clear: left
+  clear: both
   .image
     float: left
     width: $product_image_width
@@ -71,3 +71,12 @@ section.product
       width: $product_image_width
   .content
     margin-left: $product_image_width + 12px
+    table.packagings
+      float: right
+      tr
+        td
+          padding: 0 0 1em 0.5em
+        td.price
+          text-align: right
+        td.buttons
+          white-space: nowrap

@@ -4,5 +4,8 @@
 
 %ul
   - @product.packagings.each do |packaging|
-    %li[packaging]= packaging.name
+    %li[packaging]
+      = packaging.name
+      = packaging.size
+      = format_currency(packaging.price, @product.store.currency)
   %li= link_to(t('.new.packaging'), new_admin_product_packaging_path(@product))

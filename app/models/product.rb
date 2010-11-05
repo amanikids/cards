@@ -1,7 +1,7 @@
 class Product < ActiveRecord::Base
   has_many :packagings,
     :inverse_of => :product,
-    :order => :price
+    :order => 'price DESC'
 
   belongs_to :store,
     :inverse_of => :products

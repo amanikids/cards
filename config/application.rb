@@ -44,5 +44,9 @@ module Cards
       g.fixture_replacement = :machinist
       g.helper = false
     end
+
+    # Serve stylesheets from tmp.
+    # FIXME want cacheable assets to work on heroku instead!
+    config.middleware.use ::ActionDispatch::Static, Rails.root.join('tmp')
   end
 end

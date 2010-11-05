@@ -2,7 +2,7 @@
   .image= image_tag(product.image_path)
   .content
     %h1= product.name
-    %p= product.description
+    = simple_format(product.description)
 
     %table.packagings
       %tbody

@@ -78,7 +78,7 @@ GEM
     gherkin (2.2.9)
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
-    haml (3.0.19)
+    haml (3.0.23)
     haml-rails (0.2)
       haml (~> 3.0)
       rails (~> 3.0.0.rc)

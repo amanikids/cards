@@ -1,6 +1,8 @@
 %section
-  %h1= t('.title')
-
-  %ul
-    - @stores.each do |store|
-      %li[store]= link_to store.name, store_root_path(store)
+  - if @stores.any?
+    %h1= t('.title')
+    %ul
+      - @stores.each do |store|
+        %li[store]= link_to store.name, store_root_path(store)
+  - else
+    %h1= t('.none')

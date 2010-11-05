@@ -7,6 +7,16 @@ describe Store do
     Store.make!
   end
 
+  context 'scopes' do
+    it 'loads open Stores' do
+      store = Store.make!(:open => true)
+      chaff = Store.make!(:open => false)
+
+      Store.open.should include(store)
+      Store.open.should_not include(chaff)
+    end
+  end
+
   context 'associations' do
     it { should belong_to(:account) }
     it { should have_many(:carts) }

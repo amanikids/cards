@@ -30,6 +30,6 @@ class ApplicationController < ActionController::Base
 
   # Loaders -----------------------------------------------------------
   def load_store
-    @store = Store.find_by_slug!(params[:store_id])
+    @store = Store.open.find_by_slug!(params[:store_id])
   end
 end

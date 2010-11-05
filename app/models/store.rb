@@ -1,4 +1,6 @@
 class Store < ActiveRecord::Base
+  scope :open, where(:open => true)
+
   belongs_to :account,
     :inverse_of => :store,
     :polymorphic => true

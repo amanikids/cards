@@ -54,7 +54,7 @@ Given /^there is a( not-yet-open)? store(?: called "([^"]*)")?(?: with currency 
   attributes[:account]  = @account if uses_account
   attributes[:currency] = currency if currency
   attributes[:name]     = name     if name
-  # attributes[:open]     = false    if is_closed
+  attributes[:open]     = is_closed ? false : true
   @store = Store.make!(attributes)
 end
 

@@ -16,7 +16,8 @@ class Store < ActiveRecord::Base
     :through => :carts
 
   has_many :products,
-    :inverse_of => :store
+    :inverse_of => :store,
+    :order => :created_at
 
   attr_accessible :account_type_slash_id
   attr_accessible :active

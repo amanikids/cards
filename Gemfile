@@ -20,6 +20,7 @@ group :development do
   gem 'autotest',       :require => false
   gem 'autotest-growl', :require => false
   gem 'heroku',         :require => false
+  gem 'taps',           :require => false
 end
 
 # Include faker in :development so we can seed with lorem.

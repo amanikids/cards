@@ -13,7 +13,7 @@ development:
   encoding: unicode
   database: cards_development
   pool: 5
-  username: <%= Etc.getlogin %>
+  username: matthew
   password:
   min_messages: warning
 
@@ -40,7 +40,7 @@ test: &test
   encoding: unicode
   database: cards_test
   pool: 5
-  username: <%= Etc.getlogin %>
+  username: matthew
   password:
   min_messages: warning
 

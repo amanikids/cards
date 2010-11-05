@@ -48,7 +48,7 @@ module Cards
     # Serve stylesheets from tmp.
     # FIXME want cacheable assets to work on heroku instead!
     config.middleware.use ::Rack::Static,
-      :urls => '/stylesheets',
+      :urls => ['/stylesheets'],
       :root => Rails.root.join('tmp')
   end
 end

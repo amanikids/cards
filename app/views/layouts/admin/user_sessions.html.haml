@@ -5,6 +5,8 @@
     %title= t('.title')
     = csrf_meta_tag
     = stylesheet_link_tag 'screen'
+    /[if lt IE 9]
+      = javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
   %body
     = render('layouts/flash', :flash => flash) if flash.present?
     = yield

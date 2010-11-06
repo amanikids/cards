@@ -1,4 +1,5 @@
 %section[order]
+  = render('orders/order', :order => order)
   %time{:datetime => order.shipped_at.to_s(:html5)}
     = t('.time', :time => time_ago_in_words(order.shipped_at))
 

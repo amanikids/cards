@@ -1,5 +1,5 @@
-%h1= t('.title')
-
-%ul
-  - @stores.each do |store|
-    %li[store]= link_to store.name, distributor_store_path(store)
+%section
+  %h1= t('.title')
+  %ul
+    - @stores.each do |store|
+      %li[store]= link_to store.name, distributor_store_path(store)

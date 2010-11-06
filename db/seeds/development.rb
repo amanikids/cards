@@ -6,6 +6,7 @@ Store.find_or_initialize_by_slug('uk').tap do |store|
   store.account     = JustgivingAccount.find_or_create_by_charity_identifier('182061')
   store.distributor = User.find_by_email!('matthew@amanikids.org')
   store.update_attributes!(
+    :active   => true,
     :name     => 'United Kindgom',
     :currency => 'GBP',
     :description => Faker::Lorem.paragraphs(2).join("\n\n")
@@ -63,6 +64,7 @@ Store.find_or_initialize_by_slug('us').tap do |store|
   end
   store.distributor = User.find_by_email!('matthew@amanikids.org')
   store.update_attributes!(
+    :active   => true,
     :name     => 'United States',
     :currency => 'USD',
     :description => Faker::Lorem.paragraphs(2).join("\n\n")

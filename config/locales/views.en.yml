@@ -1,4 +1,8 @@
 en:
+  addresses:
+    address:
+      title: Shipping Address
+
   carts:
     cart:
       remove: Remove

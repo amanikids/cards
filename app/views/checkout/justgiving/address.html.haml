@@ -1,24 +1,25 @@
-%h1= t('.title')
+%section
+  %h1= t('.title')
 
-= form_for @address, :url => store_checkout_justgiving_address_path(@store), :html => { :method => 'put' } do |form|
-  - if @address.errors.present?
-    .errors
-      = @address.errors.full_messages.to_sentence.concat('.')
-  .fields
-    .field
-      = form.label :name
-      = form.text_field :name
-    .field
-      = form.label :line_1, t('.address')
-      = form.text_field :line_1
-    .field
-      = form.text_field :line_2
-    .field
-      = form.text_field :line_3
-    .field
-      = form.text_field :line_4
-    .field
-      = form.label :country
-      = form.text_field :country
-  .buttons
-    = form.submit
+  = form_for @address, :url => store_checkout_justgiving_address_path(@store), :html => { :method => 'put' } do |form|
+    - if @address.errors.present?
+      .errors
+        = @address.errors.full_messages.to_sentence.concat('.')
+    .fields
+      .field
+        = form.label :name
+        = form.text_field :name
+      .field
+        = form.label :line_1, t('.address')
+        = form.text_field :line_1
+      .field
+        = form.text_field :line_2
+      .field
+        = form.text_field :line_3
+      .field
+        = form.text_field :line_4
+      .field
+        = form.label :country
+        = form.text_field :country
+    .buttons
+      = form.submit

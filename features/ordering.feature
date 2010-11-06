@@ -58,12 +58,12 @@ Feature: Donors order cards
       And I press "Add to Cart" for a "10-pack" of "Poinsettia" cards
       And I press "Check out"
       And I fill in the following:
-          | Name    | Bob Loblaw            |
-          | Line 1  | Little Hedge          |
-          | Line 2  | Brighton              |
-          | Line 3  | Southamptonsfordshire |
-          | Line 4  | 42Y X93               |
-          | Country | United Kingdom        |
+          | Name           | Bob Loblaw            |
+          | Address        | Little Hedge          |
+          | address_line_2 | Brighton              |
+          | address_line_3 | Southamptonsfordshire |
+          | address_line_4 | 42Y X93               |
+          | Country        | United Kingdom        |
       And I press "Proceed"
      Then I should see the following order:
           | Poinsettia | 10-pack | 1 | £5.00 |

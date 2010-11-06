@@ -7,10 +7,10 @@ en:
     attributes:
       address:
         name: Name
-        line_1: 'Line 1'
-        line_2: 'Line 2'
-        line_3: 'Line 3'
-        line_4: 'Line 4'
+        line_1: 'Address Line 1'
+        line_2: 'Address Line 2'
+        line_3: 'Address Line 3'
+        line_4: 'Address Line 4'
         country: Country
       item:
         packaging_id: Packaging

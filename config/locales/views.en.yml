@@ -8,6 +8,7 @@ en:
     justgiving:
       address:
         title: 'Please enter your shipping address:'
+        address: Address
 
       review:
         title: Confirm your order

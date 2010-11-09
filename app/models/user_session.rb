@@ -65,6 +65,12 @@ class UserSession
     end
   end
 
+  # Haml calls object#id when you say %tag[object], so ruby warns us we should
+  # use object#object_id instead. I'd rather not see those warning messages!
+  def id
+    to_param
+  end
+
   def to_key
     nil
   end

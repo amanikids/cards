@@ -41,6 +41,10 @@ class Checkout::JustgivingController < ApplicationController
   end
 
   def complete
+    # Pre-save the payment. Should not be necessary, but I want to see why it
+    # fails sometimes: http://partners.getexceptional.com/exceptions/5487130
+    @order.payment.save!
+
     @order.save!
     forget_current_cart
     forget_address

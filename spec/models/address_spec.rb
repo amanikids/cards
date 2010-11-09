@@ -10,6 +10,7 @@ describe Address do
     it { should allow_mass_assignment_of(:line_3) }
     it { should allow_mass_assignment_of(:line_4) }
     it { should allow_mass_assignment_of(:country) }
+    it { should allow_mass_assignment_of(:email) }
   end
 
   context 'validations' do
@@ -17,11 +18,13 @@ describe Address do
     it { should validate_presence_of(:line_1) }
     it { should validate_presence_of(:line_2) }
     it { should validate_presence_of(:country) }
+    it { should validate_presence_of(:email) }
   end
 
   context 'from paypal details' do
     let 'address' do
       Address.from_paypal_details(
+        'bob@example.com',
         'name'     => 'Bob Loblaw',
         'address1' => '123 Main St.',
         'address2' => '',
@@ -55,11 +58,16 @@ describe Address do
     it 'copies the country' do
       address.country.should == 'USA'
     end
+
+    it 'copies the email address' do
+      address.email.should == 'bob@example.com'
+    end
   end
 
   context 'from paypal details, with an address2' do
     let 'address' do
       Address.from_paypal_details(
+        'bob@example.com',
         'name'     => 'Bob Loblaw',
         'address1' => '123 Main St.',
         'address2' => 'Apt. 4',

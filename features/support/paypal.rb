@@ -19,8 +19,13 @@ class ShamPaypal < Sinatra::Base
 
   # Setup Methods -----------------------------------------------------
   class << self
+    attr_accessor :email_address
     attr_accessor :shipping_address
     attr_accessor :xml_request
+  end
+
+  def email_address
+    self.class.email_address
   end
 
   def shipping_address
@@ -61,7 +66,7 @@ class ShamPaypal < Sinatra::Base
         <GetExpressCheckoutDetailsResponseDetails>
           <Token>42</Token>
           <PayerInfo>
-            <Payer>bob@example.com</Payer>
+            <Payer>#{email_address}</Payer>
             <PayerID>1234567890</PayerID>
           </PayerInfo>
           <PaymentDetails>

@@ -18,7 +18,8 @@ Feature: Donors order cards
      Then I should see the following cart:
           | Poinsettia | 10-pack | 1 | $10.00 |
 
-     When my PayPal shipping address is:
+     When my PayPal account is "bob@example.com"
+      And my PayPal shipping address is:
           | Name            | Bob Loblaw    |
           | Street1         | 123 Main St.  |
           | Street2         |               |
@@ -30,11 +31,12 @@ Feature: Donors order cards
      Then I should see the following order:
           | Poinsettia | 10-pack | 1 | $10.00 |
       And I should see the following address:
-          | Bob Loblaw    |
-          | 123 Main St.  |
-          | Anytown, NY   |
-          | 12345         |
-          | United States |
+          | Bob Loblaw      |
+          | 123 Main St.    |
+          | Anytown, NY     |
+          | 12345           |
+          | United States   |
+          | bob@example.com |
 
      When I press "Confirm your order"
      Then I should see that order again
@@ -64,6 +66,7 @@ Feature: Donors order cards
           | address_line_3 | Southamptonsfordshire |
           | address_line_4 | 42Y X93               |
           | Country        | United Kingdom        |
+          | Email address  | bob@example.com       |
       And I press "Proceed"
      Then I should see the following order:
           | Poinsettia | 10-pack | 1 | £5.00 |
@@ -74,6 +77,7 @@ Feature: Donors order cards
           | Southamptonsfordshire |
           | 42Y X93               |
           | United Kingdom        |
+          | bob@example.com       |
 
      When I press "Donate with JustGiving"
      Then I should see that order again

@@ -5,14 +5,16 @@ class Address < ActiveRecord::Base
   attr_accessible :line_3
   attr_accessible :line_4
   attr_accessible :country
+  attr_accessible :email
 
   validates :name,    :presence => true
   validates :line_1,  :presence => true
   validates :line_2,  :presence => true
   validates :country, :presence => true
+  validates :email,   :presence => true
 
   class << self
-    def from_paypal_details(d)
+    def from_paypal_details(email, d)
       city_state = [d['city'], d['state']].select(&:present?).join(', ')
 
       new.tap do |address|
@@ -29,6 +31,7 @@ class Address < ActiveRecord::Base
         end
 
         address.country = d['country']
+        address.email   = email
       end
     end
   end

@@ -73,6 +73,12 @@ Given /^there is an unshipped order for that store$/ do
 end
 
 # Shams ---------------------------------------------------------------
+When /^my PayPal account is "([^"]*)"$/ do |email_address|
+  ShamPaypal.configure do |app|
+    app.email_address = email_address
+  end
+end
+
 When /^my PayPal shipping address is:$/ do |table|
   ShamPaypal.configure do |app|
     app.shipping_address = table.raw

@@ -39,7 +39,7 @@ describe Checkout::PaypalController do
     end
 
     it 'shows the order on success' do
-      paypal_account.should_receive(:details_for).with(42) { success(:address => {}) }
+      paypal_account.should_receive(:details_for).with(42) { success(:email => '', :address => {}) }
       do_get(42)
       assigns(:order).should be_a_new_record
     end
@@ -62,7 +62,7 @@ describe Checkout::PaypalController do
     end
 
     it 'redirects to the store on failure' do
-      paypal_account.should_receive(:details_for).with(42) { success(:address => {}) }
+      paypal_account.should_receive(:details_for).with(42) { success(:email => '', :address => {}) }
       paypal_account.should_receive(:purchase) { failure(:message => 'BOOM') }
       do_put(42)
       response.should redirect_to(store_root_path(store))

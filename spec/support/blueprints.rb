@@ -13,10 +13,11 @@ class Faker::Address
 end
 
 Address.blueprint do
-  name   { Faker::Name.name }
-  line_1 { Faker::Address.street_address }
-  line_2 { Faker::Address.city_state_zip }
+  name    { Faker::Name.name }
+  line_1  { Faker::Address.street_address }
+  line_2  { Faker::Address.city_state_zip }
   country { 'United States' }
+  email   { Faker::Internet.email }
 end
 
 Administrator.blueprint do

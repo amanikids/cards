@@ -55,6 +55,11 @@ header, section
   margin-bottom: 1em
   padding: 1em
 
+.address
+  h1
+    font-size: 100%
+    font-weight: bold
+
 section
   h1
     margin-bottom: 0.5em
@@ -80,6 +85,12 @@ section.product
           text-align: right
         td.buttons
           white-space: nowrap
+
+section.unshipped, section.shipped
+  section.order
+    border-bottom: 1px solid $font_black
+    .address
+      margin-bottom: 1em
 
 table.cart
   tr

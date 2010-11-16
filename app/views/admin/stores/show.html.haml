@@ -1,7 +1,15 @@
 %h1= @store.name
 
-%ul
-  - @store.products.each do |product|
-    %li[product]= link_to(product.name, admin_product_path(product))
-  %li= link_to t('.new.product'), new_admin_store_product_path(@store)
-  %li= link_to t('.edit'), edit_admin_store_path(@store)
+%section
+  %h2= t('.products')
+  %ul
+    - @store.products.each do |product|
+      %li[product]= link_to(product.name, admin_product_path(product))
+    %li= link_to t('.new.product'), new_admin_store_product_path(@store)
+
+%section
+  %h2= t('.distributors')
+  %ul
+    - @store.distributors.each do |user|
+      %li[user]= user.email
+    %li= link_to t('.edit'), edit_admin_store_path(@store)

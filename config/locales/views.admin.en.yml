@@ -33,9 +33,13 @@ en:
       new:
         title: 'Create a new Store'
       show:
+        distributors: Distributors
+        products: Products
         new:
           product: 'Create a new Product'
         edit: 'Edit this Store'
+      edit:
+        title: 'Editing Store'
 
     users:
       index:

@@ -27,7 +27,7 @@ class Admin::StoresController < Admin::ApplicationController
   def update
     @store = Store.find_by_slug!(params[:id])
     if @store.update_attributes(params[:store])
-      redirect_to admin_stores_path, :notice => t('.update.success')
+      redirect_to admin_store_path(@store), :notice => t('.update.success')
     else
       render 'edit'
     end

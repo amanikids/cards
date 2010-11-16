@@ -3,7 +3,7 @@
     user.randomize_password! if user.new_record?
 
     unless user.administrator?
-      Administrator.new.tap do |admin|
+      Administratorship.new.tap do |admin|
         admin.user = user
         admin.save!
       end

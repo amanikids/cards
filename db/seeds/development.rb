@@ -3,8 +3,9 @@ User.find_each do |user|
 end
 
 Store.find_or_initialize_by_slug('uk').tap do |store|
-  store.account     = JustgivingAccount.find_or_create_by_charity_identifier('182061')
-  store.distributor = User.find_by_email!('matthew@amanikids.org')
+  store.account = JustgivingAccount.find_or_create_by_charity_identifier('182061')
+  store.distributor_ids += [User.find_by_email!('matthew@amanikids.org').id]
+  store.distributor_ids = store.distributor_ids.uniq
   store.update_attributes!(
     :active   => true,
     :name     => 'United Kindgom',
@@ -62,7 +63,8 @@ Store.find_or_initialize_by_slug('us').tap do |store|
       :signature => ENV['PAYPAL_SIGNATURE']
     )
   end
-  store.distributor = User.find_by_email!('matthew@amanikids.org')
+  store.distributor_ids += [User.find_by_email!('matthew@amanikids.org').id]
+  store.distributor_ids = store.distributor_ids.uniq
   store.update_attributes!(
     :active   => true,
     :name     => 'United States',
@@ -122,7 +124,8 @@ Store.find_or_initialize_by_slug('us').tap do |store|
         :name    => 'Bob Loblaw',
         :line_1  => '123 Main St.',
         :line_2  => 'Anytown, NY 09876',
-        :country => 'United States'
+        :country => 'United States',
+        :email   => 'bob@example.com'
       )
       order.cart    = cart
       order.payment = PaypalPayment.new.tap do |payment|

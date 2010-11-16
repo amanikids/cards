@@ -3,8 +3,6 @@ en:
     orders:
       unshipped:
         ship: "Ship this Order"
-      shipped:
-        time: "Shipped %{time} ago."
 
     stores:
       index:

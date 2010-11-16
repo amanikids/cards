@@ -69,7 +69,7 @@ Given /^those cards come in these packagings:$/ do |table|
 end
 
 Given /^there is an unshipped order for that store$/ do
-  @order = Order.make!(:cart => Cart.make!(:store => @store))
+  @order = Order.make!(:cart => Cart.make!(:unshipped, :store => @store))
 end
 
 # Shams ---------------------------------------------------------------

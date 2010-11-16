@@ -3,8 +3,7 @@ class Distributor::OrdersController < Distributor::ApplicationController
   before_filter :load_order
 
   def update
-    @order.shipped_at = Time.zone.now
-    @order.save!
+    @order.items.each { |item| item.shipped_at = Time.zone.now; item.save! }
     redirect_to distributor_store_path(@store)
   end
 

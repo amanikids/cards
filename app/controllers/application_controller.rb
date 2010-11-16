@@ -28,6 +28,13 @@ class ApplicationController < ActionController::Base
     session.delete(:cart_id)
   end
 
+  # User management ---------------------------------------------------
+  def current_user
+    nil
+  end
+
+  helper_method :current_user
+
   # Loaders -----------------------------------------------------------
   def load_store
     @store = Store.active.find_by_slug!(params[:store_id])

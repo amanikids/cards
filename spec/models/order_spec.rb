@@ -11,17 +11,13 @@ describe Order do
     it 'shows shipped orders' do
       order = Order.make!(:shipped)
       chaff = Order.make!(:unshipped)
-
-      Order.shipped.should include(order)
-      Order.shipped.should_not include(chaff)
+      Order.shipped.should == [order]
     end
 
     it 'shows unshipped orders' do
       order = Order.make!(:unshipped)
       chaff = Order.make!(:shipped)
-
-      Order.unshipped.should include(order)
-      Order.unshipped.should_not include(chaff)
+      Order.unshipped.should == [order]
     end
   end
 

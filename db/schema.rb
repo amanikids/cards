@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101116081601) do
+ActiveRecord::Schema.define(:version => 20101116084432) do
 
   create_table "addresses", :force => true do |t|
     t.string   "name",                       :null => false
@@ -55,7 +55,10 @@ ActiveRecord::Schema.define(:version => 20101116081601) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "packaging_id",                :null => false
+    t.datetime "shipped_at"
   end
+
+  add_index "items", ["shipped_at"], :name => "index_items_on_shipped_at"
 
   create_table "justgiving_accounts", :force => true do |t|
     t.string   "charity_identifier"
@@ -78,11 +81,9 @@ ActiveRecord::Schema.define(:version => 20101116081601) do
     t.string   "token",        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "shipped_at"
     t.integer  "address_id",   :null => false
   end
 
-  add_index "orders", ["shipped_at"], :name => "index_orders_on_shipped_at"
   add_index "orders", ["token"], :name => "index_orders_on_token", :unique => true
 
   create_table "packagings", :force => true do |t|

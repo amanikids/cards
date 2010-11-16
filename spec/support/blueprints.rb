@@ -28,6 +28,14 @@ Cart.blueprint do
   store
 end
 
+Cart.blueprint(:shipped) do
+  items(2, :shipped)
+end
+
+Cart.blueprint(:unshipped) do
+  items(2, :unshipped)
+end
+
 Distributorship.blueprint do
   store
   user
@@ -37,6 +45,14 @@ Item.blueprint do
   cart
   packaging
   quantity { 1 }
+end
+
+Item.blueprint(:shipped) do
+  shipped_at { Time.zone.now }
+end
+
+Item.blueprint(:unshipped) do
+  shipped_at { nil }
 end
 
 JustgivingAccount.blueprint do
@@ -54,11 +70,11 @@ Order.blueprint do
 end
 
 Order.blueprint(:shipped) do
-  shipped_at { Time.zone.now }
+  cart(:shipped)
 end
 
 Order.blueprint(:unshipped) do
-  shipped_at { nil }
+  cart(:unshipped)
 end
 
 Packaging.blueprint do

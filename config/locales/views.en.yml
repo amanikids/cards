@@ -6,6 +6,7 @@ en:
   carts:
     cart:
       remove: Remove
+      time: "Shipped %{time} ago."
       total: Total
 
   checkout:

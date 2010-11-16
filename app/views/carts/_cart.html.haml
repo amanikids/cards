@@ -8,9 +8,19 @@
         %td.price= format_currency(item.price, cart.store.currency)
         - if cart.mutable?
           %td= button_to(t('.remove'), [@store, item], :method => :delete)
+        - if current_user.try(:distributor?)
+          %td
+            - if item.shipped_at?
+              %time{:datetime => item.shipped_at.to_s(:html5)}
+                = t('.time', :time => time_ago_in_words(item.shipped_at))
+            - else
+              &nbsp;
+
   %tfoot
     %tr
       %td.total{:colspan => 3}= t('.total')
       %td.price= format_currency(cart.total, cart.store.currency)
       - if cart.mutable?
+        %td &nbsp;
+      - if current_user.try(:distributor?)
         %td &nbsp;

@@ -10,7 +10,11 @@ en:
       index:
         title: "Please select your store."
       show:
-        title: "Here are all your orders. Thank you!"
+        unshipped:
+          title: Unshipped orders
+        shipped:
+          title: Shipped orders
+      shipped:
         unshipped:
           title: Unshipped orders
         shipped:

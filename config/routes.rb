@@ -39,10 +39,12 @@ Cards::Application.routes.draw do
       get  '/sign_out' => :destroy, :as => 'destroy_user_session'
     end
 
-    resources :stores,
-      :only => [:index, :show] do
-      resources :orders,
-        :only => [:update]
+    resources :stores, :only => [:index, :show] do
+      member do
+        get :shipped
+      end
+
+      resources :orders, :only => [:update]
     end
 
     root :to => redirect('/distributor/stores', :status => 302)

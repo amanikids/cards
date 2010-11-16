@@ -1,0 +1,11 @@
+%section.shipped
+  %h1
+    = link_to t('.unshipped.title'), distributor_store_path(@store)
+    |
+    =  t('.shipped.title')
+  = render(                                      |
+    :as         => :order,                       |
+    :partial    => 'distributor/orders/shipped', |
+    :collection => @store.orders.shipped         |
+  )                                              |
+

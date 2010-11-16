@@ -6,4 +6,8 @@ class Distributor::StoresController < Distributor::ApplicationController
   def show
     @store = current_user.stores.find_by_slug!(params[:id])
   end
+
+  def shipped
+    @store = current_user.stores.find_by_slug!(params[:id])
+  end
 end

@@ -9,6 +9,7 @@ Feature: Distributors ship products
       And I have signed in as the distributor for that store
      When I follow "Canada"
       And I press "Ship this Order" for the order
+      And I follow "Shipped orders"
      Then I should see that the order has been shipped
 
   Scenario: Signing in as a non-distributor

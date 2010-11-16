@@ -1,18 +1,10 @@
-%section
-  %h1= t('.title')
-  
-  %section.unshipped
-    %h1= t('.unshipped.title')
-    = render(                                        |
-      :as         => :order,                         |
-      :partial    => 'distributor/orders/unshipped', |
-      :collection => @store.orders.unshipped         |
-    )                                                |
-  
-  %section.shipped
-    %h1= t('.shipped.title')
-    = render(                                        |
-      :as         => :order,                         |
-      :partial    => 'distributor/orders/shipped',   |
-      :collection => @store.orders.shipped           |
-    )                                                |
+%section.unshipped
+  %h1
+    = t('.unshipped.title')
+    |
+    = link_to t('.shipped.title'), shipped_distributor_store_path(@store)
+  = render(                                        |
+    :as         => :order,                         |
+    :partial    => 'distributor/orders/unshipped', |
+    :collection => @store.orders.unshipped         |
+  )                                                |

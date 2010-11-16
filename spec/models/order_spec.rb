@@ -28,6 +28,11 @@ describe Order do
     it { should have_one(:store) }
   end
 
+  context 'attributes' do
+    it { should respond_to(:items_attributes=) }
+    it { should allow_mass_assignment_of(:items_attributes) }
+  end
+
   context 'create' do
     it 'generates a random token' do
       order.token.should_not be_nil

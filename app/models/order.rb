@@ -33,6 +33,9 @@ class Order < ActiveRecord::Base
 
   before_create :randomize_token
 
+  accepts_nested_attributes_for :items
+  attr_accessible :items_attributes
+
   def to_param
     token
   end

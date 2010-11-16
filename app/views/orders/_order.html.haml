@@ -1,2 +1,2 @@
-= render 'carts/cart', :cart => order.cart
+= render 'carts/cart', :cart => order.cart, :f => (defined?(f) ? f : nil)
 = render 'addresses/address', :address => order.address

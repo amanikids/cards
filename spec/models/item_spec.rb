@@ -18,6 +18,7 @@ describe Item do
     it { should have_readonly_attribute(:packaging_id) }
     it { should allow_mass_assignment_of(:packaging_id) }
     it { should allow_mass_assignment_of(:quantity) }
+    it { should allow_mass_assignment_of(:shipped_at) }
     it { should have_readonly_attribute(:unit_price) }
     it { should_not allow_mass_assignment_of(:unit_price) }
   end

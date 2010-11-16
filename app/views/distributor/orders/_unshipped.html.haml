@@ -1,5 +1,5 @@
 %section[order]
-  = render('orders/order', :order => order)
   = form_for [:distributor, @store, order] do |form|
+    = render('orders/order', :order => order, :f => form)
     .buttons
       = form.submit t('.ship')

@@ -4,6 +4,7 @@ class Item < ActiveRecord::Base
 
   attr_accessible :packaging_id
   attr_accessible :quantity
+  attr_accessible :shipped_at
 
   attr_readonly :cart_id
   attr_readonly :packaging_id

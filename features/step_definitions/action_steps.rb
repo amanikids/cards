@@ -38,6 +38,10 @@ When /^I press "([^"]*)" for the (\d+)(?:st|nd|rd|th) item in my cart$/ do |butt
   When %{I press "#{button}" within ".cart .item:nth-child(#{index})"}
 end
 
+When /^I check the (\d+)(?:st|nd|rd|th) item in that order$/ do |index|
+  When %{I check "order_items_attributes_#{index.to_i.pred}_shipped_at" within "##{dom_id(@order)} .item:nth-child(#{index})"}
+end
+
 When /^I press "([^"]*)" for the order$/ do |button|
   When %{I press "#{button}" within "##{dom_id(@order)}"}
 end

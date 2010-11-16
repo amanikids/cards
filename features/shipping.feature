@@ -8,9 +8,10 @@ Feature: Distributors ship products
       And there is an unshipped order for that store
       And I have signed in as the distributor for that store
      When I follow "Canada"
-      And I press "Ship this Order" for the order
+      And I check the 1st item in that order
+      And I press "Ship Checked Items" for the order
       And I follow "Shipped orders"
-     Then I should see that the order has been shipped
+     Then I should see that the 1st item in that order has been shipped
 
   Scenario: Signing in as a non-distributor
     Given I am a regular user

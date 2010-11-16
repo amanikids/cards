@@ -1,6 +1,6 @@
 %table.cart
   %tbody
-    - cart.items.each do |item|
+    - cart.items.order(:created_at).each do |item|
       %tr[item]
         %td= item.product_name
         %td= item.name
@@ -13,6 +13,9 @@
             - if item.shipped_at?
               %time{:datetime => item.shipped_at.to_s(:html5)}
                 = t('.time', :time => time_ago_in_words(item.shipped_at))
+            - elsif defined?(f) && f.try(:respond_to?, :fields_for)
+              = f.fields_for(:items, item) do |fields|
+                = fields.check_box :shipped_at, {}, Time.zone.now.to_s(:db)
             - else
               &nbsp;
 

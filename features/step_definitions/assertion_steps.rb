@@ -2,10 +2,6 @@ Then /^I should see the following products:$/ do |expected|
   expected.diff!(actual_products)
 end
 
-Then /^I should see that the order has been shipped$/ do
-  Then %{I should see "Shipped less than a minute ago" within ".shipped ##{dom_id(@order)}"}
-end
-
 Then /^I should see the following cart(?: within "([^"]*)")?:$/ do |selector, expected|
   with_scope(selector) { expected.diff!(actual_cart) }
 end
@@ -31,5 +27,9 @@ end
 
 Then /^I should see that address again$/ do
   Then %{I should see the following address:}, @previously_expected_address
+end
+
+Then /^I should see that the (\d+)(?:st|nd|rd|th) item in that order has been shipped$/ do |index|
+  Then %{I should see "Shipped less than a minute ago" within "##{dom_id(@order)} .item:nth-child(#{index})"}
 end
 

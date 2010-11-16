@@ -2,7 +2,7 @@ en:
   distributor:
     orders:
       unshipped:
-        ship: "Ship this Order"
+        ship: "Ship Checked Items"
 
     stores:
       index:

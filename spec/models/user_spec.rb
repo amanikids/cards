@@ -8,7 +8,7 @@ describe User do
   end
 
   context 'associations' do
-    it { should have_one(:administrator) }
+    it { should have_one(:administratorship) }
     it { should have_many(:stores) }
   end
 
@@ -69,8 +69,8 @@ describe User do
     end
   end
 
-  it 'is an administrator when associated with an Administrator' do
-    expect { Administrator.make!(:user => user) }.to change {
+  it 'is an administrator when associated with an Administratorship' do
+    expect { Administratorship.make!(:user => user) }.to change {
       user.administrator?
     }
   end

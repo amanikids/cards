@@ -20,7 +20,7 @@ Address.blueprint do
   email   { Faker::Internet.email }
 end
 
-Administrator.blueprint do
+Administratorship.blueprint do
   user
 end
 

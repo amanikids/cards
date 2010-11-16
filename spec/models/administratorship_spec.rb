@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Administrator do
+describe Administratorship do
   context 'associations' do
     it { should belong_to(:user) }
   end

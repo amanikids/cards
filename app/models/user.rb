@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_one :administrator,
+  has_one :administratorship,
     :inverse_of => :user
 
   has_many :distributorships,
@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def administrator?
-    administrator.present?
+    administratorship.present?
   end
 
   def distributor?

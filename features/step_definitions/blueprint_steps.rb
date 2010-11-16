@@ -1,6 +1,6 @@
 # Users ---------------------------------------------------------------
 Given /^I am an administrator$/ do
-  @user = Administrator.make!.user
+  @user = Administratorship.make!.user
 end
 
 Given /^I am the distributor for that store$/ do

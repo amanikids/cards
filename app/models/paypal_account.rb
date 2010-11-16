@@ -12,7 +12,7 @@ class PaypalAccount < ActiveRecord::Base
   validates :signature, :presence => true
 
   def setup_purchase(amount, options={})
-    gateway.setup_purchase(amount, options.merge(:currency => store.currency))
+    gateway.setup_purchase(amount, options.merge(:currency => store.currency, :description => 'Amani Holiday Cards'))
   end
 
   def redirect_url_for(token)

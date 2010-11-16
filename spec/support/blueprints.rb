@@ -28,6 +28,11 @@ Cart.blueprint do
   store
 end
 
+Distributorship.blueprint do
+  store
+  user
+end
+
 Item.blueprint do
   cart
   packaging
@@ -86,7 +91,6 @@ Store.blueprint do
   active      { true }
   currency    { 'USD' }
   description { Faker::Lorem.sentence }
-  distributor { User.make }
   name        { Faker::Address.city }
   slug        { Faker.letterify('??') }
 end

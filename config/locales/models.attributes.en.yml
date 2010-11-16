@@ -35,7 +35,7 @@ en:
         active: Active
         currency: Currency
         description: Description
-        distributor_id: Distributor
+        distributor_ids: Distributors
         name: Name
         slug: Slug
       user:

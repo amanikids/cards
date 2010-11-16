@@ -19,8 +19,8 @@
       = form.label :account_type_slash_id
       = form.collection_select :account_type_slash_id, Account.all, :type_slash_id, :display_name
     .field
-      = form.label :distributor_id
-      = form.collection_select :distributor_id, User.all, :id, :email
+      = form.label :distributor_ids
+      = form.collection_select :distributor_ids, User.all, :id, :email, {}, :multiple => true
     .field
       = form.label :active
       = form.check_box :active

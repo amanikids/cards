@@ -8,9 +8,13 @@ class Store < ActiveRecord::Base
   has_many :carts,
     :inverse_of => :store
 
-  belongs_to :distributor,
-    :class_name => 'User',
-    :inverse_of => :stores
+  has_many :distributors,
+    :inverse_of => :stores,
+    :source => :user,
+    :through => :distributorships
+
+  has_many :distributorships,
+    :inverse_of => :store
 
   has_many :orders,
     :through => :carts
@@ -23,7 +27,7 @@ class Store < ActiveRecord::Base
   attr_accessible :active
   attr_accessible :currency
   attr_accessible :description
-  attr_accessible :distributor_id
+  attr_accessible :distributor_ids
   attr_accessible :name
   attr_accessible :slug
 

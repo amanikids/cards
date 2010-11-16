@@ -4,7 +4,7 @@ Given /^I am an administrator$/ do
 end
 
 Given /^I am the distributor for that store$/ do
-  @user = @store.distributor
+  @user = Distributorship.make!(:store => @store).user
 end
 
 Given /^I am a regular user$/ do

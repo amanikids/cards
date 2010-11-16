@@ -2,9 +2,11 @@ class User < ActiveRecord::Base
   has_one :administrator,
     :inverse_of => :user
 
+  has_many :distributorships,
+    :inverse_of => :user
+
   has_many :stores,
-    :foreign_key => :distributor_id,
-    :inverse_of  => :distributor
+    :through => :distributorships
 
   composed_of :password_hash,
     :class_name => 'BCrypt::Password'

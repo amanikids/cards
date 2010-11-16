@@ -76,7 +76,7 @@ describe User do
   end
 
   it 'is a distributor when associated with a Store' do
-    expect { Store.make!(:distributor => user) }.to change {
+    expect { Distributorship.make!(:user => user) }.to change {
       user.distributor?
     }
   end

@@ -20,7 +20,7 @@ describe Store do
   context 'associations' do
     it { should belong_to(:account) }
     it { should have_many(:carts) }
-    it { should belong_to(:distributor) }
+    it { should have_many(:distributors) }
     it { should have_many(:orders) }
     it { should have_many(:products) }
   end
@@ -30,7 +30,7 @@ describe Store do
     it { should allow_mass_assignment_of(:active) }
     it { should allow_mass_assignment_of(:currency) }
     it { should allow_mass_assignment_of(:description) }
-    it { should allow_mass_assignment_of(:distributor_id) }
+    it { should allow_mass_assignment_of(:distributor_ids) }
     it { should allow_mass_assignment_of(:name) }
     it { should allow_mass_assignment_of(:slug) }
   end

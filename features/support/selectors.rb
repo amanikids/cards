@@ -7,6 +7,10 @@ module SelectorHelpers
     tableish('table.cart tbody tr', 'td')
   end
 
+  def actual_inventory
+    tableish('table#products tbody tr', 'td')
+  end
+
   def actual_products
     tableish('table#products tbody tr', 'td')
   end

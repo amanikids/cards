@@ -33,3 +33,6 @@ Then /^I should see that the (\d+)(?:st|nd|rd|th) item in that order has been sh
   Then %{I should see "Shipped less than a minute ago" within "##{dom_id(@order)} .item:nth-child(#{index})"}
 end
 
+Then /^I should see the following inventory:$/ do |expected|
+  expected.diff!(actual_inventory)
+end

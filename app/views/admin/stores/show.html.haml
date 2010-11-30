@@ -2,10 +2,15 @@
 
 %section
   %h2= t('.products')
-  %ul
-    - @store.products.each do |product|
-      %li[product]= link_to(product.name, admin_product_path(product))
-    %li= link_to t('.new.product'), new_admin_store_product_path(@store)
+
+  %table#products
+    %tbody
+      - @store.products.each do |product|
+        %tr[product]
+          %td= link_to(product.name, admin_product_path(product))
+          %td= product.quantity
+
+  %p= link_to t('.new.product'), new_admin_store_product_path(@store)
 
 %section
   %h2= t('.distributors')

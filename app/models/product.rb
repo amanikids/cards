@@ -22,4 +22,8 @@ class Product < ActiveRecord::Base
     :presence => true,
     :uniqueness => {
       :scope => :store_id }
+
+  def quantity
+    500
+  end
 end

@@ -6,6 +6,7 @@ describe Product do
   context 'associations' do
     it { should have_many(:packagings) }
     it { should belong_to(:store) }
+    it { should have_many(:transfers) }
   end
 
   context 'assignment' do

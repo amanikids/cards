@@ -1,2 +1,6 @@
-%h1= t('.title')
+%h1
+  = link_to @store.name, [:admin, @store]
+  = ':'
+  = t('.title')
+
 = render 'form'

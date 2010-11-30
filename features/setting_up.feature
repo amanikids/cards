@@ -84,7 +84,7 @@ Feature: Administrators set up the site
      When I go to the home page
      Then I should see "United States"
 
-  Scenario: Setting up products
+  Scenario: Setting up Products
     Given there is a store called "United States"
       And I have signed in as an administrator
      When I follow "Stores"
@@ -113,6 +113,23 @@ Feature: Administrators set up the site
       And I press "Create Packaging"
      Then I should see "Packaging created"
       And I should see "10-pack"
+
+  Scenario: Setting up Inventory
+    Given there is a store called "United States"
+      And that store sells "Poinsettia" cards
+      And I have signed in as an administrator
+     When I follow "Stores"
+      And I follow "United States"
+      And I follow "Poinsettia"
+      And I follow "Create a new Transfer"
+      And I fill in the following:
+          | Quantity | 500              |
+          | Reason   | Initial printing |
+      And I press "Create Transfer"
+     Then I should see "Transfer created"
+     When I follow "United States"
+     Then I should see the following inventory:
+          | Poinsettia | 500 |
 
   Scenario: Signing in as a non-administrator
     Given I am a regular user

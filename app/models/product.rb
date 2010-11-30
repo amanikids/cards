@@ -6,6 +6,10 @@ class Product < ActiveRecord::Base
   belongs_to :store,
     :inverse_of => :products
 
+  has_many :transfers,
+    :inverse_of => :product,
+    :order => :happened_at
+
   attr_accessible :description
   attr_accessible :image_path
   attr_accessible :name

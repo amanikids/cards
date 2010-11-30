@@ -25,6 +25,9 @@ Cards::Application.routes.draw do
         resources :packagings,
           :only => %w(new create),
           :shallow => true
+        resources :transfers,
+          :only => %w(new create),
+          :shallow => true
       end
     end
 

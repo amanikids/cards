@@ -41,6 +41,10 @@ en:
         distributor_ids: Distributors
         name: Name
         slug: Slug
+      transfer:
+        happened_at: Happened
+        quantity: Quantity
+        reason: Reason
       user:
         email: Email address
         password: Password

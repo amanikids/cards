@@ -1,4 +1,8 @@
-%h1= @product.name
+%h1
+  = link_to @product.store.name, [:admin, @product.store]
+  = ':'
+  = @product.name
+
 = image_tag @product.image_path
 = simple_format @product.description
 
@@ -9,3 +13,4 @@
       = packaging.size
       = format_currency(packaging.price, @product.store.currency)
   %li= link_to(t('.new.packaging'), new_admin_product_packaging_path(@product))
+  %li= link_to(t('.new.transfer'), new_admin_product_transfer_path(@product))

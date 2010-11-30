@@ -111,6 +111,11 @@ Store.blueprint do
   slug        { Faker.letterify('??') }
 end
 
+Transfer.blueprint do
+  product
+  quantity { 1 }
+end
+
 # Pre-calculate the password hash once, to make specs significantly faster.
 # NOTE that this does mean some specs / features need to know that we're using
 # "secret" as the password here. I think the regained speed's probably worth

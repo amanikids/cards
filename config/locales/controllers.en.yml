@@ -20,6 +20,9 @@ en:
           success: 'Store created.'
         update:
           success: 'Store updated.'
+      transfers_controller:
+        create:
+          success: 'Transfer created.'
       users_controller:
         create:
           success: 'User created.'

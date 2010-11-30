@@ -1,0 +1,25 @@
+%h1
+  = link_to @product.store.name, [:admin, @product.store]
+  = ':'
+  = link_to @product.name, [:admin, @product]
+  = ':'
+  = t('.title')
+
+= form_for [:admin, @product, @transfer] do |form|
+  - if @transfer.errors.present?
+    .errors
+      = @transfer.errors.full_messages.to_sentence.concat('.')
+  .fields
+    .field
+      = form.label :reason
+      = form.text_field :reason, :autofocus => true
+    .field
+      = form.label :quantity
+      = form.text_field :quantity
+    .field
+      = form.label :happened_at
+      = form.date_select :happened_at
+  .buttons
+    = form.submit
+
+

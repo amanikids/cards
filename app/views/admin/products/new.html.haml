@@ -1,4 +1,7 @@
-%h1= t('.title')
+%h1
+  = link_to @store.name, [:admin, @store]
+  = ':'
+  = t('.title')
 
 = form_for [:admin, @store, @product] do |form|
   - if @product.errors.present?

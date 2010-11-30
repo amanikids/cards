@@ -25,6 +25,7 @@ en:
       show:
         new:
           packaging: 'Create a new Packaging'
+          transfer: 'Create a new Transfer'
 
     stores:
       index:
@@ -40,6 +41,10 @@ en:
         edit: 'Edit this Store'
       edit:
         title: 'Editing Store'
+
+    transfers:
+      new:
+        title: 'Create a new Transfer'
 
     users:
       index:

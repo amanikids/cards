@@ -113,7 +113,9 @@ end
 
 Transfer.blueprint do
   product
-  quantity { 1 }
+  happened_at { Date.today }
+  quantity    { 5000 }
+  reason      { 'Printing' }
 end
 
 # Pre-calculate the password hash once, to make specs significantly faster.

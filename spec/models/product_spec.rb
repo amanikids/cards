@@ -22,4 +22,12 @@ describe Product do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name).scoped_to(:store_id) }
   end
+
+  context '#quantity' do
+    it 'is the sum of the transfers' do
+      product = Product.make!
+      2.times { Transfer.make!(:product => product, :quantity => 21) }
+      product.quantity.should == 42
+    end
+  end
 end

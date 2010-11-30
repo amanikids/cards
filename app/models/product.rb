@@ -24,6 +24,6 @@ class Product < ActiveRecord::Base
       :scope => :store_id }
 
   def quantity
-    500
+    transfers.sum(:quantity)
   end
 end

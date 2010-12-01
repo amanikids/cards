@@ -32,9 +32,21 @@ class Order < ActiveRecord::Base
     :through => :cart
 
   before_create :randomize_token
+  after_create :create_transfers
 
   accepts_nested_attributes_for :items
   attr_accessible :items_attributes
+
+  # TODO clean this up, pushing a lot into item...
+  def create_transfers
+    items.each do |item|
+      item.packaging.product.transfers.create!(
+        :happened_at => Time.zone.now,
+        :quantity => (-1 * item.quantity * item.packaging.size),
+        :reason => "Order for #{address.name}"
+      )
+    end
+  end
 
   def to_param
     token

@@ -37,6 +37,34 @@ describe Order do
     it 'generates a random token' do
       order.token.should_not be_nil
     end
+
+    it 'generates the appropriate inventory transfers' do
+      store = Store.make!
+
+      product_one = Product.make!(:store => store)
+      product_two = Product.make!(:store => store)
+
+      cart = Cart.make!(:store => store)
+
+      Item.make!(
+        :cart => cart,
+        :quantity => 2,
+        :packaging => Packaging.make!(
+          :size => 3,
+          :product => product_one))
+
+      Item.make!(
+        :cart => cart,
+        :quantity => 5,
+        :packaging => Packaging.make!(
+          :size => 7,
+          :product => product_two))
+
+      order = Order.make!(:cart => cart)
+
+      product_one.quantity.should == -6
+      product_two.quantity.should == -35
+    end
   end
 
   it 'uses token for to_param' do

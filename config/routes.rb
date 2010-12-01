@@ -31,7 +31,7 @@ Cards::Application.routes.draw do
       end
     end
 
-    root :to => redirect('/admin/accounts', :status => 302)
+    root :to => redirect('/admin/stores', :status => 302)
   end
 
   # Distributor routes ------------------------------------------------

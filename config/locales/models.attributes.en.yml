@@ -33,6 +33,7 @@ en:
         name: Name
         description: Description
         image_path: Image
+        on_demand: On Demand
       store:
         account_type_slash_id: Account
         active: Active

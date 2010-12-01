@@ -13,6 +13,7 @@ describe Product do
     it { should allow_mass_assignment_of(:description) }
     it { should allow_mass_assignment_of(:image_path) }
     it { should allow_mass_assignment_of(:name) }
+    it { should allow_mass_assignment_of(:on_demand) }
   end
 
   context 'validations' do

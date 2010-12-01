@@ -10,6 +10,10 @@ class Transfer < ActiveRecord::Base
   attr_accessible :quantity
   attr_accessible :reason
 
+  validates :detail_id,
+    :uniqueness => {
+      :allow_blank => true,
+      :scope => [:product_id, :detail_type] }
   validates :product_id,
     :presence => true
   validates :happened_at,

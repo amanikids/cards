@@ -9,6 +9,7 @@ describe Transfer do
   end
 
   context 'attributes' do
+    it { should allow_mass_assignment_of(:detail) }
     it { should allow_mass_assignment_of(:happened_at) }
     it { should allow_mass_assignment_of(:quantity) }
     it { should allow_mass_assignment_of(:reason) }

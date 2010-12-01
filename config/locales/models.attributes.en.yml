@@ -42,6 +42,7 @@ en:
         name: Name
         slug: Slug
       transfer:
+        detail: Detail
         happened_at: Happened
         quantity: Quantity
         reason: Reason

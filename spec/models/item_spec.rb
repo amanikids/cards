@@ -49,4 +49,7 @@ describe Item do
     item.price.should == 10
   end
 
+  it 'transfers inventory, referencing self' do
+    item.transfer_inventory('REASON').detail.should == item
+  end
 end

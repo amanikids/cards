@@ -5,6 +5,7 @@ class Transfer < ActiveRecord::Base
   belongs_to :product,
     :inverse_of => :transfers
 
+  attr_accessible :detail
   attr_accessible :happened_at
   attr_accessible :quantity
   attr_accessible :reason

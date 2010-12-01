@@ -1,4 +1,10 @@
 PATH
+  remote: vendor/extractions/cacheable_assets
+  specs:
+    cacheable_assets (0.0.0)
+      rack-contrib
+
+PATH
   remote: vendor/extractions/graphite
   specs:
     graphite (0.0.0)
@@ -97,6 +103,8 @@ GEM
     pg (0.9.0)
     polyglot (0.3.1)
     rack (1.2.1)
+    rack-contrib (1.1.0)
+      rack (>= 0.9.1)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
     rack-test (0.5.5)
@@ -153,6 +161,7 @@ DEPENDENCIES
   autotest
   autotest-growl
   bcrypt-ruby
+  cacheable_assets!
   capybara
   cucumber-rails
   database_cleaner

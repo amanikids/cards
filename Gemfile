@@ -1,9 +1,8 @@
 source :rubygems
 
-# Hrm, not yet working on Heroku...
-# gem 'cacheable_assets',
-#   :path    => 'vendor/extractions/cacheable_assets'
-#   :require => 'cacheable_assets/railtie'
+gem 'cacheable_assets',
+  :path    => 'vendor/extractions/cacheable_assets',
+  :require => 'cacheable_assets/railtie'
 
 gem 'graphite',
   :path    => 'vendor/extractions/graphite',

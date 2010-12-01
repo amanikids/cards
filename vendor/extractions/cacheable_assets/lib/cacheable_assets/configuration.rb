@@ -17,7 +17,7 @@ module CacheableAssets
     end
 
     def install_middleware(stack)
-      stack.use(Middleware, @static_asset_paths)
+      stack.insert_after(ActionDispatch::Static, Middleware, @static_asset_paths)
     end
 
     private

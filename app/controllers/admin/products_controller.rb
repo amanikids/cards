@@ -18,6 +18,20 @@ class Admin::ProductsController < Admin::ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.find(params[:id])
+
+    if @product.update_attributes(params[:product])
+      redirect_to [:admin, @product], :notice => t('.update.success')
+    else
+      render 'edit'
+    end
+  end
+
   private
 
   def load_store

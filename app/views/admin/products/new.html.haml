@@ -3,22 +3,4 @@
   = ':'
   = t('.title')
 
-= form_for [:admin, @store, @product] do |form|
-  - if @product.errors.present?
-    .errors
-      = @product.errors.full_messages.to_sentence.concat('.')
-  .fields
-    .field
-      = form.label :name
-      = form.text_field :name, :autofocus => true
-    .field
-      = form.label :image_path
-      = form.select :image_path, public_image_paths
-    .field
-      = form.label :description
-      = form.text_area :description
-    .field
-      = form.label :on_demand
-      = form.check_box :on_demand
-  .buttons
-    = form.submit
+= render 'form'

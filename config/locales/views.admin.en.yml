@@ -23,6 +23,7 @@ en:
       new:
         title: 'Create a new Product'
       show:
+        edit: 'Edit this Product'
         new:
           packaging: 'Create a new Packaging'
           transfer: 'Create a new Transfer'

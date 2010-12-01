@@ -12,5 +12,6 @@
       = packaging.name
       = packaging.size
       = format_currency(packaging.price, @product.store.currency)
+  %li= link_to(t('.edit'), edit_admin_product_path(@product))
   %li= link_to(t('.new.packaging'), new_admin_product_packaging_path(@product))
   %li= link_to(t('.new.transfer'), new_admin_product_transfer_path(@product))

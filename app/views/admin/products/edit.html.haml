@@ -1,0 +1,6 @@
+%h1
+  = link_to @product.store.name, [:admin, @product.store]
+  = ':'
+  = link_to @product.name, [:admin, @product]
+
+= render 'form'

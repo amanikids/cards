@@ -5,12 +5,12 @@ Feature: Donors browse the site
 
   Scenario: There aren't any stores
     When I go to the home page
-    Then I should see "not yet accepting orders"
+    Then I should see "Orders are currently closed."
 
   Scenario: There aren't any open stores
     Given there is a not-yet-active store
      When I go to the home page
-     Then I should see "not yet accepting orders"
+     Then I should see "Orders are currently closed."
 
   Scenario: Closed stores don't show up
     Given there is a not-yet-active store called "Australia"
@@ -21,4 +21,4 @@ Feature: Donors browse the site
     Given there is a store called "Canada"
      When I go to the home page
      Then I should see "Canada"
-      And I should not see "not yet accepting orders"
+      And I should not see "Orders are currently closed."

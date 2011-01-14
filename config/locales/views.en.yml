@@ -31,7 +31,7 @@ en:
   stores:
     index:
       title: 'Please choose your country:'
-      none: "Sorry, we're not yet accepting orders. Try back shortly!"
+      none: 'Orders are currently closed.'
     show:
       title: Welcome!
       cart:

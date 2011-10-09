@@ -15,6 +15,9 @@ gem 'heroku-environment'
 gem 'pg'
 gem 'rails'
 
+# rake 0.9.2 breaks rails 3.0.
+gem 'rake', '~> 0.8.7'
+
 group :development do
   gem 'autotest',       :require => false
   gem 'autotest-growl', :require => false

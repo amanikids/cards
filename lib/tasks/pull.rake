@@ -1,6 +1,12 @@
 require 'shellwords'
 require 'tempfile'
 
+desc 'Back up production db locally'
+task :pull do
+  sh "heroku pgbackups:capture --expire --remote production"
+  sh "curl -o #{Time.now.utc.to_s(:number)}.pgdump #{dburl}"
+end
+
 namespace :pull do
   def dburl
     Shellwords.escape(`heroku pgbackups:url --remote production`.strip)

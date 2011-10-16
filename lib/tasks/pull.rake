@@ -29,6 +29,6 @@ namespace :pull do
   desc 'Clone production db to staging'
   task :staging do
     sh "heroku pgbackups:capture --expire --remote production"
-    sh "heroku pgbackups:restore #{dburl} --remote staging --confirm amanikids-cards-staging"
+    sh "heroku pgbackups:restore DATABASE #{dburl} --remote staging --confirm amanikids-cards-staging"
   end
 end

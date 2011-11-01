@@ -25,7 +25,15 @@ class Product < ActiveRecord::Base
       :scope => :store_id }
 
   def self.available
+    (in_stock + on_demand).sort_by(&:created_at)
+  end
+
+  def self.in_stock
     joins(:transfers).group(qualified_columns).having('sum(transfers.quantity) > 0')
+  end
+
+  def self.on_demand
+    where(:on_demand => true)
   end
 
   def self.qualified_columns

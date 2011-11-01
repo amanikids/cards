@@ -20,3 +20,9 @@ Feature: Restricting inventory
     Given plenty of those cards are available
      When I go to the home page for that store
      Then I should see those cards
+
+  Scenario: On demand cards are always available
+    Given those cards are printed on demand
+      And 0 of those cards are available
+     When I go to the home page for that store
+     Then I should see those cards

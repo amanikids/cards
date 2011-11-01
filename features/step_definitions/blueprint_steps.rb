@@ -76,6 +76,10 @@ Given /^(\d+) of those cards are available/ do |quantity|
   Transfer.make!(:product => @product, :quantity => quantity)
 end
 
+Given /^those cards are printed on demand$/ do
+  @product.update_attributes!(:on_demand => true)
+end
+
 Given /^there is an unshipped order for that store$/ do
   @order = Order.make!(:cart => Cart.make!(:unshipped, :store => @store))
 end

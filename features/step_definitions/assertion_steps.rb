@@ -1,5 +1,9 @@
-Then /^I should see the following products:$/ do |expected|
-  expected.diff!(actual_products)
+Then /^I should see those cards$/ do
+  page.should have_css('#' + ActionController::RecordIdentifier.dom_id(@product))
+end
+
+Then /^I should not see those cards$/ do
+  page.should have_no_css('#' + ActionController::RecordIdentifier.dom_id(@product))
 end
 
 Then /^I should see the following cart(?: within "([^"]*)")?:$/ do |selector, expected|

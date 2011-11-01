@@ -11,6 +11,7 @@ Feature: Donors order cards
           | name    | size | price |
           | 10-pack | 10   |  1000 |
           | 25-pack | 25   |  2500 |
+      And plenty of those cards are available
       And I am on the home page
 
      When I follow "United States"
@@ -54,6 +55,7 @@ Feature: Donors order cards
           | name    | size | price |
           | 10-pack | 10   |   500 |
           | 25-pack | 25   |  1250 |
+      And plenty of those cards are available
       And I am on the home page
 
      When I follow "United Kingdom"

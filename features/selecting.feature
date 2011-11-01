@@ -10,6 +10,7 @@ Feature: Selecting items
           | name    | size | price |
           | 10-pack | 10   |  1000 |
           | 25-pack | 25   |  2500 |
+      And plenty of those cards are available
       And I am on the home page for that store
 
   Scenario: Adding multiple items

@@ -68,6 +68,14 @@ Given /^those cards come in these packagings:$/ do |table|
   end
 end
 
+Given /^plenty of those cards are available/ do
+  Given '1000000 of those cards are available'
+end
+
+Given /^(\d+) of those cards are available/ do |quantity|
+  Transfer.make!(:product => @product, :quantity => quantity)
+end
+
 Given /^there is an unshipped order for that store$/ do
   @order = Order.make!(:cart => Cart.make!(:unshipped, :store => @store))
 end

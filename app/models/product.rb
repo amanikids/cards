@@ -24,6 +24,14 @@ class Product < ActiveRecord::Base
     :uniqueness => {
       :scope => :store_id }
 
+  def self.available
+    joins(:transfers).group(qualified_columns).having('sum(transfers.quantity) > 0')
+  end
+
+  def self.qualified_columns
+    column_names.map { |column_name| "#{table_name}.#{column_name}" }
+  end
+
   def quantity
     transfers.sum(:quantity)
   end

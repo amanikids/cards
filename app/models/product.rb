@@ -29,7 +29,7 @@ class Product < ActiveRecord::Base
   end
 
   def self.in_stock
-    joins(:transfers).group(qualified_columns).having('sum(transfers.quantity) > 0')
+    joins(:transfers).group(qualified_columns).having('sum(transfers.quantity) > 50')
   end
 
   def self.on_demand

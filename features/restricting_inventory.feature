@@ -16,6 +16,11 @@ Feature: Restricting inventory
      When I go to the home page for that store
      Then I should not see those cards
 
+  Scenario: Cards are running low
+    Given 50 of those cards are available
+     When I go to the home page for that store
+     Then I should not see those cards
+
   Scenario: Cards are available
     Given plenty of those cards are available
      When I go to the home page for that store

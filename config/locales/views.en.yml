@@ -30,7 +30,7 @@ en:
 
   stores:
     index:
-      title: 'Please choose your country:'
+      title: 'Please choose your region:'
       none: 'Orders are currently closed.'
     show:
       title: Welcome!

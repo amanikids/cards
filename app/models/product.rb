@@ -15,8 +15,6 @@ class Product < ActiveRecord::Base
   attr_accessible :name
   attr_accessible :on_demand
 
-  validates :description,
-    :presence => true
   validates :image_path,
     :presence => true
   validates :name,

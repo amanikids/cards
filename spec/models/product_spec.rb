@@ -18,7 +18,6 @@ describe Product do
 
   context 'validations' do
     before { Product.make! }
-    it { should validate_presence_of(:description) }
     it { should validate_presence_of(:image_path) }
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name).scoped_to(:store_id) }

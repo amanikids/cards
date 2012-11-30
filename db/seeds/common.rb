@@ -33,10 +33,7 @@ store 'us', 'USD',
   STORE_DESCRIPTION,
   'diane@amanikids.org'
 
-on_demand_product 'Amani Gift Cards',
-  '',
-  '2012/gift_card.png'
-
+on_demand_product 'Amani Gift Cards', '', '2012/gift_card.png'
 packaging 'School Uniform',                   CAD(15),  GBP(10),  USD(15)
 packaging 'Sports Equipment',                 CAD(25),  GBP(16),  USD(25)
 packaging 'Health Care Visits',               CAD(50),  GBP(32),  USD(50)

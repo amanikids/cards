@@ -18,7 +18,8 @@ store 'ca', 'CAD',
   'Canada',
   pay_pal('info_api1.friendsofamani.ca'),
   STORE_DESCRIPTION,
-  'diane@amanikids.org'
+  'diane@amanikids.org',
+  'randy.bacchus@sage.com'
 
 store 'uk', 'GBP',
   'United Kingdom & Europe',

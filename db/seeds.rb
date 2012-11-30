@@ -57,6 +57,10 @@ def pricing(currency, price_cents)
   end
 end
 
+def AUD(amount)
+  pricing('AUD', amount * 100)
+end
+
 def CAD(amount)
   pricing('CAD', amount * 100)
 end

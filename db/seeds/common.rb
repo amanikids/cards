@@ -8,6 +8,12 @@ administrators 'diane@amanikids.org',
   'kristy@amanikids.org',
   'matthew@amanikids.org'
 
+store 'au', 'AUD',
+  'Australia',
+  pay_pal('diane_api1.amanikids.org'),
+  STORE_DESCRIPTION,
+  'diane@amanikids.org'
+
 store 'ca', 'CAD',
   'Canada',
   pay_pal('info_api1.friendsofamani.ca'),

@@ -34,9 +34,9 @@ store 'us', 'USD',
   'diane@amanikids.org'
 
 on_demand_product 'Amani Gift Cards', '', '2012/gift_card.png'
-packaging 'School Uniform',                   CAD(15),  GBP(10),  USD(15)
-packaging 'Sports Equipment',                 CAD(25),  GBP(16),  USD(25)
-packaging 'Health Care Visits',               CAD(50),  GBP(32),  USD(50)
-packaging 'School Textbooks',                 CAD(50),  GBP(32),  USD(50)
-packaging 'Nutritious Food',                 CAD(100),  GBP(65), USD(100)
-packaging 'Semester of Secondary Education', CAD(200), GBP(130), USD(200)
+packaging 'School Uniform',                   AUD(15),  CAD(15),  GBP(10),  USD(15)
+packaging 'Sports Equipment',                 AUD(25),  CAD(25),  GBP(16),  USD(25)
+packaging 'Health Care Visits',               AUD(50),  CAD(50),  GBP(32),  USD(50)
+packaging 'School Textbooks',                 AUD(50),  CAD(50),  GBP(32),  USD(50)
+packaging 'Nutritious Food',                 AUD(100), CAD(100),  GBP(65), USD(100)
+packaging 'Semester of Secondary Education', AUD(200), CAD(200), GBP(130), USD(200)

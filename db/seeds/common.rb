@@ -12,13 +12,12 @@ store 'au', 'AUD',
   'Australia',
   pay_pal('diane_api1.amanikids.org'),
   STORE_DESCRIPTION,
-  'diane@amanikids.org'
+  'chris@friendsofamani.org.au'
 
 store 'ca', 'CAD',
   'Canada',
   pay_pal('info_api1.friendsofamani.ca'),
   STORE_DESCRIPTION,
-  'diane@amanikids.org',
   'randy.bacchus@sage.com'
 
 store 'uk', 'GBP',

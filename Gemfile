@@ -13,7 +13,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'haml-rails'
 gem 'heroku-environment'
 gem 'pg'
-gem 'rails'
+gem 'rails', '~> 3.0.19'
 
 # rake 0.9.2 breaks rails 3.0.
 gem 'rake', '~> 0.8.7'
